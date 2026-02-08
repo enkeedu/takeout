@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+.site-bg {
+  background-color: #f3ede4;
+  background-image:
+    radial-gradient(circle at 14% 14%, rgba(255, 189, 132, 0.18) 0, rgba(255, 189, 132, 0) 40%),
+    radial-gradient(circle at 86% 10%, rgba(245, 146, 135, 0.12) 0, rgba(245, 146, 135, 0) 42%),
+    linear-gradient(180deg, #f7f2e9 0%, #f2ece3 52%, #efe8de 100%);
+}
+
 @keyframes fade-up {
   from {
     opacity: 0;

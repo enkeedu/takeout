@@ -82,6 +82,9 @@ async def list_restaurants_in_city(
         select(
             Restaurant.name,
             Restaurant.phone,
+            Restaurant.has_online_ordering,
+            Restaurant.has_ai_phone,
+            Restaurant.is_claimed,
             RestaurantLocation.address1,
             RestaurantLocation.city,
             RestaurantLocation.state,
@@ -112,6 +115,9 @@ async def list_restaurants_in_city(
         RestaurantListItem(
             name=row.name,
             phone=row.phone,
+            has_online_ordering=row.has_online_ordering,
+            has_ai_phone=row.has_ai_phone,
+            is_claimed=row.is_claimed,
             address1=row.address1,
             city=row.city,
             state=row.state,

@@ -21,6 +21,9 @@ export interface CityInfo {
 export interface RestaurantListItem {
   name: string;
   phone: string | null;
+  has_online_ordering: boolean;
+  has_ai_phone: boolean;
+  is_claimed: boolean;
   address1: string;
   city: string;
   state: string;

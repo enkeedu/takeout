@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 520" role="img" aria-label="New York banner with Statue of Liberty and skyline">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#141117"/>
+      <stop offset="58%" stop-color="#111017"/>
+      <stop offset="100%" stop-color="#0c0c12"/>
+    </linearGradient>
+    <radialGradient id="moon" cx="78%" cy="18%" r="28%">
+      <stop offset="0%" stop-color="#f9d6b9"/>
+      <stop offset="100%" stop-color="#e89d79"/>
+    </radialGradient>
+  </defs>
+  <rect width="1800" height="520" fill="url(#bg)"/>
+  <circle cx="1420" cy="105" r="120" fill="url(#moon)" opacity="0.3"/>
+
+  <g fill="#f7c3a5" opacity="0.45">
+    <rect x="120" y="260" width="72" height="170"/>
+    <rect x="218" y="220" width="90" height="210"/>
+    <rect x="344" y="184" width="106" height="246"/>
+    <rect x="492" y="232" width="84" height="198"/>
+    <rect x="610" y="274" width="64" height="156"/>
+    <rect x="1140" y="274" width="70" height="156"/>
+    <rect x="1238" y="220" width="88" height="210"/>
+    <rect x="1360" y="170" width="92" height="260"/>
+    <rect x="1488" y="240" width="78" height="190"/>
+    <rect x="1598" y="286" width="62" height="144"/>
+  </g>
+
+  <g fill="#ffd2b6" opacity="0.62">
+    <path d="M860 336l25-128h18l24 128z"/>
+    <rect x="861" y="178" width="50" height="44"/>
+    <path d="M886 142l12 32h-24z"/>
+    <rect x="882" y="162" width="8" height="24"/>
+    <rect x="846" y="336" width="78" height="18"/>
+  </g>
+
+  <g stroke="#f5b28f" stroke-width="6" fill="none" opacity="0.52">
+    <path d="M120 370H1680"/>
+    <path d="M90 405C350 330 1450 330 1710 405"/>
+    <path d="M250 405V370M370 395V370M490 386V370M610 380V370M730 376V370M970 376V370M1090 380V370M1210 386V370M1330 395V370M1450 405V370"/>
+  </g>
+</svg>
