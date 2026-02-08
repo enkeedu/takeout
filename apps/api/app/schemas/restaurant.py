@@ -50,8 +50,13 @@ class RestaurantDetail(BaseModel):
     city_slug: str
     restaurant_slug: str
     is_canonical: bool = True
+    template_key: str | None = None
 
     model_config = {"from_attributes": True}
+
+
+class RestaurantTemplateUpdate(BaseModel):
+    template_key: str
 
 
 class SearchResultItem(BaseModel):

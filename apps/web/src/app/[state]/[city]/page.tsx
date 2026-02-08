@@ -34,7 +34,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CityPage({ params, searchParams }: Props) {
   const { state, city } = await params;
   const sp = await searchParams;
-  const page = parseInt(sp.page || "1", 10);
+  const parsedPage = parseInt(sp.page || "1", 10);
+  const page = Number.isFinite(parsedPage) && parsedPage > 0 ? parsedPage : 1;
   const stateName = getStateName(state);
   const cityName = formatCityName(city);
 

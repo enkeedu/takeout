@@ -36,6 +36,7 @@ async def list_cities(
         )
         .join(RestaurantSlug, RestaurantLocation.id == RestaurantSlug.restaurant_location_id)
         .where(RestaurantLocation.state == state.upper())
+        .where(RestaurantSlug.is_canonical.is_(True))
         .group_by(RestaurantLocation.city, RestaurantSlug.city_slug, RestaurantLocation.state)
         .order_by(RestaurantLocation.city)
     )

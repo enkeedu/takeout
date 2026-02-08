@@ -35,6 +35,7 @@ class RestaurantLocation(Base):
     has_delivery: Mapped[bool | None] = mapped_column(Boolean, nullable=True)
     has_dine_in: Mapped[bool | None] = mapped_column(Boolean, nullable=True)
     business_status: Mapped[str | None] = mapped_column(String(50), nullable=True)
+    template_key: Mapped[str | None] = mapped_column(String(40), nullable=True)
     search_vector: Mapped[Any | None] = mapped_column(TSVECTOR, nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
@@ -44,9 +45,9 @@ class RestaurantLocation(Base):
     )
 
     restaurant: Mapped["Restaurant"] = relationship(back_populates="locations")
-    slug: Mapped["RestaurantSlug | None"] = relationship(
-        back_populates="location", uselist=False
-    )
+    slugs: Mapped[list["RestaurantSlug"]] = relationship(back_populates="location")
+    menus: Mapped[list["Menu"]] = relationship(back_populates="location")
+    orders: Mapped[list["Order"]] = relationship(back_populates="location")
 
     __table_args__ = (
         Index("ix_location_state_city", "state", "city"),

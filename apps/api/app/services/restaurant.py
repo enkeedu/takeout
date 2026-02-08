@@ -1,8 +1,17 @@
-from sqlalchemy import select
+from sqlalchemy import select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models import Restaurant, RestaurantLocation, RestaurantSlug
 from app.schemas.restaurant import RestaurantDetail
+
+TEMPLATE_KEYS = {
+    "ming",
+    "ming-slim",
+    "ming-balanced",
+    "ming-full",
+    "night-market",
+    "wok-fire",
+}
 
 
 async def get_restaurant_detail(
@@ -38,6 +47,7 @@ async def get_restaurant_detail(
             RestaurantLocation.has_delivery,
             RestaurantLocation.has_dine_in,
             RestaurantLocation.business_status,
+            RestaurantLocation.template_key,
             RestaurantSlug.state_slug,
             RestaurantSlug.city_slug,
             RestaurantSlug.restaurant_slug,
@@ -81,6 +91,7 @@ async def get_restaurant_detail(
         has_delivery=row.has_delivery,
         has_dine_in=row.has_dine_in,
         business_status=row.business_status,
+        template_key=row.template_key,
         state_slug=row.state_slug,
         city_slug=row.city_slug,
         restaurant_slug=row.restaurant_slug,
@@ -105,3 +116,44 @@ async def get_all_slugs(db: AsyncSession) -> list[dict]:
         }
         for row in result.all()
     ]
+
+
+async def set_restaurant_template(
+    db: AsyncSession,
+    state_slug: str,
+    city_slug: str,
+    restaurant_slug: str,
+    template_key: str,
+) -> RestaurantDetail:
+    normalized_template = template_key.strip().lower()
+    if normalized_template not in TEMPLATE_KEYS:
+        raise ValueError("Invalid template key.")
+
+    location_result = await db.execute(
+        select(RestaurantLocation.id)
+        .join(
+            RestaurantSlug,
+            RestaurantSlug.restaurant_location_id == RestaurantLocation.id,
+        )
+        .where(
+            RestaurantSlug.state_slug == state_slug.lower(),
+            RestaurantSlug.city_slug == city_slug.lower(),
+            RestaurantSlug.restaurant_slug == restaurant_slug.lower(),
+            RestaurantSlug.is_canonical.is_(True),
+        )
+    )
+    location_id = location_result.scalar_one_or_none()
+    if location_id is None:
+        raise LookupError("Restaurant not found.")
+
+    await db.execute(
+        update(RestaurantLocation)
+        .where(RestaurantLocation.id == location_id)
+        .values(template_key=normalized_template)
+    )
+    await db.commit()
+
+    detail = await get_restaurant_detail(db, state_slug, city_slug, restaurant_slug)
+    if detail is None:
+        raise LookupError("Restaurant not found.")
+    return detail

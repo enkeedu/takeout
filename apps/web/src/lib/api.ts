@@ -16,6 +16,7 @@ export async function apiFetch<T>(
 ): Promise<T> {
   const url = `${getBaseUrl()}${path}`;
   const res = await fetch(url, {
+    cache: "no-store",
     ...options,
     headers: { "Content-Type": "application/json", ...options?.headers },
   });
