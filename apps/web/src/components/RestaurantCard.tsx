@@ -27,9 +27,34 @@ export function RestaurantCard({
   city_slug,
   restaurant_slug,
 }: RestaurantCardProps) {
-  const actionLabel = is_claimed
-    ? "Open restaurant preview"
-    : "Claim listing and start demo";
+  const actionLabel = is_claimed ? "Open restaurant page" : "Claim listing";
+  const badges: Array<{ label: string; className: string }> = [];
+
+  if (is_claimed) {
+    badges.push({
+      label: "Claimed",
+      className: "bg-[#fff2df] text-[#8a5300]",
+    });
+  } else {
+    badges.push({
+      label: "Unclaimed",
+      className: "bg-[#f5f5f5] text-[#666]",
+    });
+  }
+
+  if (has_online_ordering) {
+    badges.push({
+      label: "Online Ordering",
+      className: "bg-[#fff3f1] text-[#c0392b]",
+    });
+  }
+
+  if (has_ai_phone) {
+    badges.push({
+      label: "AI Phone",
+      className: "bg-[#f2f6ff] text-[#2a5fb8]",
+    });
+  }
 
   return (
     <Link
@@ -37,44 +62,30 @@ export function RestaurantCard({
       className="group block rounded-2xl border border-[#e8ddd2] bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-[#d33f2f] hover:shadow-md"
     >
       <div className="flex flex-wrap items-center gap-2">
-        {is_claimed ? (
-          <span className="rounded-full bg-[#fff2df] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-[#8a5300]">
-            Claimed
+        {badges.map((badge) => (
+          <span
+            key={`${restaurant_slug}-${badge.label}`}
+            className={`rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] ${badge.className}`}
+          >
+            {badge.label}
           </span>
-        ) : (
-          <span className="rounded-full bg-[#f5f5f5] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-[#666]">
-            Unclaimed
-          </span>
-        )}
-        {has_online_ordering ? (
-          <span className="rounded-full bg-[#fff3f1] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-[#c0392b]">
-            Online Ordering
-          </span>
-        ) : null}
-        {has_ai_phone ? (
-          <span className="rounded-full bg-[#f2f6ff] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-[#2a5fb8]">
-            AI Phone
-          </span>
-        ) : null}
-        <span className="rounded-full bg-[#f4fff5] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-[#23613d]">
-          Template Ready
-        </span>
+        ))}
       </div>
 
-      <h3 className="font-[var(--font-display)] mt-3 text-2xl font-semibold leading-tight text-[#1f1f1f]">
+      <h3 className="[font-family:var(--font-display)] mt-3 text-xl font-bold leading-tight text-[#1f1f1f] md:text-2xl">
         {name}
       </h3>
-      <p className="mt-1 text-sm text-[#555]">{address1}</p>
+      <p className="mt-2 text-sm text-[#555]">{address1}</p>
       <p className="text-sm text-[#555]">
         {city}, {state}
       </p>
       {phone ? (
-        <p className="mt-3 text-sm font-medium text-[#c0392b]">{phone}</p>
+        <p className="mt-3 text-sm font-semibold text-[#c0392b]">{phone}</p>
       ) : (
         <p className="mt-3 text-sm text-[#888]">Phone not listed</p>
       )}
 
-      <p className="mt-3 text-xs uppercase tracking-[0.14em] text-[#8c7f73]">
+      <p className="mt-4 text-xs uppercase tracking-[0.14em] text-[#8c7f73]">
         Owner next step
       </p>
       <div className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-[#c0392b]">

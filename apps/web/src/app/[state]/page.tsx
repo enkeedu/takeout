@@ -48,7 +48,7 @@ export default async function StatePage({ params }: Props) {
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#ffb999]">
             {theme.eyebrow}
           </p>
-          <h1 className="font-[var(--font-display)] mt-2 text-5xl font-black tracking-tight text-white md:text-6xl">
+          <h1 className="[font-family:var(--font-display)] mt-2 text-5xl font-black tracking-tight text-white md:text-6xl">
             {name}
           </h1>
           <p className="mt-1 text-sm font-semibold uppercase tracking-[0.2em] text-[#ffd5bf]">
@@ -78,7 +78,7 @@ export default async function StatePage({ params }: Props) {
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b73a2f]">
             Owner Growth Move
           </p>
-          <h2 className="font-[var(--font-display)] mt-2 text-3xl font-bold tracking-tight text-[#1f1f1f]">
+          <h2 className="[font-family:var(--font-display)] mt-2 text-3xl font-bold tracking-tight text-[#1f1f1f]">
             Own a restaurant in {name}? Launch this week.
           </h2>
           <p className="mt-2 text-sm text-[#666]">

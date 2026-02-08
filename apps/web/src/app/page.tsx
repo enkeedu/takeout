@@ -41,7 +41,7 @@ export default async function HomePage() {
   }, 0);
 
   return (
-    <div className="space-y-10 pb-10">
+    <div className="space-y-8 pb-10">
       <section className="full-bleed relative overflow-hidden border-y border-[#2c1f18]/50 bg-[#130d0a] text-white">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-70"
@@ -58,7 +58,7 @@ export default async function HomePage() {
               <p className="text-xs font-semibold uppercase tracking-[0.34em] text-[#ffb998]">
                 Built for Chinese Restaurant Owners
               </p>
-              <h1 className="font-[var(--font-display)] mt-3 max-w-4xl text-4xl font-black leading-tight tracking-tight md:text-5xl lg:text-6xl">
+              <h1 className="[font-family:var(--font-display)] mt-3 max-w-4xl text-4xl font-black leading-tight tracking-tight md:text-5xl lg:text-6xl">
                 Go from listing to live ordering website fast, without changing
                 how your restaurant already works.
               </h1>
@@ -125,7 +125,7 @@ export default async function HomePage() {
               <p className="text-xs font-semibold uppercase tracking-[0.26em] text-[#ffb998]">
                 Owner Launch Plan
               </p>
-              <h2 className="font-[var(--font-display)] mt-2 text-3xl font-bold leading-tight tracking-tight">
+              <h2 className="[font-family:var(--font-display)] mt-2 text-3xl font-bold leading-tight tracking-tight">
                 Launch in 3 simple steps
               </h2>
               <ol className="mt-4 space-y-3 text-sm text-[#f1d7ca]">
@@ -166,7 +166,7 @@ export default async function HomePage() {
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b73a2f]">
             Owner ROI Snapshot
           </p>
-          <h2 className="font-[var(--font-display)] mt-1 text-3xl font-bold tracking-tight text-[#1f1f1f] md:text-4xl">
+          <h2 className="[font-family:var(--font-display)] mt-1 text-3xl font-bold tracking-tight text-[#1f1f1f] md:text-4xl">
             What changes when you launch direct ordering
           </h2>
         </div>
@@ -196,51 +196,13 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="grid gap-4 md:grid-cols-4">
-        {[
-          {
-            label: "Directory Loaded",
-            value: `${totalRestaurants}`,
-            desc: "Real listings already in platform",
-          },
-          {
-            label: "States Live",
-            value: `${states.length}`,
-            desc: "Owner traffic markets covered now",
-          },
-          {
-            label: "Cities Covered",
-            value: `${citiesCovered}`,
-            desc: "Start where demand is already visible",
-          },
-          {
-            label: "Owner Launch Path",
-            value: "3 Steps",
-            desc: "Listing -> Template -> Ordering live",
-          },
-        ].map((item) => (
-          <div
-            key={item.label}
-            className="rounded-2xl border border-[#e2d3c3] bg-white p-5 shadow-sm"
-          >
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#9b4b1c]">
-              {item.label}
-            </p>
-            <p className="mt-2 font-[var(--font-display)] text-4xl font-bold leading-none text-[#1f1f1f]">
-              {item.value}
-            </p>
-            <p className="mt-2 text-sm text-[#666]">{item.desc}</p>
-          </div>
-        ))}
-      </section>
-
       <section className="rounded-3xl border border-[#dbc8b6] bg-gradient-to-r from-[#fff8f1] via-[#f8eddf] to-[#fff2e6] p-6 shadow-sm md:p-8">
         <div className="grid gap-6 md:grid-cols-[1.15fr_0.85fr] md:items-center">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#9b4b1c]">
               POS Migration Friendly
             </p>
-            <h2 className="font-[var(--font-display)] mt-2 text-3xl font-bold tracking-tight text-[#1f1f1f] md:text-4xl">
+            <h2 className="[font-family:var(--font-display)] mt-2 text-3xl font-bold tracking-tight text-[#1f1f1f] md:text-4xl">
               Keep your current POS. We handle the setup layer around it.
             </h2>
             <p className="mt-3 text-sm text-[#5f5b56] md:text-base">
@@ -283,53 +245,13 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-[#e3d5c4] bg-white p-6 shadow-sm md:p-8">
-        <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b73a2f]">
-              Why Owners Switch
-            </p>
-            <h2 className="font-[var(--font-display)] mt-1 text-3xl font-bold tracking-tight text-[#1f1f1f] md:text-4xl">
-              Built for non-technical restaurant teams
-            </h2>
-          </div>
-          <span className="rounded-full border border-[#eadfd4] bg-[#fff8f2] px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-[#7c6a58]">
-            Operator-first workflow
-          </span>
-        </div>
-        <div className="grid gap-4 md:grid-cols-3">
-          {[
-            {
-              title: "Use your real listing data",
-              desc: "No blank setup page. Start from information already visible in your market.",
-            },
-            {
-              title: "Chinese-focused website templates",
-              desc: "Preview designs made for takeout menus and direct online ordering flows.",
-            },
-            {
-              title: "Ordering + phone flow in one stack",
-              desc: "Web ordering, call support, and owner controls in one system.",
-            },
-          ].map((item) => (
-            <article
-              key={item.title}
-              className="rounded-2xl border border-[#e9ddd0] bg-[#fffdfa] p-5"
-            >
-              <h3 className="text-lg font-semibold text-[#222]">{item.title}</h3>
-              <p className="mt-2 text-sm text-[#666]">{item.desc}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
       <section id="states">
         <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#b73a2f]">
               Browse by State
             </p>
-            <h2 className="font-[var(--font-display)] mt-1 text-4xl font-bold tracking-tight text-[#1f1f1f]">
+            <h2 className="[font-family:var(--font-display)] mt-1 text-4xl font-bold tracking-tight text-[#1f1f1f]">
               Pick a state and start from real listings
             </h2>
           </div>
@@ -392,7 +314,7 @@ export default async function HomePage() {
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b73a2f]">
             Owner Call To Action
           </p>
-          <h2 className="font-[var(--font-display)] mt-2 text-3xl font-bold tracking-tight text-[#1f1f1f] md:text-4xl">
+          <h2 className="[font-family:var(--font-display)] mt-2 text-3xl font-bold tracking-tight text-[#1f1f1f] md:text-4xl">
             Want your demo website this week?
           </h2>
           <p className="mt-2 text-sm text-[#666] md:text-base">

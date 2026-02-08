@@ -1,4 +1,5 @@
 import type { RestaurantDetail } from "@/lib/types";
+import type { FontPresetKey, PaletteKey } from "./preview-options";
 import type {
   GalleryItem,
   HoursData,
@@ -14,6 +15,9 @@ export const TEMPLATE_KEYS = [
   "ming-full",
   "night-market",
   "wok-fire",
+  "metro-grid",
+  "editorial-column",
+  "glass-orbit",
 ] as const;
 
 export type TemplateKey = (typeof TEMPLATE_KEYS)[number];
@@ -25,6 +29,9 @@ export const TEMPLATE_LABELS: Record<TemplateKey, string> = {
   "ming-full": "Ming Full",
   "night-market": "Night Market",
   "wok-fire": "Wok Fire",
+  "metro-grid": "Metro Grid",
+  "editorial-column": "Editorial Column",
+  "glass-orbit": "Glass Orbit",
 };
 
 export interface RestaurantTemplateProps {
@@ -38,8 +45,9 @@ export interface RestaurantTemplateProps {
   highlights: string[];
   mapsUrl: string;
   templateKey: TemplateKey;
-  previewMode: boolean;
   basePath: string;
   orderPath: string;
   orderingEnabled: boolean;
+  fontPreset: FontPresetKey;
+  palette: PaletteKey;
 }

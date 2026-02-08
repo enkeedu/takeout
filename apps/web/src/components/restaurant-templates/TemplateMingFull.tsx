@@ -2,6 +2,8 @@ import { Fira_Sans, Roboto } from "next/font/google";
 import { formatPrice } from "@/lib/restaurantDemo";
 import { Reveal } from "@/components/Reveal";
 import { OrderPanel } from "./OrderPanel";
+import { OpeningHoursPanel } from "./OpeningHoursPanel";
+import { buildTemplateRootStyle } from "./preview-options";
 import type { RestaurantTemplateProps } from "./types";
 
 const display = Fira_Sans({
@@ -45,6 +47,8 @@ export function TemplateMingFull({
   mapsUrl,
   orderPath,
   orderingEnabled,
+  fontPreset,
+  palette,
 }: RestaurantTemplateProps) {
   const assetBase = "/templates/ming";
   const menuItems = menu.flatMap((category) => category.items);
@@ -70,10 +74,12 @@ export function TemplateMingFull({
     backgroundSize: "cover",
     backgroundPosition: "center",
   });
+  const rootStyle = buildTemplateRootStyle(fontPreset, palette);
 
   return (
     <div
-      className={`${display.variable} ${body.variable} font-[var(--font-body)] text-[#2D2D2D]`}
+      className={`${display.variable} ${body.variable} [font-family:var(--font-body)] text-[#2D2D2D]`}
+      style={rootStyle}
     >
       <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen bg-[#FFFEFD]">
         <div className="absolute inset-0 pattern-medallion opacity-10" />
@@ -116,7 +122,7 @@ export function TemplateMingFull({
 
               <div className="mt-12 text-center">
                 <Reveal variant="fade-up">
-                  <h1 className="text-4xl font-[var(--font-display)] md:text-5xl">
+                  <h1 className="text-4xl [font-family:var(--font-display)] md:text-5xl">
                     {restaurant.name}
                   </h1>
                   <p className="mx-auto mt-4 max-w-2xl text-base text-white/80">
@@ -127,7 +133,7 @@ export function TemplateMingFull({
                   <div className="mt-6 flex flex-wrap justify-center gap-3">
                     <a
                       href="#order"
-                      className="border border-[#B51F09] bg-[#B51F09] px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white hover:bg-[#FFD700] hover:text-black"
+                      className="border border-[var(--template-accent)] bg-[var(--template-accent)] px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white hover:bg-[var(--template-accent-strong)] hover:text-black"
                     >
                       Order Online
                     </a>
@@ -182,7 +188,7 @@ export function TemplateMingFull({
                 key={item.title}
                 className="rounded-2xl border border-[#e6dfd8] bg-white p-5 shadow-sm"
               >
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#B51F09]">
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--template-accent)]">
                   {item.title}
                 </p>
                 <p className="mt-2 text-lg font-semibold text-[#010000]">
@@ -206,8 +212,8 @@ export function TemplateMingFull({
                   style={photoStyle("about-interior", "Interior")}
                 />
               </div>
-              <div className="absolute -bottom-5 left-6 border border-[#FFD700] bg-[#B51F09] px-4 py-3 text-white shadow-lg">
-                <div className="text-center text-2xl font-[var(--font-display)]">
+              <div className="absolute -bottom-5 left-6 border border-[var(--template-accent-strong)] bg-[var(--template-accent)] px-4 py-3 text-white shadow-lg">
+                <div className="text-center text-2xl [font-family:var(--font-display)]">
                   4.8
                 </div>
                 <div className="text-[10px] uppercase tracking-[0.3em] text-white/80">
@@ -217,17 +223,17 @@ export function TemplateMingFull({
             </div>
 
             <div className="space-y-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#B51F09]">
+              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[var(--template-accent)]">
                 About Us
               </p>
-              <h2 className="text-3xl font-[var(--font-display)] text-[#010000]">
+              <h2 className="text-3xl [font-family:var(--font-display)] text-[#010000]">
                 Family recipes with a fast, friendly pickup.
               </h2>
               <p className="text-sm text-[#6b6b6b]">
                 We focus on simple, honest food done right. Order online in
                 minutes and enjoy fresh wok classics made to order.
               </p>
-              <div className="flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-[#B51F09]">
+              <div className="flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-[var(--template-accent)]">
                 {highlights.map((highlight) => (
                   <span
                     key={highlight}
@@ -250,7 +256,7 @@ export function TemplateMingFull({
               <p className="text-xs font-semibold uppercase tracking-[0.35em] text-white/70">
                 Catering + Reservations
               </p>
-              <h2 className="mt-3 text-3xl font-[var(--font-display)] md:text-4xl">
+              <h2 className="mt-3 text-3xl [font-family:var(--font-display)] md:text-4xl">
                 Reserve a table or plan a family feast.
               </h2>
               <p className="mt-3 text-sm text-white/80">
@@ -259,7 +265,7 @@ export function TemplateMingFull({
               <div className="mt-6 flex flex-wrap justify-center gap-3">
                 <a
                   href={restaurant.phone ? `tel:${restaurant.phone}` : "#contact"}
-                  className="border border-[#FFD700] bg-[#FFD700] px-6 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-black hover:bg-white"
+                  className="border border-[var(--template-accent-strong)] bg-[var(--template-accent-strong)] px-6 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-black hover:bg-white"
                 >
                   Call to Reserve
                 </a>
@@ -279,10 +285,10 @@ export function TemplateMingFull({
           >
             <div className="space-y-6">
               <div className="rounded-2xl border border-[#e6dfd8] bg-white p-6 shadow-sm">
-                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#B51F09]">
+                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[var(--template-accent)]">
                   Popular Picks
                 </p>
-                <h2 className="mt-2 text-3xl font-[var(--font-display)] text-[#010000]">
+                <h2 className="mt-2 text-3xl [font-family:var(--font-display)] text-[#010000]">
                   Crowd favorites, made fresh.
                 </h2>
                 <p className="mt-3 text-sm text-[#6b6b6b]">
@@ -303,7 +309,7 @@ export function TemplateMingFull({
                           <p className="font-semibold text-[#010000]">
                             {item.name}
                           </p>
-                          <span className="text-sm font-semibold text-[#B51F09]">
+                          <span className="text-sm font-semibold text-[var(--template-accent)]">
                             {formatPrice(item.price)}
                           </span>
                         </div>
@@ -350,17 +356,17 @@ export function TemplateMingFull({
             />
             <div className="relative mx-auto max-w-[1760px] px-6">
               <div className="text-center">
-                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#B51F09]">
+                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[var(--template-accent)]">
                   Full Menu
                 </p>
-                <h2 className="mt-3 text-3xl font-[var(--font-display)] text-[#010000] md:text-4xl">
+                <h2 className="mt-3 text-3xl [font-family:var(--font-display)] text-[#010000] md:text-4xl">
                   Browse our authentic Chinese menu
                 </h2>
               </div>
               <div className="mt-10 grid gap-8 lg:grid-cols-2">
                 {[menuLeft, menuRight].map((column, columnIndex) => (
                   <div key={columnIndex} className="space-y-4">
-                    <h3 className="text-sm font-semibold uppercase tracking-[0.25em] text-[#B51F09]">
+                    <h3 className="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--template-accent)]">
                       {columnIndex === 0 ? "Popular" : "New"}
                     </h3>
                     {column.map((item, index) => (
@@ -378,7 +384,7 @@ export function TemplateMingFull({
                               {item.name}
                             </span>
                             <span className="flex-1 border-b border-dotted border-[#d7cfc7]" />
-                            <span className="font-semibold text-[#B51F09]">
+                            <span className="font-semibold text-[var(--template-accent)]">
                               {formatPrice(item.price)}
                             </span>
                           </div>
@@ -400,7 +406,7 @@ export function TemplateMingFull({
                 key={review.id}
                 className="rounded-2xl border border-[#e6dfd8] bg-white p-5 shadow-sm"
               >
-                <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.2em] text-[#B51F09]">
+                <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.2em] text-[var(--template-accent)]">
                   <span>{review.name}</span>
                   <span>{review.source}</span>
                 </div>
@@ -416,32 +422,7 @@ export function TemplateMingFull({
             id="contact"
             className="grid gap-6 lg:grid-cols-[0.45fr_0.3fr_0.25fr]"
           >
-            <div className="relative overflow-hidden rounded-2xl border border-[#B51F09] bg-[#B51F09] p-6 text-white shadow-sm">
-              <div
-                className="absolute inset-0 opacity-25"
-                style={{
-                  backgroundImage: `url(${assetBase}/deco-bottom-right.webp)`,
-                  backgroundRepeat: "repeat",
-                  backgroundSize: "160px",
-                }}
-              />
-              <div className="relative">
-                <h3 className="text-lg font-semibold uppercase tracking-[0.2em]">
-                  Opening Hours
-                </h3>
-                <div className="mt-4 space-y-2 text-xs text-white/90">
-                  {hours.rows.map((row) => (
-                    <div
-                      key={row.day}
-                      className="flex items-center justify-between border-b border-white/20 pb-2"
-                    >
-                      <span className="font-semibold">{row.day}</span>
-                      <span>{row.hours}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <OpeningHoursPanel hours={hours} assetBase={assetBase} />
 
             <div className="rounded-2xl border border-[#e6dfd8] bg-white p-6 shadow-sm">
               <h3 className="text-lg font-semibold text-[#010000]">Find Us</h3>
@@ -455,7 +436,7 @@ export function TemplateMingFull({
                 href={mapsUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-3 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-[#B51F09]"
+                className="mt-3 inline-block text-xs font-semibold uppercase tracking-[0.2em] text-[var(--template-accent)]"
               >
                 View map
               </a>
@@ -473,7 +454,7 @@ export function TemplateMingFull({
               </p>
               <button
                 type="button"
-                className="mt-4 w-full border border-[#B51F09] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#B51F09] hover:bg-[#B51F09] hover:text-white"
+                className="mt-4 w-full border border-[var(--template-accent)] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--template-accent)] hover:bg-[var(--template-accent)] hover:text-white"
               >
                 Send Inquiry
               </button>

@@ -45,9 +45,9 @@ export function StateCityExplorer({
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#b04a2d]">
             Browse Cities
           </p>
-          <h1 className="font-[var(--font-display)] mt-2 text-5xl font-black tracking-tight text-[#1f1f1f] md:text-6xl">
+          <h2 className="[font-family:var(--font-display)] mt-2 text-5xl font-black tracking-tight text-[#1f1f1f] md:text-6xl">
             {stateName}
-          </h1>
+          </h2>
           <p className="mt-3 max-w-2xl text-sm text-[#5a534d] md:text-base">
             Pick a city to see local Chinese restaurant listings and quickly start
             your owner demo flow.
@@ -87,7 +87,7 @@ export function StateCityExplorer({
             <div className="rounded-xl border border-[#eadccf] bg-white px-4 py-3">
               <p className="text-xs uppercase tracking-[0.2em] text-[#8d7a66]">Next Step</p>
               <p className="mt-1 text-base font-bold text-[#1f1f1f]">
-                Open a city and start demo
+                Open a city
               </p>
             </div>
           </div>
@@ -118,20 +118,11 @@ export function StateCityExplorer({
                 {city.restaurant_count !== 1 ? "s" : ""}
               </p>
 
-              <div className="mt-3 flex flex-wrap gap-2">
-                {[
-                  "Listing Imported",
-                  "Template Ready",
-                  "Owner Demo Flow",
-                ].map((badge) => (
-                  <span
-                    key={`${city.city_slug}-${badge}`}
-                    className="rounded-full border border-[#e8dacb] bg-[#fffdfa] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#6f6154]"
-                  >
-                    {badge}
-                  </span>
-                ))}
-              </div>
+              <p className="mt-3 text-xs uppercase tracking-[0.12em] text-[#8a7b6d]">
+                {city.restaurant_count >= 3
+                  ? "Good launch candidate"
+                  : "Emerging city opportunity"}
+              </p>
 
               <div className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#c0392b]">
                 Open city and start demo
@@ -149,7 +140,7 @@ export function StateCityExplorer({
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b73a2f]">
             Missing a city?
           </p>
-          <h2 className="font-[var(--font-display)] mt-2 text-3xl font-bold tracking-tight text-[#1f1f1f]">
+          <h2 className="[font-family:var(--font-display)] mt-2 text-3xl font-bold tracking-tight text-[#1f1f1f]">
             We can import it quickly.
           </h2>
           <p className="mt-2 text-sm text-[#666]">

@@ -3,6 +3,7 @@ import { formatPrice } from "@/lib/restaurantDemo";
 import { Parallax } from "@/components/Parallax";
 import { Reveal } from "@/components/Reveal";
 import { OrderPanel } from "./OrderPanel";
+import { buildTemplateRootStyle } from "./preview-options";
 import type { RestaurantTemplateProps } from "./types";
 
 const display = Cormorant_Garamond({
@@ -48,6 +49,8 @@ export function TemplateNightMarket({
   mapsUrl,
   orderPath,
   orderingEnabled,
+  fontPreset,
+  palette,
 }: RestaurantTemplateProps) {
   const categoryCards = menu.slice(0, 4);
   const menuItems = menu.flatMap((category) => category.items);
@@ -59,15 +62,17 @@ export function TemplateNightMarket({
     backgroundSize: "cover",
     backgroundPosition: "center",
   });
+  const rootStyle = buildTemplateRootStyle(fontPreset, palette);
 
   return (
     <div
-      className={`${display.variable} ${body.variable} font-[var(--font-body)] text-slate-900`}
+      className={`${display.variable} ${body.variable} [font-family:var(--font-body)] text-slate-900`}
+      style={rootStyle}
     >
       <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen bg-[#f6f2ea]">
         <div className="absolute inset-0 pattern-medallion opacity-12" />
         <div className="relative mx-auto max-w-[1760px] px-6 py-10 space-y-10">
-          <section className="full-bleed section-angled relative overflow-hidden rounded-[32px] border border-emerald-200 bg-[#f8f5ef] px-6 py-12 md:px-10">
+          <section className="full-bleed section-angled relative overflow-hidden rounded-[32px] border border-[var(--template-accent)] bg-[#f8f5ef] px-6 py-12 md:px-10">
             <div className="absolute inset-0 pattern-medallion opacity-25" />
             <div className="absolute inset-0 opacity-40 [background-image:radial-gradient(circle,rgba(15,118,110,0.12)_1px,transparent_1px)] [background-size:52px_52px]" />
             <Parallax
@@ -82,10 +87,10 @@ export function TemplateNightMarket({
         <div className="relative mx-auto max-w-[1760px] grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="space-y-6">
             <Reveal variant="bounce">
-              <p className="text-xs font-semibold uppercase tracking-[0.4em] text-emerald-700">
+              <p className="text-xs font-semibold uppercase tracking-[0.4em] text-[var(--template-accent)]">
                 Night Market
               </p>
-              <h1 className="mt-4 text-5xl font-[var(--font-display)] text-slate-900 md:text-6xl">
+              <h1 className="mt-4 text-5xl [font-family:var(--font-display)] text-slate-900 md:text-6xl">
                 {restaurant.name}
               </h1>
               <p className="mt-4 max-w-2xl text-lg text-slate-600">
@@ -94,11 +99,11 @@ export function TemplateNightMarket({
             </Reveal>
 
             <Reveal variant="slide-left" delayMs={120}>
-              <div className="flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-emerald-700">
+              <div className="flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-[var(--template-accent)]">
                 {highlights.map((highlight) => (
                   <span
                     key={highlight}
-                    className="rounded-full border border-emerald-200 bg-white/80 px-3 py-1 text-[10px]"
+                    className="rounded-full border border-[var(--template-accent)] bg-white/80 px-3 py-1 text-[10px]"
                   >
                     {highlight}
                   </span>
@@ -110,14 +115,14 @@ export function TemplateNightMarket({
               <div className="flex flex-wrap gap-3">
                 <a
                   href="#order"
-                  className="rounded-full bg-emerald-700 px-5 py-2 text-sm font-semibold text-white hover:bg-emerald-600"
+                  className="rounded-full bg-[var(--template-accent)] px-5 py-2 text-sm font-semibold text-white hover:bg-[var(--template-accent-strong)]"
                 >
                   Start Order
                 </a>
                 {restaurant.phone ? (
                   <a
                     href={`tel:${restaurant.phone}`}
-                    className="rounded-full border border-emerald-200 bg-white px-5 py-2 text-sm font-semibold text-emerald-700 hover:border-emerald-300"
+                    className="rounded-full border border-[var(--template-accent)] bg-white px-5 py-2 text-sm font-semibold text-[var(--template-accent)] hover:border-[var(--template-accent-strong)]"
                   >
                     Call {restaurant.phone}
                   </a>
@@ -126,8 +131,8 @@ export function TemplateNightMarket({
             </Reveal>
 
             <Reveal variant="fade-up" delayMs={260}>
-              <div className="rounded-2xl border border-emerald-200 bg-white p-4">
-                <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.3em] text-emerald-700">
+              <div className="rounded-2xl border border-[var(--template-accent)] bg-white p-4">
+                <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.3em] text-[var(--template-accent)]">
                   <span>Chef Specials</span>
                   <span>Tonight</span>
                 </div>
@@ -140,7 +145,7 @@ export function TemplateNightMarket({
                       <p className="text-xs text-slate-500">
                         {special.description}
                       </p>
-                      <p className="mt-1 text-xs font-semibold text-emerald-700">
+                      <p className="mt-1 text-xs font-semibold text-[var(--template-accent)]">
                         {special.price}
                       </p>
                     </div>
@@ -166,15 +171,15 @@ export function TemplateNightMarket({
         <div className="relative mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {categoryCards.map((category, index) => (
             <Reveal key={category.name} variant="clip" delayMs={index * 100}>
-              <div className="group relative overflow-hidden rounded-2xl border border-emerald-200 bg-white shadow-sm transition-transform duration-300 hover:-translate-y-1">
+              <div className="group relative overflow-hidden rounded-2xl border border-[var(--template-accent)] bg-white shadow-sm transition-transform duration-300 hover:-translate-y-1">
                 <div
                   className="absolute inset-0 bg-cover bg-center opacity-85"
                   style={photoStyle(category.name)}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-white/70 via-white/20 to-transparent" />
                 <div className="relative flex min-h-[180px] items-end p-4">
-                  <div className="w-full rounded-xl border border-emerald-200 bg-white/90 p-3 text-center">
-                    <p className="text-sm font-semibold uppercase tracking-[0.3em] text-emerald-700">
+                  <div className="w-full rounded-xl border border-[var(--template-accent)] bg-white/90 p-3 text-center">
+                    <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[var(--template-accent)]">
                       {category.name}
                     </p>
                     <p className="mt-1 text-[11px] text-slate-600">
@@ -190,12 +195,12 @@ export function TemplateNightMarket({
 
           <section className="mt-12 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
         <Reveal variant="slide-left">
-          <div className="rounded-3xl border border-emerald-200 bg-white p-6 shadow-sm">
+          <div className="rounded-3xl border border-[var(--template-accent)] bg-white p-6 shadow-sm">
             <div className="flex items-center justify-between">
-              <h2 className="text-3xl font-[var(--font-display)] text-slate-900">
+              <h2 className="text-3xl [font-family:var(--font-display)] text-slate-900">
                 Street Bites
               </h2>
-              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-emerald-700">
+              <span className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--template-accent)]">
                 Curated
               </span>
             </div>
@@ -206,12 +211,12 @@ export function TemplateNightMarket({
                   variant={index % 2 === 0 ? "slide-left" : "slide-right"}
                   delayMs={index * 60}
                 >
-                  <div className="rounded-2xl border border-emerald-200 bg-white p-4 shadow-sm">
+                  <div className="rounded-2xl border border-[var(--template-accent)] bg-white p-4 shadow-sm">
                     <div className="flex items-center justify-between gap-3">
                       <h3 className="text-lg font-semibold text-slate-900">
                         {item.name}
                       </h3>
-                      <span className="font-semibold text-emerald-700">
+                      <span className="font-semibold text-[var(--template-accent)]">
                         {formatPrice(item.price)}
                       </span>
                     </div>
@@ -227,7 +232,7 @@ export function TemplateNightMarket({
 
         <aside className="space-y-4">
           <Reveal variant="fade-up">
-            <div className="rounded-3xl border border-emerald-200 bg-white p-6 shadow-sm">
+            <div className="rounded-3xl border border-[var(--template-accent)] bg-white p-6 shadow-sm">
               <h3 className="text-lg font-semibold text-slate-900">Hours</h3>
               <div className="mt-3 space-y-2 text-xs text-slate-600">
                 {hours.rows.map((row) => (
@@ -245,7 +250,7 @@ export function TemplateNightMarket({
             </div>
           </Reveal>
           <Reveal variant="fade-up" delayMs={140}>
-            <div className="rounded-3xl border border-emerald-200 bg-white p-6 shadow-sm">
+            <div className="rounded-3xl border border-[var(--template-accent)] bg-white p-6 shadow-sm">
               <h3 className="text-lg font-semibold text-slate-900">
                 Find Us
               </h3>
@@ -259,7 +264,7 @@ export function TemplateNightMarket({
                 href={mapsUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-3 inline-block text-sm font-semibold text-emerald-700 hover:text-emerald-600"
+                className="mt-3 inline-block text-sm font-semibold text-[var(--template-accent)] hover:text-[var(--template-accent-strong)]"
               >
                 View map
               </a>
@@ -268,34 +273,34 @@ export function TemplateNightMarket({
         </aside>
           </section>
 
-          <section className="full-bleed relative mt-12 rounded-3xl border border-emerald-200 bg-white p-6 shadow-sm">
+          <section className="full-bleed relative mt-12 rounded-3xl border border-[var(--template-accent)] bg-white p-6 shadow-sm">
             <div className="pointer-events-none absolute inset-0 pattern-key" />
             <div className="relative mx-auto max-w-[1760px]">
               <Reveal variant="fade-up">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.35em] text-emerald-700">
+                    <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[var(--template-accent)]">
                       Menu Highlights
                     </p>
-                    <h2 className="mt-2 text-3xl font-[var(--font-display)] text-slate-900">
+                    <h2 className="mt-2 text-3xl [font-family:var(--font-display)] text-slate-900">
                       Browse our authentic Chinese menu.
                     </h2>
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-emerald-700">
-                    <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1">
+                  <div className="flex items-center gap-2 text-xs text-[var(--template-accent)]">
+                    <span className="rounded-full border border-[var(--template-accent)] bg-slate-100/70 px-3 py-1">
                       Popular
                     </span>
-                    <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1">
+                    <span className="rounded-full border border-[var(--template-accent)] bg-slate-100/70 px-3 py-1">
                       New
                     </span>
                   </div>
                 </div>
 
                 <div className="relative mt-8 grid gap-6 lg:grid-cols-2">
-                  <div className="absolute left-1/2 top-0 hidden h-full w-px border-l border-dotted border-emerald-200 lg:block" />
+                  <div className="absolute left-1/2 top-0 hidden h-full w-px border-l border-dotted border-[var(--template-accent)] lg:block" />
                   {[menuLeft, menuRight].map((column, columnIndex) => (
                     <div key={columnIndex} className="space-y-4 lg:px-6">
-                      <h3 className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-700">
+                      <h3 className="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--template-accent)]">
                         {columnIndex === 0 ? "Popular Menu" : "New Menu"}
                       </h3>
                       {column.map((item) => (
@@ -304,8 +309,8 @@ export function TemplateNightMarket({
                             <span className="font-semibold text-slate-900">
                               {item.name}
                             </span>
-                            <span className="flex-1 border-b border-dotted border-emerald-200" />
-                            <span className="font-semibold text-emerald-700">
+                            <span className="flex-1 border-b border-dotted border-[var(--template-accent)]" />
+                            <span className="font-semibold text-[var(--template-accent)]">
                               {formatPrice(item.price)}
                             </span>
                           </div>
@@ -321,15 +326,15 @@ export function TemplateNightMarket({
 
           <section className="mt-12 grid gap-6 lg:grid-cols-[1fr_1fr]">
         <Reveal variant="slide-left">
-          <div className="rounded-3xl border border-emerald-200 bg-white p-6 shadow-sm">
-            <h2 className="text-2xl font-[var(--font-display)] text-slate-900">
+          <div className="rounded-3xl border border-[var(--template-accent)] bg-white p-6 shadow-sm">
+            <h2 className="text-2xl [font-family:var(--font-display)] text-slate-900">
               Guest Notes
             </h2>
             <div className="mt-4 space-y-4">
               {reviews.map((review, index) => (
                 <Reveal key={review.id} delayMs={index * 80} variant="fade-up">
-                  <div className="rounded-2xl border border-emerald-200 bg-emerald-50/40 p-4 text-sm text-slate-700">
-                    <div className="flex items-center justify-between text-xs font-semibold uppercase text-emerald-700">
+                  <div className="rounded-2xl border border-[var(--template-accent)] bg-slate-100/70 p-4 text-sm text-slate-700">
+                    <div className="flex items-center justify-between text-xs font-semibold uppercase text-[var(--template-accent)]">
                       <span>{review.name}</span>
                       <span>{review.source}</span>
                     </div>
@@ -345,8 +350,8 @@ export function TemplateNightMarket({
         </Reveal>
 
         <Reveal variant="slide-right">
-          <div className="rounded-3xl border border-emerald-200 bg-white p-6 shadow-sm">
-            <h2 className="text-2xl font-[var(--font-display)] text-slate-900">
+          <div className="rounded-3xl border border-[var(--template-accent)] bg-white p-6 shadow-sm">
+            <h2 className="text-2xl [font-family:var(--font-display)] text-slate-900">
               Gallery
             </h2>
             <div className="mt-6 grid gap-4 sm:grid-cols-3">

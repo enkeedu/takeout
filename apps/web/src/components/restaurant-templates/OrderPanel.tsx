@@ -49,39 +49,66 @@ const VARIANT_STYLES: Record<
   }
 > = {
   ming: {
-    panel: "border-[#e6dfd8] bg-white/95 text-[#2D2D2D]",
-    button: "bg-[#B51F09] text-white hover:bg-[#FFD700] hover:text-black",
-    accent: "text-[#B51F09]",
-    muted: "text-[#6b6b6b]",
+    panel: "border-slate-200 bg-white/95 text-slate-900",
+    button:
+      "bg-[var(--template-accent)] text-white hover:bg-[var(--template-accent-strong)] hover:text-black",
+    accent: "text-[var(--template-accent)]",
+    muted: "text-slate-500",
   },
   "ming-slim": {
-    panel: "border-[#e6dfd8] bg-white/95 text-[#2D2D2D]",
-    button: "bg-[#B51F09] text-white hover:bg-[#FFD700] hover:text-black",
-    accent: "text-[#B51F09]",
-    muted: "text-[#6b6b6b]",
+    panel: "border-slate-200 bg-white/95 text-slate-900",
+    button:
+      "bg-[var(--template-accent)] text-white hover:bg-[var(--template-accent-strong)] hover:text-black",
+    accent: "text-[var(--template-accent)]",
+    muted: "text-slate-500",
   },
   "ming-balanced": {
-    panel: "border-[#e6dfd8] bg-white/95 text-[#2D2D2D]",
-    button: "bg-[#B51F09] text-white hover:bg-[#FFD700] hover:text-black",
-    accent: "text-[#B51F09]",
-    muted: "text-[#6b6b6b]",
+    panel: "border-slate-200 bg-white/95 text-slate-900",
+    button:
+      "bg-[var(--template-accent)] text-white hover:bg-[var(--template-accent-strong)] hover:text-black",
+    accent: "text-[var(--template-accent)]",
+    muted: "text-slate-500",
   },
   "ming-full": {
-    panel: "border-[#e6dfd8] bg-white/95 text-[#2D2D2D]",
-    button: "bg-[#B51F09] text-white hover:bg-[#FFD700] hover:text-black",
-    accent: "text-[#B51F09]",
-    muted: "text-[#6b6b6b]",
+    panel: "border-slate-200 bg-white/95 text-slate-900",
+    button:
+      "bg-[var(--template-accent)] text-white hover:bg-[var(--template-accent-strong)] hover:text-black",
+    accent: "text-[var(--template-accent)]",
+    muted: "text-slate-500",
   },
   "night-market": {
     panel: "border-slate-200 bg-white text-slate-900",
-    button: "bg-emerald-700 text-white hover:bg-emerald-600",
-    accent: "text-emerald-700",
+    button:
+      "bg-[var(--template-accent)] text-white hover:bg-[var(--template-accent-strong)] hover:text-black",
+    accent: "text-[var(--template-accent)]",
     muted: "text-slate-500",
   },
   "wok-fire": {
-    panel: "border-amber-200 bg-white text-slate-900",
-    button: "bg-amber-700 text-white hover:bg-amber-600",
-    accent: "text-amber-700",
+    panel: "border-slate-200 bg-white text-slate-900",
+    button:
+      "bg-[var(--template-accent)] text-white hover:bg-[var(--template-accent-strong)] hover:text-black",
+    accent: "text-[var(--template-accent)]",
+    muted: "text-slate-500",
+  },
+  "metro-grid": {
+    panel: "border-slate-200 bg-white text-slate-900",
+    button:
+      "bg-[var(--template-accent)] text-white hover:bg-[var(--template-accent-strong)] hover:text-black",
+    accent: "text-[var(--template-accent)]",
+    muted: "text-slate-500",
+  },
+  "editorial-column": {
+    panel: "border-slate-200 bg-white text-slate-900",
+    button:
+      "bg-[var(--template-accent)] text-white hover:bg-[var(--template-accent-strong)] hover:text-black",
+    accent: "text-[var(--template-accent)]",
+    muted: "text-slate-500",
+  },
+  "glass-orbit": {
+    panel: "border-slate-200 bg-white text-slate-900",
+    button:
+      "bg-[var(--template-accent)] text-white hover:bg-[var(--template-accent-strong)] hover:text-black",
+    accent: "text-[var(--template-accent)]",
     muted: "text-slate-500",
   },
 };

@@ -38,7 +38,6 @@ export function CityRestaurantExplorer({
   ).length;
   const totalWithAi = restaurants.filter((restaurant) => restaurant.has_ai_phone).length;
   const totalClaimed = restaurants.filter((restaurant) => restaurant.is_claimed).length;
-  const totalUnclaimed = restaurants.length - totalClaimed;
 
   return (
     <div className="space-y-5">
@@ -46,7 +45,7 @@ export function CityRestaurantExplorer({
         <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b73a2f]">
           Local Directory
         </p>
-        <h2 className="font-[var(--font-display)] mt-2 text-4xl font-black tracking-tight text-[#1f1f1f]">
+        <h2 className="[font-family:var(--font-display)] mt-2 text-3xl font-black tracking-tight text-[#1f1f1f] md:text-4xl">
           Find restaurants in this city
         </h2>
         <p className="mt-2 text-sm text-[#666]">
@@ -102,12 +101,9 @@ export function CityRestaurantExplorer({
           </div>
         ) : null}
 
-        <div className="mt-5 grid gap-3 md:grid-cols-5">
+        <div className="mt-5 grid gap-3 md:grid-cols-4">
           <div className="rounded-xl border border-[#ecdcc8] bg-[#fff7ee] px-4 py-3 text-sm text-[#7a4b0d]">
             <strong className="text-base text-[#4a2a00]">{filtered.length}</strong> visible
-          </div>
-          <div className="rounded-xl border border-[#f1dfd4] bg-[#fff5f2] px-4 py-3 text-sm text-[#8d3f2f]">
-            <strong className="text-base text-[#6e2d20]">{totalUnclaimed}</strong> unclaimed
           </div>
           <div className="rounded-xl border border-[#f1d8d2] bg-[#fff3f1] px-4 py-3 text-sm text-[#8c2f24]">
             <strong className="text-base text-[#71281f]">{totalWithOnline}</strong> with online ordering

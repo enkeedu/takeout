@@ -70,7 +70,7 @@ export default async function CityPage({ params, searchParams }: Props) {
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#ffb999]">
             City Market Snapshot
           </p>
-          <h1 className="font-[var(--font-display)] mt-2 text-5xl font-black tracking-tight text-white md:text-6xl">
+          <h1 className="[font-family:var(--font-display)] mt-2 text-5xl font-black tracking-tight text-white md:text-6xl">
             {cityName}, {stateName}
           </h1>
           <p className="mt-3 max-w-3xl text-sm text-[#f2ddd1] md:text-base">
@@ -114,7 +114,7 @@ export default async function CityPage({ params, searchParams }: Props) {
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b73a2f]">
             Owner Growth Move
           </p>
-          <h2 className="font-[var(--font-display)] mt-2 text-3xl font-bold tracking-tight text-[#1f1f1f]">
+          <h2 className="[font-family:var(--font-display)] mt-2 text-3xl font-bold tracking-tight text-[#1f1f1f]">
             Turn this city page into real order volume
           </h2>
           <p className="mt-2 text-sm text-[#666]">

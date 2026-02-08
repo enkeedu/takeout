@@ -18,15 +18,26 @@ import { TemplateMingBalanced } from "@/components/restaurant-templates/Template
 import { TemplateMingFull } from "@/components/restaurant-templates/TemplateMingFull";
 import { TemplateNightMarket } from "@/components/restaurant-templates/TemplateNightMarket";
 import { TemplateWokFire } from "@/components/restaurant-templates/TemplateWokFire";
+import { TemplateMetroGrid } from "@/components/restaurant-templates/TemplateMetroGrid";
+import { TemplateEditorialColumn } from "@/components/restaurant-templates/TemplateEditorialColumn";
+import { TemplateGlassOrbit } from "@/components/restaurant-templates/TemplateGlassOrbit";
 import {
   TEMPLATE_KEYS,
   type TemplateKey,
 } from "@/components/restaurant-templates/types";
 import { TemplatePreviewToggle } from "@/components/TemplatePreviewToggle";
+import {
+  resolveFontPreset,
+  resolvePalette,
+} from "@/components/restaurant-templates/preview-options";
 
 type Props = {
   params: Promise<{ state: string; city: string; slug: string }>;
-  searchParams: Promise<{ template?: string; preview?: string }>;
+  searchParams: Promise<{
+    template?: string;
+    font?: string;
+    palette?: string;
+  }>;
 };
 
 async function getRestaurant(
@@ -80,6 +91,12 @@ function selectTemplateKey(
   return TEMPLATE_KEYS[seed % TEMPLATE_KEYS.length];
 }
 
+const MOCK_MENU_TEMPLATE_KEYS: TemplateKey[] = [
+  "metro-grid",
+  "editorial-column",
+  "glass-orbit",
+];
+
 function buildMapsUrl(restaurant: RestaurantDetail): string {
   const query = encodeURIComponent(`${restaurant.name}, ${restaurant.address1}, ${restaurant.city}, ${restaurant.state} ${restaurant.zip}`);
   if (restaurant.google_place_id) {
@@ -112,8 +129,15 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
   if (!r) notFound();
 
   const templateKey = selectTemplateKey(r, sp.template);
-  const menu = menuData ? menuFromApi(menuData) : buildMockMenu(r.name);
-  const orderingEnabled = Boolean(menuData);
+  const fontPreset = resolveFontPreset(sp.font);
+  const palette = resolvePalette(sp.palette);
+  const templateUsesMockMenu = MOCK_MENU_TEMPLATE_KEYS.includes(templateKey);
+  const menu = templateUsesMockMenu
+    ? buildMockMenu(r.name)
+    : menuData
+      ? menuFromApi(menuData)
+      : buildMockMenu(r.name);
+  const orderingEnabled = Boolean(menuData) && !templateUsesMockMenu;
   const reviews = buildMockReviews(r.name, r.city);
   const gallery = buildMockGallery(r.name);
   const specials = buildMockSpecials(r.name);
@@ -123,7 +147,6 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
   const mapsUrl = buildMapsUrl(r);
   const basePath = `/${r.state_slug}/${r.city_slug}/${r.restaurant_slug}`;
   const orderPath = basePath;
-  const previewMode = sp.preview === "1";
 
   const DAY_MAP: Record<string, string> = {
     monday: "Monday",
@@ -213,9 +236,8 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
       <TemplatePreviewToggle
         basePath={basePath}
         current={templateKey}
-        stateSlug={r.state_slug}
-        citySlug={r.city_slug}
-        restaurantSlug={r.restaurant_slug}
+        currentFont={fontPreset}
+        currentPalette={palette}
       />
 
       {templateKey === "ming" ? (
@@ -229,11 +251,12 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
           tagline={tagline}
           highlights={highlights}
           mapsUrl={mapsUrl}
-          previewMode={previewMode}
           basePath={basePath}
           templateKey={templateKey}
           orderPath={orderPath}
           orderingEnabled={orderingEnabled}
+          fontPreset={fontPreset}
+          palette={palette}
         />
       ) : null}
 
@@ -248,11 +271,12 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
           tagline={tagline}
           highlights={highlights}
           mapsUrl={mapsUrl}
-          previewMode={previewMode}
           basePath={basePath}
           templateKey={templateKey}
           orderPath={orderPath}
           orderingEnabled={orderingEnabled}
+          fontPreset={fontPreset}
+          palette={palette}
         />
       ) : null}
 
@@ -267,11 +291,12 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
           tagline={tagline}
           highlights={highlights}
           mapsUrl={mapsUrl}
-          previewMode={previewMode}
           basePath={basePath}
           templateKey={templateKey}
           orderPath={orderPath}
           orderingEnabled={orderingEnabled}
+          fontPreset={fontPreset}
+          palette={palette}
         />
       ) : null}
 
@@ -286,11 +311,12 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
           tagline={tagline}
           highlights={highlights}
           mapsUrl={mapsUrl}
-          previewMode={previewMode}
           basePath={basePath}
           templateKey={templateKey}
           orderPath={orderPath}
           orderingEnabled={orderingEnabled}
+          fontPreset={fontPreset}
+          palette={palette}
         />
       ) : null}
 
@@ -305,11 +331,12 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
           tagline={tagline}
           highlights={highlights}
           mapsUrl={mapsUrl}
-          previewMode={previewMode}
           basePath={basePath}
           templateKey={templateKey}
           orderPath={orderPath}
           orderingEnabled={orderingEnabled}
+          fontPreset={fontPreset}
+          palette={palette}
         />
       ) : null}
 
@@ -324,11 +351,72 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
           tagline={tagline}
           highlights={highlights}
           mapsUrl={mapsUrl}
-          previewMode={previewMode}
           basePath={basePath}
           templateKey={templateKey}
           orderPath={orderPath}
           orderingEnabled={orderingEnabled}
+          fontPreset={fontPreset}
+          palette={palette}
+        />
+      ) : null}
+
+      {templateKey === "metro-grid" ? (
+        <TemplateMetroGrid
+          restaurant={r}
+          menu={menu}
+          reviews={reviews}
+          gallery={gallery}
+          hours={hours}
+          specials={specials}
+          tagline={tagline}
+          highlights={highlights}
+          mapsUrl={mapsUrl}
+          basePath={basePath}
+          templateKey={templateKey}
+          orderPath={orderPath}
+          orderingEnabled={orderingEnabled}
+          fontPreset={fontPreset}
+          palette={palette}
+        />
+      ) : null}
+
+      {templateKey === "editorial-column" ? (
+        <TemplateEditorialColumn
+          restaurant={r}
+          menu={menu}
+          reviews={reviews}
+          gallery={gallery}
+          hours={hours}
+          specials={specials}
+          tagline={tagline}
+          highlights={highlights}
+          mapsUrl={mapsUrl}
+          basePath={basePath}
+          templateKey={templateKey}
+          orderPath={orderPath}
+          orderingEnabled={orderingEnabled}
+          fontPreset={fontPreset}
+          palette={palette}
+        />
+      ) : null}
+
+      {templateKey === "glass-orbit" ? (
+        <TemplateGlassOrbit
+          restaurant={r}
+          menu={menu}
+          reviews={reviews}
+          gallery={gallery}
+          hours={hours}
+          specials={specials}
+          tagline={tagline}
+          highlights={highlights}
+          mapsUrl={mapsUrl}
+          basePath={basePath}
+          templateKey={templateKey}
+          orderPath={orderPath}
+          orderingEnabled={orderingEnabled}
+          fontPreset={fontPreset}
+          palette={palette}
         />
       ) : null}
     </article>
