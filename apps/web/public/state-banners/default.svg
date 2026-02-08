@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 520" role="img" aria-label="Default state banner with Chinese restaurant motif">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#24120c"/>
+      <stop offset="58%" stop-color="#17100c"/>
+      <stop offset="100%" stop-color="#120b08"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="78%" cy="20%" r="32%">
+      <stop offset="0%" stop-color="#ffc091"/>
+      <stop offset="100%" stop-color="#ea7d4d"/>
+    </radialGradient>
+  </defs>
+  <rect width="1800" height="520" fill="url(#bg)"/>
+  <circle cx="1380" cy="118" r="128" fill="url(#glow)" opacity="0.3"/>
+
+  <path d="M0 352C220 322 500 322 760 350C1020 378 1320 390 1800 354V520H0Z" fill="#120b08"/>
+
+  <g fill="#f5c3a6" opacity="0.55">
+    <rect x="260" y="224" width="320" height="170" rx="8"/>
+    <polygon points="230,224 610,224 560,174 280,174"/>
+    <rect x="400" y="272" width="42" height="122"/>
+  </g>
+
+  <g stroke="#f2b694" stroke-width="6" fill="none" opacity="0.5">
+    <path d="M860 136L1110 396"/>
+    <path d="M904 136L1154 396"/>
+    <path d="M160 410H1640"/>
+    <path d="M160 444H1640"/>
+  </g>
+
+  <g fill="#f9d3bf" opacity="0.42">
+    <circle cx="1260" cy="272" r="52"/>
+    <circle cx="1350" cy="246" r="40"/>
+    <circle cx="1432" cy="276" r="46"/>
+  </g>
+</svg>

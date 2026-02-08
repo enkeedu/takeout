@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 520" role="img" aria-label="Florida banner with Art Deco skyline and palms">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#131721"/>
+      <stop offset="52%" stop-color="#12202a"/>
+      <stop offset="100%" stop-color="#191016"/>
+    </linearGradient>
+    <linearGradient id="sun" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffc889"/>
+      <stop offset="100%" stop-color="#ff7d64"/>
+    </linearGradient>
+  </defs>
+  <rect width="1800" height="520" fill="url(#bg)"/>
+  <circle cx="310" cy="122" r="104" fill="url(#sun)" opacity="0.5"/>
+
+  <path d="M0 362C260 332 530 332 810 362C1090 392 1360 392 1800 352V520H0Z" fill="#100f17"/>
+  <g stroke="#8ff2e2" stroke-width="3" opacity="0.55" fill="none">
+    <path d="M120 380C360 336 620 336 860 380"/>
+    <path d="M1020 392C1240 354 1460 354 1680 392"/>
+  </g>
+
+  <g fill="#f8bfa4" opacity="0.44">
+    <rect x="640" y="196" width="102" height="196" rx="4"/>
+    <rect x="768" y="236" width="84" height="156" rx="4"/>
+    <rect x="882" y="206" width="96" height="186" rx="4"/>
+    <rect x="1008" y="246" width="74" height="146" rx="4"/>
+  </g>
+  <g stroke="#6df2df" stroke-width="4" opacity="0.7">
+    <path d="M652 232H730M652 258H730M892 238H966M892 264H966"/>
+    <path d="M780 272H842M780 298H842M1018 280H1072"/>
+  </g>
+
+  <g stroke="#f7d0ba" stroke-width="7" fill="none" opacity="0.62">
+    <path d="M260 388V286"/>
+    <path d="M260 298l-42-56"/>
+    <path d="M260 308l48-62"/>
+    <path d="M260 320l-58-30"/>
+    <path d="M260 326l58-32"/>
+
+    <path d="M1490 392V292"/>
+    <path d="M1490 304l-40-60"/>
+    <path d="M1490 314l46-66"/>
+    <path d="M1490 324l-56-28"/>
+    <path d="M1490 330l56-30"/>
+  </g>
+
+  <path d="M0 430H1800" stroke="#f3b18f" stroke-width="3" opacity="0.4"/>
+</svg>

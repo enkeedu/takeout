@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 520" role="img" aria-label="Washington banner with Space Needle and mountain silhouette">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#0f1820"/>
+      <stop offset="56%" stop-color="#10202a"/>
+      <stop offset="100%" stop-color="#0b141b"/>
+    </linearGradient>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#5fc0c4"/>
+      <stop offset="100%" stop-color="#2f7f90"/>
+    </linearGradient>
+  </defs>
+  <rect width="1800" height="520" fill="url(#bg)"/>
+  <circle cx="1250" cy="110" r="100" fill="url(#sky)" opacity="0.26"/>
+
+  <g fill="#6cbec1" opacity="0.26">
+    <polygon points="260,356 470,172 690,356"/>
+    <polygon points="520,356 760,140 1020,356"/>
+  </g>
+  <g fill="#d8f0ef" opacity="0.44">
+    <polygon points="760,140 820,194 700,194"/>
+  </g>
+
+  <path d="M0 372C260 350 520 358 760 382C1000 406 1320 406 1800 364V520H0Z" fill="#0b1218"/>
+
+  <g fill="#f0c9b0" opacity="0.62">
+    <rect x="1160" y="208" width="20" height="182"/>
+    <ellipse cx="1170" cy="190" rx="72" ry="24"/>
+    <ellipse cx="1170" cy="190" rx="52" ry="14" fill="#d9896a" opacity="0.75"/>
+    <rect x="1148" y="390" width="44" height="14"/>
+  </g>
+
+  <g fill="#87c7bf" opacity="0.45">
+    <polygon points="170,410 210,330 250,410"/>
+    <polygon points="236,410 274,322 312,410"/>
+    <polygon points="302,410 340,334 378,410"/>
+    <polygon points="1410,410 1450,330 1490,410"/>
+    <polygon points="1476,410 1514,320 1552,410"/>
+    <polygon points="1542,410 1580,332 1618,410"/>
+  </g>
+
+  <g stroke="#9ad5cf" stroke-width="3" opacity="0.26">
+    <path d="M120 74V156M320 64V146M530 80V164M760 70V150M980 62V144M1240 86V170M1460 72V154M1650 84V166"/>
+  </g>
+</svg>
