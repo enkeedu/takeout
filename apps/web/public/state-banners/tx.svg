@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 520" role="img" aria-label="Texas banner with Alamo facade and Lone Star">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#24110a"/>
+      <stop offset="56%" stop-color="#1b1009"/>
+      <stop offset="100%" stop-color="#140a06"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="24%" cy="20%" r="30%">
+      <stop offset="0%" stop-color="#ffd09e"/>
+      <stop offset="100%" stop-color="#ea7f4d"/>
+    </radialGradient>
+  </defs>
+  <rect width="1800" height="520" fill="url(#bg)"/>
+  <circle cx="400" cy="120" r="128" fill="url(#sun)" opacity="0.34"/>
+
+  <path d="M0 352C250 326 500 330 760 358C1020 386 1290 392 1800 354V520H0Z" fill="#130b08"/>
+
+  <g fill="#f6c3a2" opacity="0.58">
+    <rect x="760" y="236" width="280" height="164" rx="8"/>
+    <rect x="808" y="196" width="184" height="44" rx="6"/>
+    <path d="M860 170Q900 136 940 170V196H860Z"/>
+    <rect x="886" y="288" width="28" height="112"/>
+    <rect x="824" y="264" width="34" height="44"/>
+    <rect x="942" y="264" width="34" height="44"/>
+  </g>
+  <g stroke="#e58759" stroke-width="4" opacity="0.55">
+    <path d="M776 258H1024M776 292H1024M776 326H1024"/>
+  </g>
+
+  <polygon points="1320,114 1342,162 1394,168 1354,202 1366,254 1320,226 1274,254 1286,202 1246,168 1298,162" fill="#ffd6be" opacity="0.58"/>
+
+  <g stroke="#f4b28d" stroke-width="4" fill="none" opacity="0.52">
+    <path d="M220 410H1580"/>
+    <path d="M220 442H1580"/>
+  </g>
+
+  <g stroke="#f0c6ab" stroke-width="5" fill="none" opacity="0.42">
+    <path d="M1500 388V270L1540 318H1460L1500 270"/>
+    <path d="M1484 318V388M1516 318V388"/>
+  </g>
+</svg>
