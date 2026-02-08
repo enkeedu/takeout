@@ -45,6 +45,39 @@ NEXT_PUBLIC_ADMIN_TOKEN=change-me
 # Docs: http://localhost:8001/docs
 ```
 
+## Team Bootstrap (Full Dataset)
+
+Use this when a teammate wants the shared dataset locally without running the Google Places fetcher.
+
+```bash
+# 1) Start services
+docker compose up --build -d
+
+# 2) Apply schema + seed migrations
+docker compose exec api alembic upgrade head
+
+# 3) Import the shared dataset (safe to re-run)
+docker compose exec api env DEBUG=false \
+  python -m scripts.import_restaurants /data/chinese_restaurants.csv
+```
+
+Quick verification:
+
+```bash
+curl http://localhost:8001/health
+docker compose exec postgres psql -U takeout -d takeout -c "select count(*) from restaurants;"
+```
+
+If someone needs a totally fresh local DB:
+
+```bash
+docker compose down -v
+docker compose up --build -d
+docker compose exec api alembic upgrade head
+docker compose exec api env DEBUG=false \
+  python -m scripts.import_restaurants /data/chinese_restaurants.csv
+```
+
 ## URL Structure
 
 ```
@@ -53,6 +86,23 @@ NEXT_PUBLIC_ADMIN_TOKEN=change-me
 /:state/:city                  # e.g. /nj/clinton
 /:state/:city/:restaurant_slug # e.g. /nj/clinton/hunan-wok
 ```
+
+## Sharing Data
+
+To load restaurant data without running the Google Places API scrape yourself:
+
+```bash
+# Import from the shared CSV
+docker compose exec api python -m scripts.import_restaurants /data/chinese_restaurants.csv
+```
+
+The import script handles deduplication automatically, so it's safe to re-run.
+
+## Alembic + Data Strategy
+
+- Alembic is used for schema changes and lightweight seed data (for example `fetch_metros`).
+- The large restaurant dataset is loaded via `scripts.import_restaurants`, not embedded in Alembic revisions.
+- This keeps migrations fast/reviewable and avoids large data blobs in revision files.
 
 ## Project Structure
 

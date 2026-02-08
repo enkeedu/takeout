@@ -1,0 +1,58 @@
+[2026-02-08 03:04:29] INFO  Log file: /data/logs/fetch_20260208_030429.log
+[2026-02-08 03:04:29] INFO  ============================================================
+[2026-02-08 03:04:29] INFO    Metros:             1
+[2026-02-08 03:04:29] INFO    Total grid cells:   5
+[2026-02-08 03:04:29] INFO    Already completed:  0
+[2026-02-08 03:04:29] INFO    Remaining cells:    5
+[2026-02-08 03:04:29] INFO    Estimated cost:     $0.18
+[2026-02-08 03:04:29] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:04:29] INFO  ============================================================
+[2026-02-08 03:04:29] INFO  
+[2026-02-08 03:04:29] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:04:29] INFO  
+[2026-02-08 03:04:29] INFO    Fremont, CA: 5 cells (0 cached, 5 remaining)
+[2026-02-08 03:04:29] DEBUG     Cache miss at (37.4809, -121.9886); querying API
+[2026-02-08 03:04:30] INFO      Cell 1/5: +20 new (20 total)
+[2026-02-08 03:04:30] DEBUG     Cache miss at (37.5485, -122.0738); querying API
+[2026-02-08 03:04:31] INFO      Filtered: King Calamari (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:04:31] INFO      Cell 2/5: +18 new (38 total)
+[2026-02-08 03:04:31] DEBUG     Cache miss at (37.5485, -121.9886); querying API
+[2026-02-08 03:04:31] INFO      Filtered: Spices Garden (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:04:31] INFO      Cell 3/5: +13 new (51 total)
+[2026-02-08 03:04:31] DEBUG     Cache miss at (37.5485, -121.9034); querying API
+[2026-02-08 03:04:32] INFO      Filtered: YOSHI EN HOUSE LLC (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:04:32] INFO      Cell 4/5: +3 new (54 total)
+[2026-02-08 03:04:32] DEBUG     Cache miss at (37.6161, -121.9886); querying API
+[2026-02-08 03:04:33] INFO      Filtered: Shanghai Cuisine (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:04:33] INFO      Cell 5/5: +10 new (64 total)
+[2026-02-08 03:04:33] INFO    Filtered out 4 restaurants
+[2026-02-08 03:04:33] INFO    -> Fremont: 64 restaurants (running total: 64)
+[2026-02-08 03:04:33] INFO  
+[2026-02-08 03:04:33] INFO  
+[2026-02-08 03:04:33] INFO  ============================================================
+[2026-02-08 03:04:33] INFO  FETCH SUMMARY
+[2026-02-08 03:04:33] INFO  ============================================================
+[2026-02-08 03:04:33] INFO  Total restaurants:    64
+[2026-02-08 03:04:33] INFO  API calls made:       5
+[2026-02-08 03:04:33] INFO  Cache hits/misses:    0/5
+[2026-02-08 03:04:33] INFO  Estimated cost:       $0.18
+[2026-02-08 03:04:33] INFO  
+[2026-02-08 03:04:33] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:04:33] INFO    Phone:                63 ( 98.4%)
+[2026-02-08 03:04:33] INFO    Website:              50 ( 78.1%)
+[2026-02-08 03:04:33] INFO    Hours:                63 ( 98.4%)
+[2026-02-08 03:04:33] INFO    Rating:               64 (100.0%)
+[2026-02-08 03:04:33] INFO    Takeout flag:         63 ( 98.4%)
+[2026-02-08 03:04:33] INFO  
+[2026-02-08 03:04:33] INFO  AVG RATING:           4.21
+[2026-02-08 03:04:33] INFO  
+[2026-02-08 03:04:33] INFO  PRICE LEVELS:
+[2026-02-08 03:04:33] INFO    PRICE_LEVEL_MODERATE                  33 ( 51.6%)
+[2026-02-08 03:04:33] INFO    PRICE_LEVEL_INEXPENSIVE               21 ( 32.8%)
+[2026-02-08 03:04:33] INFO    UNKNOWN                               10 ( 15.6%)
+[2026-02-08 03:04:33] INFO  
+[2026-02-08 03:04:33] INFO  TOP STATES:
+[2026-02-08 03:04:33] INFO    CA           64 (100.0%)
+[2026-02-08 03:04:33] INFO  ============================================================
+[2026-02-08 03:04:33] INFO  
+[2026-02-08 03:04:33] INFO  CSV written to: /data/chinese_restaurants.csv

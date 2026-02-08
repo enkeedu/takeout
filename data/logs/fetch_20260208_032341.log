@@ -1,0 +1,74 @@
+[2026-02-08 03:23:41] INFO  Log file: /data/logs/fetch_20260208_032341.log
+[2026-02-08 03:23:41] INFO  ============================================================
+[2026-02-08 03:23:41] INFO    Metros:             1
+[2026-02-08 03:23:41] INFO    Total grid cells:   13
+[2026-02-08 03:23:41] INFO    Already completed:  0
+[2026-02-08 03:23:41] INFO    Remaining cells:    13
+[2026-02-08 03:23:41] INFO    Estimated cost:     $0.46
+[2026-02-08 03:23:41] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:23:41] INFO  ============================================================
+[2026-02-08 03:23:41] INFO  
+[2026-02-08 03:23:41] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:23:41] INFO  
+[2026-02-08 03:23:41] INFO    Minneapolis, MN: 13 cells (0 cached, 13 remaining)
+[2026-02-08 03:23:41] DEBUG     Cache miss at (44.8427, -93.2650); querying API
+[2026-02-08 03:23:41] INFO      Cell 1/13: +15 new (15 total)
+[2026-02-08 03:23:41] DEBUG     Cache miss at (44.9102, -93.3605); querying API
+[2026-02-08 03:23:42] INFO      Cell 2/13: +7 new (22 total)
+[2026-02-08 03:23:42] DEBUG     Cache miss at (44.9102, -93.2650); querying API
+[2026-02-08 03:23:43] INFO      Cell 3/13: +16 new (38 total)
+[2026-02-08 03:23:43] DEBUG     Cache miss at (44.9102, -93.1695); querying API
+[2026-02-08 03:23:44] INFO      Cell 4/13: +5 new (43 total)
+[2026-02-08 03:23:44] DEBUG     Cache miss at (44.9778, -93.4560); querying API
+[2026-02-08 03:23:44] INFO      Cell 5/13: +7 new (50 total)
+[2026-02-08 03:23:44] DEBUG     Cache miss at (44.9778, -93.3605); querying API
+[2026-02-08 03:23:45] INFO      Filtered: Urban Wok (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:23:45] INFO      Cell 6/13: +7 new (57 total)
+[2026-02-08 03:23:45] DEBUG     Cache miss at (44.9778, -93.2650); querying API
+[2026-02-08 03:23:46] INFO      Cell 7/13: +14 new (71 total)
+[2026-02-08 03:23:46] DEBUG     Cache miss at (44.9778, -93.1695); querying API
+[2026-02-08 03:23:47] INFO      Cell 8/13: +13 new (84 total)
+[2026-02-08 03:23:47] DEBUG     Cache miss at (44.9778, -93.0740); querying API
+[2026-02-08 03:23:47] INFO      Cell 9/13: +10 new (94 total)
+[2026-02-08 03:23:47] DEBUG     Cache miss at (45.0454, -93.3605); querying API
+[2026-02-08 03:23:48] INFO      Filtered: Crazy Buffet (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:23:48] INFO      Cell 10/13: +13 new (107 total)
+[2026-02-08 03:23:48] DEBUG     Saved state at cell 10/13
+[2026-02-08 03:23:48] DEBUG     Cache miss at (45.0454, -93.2650); querying API
+[2026-02-08 03:23:49] INFO      Filtered: Leeann Chin (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:23:49] INFO      Cell 11/13: +7 new (114 total)
+[2026-02-08 03:23:49] DEBUG     Cache miss at (45.0454, -93.1695); querying API
+[2026-02-08 03:23:49] INFO      Cell 12/13: +3 new (117 total)
+[2026-02-08 03:23:49] DEBUG     Cache miss at (45.1129, -93.2650); querying API
+[2026-02-08 03:23:50] INFO      Cell 13/13: +7 new (124 total)
+[2026-02-08 03:23:50] INFO    Filtered out 3 restaurants
+[2026-02-08 03:23:50] INFO    -> Minneapolis: 124 restaurants (running total: 124)
+[2026-02-08 03:23:50] INFO  
+[2026-02-08 03:23:50] INFO  
+[2026-02-08 03:23:50] INFO  ============================================================
+[2026-02-08 03:23:50] INFO  FETCH SUMMARY
+[2026-02-08 03:23:50] INFO  ============================================================
+[2026-02-08 03:23:50] INFO  Total restaurants:    124
+[2026-02-08 03:23:50] INFO  API calls made:       13
+[2026-02-08 03:23:50] INFO  Cache hits/misses:    0/13
+[2026-02-08 03:23:50] INFO  Estimated cost:       $0.46
+[2026-02-08 03:23:50] INFO  
+[2026-02-08 03:23:50] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:23:50] INFO    Phone:               123 ( 99.2%)
+[2026-02-08 03:23:50] INFO    Website:             113 ( 91.1%)
+[2026-02-08 03:23:50] INFO    Hours:               121 ( 97.6%)
+[2026-02-08 03:23:50] INFO    Rating:              123 ( 99.2%)
+[2026-02-08 03:23:50] INFO    Takeout flag:        124 (100.0%)
+[2026-02-08 03:23:50] INFO  
+[2026-02-08 03:23:50] INFO  AVG RATING:           3.97
+[2026-02-08 03:23:50] INFO  
+[2026-02-08 03:23:50] INFO  PRICE LEVELS:
+[2026-02-08 03:23:50] INFO    PRICE_LEVEL_INEXPENSIVE               69 ( 55.6%)
+[2026-02-08 03:23:50] INFO    PRICE_LEVEL_MODERATE                  46 ( 37.1%)
+[2026-02-08 03:23:50] INFO    UNKNOWN                                9 (  7.3%)
+[2026-02-08 03:23:50] INFO  
+[2026-02-08 03:23:50] INFO  TOP STATES:
+[2026-02-08 03:23:50] INFO    MN          124 (100.0%)
+[2026-02-08 03:23:50] INFO  ============================================================
+[2026-02-08 03:23:50] INFO  
+[2026-02-08 03:23:50] INFO  CSV written to: /data/chinese_restaurants.csv

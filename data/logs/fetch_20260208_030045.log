@@ -1,0 +1,14 @@
+[2026-02-08 03:00:45] INFO  Log file: /data/logs/fetch_20260208_030045.log
+[2026-02-08 03:00:45] INFO  Resuming from previous run
+[2026-02-08 03:00:45] INFO    Previous progress: 5 API calls, 50 restaurants
+[2026-02-08 03:00:45] INFO  
+[2026-02-08 03:00:45] INFO  ============================================================
+[2026-02-08 03:00:45] INFO    Metros:             1
+[2026-02-08 03:00:45] INFO    Total grid cells:   5
+[2026-02-08 03:00:45] INFO    Already completed:  5
+[2026-02-08 03:00:45] INFO    Remaining cells:    0
+[2026-02-08 03:00:45] INFO    Estimated cost:     $0.00
+[2026-02-08 03:00:45] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:00:45] INFO  ============================================================
+[2026-02-08 03:00:45] INFO  
+[2026-02-08 03:00:45] INFO  All cells already completed. Use --fresh to start over.

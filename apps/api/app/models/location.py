@@ -2,7 +2,7 @@ import uuid
 from datetime import datetime
 from typing import Any
 
-from sqlalchemy import DateTime, Float, ForeignKey, Index, String, Text, func
+from sqlalchemy import Boolean, DateTime, Float, ForeignKey, Index, String, Text, func
 from sqlalchemy.dialects.postgresql import JSONB, TSVECTOR, UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -31,6 +31,10 @@ class RestaurantLocation(Base):
         String(50), server_default="America/New_York"
     )
     hours_json: Mapped[Any | None] = mapped_column(JSONB, nullable=True)
+    has_takeout: Mapped[bool | None] = mapped_column(Boolean, nullable=True)
+    has_delivery: Mapped[bool | None] = mapped_column(Boolean, nullable=True)
+    has_dine_in: Mapped[bool | None] = mapped_column(Boolean, nullable=True)
+    business_status: Mapped[str | None] = mapped_column(String(50), nullable=True)
     template_key: Mapped[str | None] = mapped_column(String(40), nullable=True)
     search_vector: Mapped[Any | None] = mapped_column(TSVECTOR, nullable=True)
     created_at: Mapped[datetime] = mapped_column(

@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
 from app.routers import (
+    admin,
     admin_menus,
     browse,
     health,
@@ -38,3 +39,4 @@ app.include_router(admin_menus.router)
 app.include_router(orders.router)
 app.include_router(search.router)
 app.include_router(sitemap.router)
+app.include_router(admin.router)

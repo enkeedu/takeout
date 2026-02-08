@@ -1,0 +1,72 @@
+[2026-02-08 03:26:13] INFO  Log file: /data/logs/fetch_20260208_032613.log
+[2026-02-08 03:26:13] INFO  ============================================================
+[2026-02-08 03:26:13] INFO    Metros:             1
+[2026-02-08 03:26:13] INFO    Total grid cells:   13
+[2026-02-08 03:26:13] INFO    Already completed:  0
+[2026-02-08 03:26:13] INFO    Remaining cells:    13
+[2026-02-08 03:26:13] INFO    Estimated cost:     $0.46
+[2026-02-08 03:26:13] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:26:13] INFO  ============================================================
+[2026-02-08 03:26:13] INFO  
+[2026-02-08 03:26:13] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:26:13] INFO  
+[2026-02-08 03:26:13] INFO    Oklahoma City, OK: 13 cells (0 cached, 13 remaining)
+[2026-02-08 03:26:13] DEBUG     Cache miss at (35.3325, -97.5164); querying API
+[2026-02-08 03:26:14] INFO      Cell 1/13: +9 new (9 total)
+[2026-02-08 03:26:14] DEBUG     Cache miss at (35.4000, -97.5994); querying API
+[2026-02-08 03:26:15] INFO      Cell 2/13: +2 new (11 total)
+[2026-02-08 03:26:15] DEBUG     Cache miss at (35.4000, -97.5164); querying API
+[2026-02-08 03:26:15] INFO      Cell 3/13: +8 new (19 total)
+[2026-02-08 03:26:15] DEBUG     Cache miss at (35.4000, -97.4334); querying API
+[2026-02-08 03:26:16] INFO      Cell 4/13: +7 new (26 total)
+[2026-02-08 03:26:16] DEBUG     Cache miss at (35.4676, -97.6823); querying API
+[2026-02-08 03:26:17] INFO      Cell 5/13: +2 new (28 total)
+[2026-02-08 03:26:17] DEBUG     Cache miss at (35.4676, -97.5994); querying API
+[2026-02-08 03:26:18] INFO      Cell 6/13: +11 new (39 total)
+[2026-02-08 03:26:18] DEBUG     Cache miss at (35.4676, -97.5164); querying API
+[2026-02-08 03:26:18] INFO      Cell 7/13: +12 new (51 total)
+[2026-02-08 03:26:18] DEBUG     Cache miss at (35.4676, -97.4334); querying API
+[2026-02-08 03:26:19] INFO      Cell 8/13: +5 new (56 total)
+[2026-02-08 03:26:19] DEBUG     Cache miss at (35.4676, -97.3505); querying API
+[2026-02-08 03:26:20] INFO      Cell 9/13: +1 new (57 total)
+[2026-02-08 03:26:20] DEBUG     Cache miss at (35.5352, -97.5994); querying API
+[2026-02-08 03:26:21] INFO      Filtered: Panda Express (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:26:21] INFO      Cell 10/13: +7 new (64 total)
+[2026-02-08 03:26:21] DEBUG     Saved state at cell 10/13
+[2026-02-08 03:26:21] DEBUG     Cache miss at (35.5352, -97.5164); querying API
+[2026-02-08 03:26:22] INFO      Filtered: Snow Pea Western (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:26:22] INFO      Cell 11/13: +3 new (67 total)
+[2026-02-08 03:26:22] DEBUG     Cache miss at (35.5352, -97.4334); querying API
+[2026-02-08 03:26:22] DEBUG     Cache miss at (35.6027, -97.5164); querying API
+[2026-02-08 03:26:23] INFO      Cell 13/13: +15 new (82 total)
+[2026-02-08 03:26:23] INFO    Filtered out 2 restaurants
+[2026-02-08 03:26:23] INFO    -> Oklahoma City: 82 restaurants (running total: 82)
+[2026-02-08 03:26:23] INFO  
+[2026-02-08 03:26:23] INFO  
+[2026-02-08 03:26:23] INFO  ============================================================
+[2026-02-08 03:26:23] INFO  FETCH SUMMARY
+[2026-02-08 03:26:23] INFO  ============================================================
+[2026-02-08 03:26:23] INFO  Total restaurants:    82
+[2026-02-08 03:26:23] INFO  API calls made:       13
+[2026-02-08 03:26:23] INFO  Cache hits/misses:    0/13
+[2026-02-08 03:26:23] INFO  Estimated cost:       $0.46
+[2026-02-08 03:26:23] INFO  
+[2026-02-08 03:26:23] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:26:23] INFO    Phone:                77 ( 93.9%)
+[2026-02-08 03:26:23] INFO    Website:              64 ( 78.0%)
+[2026-02-08 03:26:23] INFO    Hours:                79 ( 96.3%)
+[2026-02-08 03:26:23] INFO    Rating:               79 ( 96.3%)
+[2026-02-08 03:26:23] INFO    Takeout flag:         81 ( 98.8%)
+[2026-02-08 03:26:23] INFO  
+[2026-02-08 03:26:23] INFO  AVG RATING:           4.05
+[2026-02-08 03:26:23] INFO  
+[2026-02-08 03:26:23] INFO  PRICE LEVELS:
+[2026-02-08 03:26:23] INFO    PRICE_LEVEL_INEXPENSIVE               49 ( 59.8%)
+[2026-02-08 03:26:23] INFO    PRICE_LEVEL_MODERATE                  25 ( 30.5%)
+[2026-02-08 03:26:23] INFO    UNKNOWN                                8 (  9.8%)
+[2026-02-08 03:26:23] INFO  
+[2026-02-08 03:26:23] INFO  TOP STATES:
+[2026-02-08 03:26:23] INFO    OK           82 (100.0%)
+[2026-02-08 03:26:23] INFO  ============================================================
+[2026-02-08 03:26:23] INFO  
+[2026-02-08 03:26:23] INFO  CSV written to: /data/chinese_restaurants.csv

@@ -13,6 +13,9 @@ class RestaurantListItem(BaseModel):
     state_slug: str
     city_slug: str
     restaurant_slug: str
+    rating: float | None = None
+    user_rating_count: int | None = None
+    price_level: str | None = None
 
     model_config = {"from_attributes": True}
 
@@ -25,6 +28,11 @@ class RestaurantDetail(BaseModel):
     has_online_ordering: bool = False
     has_ai_phone: bool = False
     is_claimed: bool = False
+    rating: float | None = None
+    user_rating_count: int | None = None
+    price_level: str | None = None
+    google_place_id: str | None = None
+    google_maps_uri: str | None = None
     address1: str
     address2: str | None = None
     city: str
@@ -34,6 +42,10 @@ class RestaurantDetail(BaseModel):
     lng: float | None = None
     timezone: str
     hours_json: dict | None = None
+    has_takeout: bool | None = None
+    has_delivery: bool | None = None
+    has_dine_in: bool | None = None
+    business_status: str | None = None
     state_slug: str
     city_slug: str
     restaurant_slug: str

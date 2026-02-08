@@ -1,0 +1,70 @@
+[2026-02-08 03:29:14] INFO  Log file: /data/logs/fetch_20260208_032914.log
+[2026-02-08 03:29:14] INFO  ============================================================
+[2026-02-08 03:29:14] INFO    Metros:             1
+[2026-02-08 03:29:14] INFO    Total grid cells:   13
+[2026-02-08 03:29:14] INFO    Already completed:  0
+[2026-02-08 03:29:14] INFO    Remaining cells:    13
+[2026-02-08 03:29:14] INFO    Estimated cost:     $0.46
+[2026-02-08 03:29:14] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:29:14] INFO  ============================================================
+[2026-02-08 03:29:14] INFO  
+[2026-02-08 03:29:14] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:29:14] INFO  
+[2026-02-08 03:29:14] INFO    Seattle, WA: 13 cells (0 cached, 13 remaining)
+[2026-02-08 03:29:14] DEBUG     Cache miss at (47.4711, -122.3321); querying API
+[2026-02-08 03:29:15] INFO      Cell 1/13: +11 new (11 total)
+[2026-02-08 03:29:15] DEBUG     Cache miss at (47.5386, -122.4323); querying API
+[2026-02-08 03:29:16] DEBUG     Cache miss at (47.5386, -122.3321); querying API
+[2026-02-08 03:29:16] INFO      Cell 3/13: +12 new (23 total)
+[2026-02-08 03:29:16] DEBUG     Cache miss at (47.5386, -122.2319); querying API
+[2026-02-08 03:29:17] INFO      Cell 4/13: +3 new (26 total)
+[2026-02-08 03:29:17] DEBUG     Cache miss at (47.6062, -122.5325); querying API
+[2026-02-08 03:29:18] INFO      Cell 5/13: +1 new (27 total)
+[2026-02-08 03:29:18] DEBUG     Cache miss at (47.6062, -122.4323); querying API
+[2026-02-08 03:29:18] INFO      Cell 6/13: +1 new (28 total)
+[2026-02-08 03:29:18] DEBUG     Cache miss at (47.6062, -122.3321); querying API
+[2026-02-08 03:29:19] INFO      Cell 7/13: +20 new (48 total)
+[2026-02-08 03:29:19] DEBUG     Cache miss at (47.6062, -122.2319); querying API
+[2026-02-08 03:29:20] INFO      Cell 8/13: +18 new (66 total)
+[2026-02-08 03:29:20] DEBUG     Cache miss at (47.6062, -122.1317); querying API
+[2026-02-08 03:29:21] INFO      Cell 9/13: +18 new (84 total)
+[2026-02-08 03:29:21] DEBUG     Cache miss at (47.6738, -122.4323); querying API
+[2026-02-08 03:29:21] INFO      Cell 10/13: +5 new (89 total)
+[2026-02-08 03:29:21] DEBUG     Saved state at cell 10/13
+[2026-02-08 03:29:21] DEBUG     Cache miss at (47.6738, -122.3321); querying API
+[2026-02-08 03:29:22] INFO      Cell 11/13: +20 new (109 total)
+[2026-02-08 03:29:22] DEBUG     Cache miss at (47.6738, -122.2319); querying API
+[2026-02-08 03:29:23] INFO      Cell 12/13: +9 new (118 total)
+[2026-02-08 03:29:23] DEBUG     Cache miss at (47.7413, -122.3321); querying API
+[2026-02-08 03:29:24] INFO      Cell 13/13: +19 new (137 total)
+[2026-02-08 03:29:24] INFO    -> Seattle: 137 restaurants (running total: 137)
+[2026-02-08 03:29:24] INFO  
+[2026-02-08 03:29:24] INFO  
+[2026-02-08 03:29:24] INFO  ============================================================
+[2026-02-08 03:29:24] INFO  FETCH SUMMARY
+[2026-02-08 03:29:24] INFO  ============================================================
+[2026-02-08 03:29:24] INFO  Total restaurants:    137
+[2026-02-08 03:29:24] INFO  API calls made:       13
+[2026-02-08 03:29:24] INFO  Cache hits/misses:    0/13
+[2026-02-08 03:29:24] INFO  Estimated cost:       $0.46
+[2026-02-08 03:29:24] INFO  
+[2026-02-08 03:29:24] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:29:24] INFO    Phone:               134 ( 97.8%)
+[2026-02-08 03:29:24] INFO    Website:             119 ( 86.9%)
+[2026-02-08 03:29:24] INFO    Hours:               134 ( 97.8%)
+[2026-02-08 03:29:24] INFO    Rating:              134 ( 97.8%)
+[2026-02-08 03:29:24] INFO    Takeout flag:        135 ( 98.5%)
+[2026-02-08 03:29:24] INFO  
+[2026-02-08 03:29:24] INFO  AVG RATING:           4.20
+[2026-02-08 03:29:24] INFO  
+[2026-02-08 03:29:24] INFO  PRICE LEVELS:
+[2026-02-08 03:29:24] INFO    PRICE_LEVEL_MODERATE                  82 ( 59.9%)
+[2026-02-08 03:29:24] INFO    PRICE_LEVEL_INEXPENSIVE               44 ( 32.1%)
+[2026-02-08 03:29:24] INFO    UNKNOWN                                9 (  6.6%)
+[2026-02-08 03:29:24] INFO    PRICE_LEVEL_EXPENSIVE                  2 (  1.5%)
+[2026-02-08 03:29:24] INFO  
+[2026-02-08 03:29:24] INFO  TOP STATES:
+[2026-02-08 03:29:24] INFO    WA          137 (100.0%)
+[2026-02-08 03:29:24] INFO  ============================================================
+[2026-02-08 03:29:24] INFO  
+[2026-02-08 03:29:24] INFO  CSV written to: /data/chinese_restaurants.csv

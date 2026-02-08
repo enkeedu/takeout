@@ -1,0 +1,56 @@
+[2026-02-08 03:24:33] INFO  Log file: /data/logs/fetch_20260208_032433.log
+[2026-02-08 03:24:33] INFO  ============================================================
+[2026-02-08 03:24:33] INFO    Metros:             1
+[2026-02-08 03:24:33] INFO    Total grid cells:   5
+[2026-02-08 03:24:33] INFO    Already completed:  0
+[2026-02-08 03:24:33] INFO    Remaining cells:    5
+[2026-02-08 03:24:33] INFO    Estimated cost:     $0.18
+[2026-02-08 03:24:33] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:24:33] INFO  ============================================================
+[2026-02-08 03:24:33] INFO  
+[2026-02-08 03:24:33] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:24:33] INFO  
+[2026-02-08 03:24:33] INFO    Jersey City, NJ: 5 cells (0 cached, 5 remaining)
+[2026-02-08 03:24:33] DEBUG     Cache miss at (40.6502, -74.0431); querying API
+[2026-02-08 03:24:33] INFO      Filtered: BK Seafood Market 海鲜舫 (price=PRICE_LEVEL_VERY_EXPENSIVE)
+[2026-02-08 03:24:33] DEBUG     Cache miss at (40.7178, -74.1322); querying API
+[2026-02-08 03:24:34] INFO      Cell 2/5: +20 new (20 total)
+[2026-02-08 03:24:34] DEBUG     Cache miss at (40.7178, -74.0431); querying API
+[2026-02-08 03:24:35] INFO      Cell 3/5: +20 new (40 total)
+[2026-02-08 03:24:35] DEBUG     Cache miss at (40.7178, -73.9540); querying API
+[2026-02-08 03:24:36] INFO      Cell 4/5: +4 new (44 total)
+[2026-02-08 03:24:36] DEBUG     Cache miss at (40.7854, -74.0431); querying API
+[2026-02-08 03:24:36] INFO      Cell 5/5: +20 new (64 total)
+[2026-02-08 03:24:36] INFO    Filtered out 1 restaurants
+[2026-02-08 03:24:36] INFO    -> Jersey City: 64 restaurants (running total: 64)
+[2026-02-08 03:24:36] INFO  
+[2026-02-08 03:24:36] INFO  
+[2026-02-08 03:24:36] INFO  ============================================================
+[2026-02-08 03:24:36] INFO  FETCH SUMMARY
+[2026-02-08 03:24:36] INFO  ============================================================
+[2026-02-08 03:24:36] INFO  Total restaurants:    64
+[2026-02-08 03:24:36] INFO  API calls made:       5
+[2026-02-08 03:24:36] INFO  Cache hits/misses:    0/5
+[2026-02-08 03:24:36] INFO  Estimated cost:       $0.18
+[2026-02-08 03:24:36] INFO  
+[2026-02-08 03:24:36] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:24:36] INFO    Phone:                63 ( 98.4%)
+[2026-02-08 03:24:36] INFO    Website:              54 ( 84.4%)
+[2026-02-08 03:24:36] INFO    Hours:                64 (100.0%)
+[2026-02-08 03:24:36] INFO    Rating:               64 (100.0%)
+[2026-02-08 03:24:36] INFO    Takeout flag:         64 (100.0%)
+[2026-02-08 03:24:36] INFO  
+[2026-02-08 03:24:36] INFO  AVG RATING:           4.21
+[2026-02-08 03:24:36] INFO  
+[2026-02-08 03:24:36] INFO  PRICE LEVELS:
+[2026-02-08 03:24:36] INFO    PRICE_LEVEL_INEXPENSIVE               36 ( 56.2%)
+[2026-02-08 03:24:36] INFO    PRICE_LEVEL_MODERATE                  22 ( 34.4%)
+[2026-02-08 03:24:36] INFO    UNKNOWN                                4 (  6.2%)
+[2026-02-08 03:24:36] INFO    PRICE_LEVEL_EXPENSIVE                  2 (  3.1%)
+[2026-02-08 03:24:36] INFO  
+[2026-02-08 03:24:36] INFO  TOP STATES:
+[2026-02-08 03:24:36] INFO    NJ           37 ( 57.8%)
+[2026-02-08 03:24:36] INFO    NY           27 ( 42.2%)
+[2026-02-08 03:24:36] INFO  ============================================================
+[2026-02-08 03:24:36] INFO  
+[2026-02-08 03:24:36] INFO  CSV written to: /data/chinese_restaurants.csv

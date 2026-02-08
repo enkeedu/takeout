@@ -1,0 +1,74 @@
+[2026-02-08 03:05:20] INFO  Log file: /data/logs/fetch_20260208_030520.log
+[2026-02-08 03:05:20] INFO  ============================================================
+[2026-02-08 03:05:20] INFO    Metros:             1
+[2026-02-08 03:05:20] INFO    Total grid cells:   13
+[2026-02-08 03:05:20] INFO    Already completed:  0
+[2026-02-08 03:05:20] INFO    Remaining cells:    13
+[2026-02-08 03:05:20] INFO    Estimated cost:     $0.46
+[2026-02-08 03:05:20] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:05:20] INFO  ============================================================
+[2026-02-08 03:05:20] INFO  
+[2026-02-08 03:05:20] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:05:20] INFO  
+[2026-02-08 03:05:20] INFO    Sacramento, CA: 13 cells (0 cached, 13 remaining)
+[2026-02-08 03:05:20] DEBUG     Cache miss at (38.4465, -121.4944); querying API
+[2026-02-08 03:05:20] INFO      Cell 1/13: +5 new (5 total)
+[2026-02-08 03:05:20] DEBUG     Cache miss at (38.5140, -121.5808); querying API
+[2026-02-08 03:05:21] INFO      Cell 2/13: +2 new (7 total)
+[2026-02-08 03:05:21] DEBUG     Cache miss at (38.5140, -121.4944); querying API
+[2026-02-08 03:05:22] INFO      Cell 3/13: +20 new (27 total)
+[2026-02-08 03:05:22] DEBUG     Cache miss at (38.5140, -121.4080); querying API
+[2026-02-08 03:05:23] INFO      Filtered: Seapot Hot Pot & Korean BBQ (no takeout)
+[2026-02-08 03:05:23] INFO      Cell 4/13: +13 new (40 total)
+[2026-02-08 03:05:23] DEBUG     Cache miss at (38.5816, -121.6673); querying API
+[2026-02-08 03:05:24] INFO      Cell 5/13: +1 new (41 total)
+[2026-02-08 03:05:24] DEBUG     Cache miss at (38.5816, -121.5808); querying API
+[2026-02-08 03:05:24] INFO      Cell 6/13: +4 new (45 total)
+[2026-02-08 03:05:24] DEBUG     Cache miss at (38.5816, -121.4944); querying API
+[2026-02-08 03:05:25] INFO      Cell 7/13: +16 new (61 total)
+[2026-02-08 03:05:25] DEBUG     Cache miss at (38.5816, -121.4080); querying API
+[2026-02-08 03:05:26] INFO      Filtered: Po Po Garden (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:05:26] INFO      Cell 8/13: +17 new (78 total)
+[2026-02-08 03:05:26] DEBUG     Cache miss at (38.5816, -121.3215); querying API
+[2026-02-08 03:05:27] INFO      Filtered: Red Dragon Fire (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:05:27] INFO      Cell 9/13: +7 new (85 total)
+[2026-02-08 03:05:27] DEBUG     Cache miss at (38.6492, -121.5808); querying API
+[2026-02-08 03:05:27] INFO      Cell 10/13: +2 new (87 total)
+[2026-02-08 03:05:27] DEBUG     Saved state at cell 10/13
+[2026-02-08 03:05:27] DEBUG     Cache miss at (38.6492, -121.4944); querying API
+[2026-02-08 03:05:28] INFO      Cell 11/13: +8 new (95 total)
+[2026-02-08 03:05:28] DEBUG     Cache miss at (38.6492, -121.4080); querying API
+[2026-02-08 03:05:29] INFO      Cell 12/13: +9 new (104 total)
+[2026-02-08 03:05:29] DEBUG     Cache miss at (38.7167, -121.4944); querying API
+[2026-02-08 03:05:30] INFO      Cell 13/13: +1 new (105 total)
+[2026-02-08 03:05:30] INFO    Filtered out 3 restaurants
+[2026-02-08 03:05:30] INFO    -> Sacramento: 105 restaurants (running total: 105)
+[2026-02-08 03:05:30] INFO  
+[2026-02-08 03:05:30] INFO  
+[2026-02-08 03:05:30] INFO  ============================================================
+[2026-02-08 03:05:30] INFO  FETCH SUMMARY
+[2026-02-08 03:05:30] INFO  ============================================================
+[2026-02-08 03:05:30] INFO  Total restaurants:    105
+[2026-02-08 03:05:30] INFO  API calls made:       13
+[2026-02-08 03:05:30] INFO  Cache hits/misses:    0/13
+[2026-02-08 03:05:30] INFO  Estimated cost:       $0.46
+[2026-02-08 03:05:30] INFO  
+[2026-02-08 03:05:30] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:05:30] INFO    Phone:               103 ( 98.1%)
+[2026-02-08 03:05:30] INFO    Website:              90 ( 85.7%)
+[2026-02-08 03:05:30] INFO    Hours:               104 ( 99.0%)
+[2026-02-08 03:05:30] INFO    Rating:              105 (100.0%)
+[2026-02-08 03:05:30] INFO    Takeout flag:        105 (100.0%)
+[2026-02-08 03:05:30] INFO  
+[2026-02-08 03:05:30] INFO  AVG RATING:           4.17
+[2026-02-08 03:05:30] INFO  
+[2026-02-08 03:05:30] INFO  PRICE LEVELS:
+[2026-02-08 03:05:30] INFO    PRICE_LEVEL_INEXPENSIVE               66 ( 62.9%)
+[2026-02-08 03:05:30] INFO    PRICE_LEVEL_MODERATE                  30 ( 28.6%)
+[2026-02-08 03:05:30] INFO    UNKNOWN                                9 (  8.6%)
+[2026-02-08 03:05:30] INFO  
+[2026-02-08 03:05:30] INFO  TOP STATES:
+[2026-02-08 03:05:30] INFO    CA          105 (100.0%)
+[2026-02-08 03:05:30] INFO  ============================================================
+[2026-02-08 03:05:30] INFO  
+[2026-02-08 03:05:30] INFO  CSV written to: /data/chinese_restaurants.csv

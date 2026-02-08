@@ -212,8 +212,6 @@ const FALLBACK_HOURS: HoursRow[] = [
   { day: "Sun", hours: "12:00 PM - 9:00 PM" },
 ];
 
-const DAY_ORDER = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
-
 function hashString(value: string): number {
   let hash = 0;
   for (let i = 0; i < value.length; i += 1) {
@@ -340,6 +338,21 @@ function normalizeDayLabel(key: string): string {
   return map[normalized] || key;
 }
 
+function formatTime24to12(time24: string): string {
+  const [hourStr, minuteStr] = time24.split(":");
+  let hour = parseInt(hourStr, 10);
+  const minute = minuteStr || "00";
+  const ampm = hour >= 12 ? "PM" : "AM";
+  if (hour === 0) hour = 12;
+  else if (hour > 12) hour -= 12;
+  return `${hour}:${minute} ${ampm}`;
+}
+
+function formatPeriod(entry: { open?: string; close?: string }): string | null {
+  if (!entry.open || !entry.close) return null;
+  return `${formatTime24to12(entry.open)} - ${formatTime24to12(entry.close)}`;
+}
+
 export function buildHours(
   hoursJson: Record<string, unknown> | null | undefined
 ): HoursData {
@@ -355,7 +368,13 @@ export function buildHours(
     }
     if (Array.isArray(value)) {
       const formatted = value
-        .map((entry) => (typeof entry === "string" ? entry : null))
+        .map((entry) => {
+          if (typeof entry === "string") return entry;
+          if (entry && typeof entry === "object" && "open" in entry) {
+            return formatPeriod(entry as { open?: string; close?: string });
+          }
+          return null;
+        })
         .filter(Boolean)
         .join(", ");
       if (formatted) {
@@ -368,11 +387,13 @@ export function buildHours(
     return { rows: FALLBACK_HOURS, isSample: true };
   }
 
-  const ordered = [...rows].sort((a, b) => {
-    const aIndex = DAY_ORDER.indexOf(a.day.toLowerCase().slice(0, 3));
-    const bIndex = DAY_ORDER.indexOf(b.day.toLowerCase().slice(0, 3));
-    return aIndex - bIndex;
-  });
+  // Build a map of parsed days, then fill in all 7 days (missing = Closed)
+  const dayLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const parsed = new Map(rows.map((r) => [r.day, r.hours]));
+  const allDays: HoursRow[] = dayLabels.map((day) => ({
+    day,
+    hours: parsed.get(day) || "Closed",
+  }));
 
-  return { rows: ordered, isSample: false };
+  return { rows: allDays, isSample: false };
 }

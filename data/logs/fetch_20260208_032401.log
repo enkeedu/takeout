@@ -1,0 +1,74 @@
+[2026-02-08 03:24:01] INFO  Log file: /data/logs/fetch_20260208_032401.log
+[2026-02-08 03:24:01] INFO  ============================================================
+[2026-02-08 03:24:01] INFO    Metros:             1
+[2026-02-08 03:24:01] INFO    Total grid cells:   13
+[2026-02-08 03:24:01] INFO    Already completed:  0
+[2026-02-08 03:24:01] INFO    Remaining cells:    13
+[2026-02-08 03:24:01] INFO    Estimated cost:     $0.46
+[2026-02-08 03:24:01] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:24:01] INFO  ============================================================
+[2026-02-08 03:24:01] INFO  
+[2026-02-08 03:24:01] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:24:01] INFO  
+[2026-02-08 03:24:01] INFO    St. Louis, MO: 13 cells (0 cached, 13 remaining)
+[2026-02-08 03:24:01] DEBUG     Cache miss at (38.4919, -90.1994); querying API
+[2026-02-08 03:24:02] DEBUG     Cache miss at (38.5594, -90.2859); querying API
+[2026-02-08 03:24:02] INFO      Cell 2/13: +16 new (16 total)
+[2026-02-08 03:24:02] DEBUG     Cache miss at (38.5594, -90.1994); querying API
+[2026-02-08 03:24:03] INFO      Cell 3/13: +5 new (21 total)
+[2026-02-08 03:24:03] DEBUG     Cache miss at (38.5594, -90.1129); querying API
+[2026-02-08 03:24:04] DEBUG     Cache miss at (38.6270, -90.3724); querying API
+[2026-02-08 03:24:05] INFO      Cell 5/13: +8 new (29 total)
+[2026-02-08 03:24:05] DEBUG     Cache miss at (38.6270, -90.2859); querying API
+[2026-02-08 03:24:05] INFO      Filtered: Umami Seasons Hotpot (no takeout)
+[2026-02-08 03:24:05] INFO      Cell 6/13: +11 new (40 total)
+[2026-02-08 03:24:05] DEBUG     Cache miss at (38.6270, -90.1994); querying API
+[2026-02-08 03:24:06] INFO      Cell 7/13: +15 new (55 total)
+[2026-02-08 03:24:06] DEBUG     Cache miss at (38.6270, -90.1129); querying API
+[2026-02-08 03:24:07] INFO      Filtered: Happy Wok (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:24:07] INFO      Cell 8/13: +4 new (59 total)
+[2026-02-08 03:24:07] DEBUG     Cache miss at (38.6270, -90.0264); querying API
+[2026-02-08 03:24:08] INFO      Cell 9/13: +2 new (61 total)
+[2026-02-08 03:24:08] DEBUG     Cache miss at (38.6946, -90.2859); querying API
+[2026-02-08 03:24:08] INFO      Cell 10/13: +14 new (75 total)
+[2026-02-08 03:24:08] DEBUG     Saved state at cell 10/13
+[2026-02-08 03:24:08] DEBUG     Cache miss at (38.6946, -90.1994); querying API
+[2026-02-08 03:24:09] INFO      Filtered: Vinh Chop Suey (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:24:09] INFO      Filtered: China Kim Chinese Restaurant (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:24:09] INFO      Cell 11/13: +4 new (79 total)
+[2026-02-08 03:24:09] DEBUG     Cache miss at (38.6946, -90.1129); querying API
+[2026-02-08 03:24:10] INFO      Cell 12/13: +4 new (83 total)
+[2026-02-08 03:24:10] DEBUG     Cache miss at (38.7621, -90.1994); querying API
+[2026-02-08 03:24:11] INFO      Cell 13/13: +5 new (88 total)
+[2026-02-08 03:24:11] INFO    Filtered out 4 restaurants
+[2026-02-08 03:24:11] INFO    -> St. Louis: 88 restaurants (running total: 88)
+[2026-02-08 03:24:11] INFO  
+[2026-02-08 03:24:11] INFO  
+[2026-02-08 03:24:11] INFO  ============================================================
+[2026-02-08 03:24:11] INFO  FETCH SUMMARY
+[2026-02-08 03:24:11] INFO  ============================================================
+[2026-02-08 03:24:11] INFO  Total restaurants:    88
+[2026-02-08 03:24:11] INFO  API calls made:       13
+[2026-02-08 03:24:11] INFO  Cache hits/misses:    0/13
+[2026-02-08 03:24:11] INFO  Estimated cost:       $0.46
+[2026-02-08 03:24:11] INFO  
+[2026-02-08 03:24:11] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:24:11] INFO    Phone:                88 (100.0%)
+[2026-02-08 03:24:11] INFO    Website:              55 ( 62.5%)
+[2026-02-08 03:24:11] INFO    Hours:                87 ( 98.9%)
+[2026-02-08 03:24:11] INFO    Rating:               87 ( 98.9%)
+[2026-02-08 03:24:11] INFO    Takeout flag:         88 (100.0%)
+[2026-02-08 03:24:11] INFO  
+[2026-02-08 03:24:11] INFO  AVG RATING:           4.09
+[2026-02-08 03:24:11] INFO  
+[2026-02-08 03:24:11] INFO  PRICE LEVELS:
+[2026-02-08 03:24:11] INFO    PRICE_LEVEL_INEXPENSIVE               68 ( 77.3%)
+[2026-02-08 03:24:11] INFO    UNKNOWN                               11 ( 12.5%)
+[2026-02-08 03:24:11] INFO    PRICE_LEVEL_MODERATE                   9 ( 10.2%)
+[2026-02-08 03:24:11] INFO  
+[2026-02-08 03:24:11] INFO  TOP STATES:
+[2026-02-08 03:24:11] INFO    MO           76 ( 86.4%)
+[2026-02-08 03:24:11] INFO    IL           12 ( 13.6%)
+[2026-02-08 03:24:11] INFO  ============================================================
+[2026-02-08 03:24:11] INFO  
+[2026-02-08 03:24:11] INFO  CSV written to: /data/chinese_restaurants.csv

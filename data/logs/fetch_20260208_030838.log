@@ -1,0 +1,55 @@
+[2026-02-08 03:08:38] INFO  Log file: /data/logs/fetch_20260208_030838.log
+[2026-02-08 03:08:38] INFO  ============================================================
+[2026-02-08 03:08:38] INFO    Metros:             1
+[2026-02-08 03:08:38] INFO    Total grid cells:   5
+[2026-02-08 03:08:38] INFO    Already completed:  0
+[2026-02-08 03:08:38] INFO    Remaining cells:    5
+[2026-02-08 03:08:38] INFO    Estimated cost:     $0.18
+[2026-02-08 03:08:38] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:08:38] INFO  ============================================================
+[2026-02-08 03:08:38] INFO  
+[2026-02-08 03:08:38] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:08:38] INFO  
+[2026-02-08 03:08:38] INFO    Colorado Springs, CO: 5 cells (0 cached, 5 remaining)
+[2026-02-08 03:08:38] DEBUG     Cache miss at (38.7663, -104.8214); querying API
+[2026-02-08 03:08:38] INFO      Cell 1/5: +5 new (5 total)
+[2026-02-08 03:08:38] DEBUG     Cache miss at (38.8339, -104.9081); querying API
+[2026-02-08 03:08:39] INFO      Cell 2/5: +2 new (7 total)
+[2026-02-08 03:08:39] DEBUG     Cache miss at (38.8339, -104.8214); querying API
+[2026-02-08 03:08:40] INFO      Cell 3/5: +5 new (12 total)
+[2026-02-08 03:08:40] DEBUG     Cache miss at (38.8339, -104.7347); querying API
+[2026-02-08 03:08:41] INFO      Cell 4/5: +12 new (24 total)
+[2026-02-08 03:08:41] DEBUG     Cache miss at (38.9015, -104.8214); querying API
+[2026-02-08 03:08:41] INFO      Filtered: China One (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:08:41] INFO      Cell 5/5: +5 new (29 total)
+[2026-02-08 03:08:41] INFO    Filtered out 1 restaurants
+[2026-02-08 03:08:41] INFO    -> Colorado Springs: 29 restaurants (running total: 29)
+[2026-02-08 03:08:41] INFO  
+[2026-02-08 03:08:41] INFO  
+[2026-02-08 03:08:41] INFO  ============================================================
+[2026-02-08 03:08:41] INFO  FETCH SUMMARY
+[2026-02-08 03:08:41] INFO  ============================================================
+[2026-02-08 03:08:41] INFO  Total restaurants:    29
+[2026-02-08 03:08:41] INFO  API calls made:       5
+[2026-02-08 03:08:41] INFO  Cache hits/misses:    0/5
+[2026-02-08 03:08:41] INFO  Estimated cost:       $0.18
+[2026-02-08 03:08:41] INFO  
+[2026-02-08 03:08:41] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:08:41] INFO    Phone:                28 ( 96.6%)
+[2026-02-08 03:08:41] INFO    Website:              23 ( 79.3%)
+[2026-02-08 03:08:41] INFO    Hours:                29 (100.0%)
+[2026-02-08 03:08:41] INFO    Rating:               29 (100.0%)
+[2026-02-08 03:08:41] INFO    Takeout flag:         28 ( 96.6%)
+[2026-02-08 03:08:41] INFO  
+[2026-02-08 03:08:41] INFO  AVG RATING:           4.00
+[2026-02-08 03:08:41] INFO  
+[2026-02-08 03:08:41] INFO  PRICE LEVELS:
+[2026-02-08 03:08:41] INFO    PRICE_LEVEL_INEXPENSIVE               15 ( 51.7%)
+[2026-02-08 03:08:41] INFO    PRICE_LEVEL_MODERATE                  10 ( 34.5%)
+[2026-02-08 03:08:41] INFO    UNKNOWN                                4 ( 13.8%)
+[2026-02-08 03:08:41] INFO  
+[2026-02-08 03:08:41] INFO  TOP STATES:
+[2026-02-08 03:08:41] INFO    CO           29 (100.0%)
+[2026-02-08 03:08:41] INFO  ============================================================
+[2026-02-08 03:08:41] INFO  
+[2026-02-08 03:08:41] INFO  CSV written to: /data/chinese_restaurants.csv

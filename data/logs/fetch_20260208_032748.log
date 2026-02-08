@@ -1,0 +1,64 @@
+[2026-02-08 03:27:48] INFO  Log file: /data/logs/fetch_20260208_032748.log
+[2026-02-08 03:27:48] INFO  ============================================================
+[2026-02-08 03:27:48] INFO    Metros:             1
+[2026-02-08 03:27:48] INFO    Total grid cells:   9
+[2026-02-08 03:27:48] INFO    Already completed:  0
+[2026-02-08 03:27:48] INFO    Remaining cells:    9
+[2026-02-08 03:27:48] INFO    Estimated cost:     $0.32
+[2026-02-08 03:27:48] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:27:48] INFO  ============================================================
+[2026-02-08 03:27:48] INFO  
+[2026-02-08 03:27:48] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:27:48] INFO  
+[2026-02-08 03:27:48] INFO    El Paso, TX: 9 cells (0 cached, 9 remaining)
+[2026-02-08 03:27:48] DEBUG     Cache miss at (31.6943, -106.5645); querying API
+[2026-02-08 03:27:48] DEBUG     Cache miss at (31.6943, -106.4850); querying API
+[2026-02-08 03:27:49] INFO      Cell 2/9: +16 new (16 total)
+[2026-02-08 03:27:49] DEBUG     Cache miss at (31.6943, -106.4055); querying API
+[2026-02-08 03:27:50] INFO      Filtered: Tortas de la Morín (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:27:50] INFO      Cell 3/9: +16 new (32 total)
+[2026-02-08 03:27:50] DEBUG     Cache miss at (31.7619, -106.5645); querying API
+[2026-02-08 03:27:51] DEBUG     Cache miss at (31.7619, -106.4850); querying API
+[2026-02-08 03:27:52] INFO      Cell 5/9: +12 new (44 total)
+[2026-02-08 03:27:52] DEBUG     Cache miss at (31.7619, -106.4055); querying API
+[2026-02-08 03:27:52] INFO      Filtered: comida china sun jing (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:27:52] INFO      Cell 6/9: +11 new (55 total)
+[2026-02-08 03:27:52] DEBUG     Cache miss at (31.8295, -106.5645); querying API
+[2026-02-08 03:27:53] INFO      Cell 7/9: +13 new (68 total)
+[2026-02-08 03:27:53] DEBUG     Cache miss at (31.8295, -106.4850); querying API
+[2026-02-08 03:27:54] INFO      Cell 8/9: +1 new (69 total)
+[2026-02-08 03:27:54] DEBUG     Cache miss at (31.8295, -106.4055); querying API
+[2026-02-08 03:27:55] INFO      Cell 9/9: +1 new (70 total)
+[2026-02-08 03:27:55] INFO    Filtered out 2 restaurants
+[2026-02-08 03:27:55] INFO    -> El Paso: 70 restaurants (running total: 70)
+[2026-02-08 03:27:55] INFO  
+[2026-02-08 03:27:55] INFO  
+[2026-02-08 03:27:55] INFO  ============================================================
+[2026-02-08 03:27:55] INFO  FETCH SUMMARY
+[2026-02-08 03:27:55] INFO  ============================================================
+[2026-02-08 03:27:55] INFO  Total restaurants:    70
+[2026-02-08 03:27:55] INFO  API calls made:       9
+[2026-02-08 03:27:55] INFO  Cache hits/misses:    0/9
+[2026-02-08 03:27:55] INFO  Estimated cost:       $0.32
+[2026-02-08 03:27:55] INFO  
+[2026-02-08 03:27:55] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:27:55] INFO    Phone:                52 ( 74.3%)
+[2026-02-08 03:27:55] INFO    Website:              29 ( 41.4%)
+[2026-02-08 03:27:55] INFO    Hours:                69 ( 98.6%)
+[2026-02-08 03:27:55] INFO    Rating:               68 ( 97.1%)
+[2026-02-08 03:27:55] INFO    Takeout flag:         67 ( 95.7%)
+[2026-02-08 03:27:55] INFO  
+[2026-02-08 03:27:55] INFO  AVG RATING:           4.10
+[2026-02-08 03:27:55] INFO  
+[2026-02-08 03:27:55] INFO  PRICE LEVELS:
+[2026-02-08 03:27:55] INFO    UNKNOWN                               35 ( 50.0%)
+[2026-02-08 03:27:55] INFO    PRICE_LEVEL_INEXPENSIVE               17 ( 24.3%)
+[2026-02-08 03:27:55] INFO    PRICE_LEVEL_MODERATE                  16 ( 22.9%)
+[2026-02-08 03:27:55] INFO    PRICE_LEVEL_EXPENSIVE                  2 (  2.9%)
+[2026-02-08 03:27:55] INFO  
+[2026-02-08 03:27:55] INFO  TOP STATES:
+[2026-02-08 03:27:55] INFO    Chih.        42 ( 60.0%)
+[2026-02-08 03:27:55] INFO    TX           28 ( 40.0%)
+[2026-02-08 03:27:55] INFO  ============================================================
+[2026-02-08 03:27:55] INFO  
+[2026-02-08 03:27:55] INFO  CSV written to: /data/chinese_restaurants.csv

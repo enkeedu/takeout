@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from sqlalchemy import Boolean, DateTime, String, Text, func
+from sqlalchemy import Boolean, DateTime, Float, Integer, String, Text, func
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -17,6 +17,13 @@ class Restaurant(Base):
     name: Mapped[str] = mapped_column(Text, nullable=False)
     phone: Mapped[str | None] = mapped_column(String(20), nullable=True)
     website_url: Mapped[str | None] = mapped_column(Text, nullable=True)
+    google_place_id: Mapped[str | None] = mapped_column(
+        String(255), nullable=True, unique=True, index=True
+    )
+    rating: Mapped[float | None] = mapped_column(Float, nullable=True)
+    user_rating_count: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    price_level: Mapped[str | None] = mapped_column(String(50), nullable=True)
+    google_maps_uri: Mapped[str | None] = mapped_column(Text, nullable=True)
     has_online_ordering: Mapped[bool] = mapped_column(Boolean, server_default="false")
     has_ai_phone: Mapped[bool] = mapped_column(Boolean, server_default="false")
     is_claimed: Mapped[bool] = mapped_column(Boolean, server_default="false")

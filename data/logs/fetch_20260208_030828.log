@@ -1,0 +1,72 @@
+[2026-02-08 03:08:28] INFO  Log file: /data/logs/fetch_20260208_030828.log
+[2026-02-08 03:08:28] INFO  ============================================================
+[2026-02-08 03:08:28] INFO    Metros:             1
+[2026-02-08 03:08:28] INFO    Total grid cells:   13
+[2026-02-08 03:08:28] INFO    Already completed:  0
+[2026-02-08 03:08:28] INFO    Remaining cells:    13
+[2026-02-08 03:08:28] INFO    Estimated cost:     $0.46
+[2026-02-08 03:08:28] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:08:28] INFO  ============================================================
+[2026-02-08 03:08:28] INFO  
+[2026-02-08 03:08:28] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:08:28] INFO  
+[2026-02-08 03:08:28] INFO    San Jose, CA: 13 cells (0 cached, 13 remaining)
+[2026-02-08 03:08:28] DEBUG     Cache miss at (37.2031, -121.8863); querying API
+[2026-02-08 03:08:29] INFO      Cell 1/13: +4 new (4 total)
+[2026-02-08 03:08:29] DEBUG     Cache miss at (37.2706, -121.9713); querying API
+[2026-02-08 03:08:29] INFO      Filtered: Union Chinese Restaurant (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:08:29] INFO      Cell 2/13: +16 new (20 total)
+[2026-02-08 03:08:29] DEBUG     Cache miss at (37.2706, -121.8863); querying API
+[2026-02-08 03:08:30] INFO      Cell 3/13: +16 new (36 total)
+[2026-02-08 03:08:30] DEBUG     Cache miss at (37.2706, -121.8013); querying API
+[2026-02-08 03:08:31] INFO      Filtered: Revopot (no takeout)
+[2026-02-08 03:08:31] INFO      Cell 4/13: +16 new (52 total)
+[2026-02-08 03:08:31] DEBUG     Cache miss at (37.3382, -122.0563); querying API
+[2026-02-08 03:08:32] INFO      Cell 5/13: +20 new (72 total)
+[2026-02-08 03:08:32] DEBUG     Cache miss at (37.3382, -121.9713); querying API
+[2026-02-08 03:08:32] INFO      Cell 6/13: +12 new (84 total)
+[2026-02-08 03:08:32] DEBUG     Cache miss at (37.3382, -121.8863); querying API
+[2026-02-08 03:08:33] INFO      Cell 7/13: +17 new (101 total)
+[2026-02-08 03:08:33] DEBUG     Cache miss at (37.3382, -121.8013); querying API
+[2026-02-08 03:08:34] INFO      Cell 8/13: +10 new (111 total)
+[2026-02-08 03:08:34] DEBUG     Cache miss at (37.3382, -121.7163); querying API
+[2026-02-08 03:08:35] DEBUG     Cache miss at (37.4058, -121.9713); querying API
+[2026-02-08 03:08:35] INFO      Cell 10/13: +20 new (131 total)
+[2026-02-08 03:08:35] DEBUG     Saved state at cell 10/13
+[2026-02-08 03:08:35] DEBUG     Cache miss at (37.4058, -121.8863); querying API
+[2026-02-08 03:08:36] INFO      Cell 11/13: +18 new (149 total)
+[2026-02-08 03:08:36] DEBUG     Cache miss at (37.4058, -121.8013); querying API
+[2026-02-08 03:08:37] DEBUG     Cache miss at (37.4733, -121.8863); querying API
+[2026-02-08 03:08:37] INFO      Cell 13/13: +19 new (168 total)
+[2026-02-08 03:08:37] INFO    Filtered out 2 restaurants
+[2026-02-08 03:08:37] INFO    -> San Jose: 168 restaurants (running total: 168)
+[2026-02-08 03:08:37] INFO  
+[2026-02-08 03:08:37] INFO  
+[2026-02-08 03:08:37] INFO  ============================================================
+[2026-02-08 03:08:37] INFO  FETCH SUMMARY
+[2026-02-08 03:08:37] INFO  ============================================================
+[2026-02-08 03:08:37] INFO  Total restaurants:    168
+[2026-02-08 03:08:37] INFO  API calls made:       13
+[2026-02-08 03:08:37] INFO  Cache hits/misses:    0/13
+[2026-02-08 03:08:37] INFO  Estimated cost:       $0.46
+[2026-02-08 03:08:37] INFO  
+[2026-02-08 03:08:37] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:08:37] INFO    Phone:               165 ( 98.2%)
+[2026-02-08 03:08:37] INFO    Website:             142 ( 84.5%)
+[2026-02-08 03:08:37] INFO    Hours:               164 ( 97.6%)
+[2026-02-08 03:08:37] INFO    Rating:              167 ( 99.4%)
+[2026-02-08 03:08:37] INFO    Takeout flag:        165 ( 98.2%)
+[2026-02-08 03:08:37] INFO  
+[2026-02-08 03:08:37] INFO  AVG RATING:           4.11
+[2026-02-08 03:08:37] INFO  
+[2026-02-08 03:08:37] INFO  PRICE LEVELS:
+[2026-02-08 03:08:37] INFO    PRICE_LEVEL_MODERATE                  99 ( 58.9%)
+[2026-02-08 03:08:37] INFO    PRICE_LEVEL_INEXPENSIVE               51 ( 30.4%)
+[2026-02-08 03:08:37] INFO    UNKNOWN                               16 (  9.5%)
+[2026-02-08 03:08:37] INFO    PRICE_LEVEL_EXPENSIVE                  2 (  1.2%)
+[2026-02-08 03:08:37] INFO  
+[2026-02-08 03:08:37] INFO  TOP STATES:
+[2026-02-08 03:08:37] INFO    CA          168 (100.0%)
+[2026-02-08 03:08:37] INFO  ============================================================
+[2026-02-08 03:08:37] INFO  
+[2026-02-08 03:08:37] INFO  CSV written to: /data/chinese_restaurants.csv

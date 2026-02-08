@@ -1,0 +1,57 @@
+[2026-02-08 03:25:09] INFO  Log file: /data/logs/fetch_20260208_032509.log
+[2026-02-08 03:25:09] INFO  ============================================================
+[2026-02-08 03:25:09] INFO    Metros:             1
+[2026-02-08 03:25:09] INFO    Total grid cells:   5
+[2026-02-08 03:25:09] INFO    Already completed:  0
+[2026-02-08 03:25:09] INFO    Remaining cells:    5
+[2026-02-08 03:25:09] INFO    Estimated cost:     $0.18
+[2026-02-08 03:25:09] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:25:09] INFO  ============================================================
+[2026-02-08 03:25:09] INFO  
+[2026-02-08 03:25:09] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:25:09] INFO  
+[2026-02-08 03:25:09] INFO    Buffalo, NY: 5 cells (0 cached, 5 remaining)
+[2026-02-08 03:25:09] DEBUG     Cache miss at (42.8188, -78.8784); querying API
+[2026-02-08 03:25:09] INFO      Cell 1/5: +1 new (1 total)
+[2026-02-08 03:25:09] DEBUG     Cache miss at (42.8864, -78.9706); querying API
+[2026-02-08 03:25:10] INFO      Filtered: Tandoor on the Wheelz (TOWZ) (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:25:10] DEBUG     Cache miss at (42.8864, -78.8784); querying API
+[2026-02-08 03:25:11] INFO      Filtered: New Dragon Express (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:25:11] INFO      Cell 3/5: +12 new (13 total)
+[2026-02-08 03:25:11] DEBUG     Cache miss at (42.8864, -78.7862); querying API
+[2026-02-08 03:25:12] INFO      Cell 4/5: +8 new (21 total)
+[2026-02-08 03:25:12] DEBUG     Cache miss at (42.9540, -78.8784); querying API
+[2026-02-08 03:25:12] INFO      Filtered: Ming Café (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:25:12] INFO      Cell 5/5: +14 new (35 total)
+[2026-02-08 03:25:12] INFO    Filtered out 3 restaurants
+[2026-02-08 03:25:12] INFO    -> Buffalo: 35 restaurants (running total: 35)
+[2026-02-08 03:25:12] INFO  
+[2026-02-08 03:25:12] INFO  
+[2026-02-08 03:25:12] INFO  ============================================================
+[2026-02-08 03:25:12] INFO  FETCH SUMMARY
+[2026-02-08 03:25:12] INFO  ============================================================
+[2026-02-08 03:25:12] INFO  Total restaurants:    35
+[2026-02-08 03:25:12] INFO  API calls made:       5
+[2026-02-08 03:25:12] INFO  Cache hits/misses:    0/5
+[2026-02-08 03:25:12] INFO  Estimated cost:       $0.18
+[2026-02-08 03:25:12] INFO  
+[2026-02-08 03:25:12] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:25:12] INFO    Phone:                33 ( 94.3%)
+[2026-02-08 03:25:12] INFO    Website:              21 ( 60.0%)
+[2026-02-08 03:25:12] INFO    Hours:                35 (100.0%)
+[2026-02-08 03:25:12] INFO    Rating:               35 (100.0%)
+[2026-02-08 03:25:12] INFO    Takeout flag:         35 (100.0%)
+[2026-02-08 03:25:12] INFO  
+[2026-02-08 03:25:12] INFO  AVG RATING:           3.93
+[2026-02-08 03:25:12] INFO  
+[2026-02-08 03:25:12] INFO  PRICE LEVELS:
+[2026-02-08 03:25:12] INFO    PRICE_LEVEL_INEXPENSIVE               25 ( 71.4%)
+[2026-02-08 03:25:12] INFO    PRICE_LEVEL_MODERATE                   7 ( 20.0%)
+[2026-02-08 03:25:12] INFO    UNKNOWN                                3 (  8.6%)
+[2026-02-08 03:25:12] INFO  
+[2026-02-08 03:25:12] INFO  TOP STATES:
+[2026-02-08 03:25:12] INFO    NY           33 ( 94.3%)
+[2026-02-08 03:25:12] INFO    ON            2 (  5.7%)
+[2026-02-08 03:25:12] INFO  ============================================================
+[2026-02-08 03:25:12] INFO  
+[2026-02-08 03:25:12] INFO  CSV written to: /data/chinese_restaurants.csv

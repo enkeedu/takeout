@@ -1,0 +1,57 @@
+[2026-02-08 03:05:15] INFO  Log file: /data/logs/fetch_20260208_030515.log
+[2026-02-08 03:05:15] INFO  ============================================================
+[2026-02-08 03:05:15] INFO    Metros:             1
+[2026-02-08 03:05:15] INFO    Total grid cells:   5
+[2026-02-08 03:05:15] INFO    Already completed:  0
+[2026-02-08 03:05:15] INFO    Remaining cells:    5
+[2026-02-08 03:05:15] INFO    Estimated cost:     $0.18
+[2026-02-08 03:05:15] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:05:15] INFO  ============================================================
+[2026-02-08 03:05:15] INFO  
+[2026-02-08 03:05:15] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:05:15] INFO  
+[2026-02-08 03:05:15] INFO    Oakland, CA: 5 cells (0 cached, 5 remaining)
+[2026-02-08 03:05:15] DEBUG     Cache miss at (37.7368, -122.2712); querying API
+[2026-02-08 03:05:16] INFO      Filtered: JuXi (no takeout)
+[2026-02-08 03:05:16] INFO      Cell 1/5: +15 new (15 total)
+[2026-02-08 03:05:16] DEBUG     Cache miss at (37.8044, -122.3567); querying API
+[2026-02-08 03:05:17] INFO      Filtered: Moongate Lounge (no takeout)
+[2026-02-08 03:05:17] INFO      Cell 2/5: +19 new (34 total)
+[2026-02-08 03:05:17] DEBUG     Cache miss at (37.8044, -122.2712); querying API
+[2026-02-08 03:05:18] INFO      Cell 3/5: +18 new (52 total)
+[2026-02-08 03:05:18] DEBUG     Cache miss at (37.8044, -122.1857); querying API
+[2026-02-08 03:05:19] INFO      Cell 4/5: +20 new (72 total)
+[2026-02-08 03:05:19] DEBUG     Cache miss at (37.8720, -122.2712); querying API
+[2026-02-08 03:05:19] INFO      Cell 5/5: +16 new (88 total)
+[2026-02-08 03:05:19] INFO    Filtered out 2 restaurants
+[2026-02-08 03:05:19] INFO    -> Oakland: 88 restaurants (running total: 88)
+[2026-02-08 03:05:19] INFO  
+[2026-02-08 03:05:19] INFO  
+[2026-02-08 03:05:19] INFO  ============================================================
+[2026-02-08 03:05:19] INFO  FETCH SUMMARY
+[2026-02-08 03:05:19] INFO  ============================================================
+[2026-02-08 03:05:19] INFO  Total restaurants:    88
+[2026-02-08 03:05:19] INFO  API calls made:       5
+[2026-02-08 03:05:19] INFO  Cache hits/misses:    0/5
+[2026-02-08 03:05:19] INFO  Estimated cost:       $0.18
+[2026-02-08 03:05:19] INFO  
+[2026-02-08 03:05:19] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:05:19] INFO    Phone:                87 ( 98.9%)
+[2026-02-08 03:05:19] INFO    Website:              75 ( 85.2%)
+[2026-02-08 03:05:19] INFO    Hours:                88 (100.0%)
+[2026-02-08 03:05:19] INFO    Rating:               88 (100.0%)
+[2026-02-08 03:05:19] INFO    Takeout flag:         87 ( 98.9%)
+[2026-02-08 03:05:19] INFO  
+[2026-02-08 03:05:19] INFO  AVG RATING:           4.16
+[2026-02-08 03:05:19] INFO  
+[2026-02-08 03:05:19] INFO  PRICE LEVELS:
+[2026-02-08 03:05:19] INFO    PRICE_LEVEL_INEXPENSIVE               40 ( 45.5%)
+[2026-02-08 03:05:19] INFO    PRICE_LEVEL_MODERATE                  38 ( 43.2%)
+[2026-02-08 03:05:19] INFO    UNKNOWN                                7 (  8.0%)
+[2026-02-08 03:05:19] INFO    PRICE_LEVEL_EXPENSIVE                  3 (  3.4%)
+[2026-02-08 03:05:19] INFO  
+[2026-02-08 03:05:19] INFO  TOP STATES:
+[2026-02-08 03:05:19] INFO    CA           88 (100.0%)
+[2026-02-08 03:05:19] INFO  ============================================================
+[2026-02-08 03:05:19] INFO  
+[2026-02-08 03:05:19] INFO  CSV written to: /data/chinese_restaurants.csv

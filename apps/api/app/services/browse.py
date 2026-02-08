@@ -82,6 +82,9 @@ async def list_restaurants_in_city(
         select(
             Restaurant.name,
             Restaurant.phone,
+            Restaurant.rating,
+            Restaurant.user_rating_count,
+            Restaurant.price_level,
             RestaurantLocation.address1,
             RestaurantLocation.city,
             RestaurantLocation.state,
@@ -119,6 +122,9 @@ async def list_restaurants_in_city(
             state_slug=row.state_slug,
             city_slug=row.city_slug,
             restaurant_slug=row.restaurant_slug,
+            rating=row.rating,
+            user_rating_count=row.user_rating_count,
+            price_level=row.price_level,
         )
         for row in result.all()
     ]

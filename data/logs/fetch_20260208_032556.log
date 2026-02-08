@@ -1,0 +1,64 @@
+[2026-02-08 03:25:56] INFO  Log file: /data/logs/fetch_20260208_032556.log
+[2026-02-08 03:25:56] INFO  ============================================================
+[2026-02-08 03:25:56] INFO    Metros:             1
+[2026-02-08 03:25:56] INFO    Total grid cells:   9
+[2026-02-08 03:25:56] INFO    Already completed:  0
+[2026-02-08 03:25:56] INFO    Remaining cells:    9
+[2026-02-08 03:25:56] INFO    Estimated cost:     $0.32
+[2026-02-08 03:25:56] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:25:56] INFO  ============================================================
+[2026-02-08 03:25:56] INFO  
+[2026-02-08 03:25:56] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:25:56] INFO  
+[2026-02-08 03:25:56] INFO    Cleveland, OH: 9 cells (0 cached, 9 remaining)
+[2026-02-08 03:25:56] DEBUG     Cache miss at (41.4317, -81.7846); querying API
+[2026-02-08 03:25:57] INFO      Cell 1/9: +14 new (14 total)
+[2026-02-08 03:25:57] DEBUG     Cache miss at (41.4317, -81.6944); querying API
+[2026-02-08 03:25:58] INFO      Filtered: Super Chinatown III (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:25:58] INFO      Cell 2/9: +12 new (26 total)
+[2026-02-08 03:25:58] DEBUG     Cache miss at (41.4317, -81.6042); querying API
+[2026-02-08 03:25:58] INFO      Cell 3/9: +4 new (30 total)
+[2026-02-08 03:25:58] DEBUG     Cache miss at (41.4993, -81.7846); querying API
+[2026-02-08 03:25:59] INFO      Cell 4/9: +6 new (36 total)
+[2026-02-08 03:25:59] DEBUG     Cache miss at (41.4993, -81.6944); querying API
+[2026-02-08 03:26:00] INFO      Filtered: Emperor's Palace (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:26:00] INFO      Cell 5/9: +16 new (52 total)
+[2026-02-08 03:26:00] DEBUG     Cache miss at (41.4993, -81.6042); querying API
+[2026-02-08 03:26:01] INFO      Filtered: Amazing Wok 2 (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:26:01] INFO      Filtered: Amazing Wok (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:26:01] INFO      Cell 6/9: +11 new (63 total)
+[2026-02-08 03:26:01] DEBUG     Cache miss at (41.5669, -81.7846); querying API
+[2026-02-08 03:26:01] DEBUG     Cache miss at (41.5669, -81.6944); querying API
+[2026-02-08 03:26:02] DEBUG     Cache miss at (41.5669, -81.6042); querying API
+[2026-02-08 03:26:03] INFO      Cell 9/9: +2 new (65 total)
+[2026-02-08 03:26:03] INFO    Filtered out 4 restaurants
+[2026-02-08 03:26:03] INFO    -> Cleveland: 65 restaurants (running total: 65)
+[2026-02-08 03:26:03] INFO  
+[2026-02-08 03:26:03] INFO  
+[2026-02-08 03:26:03] INFO  ============================================================
+[2026-02-08 03:26:03] INFO  FETCH SUMMARY
+[2026-02-08 03:26:03] INFO  ============================================================
+[2026-02-08 03:26:03] INFO  Total restaurants:    65
+[2026-02-08 03:26:03] INFO  API calls made:       9
+[2026-02-08 03:26:03] INFO  Cache hits/misses:    0/9
+[2026-02-08 03:26:03] INFO  Estimated cost:       $0.32
+[2026-02-08 03:26:03] INFO  
+[2026-02-08 03:26:03] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:26:03] INFO    Phone:                64 ( 98.5%)
+[2026-02-08 03:26:03] INFO    Website:              57 ( 87.7%)
+[2026-02-08 03:26:03] INFO    Hours:                64 ( 98.5%)
+[2026-02-08 03:26:03] INFO    Rating:               64 ( 98.5%)
+[2026-02-08 03:26:03] INFO    Takeout flag:         64 ( 98.5%)
+[2026-02-08 03:26:03] INFO  
+[2026-02-08 03:26:03] INFO  AVG RATING:           4.04
+[2026-02-08 03:26:03] INFO  
+[2026-02-08 03:26:03] INFO  PRICE LEVELS:
+[2026-02-08 03:26:03] INFO    PRICE_LEVEL_INEXPENSIVE               42 ( 64.6%)
+[2026-02-08 03:26:03] INFO    PRICE_LEVEL_MODERATE                  16 ( 24.6%)
+[2026-02-08 03:26:03] INFO    UNKNOWN                                7 ( 10.8%)
+[2026-02-08 03:26:03] INFO  
+[2026-02-08 03:26:03] INFO  TOP STATES:
+[2026-02-08 03:26:03] INFO    OH           65 (100.0%)
+[2026-02-08 03:26:03] INFO  ============================================================
+[2026-02-08 03:26:03] INFO  
+[2026-02-08 03:26:03] INFO  CSV written to: /data/chinese_restaurants.csv

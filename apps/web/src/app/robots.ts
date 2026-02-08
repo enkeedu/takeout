@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/search"],
+      disallow: ["/search", "/admin"],
     },
     sitemap: "https://chinese-takeout.com/sitemap.xml",
   };

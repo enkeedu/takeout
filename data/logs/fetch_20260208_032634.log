@@ -1,0 +1,94 @@
+[2026-02-08 03:26:34] INFO  Log file: /data/logs/fetch_20260208_032634.log
+[2026-02-08 03:26:34] INFO  ============================================================
+[2026-02-08 03:26:34] INFO    Metros:             1
+[2026-02-08 03:26:34] INFO    Total grid cells:   21
+[2026-02-08 03:26:34] INFO    Already completed:  0
+[2026-02-08 03:26:34] INFO    Remaining cells:    21
+[2026-02-08 03:26:34] INFO    Estimated cost:     $0.74
+[2026-02-08 03:26:34] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:26:34] INFO  ============================================================
+[2026-02-08 03:26:34] INFO  
+[2026-02-08 03:26:34] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:26:34] INFO  
+[2026-02-08 03:26:34] INFO    Philadelphia, PA: 21 cells (0 cached, 21 remaining)
+[2026-02-08 03:26:34] DEBUG     Cache miss at (39.8175, -75.2533); querying API
+[2026-02-08 03:26:35] INFO      Cell 1/21: +3 new (3 total)
+[2026-02-08 03:26:35] DEBUG     Cache miss at (39.8175, -75.1652); querying API
+[2026-02-08 03:26:35] INFO      Cell 2/21: +10 new (13 total)
+[2026-02-08 03:26:35] DEBUG     Cache miss at (39.8175, -75.0771); querying API
+[2026-02-08 03:26:36] INFO      Filtered: Panda Garden (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:26:36] INFO      Filtered: Ginza Japanese & Asian Restaurant (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:26:36] INFO      Filtered: Oishi Sushi Japanese & Chinese Food (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:26:36] INFO      Cell 3/21: +12 new (25 total)
+[2026-02-08 03:26:36] DEBUG     Cache miss at (39.8850, -75.3415); querying API
+[2026-02-08 03:26:37] INFO      Cell 4/21: +18 new (43 total)
+[2026-02-08 03:26:37] DEBUG     Cache miss at (39.8850, -75.2533); querying API
+[2026-02-08 03:26:38] INFO      Cell 5/21: +16 new (59 total)
+[2026-02-08 03:26:38] DEBUG     Cache miss at (39.8850, -75.1652); querying API
+[2026-02-08 03:26:38] INFO      Cell 6/21: +18 new (77 total)
+[2026-02-08 03:26:38] DEBUG     Cache miss at (39.8850, -75.0771); querying API
+[2026-02-08 03:26:39] INFO      Cell 7/21: +16 new (93 total)
+[2026-02-08 03:26:39] DEBUG     Cache miss at (39.8850, -74.9889); querying API
+[2026-02-08 03:26:40] INFO      Filtered: Asian Bamboo Chinese Food (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:26:40] INFO      Cell 8/21: +15 new (108 total)
+[2026-02-08 03:26:40] DEBUG     Cache miss at (39.9526, -75.3415); querying API
+[2026-02-08 03:26:41] INFO      Cell 9/21: +14 new (122 total)
+[2026-02-08 03:26:41] DEBUG     Cache miss at (39.9526, -75.2533); querying API
+[2026-02-08 03:26:41] INFO      Cell 10/21: +14 new (136 total)
+[2026-02-08 03:26:41] DEBUG     Saved state at cell 10/21
+[2026-02-08 03:26:41] DEBUG     Cache miss at (39.9526, -75.1652); querying API
+[2026-02-08 03:26:42] INFO      Cell 11/21: +18 new (154 total)
+[2026-02-08 03:26:42] DEBUG     Cache miss at (39.9526, -75.0771); querying API
+[2026-02-08 03:26:43] INFO      Cell 12/21: +18 new (172 total)
+[2026-02-08 03:26:43] DEBUG     Cache miss at (39.9526, -74.9889); querying API
+[2026-02-08 03:26:44] INFO      Cell 13/21: +12 new (184 total)
+[2026-02-08 03:26:44] DEBUG     Cache miss at (40.0202, -75.3415); querying API
+[2026-02-08 03:26:44] INFO      Cell 14/21: +8 new (192 total)
+[2026-02-08 03:26:44] DEBUG     Cache miss at (40.0202, -75.2533); querying API
+[2026-02-08 03:26:45] INFO      Cell 15/21: +16 new (208 total)
+[2026-02-08 03:26:45] DEBUG     Cache miss at (40.0202, -75.1652); querying API
+[2026-02-08 03:26:46] INFO      Cell 16/21: +19 new (227 total)
+[2026-02-08 03:26:46] DEBUG     Cache miss at (40.0202, -75.0771); querying API
+[2026-02-08 03:26:47] INFO      Cell 17/21: +16 new (243 total)
+[2026-02-08 03:26:47] DEBUG     Cache miss at (40.0202, -74.9889); querying API
+[2026-02-08 03:26:47] INFO      Cell 18/21: +14 new (257 total)
+[2026-02-08 03:26:47] DEBUG     Cache miss at (40.0877, -75.2533); querying API
+[2026-02-08 03:26:48] INFO      Cell 19/21: +7 new (264 total)
+[2026-02-08 03:26:48] DEBUG     Cache miss at (40.0877, -75.1652); querying API
+[2026-02-08 03:26:49] INFO      Cell 20/21: +15 new (279 total)
+[2026-02-08 03:26:49] DEBUG     Saved state at cell 20/21
+[2026-02-08 03:26:49] DEBUG     Cache miss at (40.0877, -75.0771); querying API
+[2026-02-08 03:26:50] INFO      Cell 21/21: +14 new (293 total)
+[2026-02-08 03:26:50] INFO    Filtered out 4 restaurants
+[2026-02-08 03:26:50] INFO    -> Philadelphia: 293 restaurants (running total: 293)
+[2026-02-08 03:26:50] INFO  
+[2026-02-08 03:26:50] INFO  
+[2026-02-08 03:26:50] INFO  ============================================================
+[2026-02-08 03:26:50] INFO  FETCH SUMMARY
+[2026-02-08 03:26:50] INFO  ============================================================
+[2026-02-08 03:26:50] INFO  Total restaurants:    293
+[2026-02-08 03:26:50] INFO  API calls made:       21
+[2026-02-08 03:26:50] INFO  Cache hits/misses:    0/21
+[2026-02-08 03:26:50] INFO  Estimated cost:       $0.74
+[2026-02-08 03:26:50] INFO  
+[2026-02-08 03:26:50] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:26:50] INFO    Phone:               291 ( 99.3%)
+[2026-02-08 03:26:50] INFO    Website:             221 ( 75.4%)
+[2026-02-08 03:26:50] INFO    Hours:               292 ( 99.7%)
+[2026-02-08 03:26:50] INFO    Rating:              292 ( 99.7%)
+[2026-02-08 03:26:50] INFO    Takeout flag:        292 ( 99.7%)
+[2026-02-08 03:26:50] INFO  
+[2026-02-08 03:26:50] INFO  AVG RATING:           4.06
+[2026-02-08 03:26:50] INFO  
+[2026-02-08 03:26:50] INFO  PRICE LEVELS:
+[2026-02-08 03:26:50] INFO    PRICE_LEVEL_INEXPENSIVE              165 ( 56.3%)
+[2026-02-08 03:26:50] INFO    PRICE_LEVEL_MODERATE                  90 ( 30.7%)
+[2026-02-08 03:26:50] INFO    UNKNOWN                               37 ( 12.6%)
+[2026-02-08 03:26:50] INFO    PRICE_LEVEL_EXPENSIVE                  1 (  0.3%)
+[2026-02-08 03:26:50] INFO  
+[2026-02-08 03:26:50] INFO  TOP STATES:
+[2026-02-08 03:26:50] INFO    PA          205 ( 70.0%)
+[2026-02-08 03:26:50] INFO    NJ           88 ( 30.0%)
+[2026-02-08 03:26:50] INFO  ============================================================
+[2026-02-08 03:26:50] INFO  
+[2026-02-08 03:26:50] INFO  CSV written to: /data/chinese_restaurants.csv

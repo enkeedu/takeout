@@ -1,0 +1,121 @@
+[2026-02-08 03:20:42] INFO  Log file: /data/logs/fetch_20260208_032042.log
+[2026-02-08 03:20:42] INFO  ============================================================
+[2026-02-08 03:20:42] INFO    Metros:             1
+[2026-02-08 03:20:42] INFO    Total grid cells:   37
+[2026-02-08 03:20:42] INFO    Already completed:  0
+[2026-02-08 03:20:42] INFO    Remaining cells:    37
+[2026-02-08 03:20:42] INFO    Estimated cost:     $1.30
+[2026-02-08 03:20:42] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:20:42] INFO  ============================================================
+[2026-02-08 03:20:42] INFO  
+[2026-02-08 03:20:42] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:20:42] INFO  
+[2026-02-08 03:20:42] INFO    Chicago, IL: 37 cells (0 cached, 37 remaining)
+[2026-02-08 03:20:42] DEBUG     Cache miss at (41.6754, -87.7205); querying API
+[2026-02-08 03:20:43] INFO      Cell 1/37: +10 new (10 total)
+[2026-02-08 03:20:43] DEBUG     Cache miss at (41.6754, -87.6298); querying API
+[2026-02-08 03:20:44] INFO      Filtered: Mr. Orange Chicken (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:20:44] INFO      Filtered: Chinn's Restaurant (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:20:44] INFO      Cell 2/37: +5 new (15 total)
+[2026-02-08 03:20:44] DEBUG     Cache miss at (41.6754, -87.5391); querying API
+[2026-02-08 03:20:44] INFO      Cell 3/37: +2 new (17 total)
+[2026-02-08 03:20:44] DEBUG     Cache miss at (41.7430, -87.8113); querying API
+[2026-02-08 03:20:45] INFO      Filtered: Premier Taste Chinese Restaurant (no takeout)
+[2026-02-08 03:20:45] INFO      Cell 4/37: +13 new (30 total)
+[2026-02-08 03:20:45] DEBUG     Cache miss at (41.7430, -87.7205); querying API
+[2026-02-08 03:20:46] INFO      Filtered: Lex Chinese (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:20:46] INFO      Cell 5/37: +12 new (42 total)
+[2026-02-08 03:20:46] DEBUG     Cache miss at (41.7430, -87.6298); querying API
+[2026-02-08 03:20:46] INFO      Filtered: Long Tung Chinese Restaurant (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:20:46] INFO      Cell 6/37: +11 new (53 total)
+[2026-02-08 03:20:46] DEBUG     Cache miss at (41.7430, -87.5391); querying API
+[2026-02-08 03:20:47] INFO      Cell 7/37: +3 new (56 total)
+[2026-02-08 03:20:47] DEBUG     Cache miss at (41.7430, -87.4483); querying API
+[2026-02-08 03:20:48] DEBUG     Cache miss at (41.8105, -87.9020); querying API
+[2026-02-08 03:20:49] INFO      Filtered: Hua Ting Chinese Restaurant (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:20:49] INFO      Cell 9/37: +16 new (72 total)
+[2026-02-08 03:20:49] DEBUG     Cache miss at (41.8105, -87.8113); querying API
+[2026-02-08 03:20:50] INFO      Cell 10/37: +13 new (85 total)
+[2026-02-08 03:20:50] DEBUG     Saved state at cell 10/37
+[2026-02-08 03:20:50] DEBUG     Cache miss at (41.8105, -87.7205); querying API
+[2026-02-08 03:20:50] INFO      Cell 11/37: +16 new (101 total)
+[2026-02-08 03:20:50] DEBUG     Cache miss at (41.8105, -87.6298); querying API
+[2026-02-08 03:20:51] INFO      Cell 12/37: +20 new (121 total)
+[2026-02-08 03:20:51] DEBUG     Cache miss at (41.8105, -87.5391); querying API
+[2026-02-08 03:20:52] INFO      Cell 13/37: +2 new (123 total)
+[2026-02-08 03:20:52] DEBUG     Cache miss at (41.8105, -87.4483); querying API
+[2026-02-08 03:20:52] DEBUG     Cache miss at (41.8105, -87.3576); querying API
+[2026-02-08 03:20:53] DEBUG     Cache miss at (41.8781, -87.9020); querying API
+[2026-02-08 03:20:54] INFO      Cell 16/37: +8 new (131 total)
+[2026-02-08 03:20:54] DEBUG     Cache miss at (41.8781, -87.8113); querying API
+[2026-02-08 03:20:55] INFO      Cell 17/37: +16 new (147 total)
+[2026-02-08 03:20:55] DEBUG     Cache miss at (41.8781, -87.7205); querying API
+[2026-02-08 03:20:55] INFO      Cell 18/37: +13 new (160 total)
+[2026-02-08 03:20:55] DEBUG     Cache miss at (41.8781, -87.6298); querying API
+[2026-02-08 03:20:56] INFO      Cell 19/37: +9 new (169 total)
+[2026-02-08 03:20:56] DEBUG     Cache miss at (41.8781, -87.5391); querying API
+[2026-02-08 03:20:57] DEBUG     Saved state at cell 20/37
+[2026-02-08 03:20:57] DEBUG     Cache miss at (41.8781, -87.4483); querying API
+[2026-02-08 03:20:57] DEBUG     Cache miss at (41.8781, -87.3576); querying API
+[2026-02-08 03:20:58] DEBUG     Cache miss at (41.9457, -87.9020); querying API
+[2026-02-08 03:20:59] INFO      Cell 23/37: +12 new (181 total)
+[2026-02-08 03:20:59] DEBUG     Cache miss at (41.9457, -87.8113); querying API
+[2026-02-08 03:20:59] INFO      Cell 24/37: +15 new (196 total)
+[2026-02-08 03:20:59] DEBUG     Cache miss at (41.9457, -87.7205); querying API
+[2026-02-08 03:21:00] INFO      Filtered: 3LP (3 Little Pigs Chi) Downtown (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:21:00] INFO      Cell 25/37: +18 new (214 total)
+[2026-02-08 03:21:00] DEBUG     Cache miss at (41.9457, -87.6298); querying API
+[2026-02-08 03:21:01] INFO      Filtered: Tank Noodle (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:21:01] INFO      Cell 26/37: +17 new (231 total)
+[2026-02-08 03:21:01] DEBUG     Cache miss at (41.9457, -87.5391); querying API
+[2026-02-08 03:21:02] DEBUG     Cache miss at (41.9457, -87.4483); querying API
+[2026-02-08 03:21:02] DEBUG     Cache miss at (41.9457, -87.3576); querying API
+[2026-02-08 03:21:03] DEBUG     Cache miss at (42.0132, -87.8113); querying API
+[2026-02-08 03:21:04] INFO      Filtered: Golden Wok (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:21:04] INFO      Cell 30/37: +15 new (246 total)
+[2026-02-08 03:21:04] DEBUG     Saved state at cell 30/37
+[2026-02-08 03:21:04] DEBUG     Cache miss at (42.0132, -87.7205); querying API
+[2026-02-08 03:21:05] INFO      Cell 31/37: +17 new (263 total)
+[2026-02-08 03:21:05] DEBUG     Cache miss at (42.0132, -87.6298); querying API
+[2026-02-08 03:21:05] INFO      Cell 32/37: +8 new (271 total)
+[2026-02-08 03:21:05] DEBUG     Cache miss at (42.0132, -87.5391); querying API
+[2026-02-08 03:21:06] DEBUG     Cache miss at (42.0132, -87.4483); querying API
+[2026-02-08 03:21:07] DEBUG     Cache miss at (42.0808, -87.7205); querying API
+[2026-02-08 03:21:08] INFO      Filtered: Shanghai Kosher (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:21:08] INFO      Filtered: House of Chan (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:21:08] INFO      Cell 35/37: +4 new (275 total)
+[2026-02-08 03:21:08] DEBUG     Cache miss at (42.0808, -87.6298); querying API
+[2026-02-08 03:21:08] DEBUG     Cache miss at (42.0808, -87.5391); querying API
+[2026-02-08 03:21:09] INFO    Filtered out 11 restaurants
+[2026-02-08 03:21:09] INFO    -> Chicago: 275 restaurants (running total: 275)
+[2026-02-08 03:21:09] INFO  
+[2026-02-08 03:21:09] INFO  
+[2026-02-08 03:21:09] INFO  ============================================================
+[2026-02-08 03:21:09] INFO  FETCH SUMMARY
+[2026-02-08 03:21:09] INFO  ============================================================
+[2026-02-08 03:21:09] INFO  Total restaurants:    275
+[2026-02-08 03:21:09] INFO  API calls made:       37
+[2026-02-08 03:21:09] INFO  Cache hits/misses:    0/37
+[2026-02-08 03:21:09] INFO  Estimated cost:       $1.30
+[2026-02-08 03:21:09] INFO  
+[2026-02-08 03:21:09] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:21:09] INFO    Phone:               271 ( 98.5%)
+[2026-02-08 03:21:09] INFO    Website:             230 ( 83.6%)
+[2026-02-08 03:21:09] INFO    Hours:               275 (100.0%)
+[2026-02-08 03:21:09] INFO    Rating:              275 (100.0%)
+[2026-02-08 03:21:09] INFO    Takeout flag:        274 ( 99.6%)
+[2026-02-08 03:21:09] INFO  
+[2026-02-08 03:21:09] INFO  AVG RATING:           4.09
+[2026-02-08 03:21:09] INFO  
+[2026-02-08 03:21:09] INFO  PRICE LEVELS:
+[2026-02-08 03:21:09] INFO    PRICE_LEVEL_INEXPENSIVE              139 ( 50.5%)
+[2026-02-08 03:21:09] INFO    PRICE_LEVEL_MODERATE                  97 ( 35.3%)
+[2026-02-08 03:21:09] INFO    UNKNOWN                               36 ( 13.1%)
+[2026-02-08 03:21:09] INFO    PRICE_LEVEL_EXPENSIVE                  3 (  1.1%)
+[2026-02-08 03:21:09] INFO  
+[2026-02-08 03:21:09] INFO  TOP STATES:
+[2026-02-08 03:21:09] INFO    IL          274 ( 99.6%)
+[2026-02-08 03:21:09] INFO    IN            1 (  0.4%)
+[2026-02-08 03:21:09] INFO  ============================================================
+[2026-02-08 03:21:09] INFO  
+[2026-02-08 03:21:09] INFO  CSV written to: /data/chinese_restaurants.csv
