@@ -21,6 +21,24 @@ docker compose exec api alembic upgrade head
 # Import sample data
 docker compose exec api python -m scripts.import_restaurants /data/sample_restaurants.csv
 
+# Seed sample menus
+docker compose exec api python -m scripts.seed_menus --all
+
+## Admin Menu Editor
+
+Open the menu editor:
+
+```
+http://localhost:3001/admin/menus/nj/clinton/hunan-wok
+```
+
+Optional: set an admin token to protect the admin endpoints.
+
+```
+ADMIN_TOKEN=change-me
+NEXT_PUBLIC_ADMIN_TOKEN=change-me
+```
+
 # Access
 # Web:  http://localhost:3001
 # API:  http://localhost:8001

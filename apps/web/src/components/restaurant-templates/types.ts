@@ -7,14 +7,24 @@ import type {
   Special,
 } from "@/lib/restaurantDemo";
 
-export const TEMPLATE_KEYS = ["market", "modern", "luxe"] as const;
+export const TEMPLATE_KEYS = [
+  "ming",
+  "ming-slim",
+  "ming-balanced",
+  "ming-full",
+  "night-market",
+  "wok-fire",
+] as const;
 
 export type TemplateKey = (typeof TEMPLATE_KEYS)[number];
 
 export const TEMPLATE_LABELS: Record<TemplateKey, string> = {
-  market: "Market",
-  modern: "Studio",
-  luxe: "Luxe",
+  ming: "Ming",
+  "ming-slim": "Ming Slim",
+  "ming-balanced": "Ming Balanced",
+  "ming-full": "Ming Full",
+  "night-market": "Night Market",
+  "wok-fire": "Wok Fire",
 };
 
 export interface RestaurantTemplateProps {
@@ -30,4 +40,6 @@ export interface RestaurantTemplateProps {
   templateKey: TemplateKey;
   previewMode: boolean;
   basePath: string;
+  orderPath: string;
+  orderingEnabled: boolean;
 }

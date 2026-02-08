@@ -27,7 +27,7 @@ class RestaurantSlug(Base):
         DateTime(timezone=True), server_default=func.now()
     )
 
-    location: Mapped["RestaurantLocation"] = relationship(back_populates="slug")
+    location: Mapped["RestaurantLocation"] = relationship(back_populates="slugs")
 
     __table_args__ = (
         UniqueConstraint(

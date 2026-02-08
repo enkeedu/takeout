@@ -31,6 +31,7 @@ class RestaurantLocation(Base):
         String(50), server_default="America/New_York"
     )
     hours_json: Mapped[Any | None] = mapped_column(JSONB, nullable=True)
+    template_key: Mapped[str | None] = mapped_column(String(40), nullable=True)
     search_vector: Mapped[Any | None] = mapped_column(TSVECTOR, nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
@@ -40,9 +41,9 @@ class RestaurantLocation(Base):
     )
 
     restaurant: Mapped["Restaurant"] = relationship(back_populates="locations")
-    slug: Mapped["RestaurantSlug | None"] = relationship(
-        back_populates="location", uselist=False
-    )
+    slugs: Mapped[list["RestaurantSlug"]] = relationship(back_populates="location")
+    menus: Mapped[list["Menu"]] = relationship(back_populates="location")
+    orders: Mapped[list["Order"]] = relationship(back_populates="location")
 
     __table_args__ = (
         Index("ix_location_state_city", "state", "city"),

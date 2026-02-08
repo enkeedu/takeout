@@ -62,7 +62,8 @@ export default async function SearchPage({
 }) {
   const params = await searchParams;
   const q = params.q || "";
-  const page = parseInt(params.page || "1", 10);
+  const parsedPage = parseInt(params.page || "1", 10);
+  const page = Number.isFinite(parsedPage) && parsedPage > 0 ? parsedPage : 1;
 
   return (
     <div>

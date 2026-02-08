@@ -22,6 +22,7 @@ services:
       context: ./apps/api
     environment:
       DATABASE_URL: ${DATABASE_URL}
+      ADMIN_TOKEN: ${ADMIN_TOKEN}
     ports:
       - "8001:8000"
     depends_on:
@@ -45,6 +46,7 @@ services:
     environment:
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
       INTERNAL_API_URL: ${INTERNAL_API_URL}
+      ADMIN_TOKEN: ${ADMIN_TOKEN}
     ports:
       - "3001:3000"
     depends_on:
@@ -52,6 +54,7 @@ services:
         condition: service_healthy
     volumes:
       - ./apps/web/src:/app/src
+      - ./apps/web/public:/app/public
       - /app/node_modules
       - /app/.next
     networks:
