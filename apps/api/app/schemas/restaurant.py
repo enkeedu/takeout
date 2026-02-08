@@ -6,6 +6,9 @@ from pydantic import BaseModel
 class RestaurantListItem(BaseModel):
     name: str
     phone: str | None = None
+    has_online_ordering: bool = False
+    has_ai_phone: bool = False
+    is_claimed: bool = False
     address1: str
     city: str
     state: str
