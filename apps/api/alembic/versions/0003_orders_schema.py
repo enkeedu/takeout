@@ -1,7 +1,7 @@
-"""Add orders schema
+"""Add orders schema.
 
-Revision ID: 0003
-Revises: 0002
+Revision ID: 1b3e5a9d2c44
+Revises: 9a2f8b1c7d10
 Create Date: 2026-02-06
 """
 
@@ -11,8 +11,8 @@ import sqlalchemy as sa
 from alembic import op
 from sqlalchemy.dialects import postgresql
 
-revision: str = "0003"
-down_revision: Union[str, None] = "0002"
+revision: str = "1b3e5a9d2c44"
+down_revision: Union[str, None] = "9a2f8b1c7d10"
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
