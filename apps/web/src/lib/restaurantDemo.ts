@@ -5,6 +5,24 @@ export type MenuItem = {
   price: number;
   popular?: boolean;
   spice?: 0 | 1 | 2;
+  modifierGroups?: ModifierGroup[];
+};
+
+export type ModifierOption = {
+  id: string;
+  name: string;
+  price: number;
+  isDefault: boolean;
+};
+
+export type ModifierGroup = {
+  id: string;
+  name: string;
+  description?: string;
+  minSelect: number;
+  maxSelect: number;
+  isRequired: boolean;
+  options: ModifierOption[];
 };
 
 export type MenuCategory = {

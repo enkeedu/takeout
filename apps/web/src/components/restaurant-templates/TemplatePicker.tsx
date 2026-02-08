@@ -4,9 +4,12 @@ import { useRouter } from "next/navigation";
 import { TEMPLATE_LABELS, TEMPLATE_KEYS, type TemplateKey } from "./types";
 
 const VARIANT_CLASSES: Record<TemplateKey, string> = {
-  market: "bg-orange-50/90 text-orange-800 border-orange-200",
-  modern: "bg-emerald-50/90 text-emerald-800 border-emerald-200",
-  luxe: "bg-amber-50/90 text-amber-800 border-amber-200",
+  ming: "bg-rose-50/90 text-rose-800 border-rose-200",
+  "ming-slim": "bg-rose-50/90 text-rose-800 border-rose-200",
+  "ming-balanced": "bg-rose-50/90 text-rose-800 border-rose-200",
+  "ming-full": "bg-rose-50/90 text-rose-800 border-rose-200",
+  "night-market": "bg-emerald-50/90 text-emerald-800 border-emerald-200",
+  "wok-fire": "bg-amber-50/90 text-amber-800 border-amber-200",
 };
 
 type TemplatePickerProps = {
