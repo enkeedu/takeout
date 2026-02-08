@@ -58,11 +58,11 @@ function selectTemplateKey(
 }
 
 function buildMapsUrl(restaurant: RestaurantDetail): string {
-  if (restaurant.lat && restaurant.lng) {
-    return `https://www.google.com/maps/search/?api=1&query=${restaurant.lat},${restaurant.lng}`;
+  const query = encodeURIComponent(`${restaurant.name}, ${restaurant.address1}, ${restaurant.city}, ${restaurant.state} ${restaurant.zip}`);
+  if (restaurant.google_place_id) {
+    return `https://www.google.com/maps/search/?api=1&query=${query}&query_place_id=${restaurant.google_place_id}`;
   }
-  const fullAddress = `${restaurant.address1}, ${restaurant.city}, ${restaurant.state} ${restaurant.zip}`;
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress)}`;
+  return `https://www.google.com/maps/search/?api=1&query=${query}`;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -97,6 +97,41 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
   const basePath = `/${r.state_slug}/${r.city_slug}/${r.restaurant_slug}`;
   const previewMode = sp.preview === "1";
 
+  const DAY_MAP: Record<string, string> = {
+    monday: "Monday",
+    tuesday: "Tuesday",
+    wednesday: "Wednesday",
+    thursday: "Thursday",
+    friday: "Friday",
+    saturday: "Saturday",
+    sunday: "Sunday",
+  };
+
+  const openingHours: object[] = [];
+  if (r.hours_json && typeof r.hours_json === "object") {
+    for (const [day, periods] of Object.entries(r.hours_json)) {
+      const schemaDay = DAY_MAP[day.toLowerCase()];
+      if (!schemaDay || !Array.isArray(periods)) continue;
+      for (const p of periods) {
+        if (p && typeof p === "object" && "open" in p && "close" in p) {
+          openingHours.push({
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: schemaDay,
+            opens: (p as { open: string }).open,
+            closes: (p as { close: string }).close,
+          });
+        }
+      }
+    }
+  }
+
+  const PRICE_MAP: Record<string, string> = {
+    PRICE_LEVEL_INEXPENSIVE: "$",
+    PRICE_LEVEL_MODERATE: "$$",
+    PRICE_LEVEL_EXPENSIVE: "$$$",
+    PRICE_LEVEL_VERY_EXPENSIVE: "$$$$",
+  };
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Restaurant",
@@ -112,6 +147,7 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
     telephone: r.phone || undefined,
     servesCuisine: "Chinese",
     url: `https://chinese-takeout.com/${r.state_slug}/${r.city_slug}/${r.restaurant_slug}`,
+    ...(r.website_url ? { sameAs: r.website_url } : {}),
     ...(r.lat && r.lng
       ? {
           geo: {
@@ -120,6 +156,22 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
             longitude: r.lng,
           },
         }
+      : {}),
+    ...(r.rating && r.user_rating_count
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: r.rating,
+            reviewCount: r.user_rating_count,
+            bestRating: 5,
+          },
+        }
+      : {}),
+    ...(r.price_level && PRICE_MAP[r.price_level]
+      ? { priceRange: PRICE_MAP[r.price_level] }
+      : {}),
+    ...(openingHours.length > 0
+      ? { openingHoursSpecification: openingHours }
       : {}),
   };
 

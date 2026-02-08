@@ -1,0 +1,96 @@
+[2026-02-08 03:04:03] INFO  Log file: /data/logs/fetch_20260208_030403.log
+[2026-02-08 03:04:03] INFO  ============================================================
+[2026-02-08 03:04:03] INFO    Metros:             1
+[2026-02-08 03:04:03] INFO    Total grid cells:   25
+[2026-02-08 03:04:03] INFO    Already completed:  0
+[2026-02-08 03:04:03] INFO    Remaining cells:    25
+[2026-02-08 03:04:03] INFO    Estimated cost:     $0.88
+[2026-02-08 03:04:03] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:04:03] INFO  ============================================================
+[2026-02-08 03:04:03] INFO  
+[2026-02-08 03:04:03] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:04:03] INFO  
+[2026-02-08 03:04:03] INFO    Phoenix, AZ: 25 cells (0 cached, 25 remaining)
+[2026-02-08 03:04:03] DEBUG     Cache miss at (33.3133, -112.2360); querying API
+[2026-02-08 03:04:04] DEBUG     Cache miss at (33.3133, -112.1550); querying API
+[2026-02-08 03:04:04] DEBUG     Cache miss at (33.3133, -112.0740); querying API
+[2026-02-08 03:04:05] DEBUG     Cache miss at (33.3133, -111.9930); querying API
+[2026-02-08 03:04:06] INFO      Cell 4/25: +11 new (11 total)
+[2026-02-08 03:04:06] DEBUG     Cache miss at (33.3133, -111.9120); querying API
+[2026-02-08 03:04:07] INFO      Cell 5/25: +15 new (26 total)
+[2026-02-08 03:04:07] DEBUG     Cache miss at (33.3808, -112.2360); querying API
+[2026-02-08 03:04:08] INFO      Cell 6/25: +2 new (28 total)
+[2026-02-08 03:04:08] DEBUG     Cache miss at (33.3808, -112.1550); querying API
+[2026-02-08 03:04:08] INFO      Cell 7/25: +4 new (32 total)
+[2026-02-08 03:04:08] DEBUG     Cache miss at (33.3808, -112.0740); querying API
+[2026-02-08 03:04:09] INFO      Cell 8/25: +10 new (42 total)
+[2026-02-08 03:04:09] DEBUG     Cache miss at (33.3808, -111.9930); querying API
+[2026-02-08 03:04:10] INFO      Cell 9/25: +7 new (49 total)
+[2026-02-08 03:04:10] DEBUG     Cache miss at (33.3808, -111.9120); querying API
+[2026-02-08 03:04:10] INFO      Filtered: Chef 7 Chinese Food (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:04:10] INFO      Cell 10/25: +18 new (67 total)
+[2026-02-08 03:04:10] DEBUG     Saved state at cell 10/25
+[2026-02-08 03:04:10] DEBUG     Cache miss at (33.4484, -112.2360); querying API
+[2026-02-08 03:04:11] INFO      Cell 11/25: +8 new (75 total)
+[2026-02-08 03:04:11] DEBUG     Cache miss at (33.4484, -112.1550); querying API
+[2026-02-08 03:04:12] INFO      Cell 12/25: +5 new (80 total)
+[2026-02-08 03:04:12] DEBUG     Cache miss at (33.4484, -112.0740); querying API
+[2026-02-08 03:04:13] INFO      Cell 13/25: +10 new (90 total)
+[2026-02-08 03:04:13] DEBUG     Cache miss at (33.4484, -111.9930); querying API
+[2026-02-08 03:04:14] INFO      Cell 14/25: +8 new (98 total)
+[2026-02-08 03:04:14] DEBUG     Cache miss at (33.4484, -111.9120); querying API
+[2026-02-08 03:04:14] INFO      Cell 15/25: +9 new (107 total)
+[2026-02-08 03:04:14] DEBUG     Cache miss at (33.5160, -112.2360); querying API
+[2026-02-08 03:04:15] INFO      Cell 16/25: +6 new (113 total)
+[2026-02-08 03:04:15] DEBUG     Cache miss at (33.5160, -112.1550); querying API
+[2026-02-08 03:04:16] INFO      Cell 17/25: +8 new (121 total)
+[2026-02-08 03:04:16] DEBUG     Cache miss at (33.5160, -112.0740); querying API
+[2026-02-08 03:04:17] INFO      Cell 18/25: +16 new (137 total)
+[2026-02-08 03:04:17] DEBUG     Cache miss at (33.5160, -111.9930); querying API
+[2026-02-08 03:04:17] INFO      Cell 19/25: +3 new (140 total)
+[2026-02-08 03:04:17] DEBUG     Cache miss at (33.5160, -111.9120); querying API
+[2026-02-08 03:04:18] INFO      Cell 20/25: +9 new (149 total)
+[2026-02-08 03:04:18] DEBUG     Saved state at cell 20/25
+[2026-02-08 03:04:18] DEBUG     Cache miss at (33.5835, -112.2360); querying API
+[2026-02-08 03:04:19] INFO      Cell 21/25: +11 new (160 total)
+[2026-02-08 03:04:19] DEBUG     Cache miss at (33.5835, -112.1550); querying API
+[2026-02-08 03:04:19] INFO      Cell 22/25: +12 new (172 total)
+[2026-02-08 03:04:19] DEBUG     Cache miss at (33.5835, -112.0740); querying API
+[2026-02-08 03:04:20] INFO      Filtered: China Chef Bistro (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:04:20] INFO      Cell 23/25: +1 new (173 total)
+[2026-02-08 03:04:20] DEBUG     Cache miss at (33.5835, -111.9930); querying API
+[2026-02-08 03:04:21] INFO      Cell 24/25: +9 new (182 total)
+[2026-02-08 03:04:21] DEBUG     Cache miss at (33.5835, -111.9120); querying API
+[2026-02-08 03:04:22] INFO      Filtered: AndyFood, A Culinary Studio (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:04:22] INFO      Cell 25/25: +11 new (193 total)
+[2026-02-08 03:04:22] INFO    Filtered out 3 restaurants
+[2026-02-08 03:04:22] INFO    -> Phoenix: 193 restaurants (running total: 193)
+[2026-02-08 03:04:22] INFO  
+[2026-02-08 03:04:22] INFO  
+[2026-02-08 03:04:22] INFO  ============================================================
+[2026-02-08 03:04:22] INFO  FETCH SUMMARY
+[2026-02-08 03:04:22] INFO  ============================================================
+[2026-02-08 03:04:22] INFO  Total restaurants:    193
+[2026-02-08 03:04:22] INFO  API calls made:       25
+[2026-02-08 03:04:22] INFO  Cache hits/misses:    0/25
+[2026-02-08 03:04:22] INFO  Estimated cost:       $0.88
+[2026-02-08 03:04:22] INFO  
+[2026-02-08 03:04:22] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:04:22] INFO    Phone:               188 ( 97.4%)
+[2026-02-08 03:04:22] INFO    Website:             174 ( 90.2%)
+[2026-02-08 03:04:22] INFO    Hours:               190 ( 98.4%)
+[2026-02-08 03:04:22] INFO    Rating:              190 ( 98.4%)
+[2026-02-08 03:04:22] INFO    Takeout flag:        191 ( 99.0%)
+[2026-02-08 03:04:22] INFO  
+[2026-02-08 03:04:22] INFO  AVG RATING:           4.03
+[2026-02-08 03:04:22] INFO  
+[2026-02-08 03:04:22] INFO  PRICE LEVELS:
+[2026-02-08 03:04:22] INFO    PRICE_LEVEL_INEXPENSIVE              113 ( 58.5%)
+[2026-02-08 03:04:22] INFO    PRICE_LEVEL_MODERATE                  62 ( 32.1%)
+[2026-02-08 03:04:22] INFO    UNKNOWN                               18 (  9.3%)
+[2026-02-08 03:04:22] INFO  
+[2026-02-08 03:04:22] INFO  TOP STATES:
+[2026-02-08 03:04:22] INFO    AZ          193 (100.0%)
+[2026-02-08 03:04:22] INFO  ============================================================
+[2026-02-08 03:04:22] INFO  
+[2026-02-08 03:04:22] INFO  CSV written to: /data/chinese_restaurants.csv

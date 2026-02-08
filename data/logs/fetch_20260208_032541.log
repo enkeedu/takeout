@@ -1,0 +1,53 @@
+[2026-02-08 03:25:41] INFO  Log file: /data/logs/fetch_20260208_032541.log
+[2026-02-08 03:25:41] INFO  ============================================================
+[2026-02-08 03:25:41] INFO    Metros:             1
+[2026-02-08 03:25:41] INFO    Total grid cells:   5
+[2026-02-08 03:25:41] INFO    Already completed:  0
+[2026-02-08 03:25:41] INFO    Remaining cells:    5
+[2026-02-08 03:25:41] INFO    Estimated cost:     $0.18
+[2026-02-08 03:25:41] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:25:41] INFO  ============================================================
+[2026-02-08 03:25:41] INFO  
+[2026-02-08 03:25:41] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:25:41] INFO  
+[2026-02-08 03:25:41] INFO    Rochester, NY: 5 cells (0 cached, 5 remaining)
+[2026-02-08 03:25:41] DEBUG     Cache miss at (43.0890, -77.6088); querying API
+[2026-02-08 03:25:41] INFO      Cell 1/5: +13 new (13 total)
+[2026-02-08 03:25:41] DEBUG     Cache miss at (43.1566, -77.7014); querying API
+[2026-02-08 03:25:42] INFO      Cell 2/5: +6 new (19 total)
+[2026-02-08 03:25:42] DEBUG     Cache miss at (43.1566, -77.6088); querying API
+[2026-02-08 03:25:43] INFO      Cell 3/5: +17 new (36 total)
+[2026-02-08 03:25:43] DEBUG     Cache miss at (43.1566, -77.5162); querying API
+[2026-02-08 03:25:44] INFO      Cell 4/5: +3 new (39 total)
+[2026-02-08 03:25:44] DEBUG     Cache miss at (43.2242, -77.6088); querying API
+[2026-02-08 03:25:44] INFO      Cell 5/5: +11 new (50 total)
+[2026-02-08 03:25:44] INFO    -> Rochester: 50 restaurants (running total: 50)
+[2026-02-08 03:25:44] INFO  
+[2026-02-08 03:25:44] INFO  
+[2026-02-08 03:25:44] INFO  ============================================================
+[2026-02-08 03:25:44] INFO  FETCH SUMMARY
+[2026-02-08 03:25:44] INFO  ============================================================
+[2026-02-08 03:25:44] INFO  Total restaurants:    50
+[2026-02-08 03:25:44] INFO  API calls made:       5
+[2026-02-08 03:25:44] INFO  Cache hits/misses:    0/5
+[2026-02-08 03:25:44] INFO  Estimated cost:       $0.18
+[2026-02-08 03:25:44] INFO  
+[2026-02-08 03:25:44] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:25:44] INFO    Phone:                50 (100.0%)
+[2026-02-08 03:25:44] INFO    Website:              43 ( 86.0%)
+[2026-02-08 03:25:44] INFO    Hours:                50 (100.0%)
+[2026-02-08 03:25:44] INFO    Rating:               50 (100.0%)
+[2026-02-08 03:25:44] INFO    Takeout flag:         49 ( 98.0%)
+[2026-02-08 03:25:44] INFO  
+[2026-02-08 03:25:44] INFO  AVG RATING:           4.06
+[2026-02-08 03:25:44] INFO  
+[2026-02-08 03:25:44] INFO  PRICE LEVELS:
+[2026-02-08 03:25:44] INFO    PRICE_LEVEL_INEXPENSIVE               37 ( 74.0%)
+[2026-02-08 03:25:44] INFO    PRICE_LEVEL_MODERATE                   9 ( 18.0%)
+[2026-02-08 03:25:44] INFO    UNKNOWN                                4 (  8.0%)
+[2026-02-08 03:25:44] INFO  
+[2026-02-08 03:25:44] INFO  TOP STATES:
+[2026-02-08 03:25:44] INFO    NY           50 (100.0%)
+[2026-02-08 03:25:44] INFO  ============================================================
+[2026-02-08 03:25:44] INFO  
+[2026-02-08 03:25:44] INFO  CSV written to: /data/chinese_restaurants.csv

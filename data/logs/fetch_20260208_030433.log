@@ -1,0 +1,59 @@
+[2026-02-08 03:04:33] INFO  Log file: /data/logs/fetch_20260208_030433.log
+[2026-02-08 03:04:33] INFO  ============================================================
+[2026-02-08 03:04:33] INFO    Metros:             1
+[2026-02-08 03:04:33] INFO    Total grid cells:   5
+[2026-02-08 03:04:33] INFO    Already completed:  0
+[2026-02-08 03:04:33] INFO    Remaining cells:    5
+[2026-02-08 03:04:33] INFO    Estimated cost:     $0.18
+[2026-02-08 03:04:33] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:04:33] INFO  ============================================================
+[2026-02-08 03:04:33] INFO  
+[2026-02-08 03:04:33] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:04:33] INFO  
+[2026-02-08 03:04:33] INFO    Irvine, CA: 5 cells (0 cached, 5 remaining)
+[2026-02-08 03:04:33] DEBUG     Cache miss at (33.6170, -117.8265); querying API
+[2026-02-08 03:04:34] INFO      Cell 1/5: +8 new (8 total)
+[2026-02-08 03:04:34] DEBUG     Cache miss at (33.6846, -117.9077); querying API
+[2026-02-08 03:04:35] INFO      Filtered: 佰禾私廚 Pakwos Kitchen (no takeout)
+[2026-02-08 03:04:35] INFO      Filtered: Fortune Cookies Restaurant (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:04:35] INFO      Cell 2/5: +18 new (26 total)
+[2026-02-08 03:04:35] DEBUG     Cache miss at (33.6846, -117.8265); querying API
+[2026-02-08 03:04:36] INFO      Cell 3/5: +17 new (43 total)
+[2026-02-08 03:04:36] DEBUG     Cache miss at (33.6846, -117.7453); querying API
+[2026-02-08 03:04:36] INFO      Filtered: Gui BBQ Restaurant & Bar 簋街 (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:04:36] INFO      Cell 4/5: +14 new (57 total)
+[2026-02-08 03:04:36] DEBUG     Cache miss at (33.7522, -117.8265); querying API
+[2026-02-08 03:04:37] INFO      Filtered: MLBB AYCE Hot Pot 马路边边直营店 (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:04:37] INFO      Cell 5/5: +19 new (76 total)
+[2026-02-08 03:04:37] INFO    Filtered out 4 restaurants
+[2026-02-08 03:04:37] INFO    -> Irvine: 76 restaurants (running total: 76)
+[2026-02-08 03:04:37] INFO  
+[2026-02-08 03:04:37] INFO  
+[2026-02-08 03:04:37] INFO  ============================================================
+[2026-02-08 03:04:37] INFO  FETCH SUMMARY
+[2026-02-08 03:04:37] INFO  ============================================================
+[2026-02-08 03:04:37] INFO  Total restaurants:    76
+[2026-02-08 03:04:37] INFO  API calls made:       5
+[2026-02-08 03:04:37] INFO  Cache hits/misses:    0/5
+[2026-02-08 03:04:37] INFO  Estimated cost:       $0.18
+[2026-02-08 03:04:37] INFO  
+[2026-02-08 03:04:37] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:04:37] INFO    Phone:                75 ( 98.7%)
+[2026-02-08 03:04:37] INFO    Website:              61 ( 80.3%)
+[2026-02-08 03:04:37] INFO    Hours:                76 (100.0%)
+[2026-02-08 03:04:37] INFO    Rating:               76 (100.0%)
+[2026-02-08 03:04:37] INFO    Takeout flag:         74 ( 97.4%)
+[2026-02-08 03:04:37] INFO  
+[2026-02-08 03:04:37] INFO  AVG RATING:           4.18
+[2026-02-08 03:04:37] INFO  
+[2026-02-08 03:04:37] INFO  PRICE LEVELS:
+[2026-02-08 03:04:37] INFO    PRICE_LEVEL_INEXPENSIVE               36 ( 47.4%)
+[2026-02-08 03:04:37] INFO    PRICE_LEVEL_MODERATE                  35 ( 46.1%)
+[2026-02-08 03:04:37] INFO    PRICE_LEVEL_EXPENSIVE                  3 (  3.9%)
+[2026-02-08 03:04:37] INFO    UNKNOWN                                2 (  2.6%)
+[2026-02-08 03:04:37] INFO  
+[2026-02-08 03:04:37] INFO  TOP STATES:
+[2026-02-08 03:04:37] INFO    CA           76 (100.0%)
+[2026-02-08 03:04:37] INFO  ============================================================
+[2026-02-08 03:04:37] INFO  
+[2026-02-08 03:04:37] INFO  CSV written to: /data/chinese_restaurants.csv

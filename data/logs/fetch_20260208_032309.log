@@ -1,0 +1,93 @@
+[2026-02-08 03:23:09] INFO  Log file: /data/logs/fetch_20260208_032309.log
+[2026-02-08 03:23:09] INFO  ============================================================
+[2026-02-08 03:23:09] INFO    Metros:             1
+[2026-02-08 03:23:09] INFO    Total grid cells:   21
+[2026-02-08 03:23:09] INFO    Already completed:  0
+[2026-02-08 03:23:09] INFO    Remaining cells:    21
+[2026-02-08 03:23:09] INFO    Estimated cost:     $0.74
+[2026-02-08 03:23:09] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:23:09] INFO  ============================================================
+[2026-02-08 03:23:09] INFO  
+[2026-02-08 03:23:09] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:23:09] INFO  
+[2026-02-08 03:23:09] INFO    Detroit, MI: 21 cells (0 cached, 21 remaining)
+[2026-02-08 03:23:09] DEBUG     Cache miss at (42.1963, -83.1372); querying API
+[2026-02-08 03:23:09] INFO      Cell 1/21: +3 new (3 total)
+[2026-02-08 03:23:09] DEBUG     Cache miss at (42.1963, -83.0458); querying API
+[2026-02-08 03:23:10] DEBUG     Cache miss at (42.1963, -82.9544); querying API
+[2026-02-08 03:23:11] DEBUG     Cache miss at (42.2638, -83.2286); querying API
+[2026-02-08 03:23:12] INFO      Filtered: Ho's Kitchen Restaurant (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:23:12] INFO      Cell 4/21: +14 new (17 total)
+[2026-02-08 03:23:12] DEBUG     Cache miss at (42.2638, -83.1372); querying API
+[2026-02-08 03:23:12] INFO      Cell 5/21: +1 new (18 total)
+[2026-02-08 03:23:12] DEBUG     Cache miss at (42.2638, -83.0458); querying API
+[2026-02-08 03:23:13] INFO      Filtered: New Kirin Eatery (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:23:13] INFO      Filtered: Hurricane Crepe (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:23:13] INFO      Cell 6/21: +12 new (30 total)
+[2026-02-08 03:23:13] DEBUG     Cache miss at (42.2638, -82.9544); querying API
+[2026-02-08 03:23:14] INFO      Cell 7/21: +1 new (31 total)
+[2026-02-08 03:23:14] DEBUG     Cache miss at (42.2638, -82.8630); querying API
+[2026-02-08 03:23:15] INFO      Cell 8/21: +1 new (32 total)
+[2026-02-08 03:23:15] DEBUG     Cache miss at (42.3314, -83.2286); querying API
+[2026-02-08 03:23:15] INFO      Cell 9/21: +5 new (37 total)
+[2026-02-08 03:23:15] DEBUG     Cache miss at (42.3314, -83.1372); querying API
+[2026-02-08 03:23:16] INFO      Cell 10/21: +5 new (42 total)
+[2026-02-08 03:23:16] DEBUG     Saved state at cell 10/21
+[2026-02-08 03:23:16] DEBUG     Cache miss at (42.3314, -83.0458); querying API
+[2026-02-08 03:23:17] INFO      Cell 11/21: +13 new (55 total)
+[2026-02-08 03:23:17] DEBUG     Cache miss at (42.3314, -82.9544); querying API
+[2026-02-08 03:23:18] INFO      Filtered: Sam Street Food (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:23:18] INFO      Cell 12/21: +7 new (62 total)
+[2026-02-08 03:23:18] DEBUG     Cache miss at (42.3314, -82.8630); querying API
+[2026-02-08 03:23:19] INFO      Cell 13/21: +2 new (64 total)
+[2026-02-08 03:23:19] DEBUG     Cache miss at (42.3990, -83.2286); querying API
+[2026-02-08 03:23:19] INFO      Filtered: Golden Bowl Chop Suey (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:23:19] INFO      Filtered: Panda Chinese Restaurant (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:23:19] INFO      Filtered: Rikshaw House (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:23:19] INFO      Cell 14/21: +5 new (69 total)
+[2026-02-08 03:23:19] DEBUG     Cache miss at (42.3990, -83.1372); querying API
+[2026-02-08 03:23:20] INFO      Cell 15/21: +5 new (74 total)
+[2026-02-08 03:23:20] DEBUG     Cache miss at (42.3990, -83.0458); querying API
+[2026-02-08 03:23:21] INFO      Cell 16/21: +5 new (79 total)
+[2026-02-08 03:23:21] DEBUG     Cache miss at (42.3990, -82.9544); querying API
+[2026-02-08 03:23:22] INFO      Cell 17/21: +6 new (85 total)
+[2026-02-08 03:23:22] DEBUG     Cache miss at (42.3990, -82.8630); querying API
+[2026-02-08 03:23:22] DEBUG     Cache miss at (42.4665, -83.1372); querying API
+[2026-02-08 03:23:23] INFO      Cell 19/21: +9 new (94 total)
+[2026-02-08 03:23:23] DEBUG     Cache miss at (42.4665, -83.0458); querying API
+[2026-02-08 03:23:24] INFO      Cell 20/21: +5 new (99 total)
+[2026-02-08 03:23:24] DEBUG     Saved state at cell 20/21
+[2026-02-08 03:23:24] DEBUG     Cache miss at (42.4665, -82.9544); querying API
+[2026-02-08 03:23:25] INFO      Cell 21/21: +10 new (109 total)
+[2026-02-08 03:23:25] INFO    Filtered out 7 restaurants
+[2026-02-08 03:23:25] INFO    -> Detroit: 109 restaurants (running total: 109)
+[2026-02-08 03:23:25] INFO  
+[2026-02-08 03:23:25] INFO  
+[2026-02-08 03:23:25] INFO  ============================================================
+[2026-02-08 03:23:25] INFO  FETCH SUMMARY
+[2026-02-08 03:23:25] INFO  ============================================================
+[2026-02-08 03:23:25] INFO  Total restaurants:    109
+[2026-02-08 03:23:25] INFO  API calls made:       21
+[2026-02-08 03:23:25] INFO  Cache hits/misses:    0/21
+[2026-02-08 03:23:25] INFO  Estimated cost:       $0.74
+[2026-02-08 03:23:25] INFO  
+[2026-02-08 03:23:25] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:23:25] INFO    Phone:               108 ( 99.1%)
+[2026-02-08 03:23:25] INFO    Website:              79 ( 72.5%)
+[2026-02-08 03:23:25] INFO    Hours:               108 ( 99.1%)
+[2026-02-08 03:23:25] INFO    Rating:              108 ( 99.1%)
+[2026-02-08 03:23:25] INFO    Takeout flag:        108 ( 99.1%)
+[2026-02-08 03:23:25] INFO  
+[2026-02-08 03:23:25] INFO  AVG RATING:           3.96
+[2026-02-08 03:23:25] INFO  
+[2026-02-08 03:23:25] INFO  PRICE LEVELS:
+[2026-02-08 03:23:25] INFO    PRICE_LEVEL_INEXPENSIVE               68 ( 62.4%)
+[2026-02-08 03:23:25] INFO    PRICE_LEVEL_MODERATE                  31 ( 28.4%)
+[2026-02-08 03:23:25] INFO    UNKNOWN                               10 (  9.2%)
+[2026-02-08 03:23:25] INFO  
+[2026-02-08 03:23:25] INFO  TOP STATES:
+[2026-02-08 03:23:25] INFO    MI           81 ( 74.3%)
+[2026-02-08 03:23:25] INFO    ON           28 ( 25.7%)
+[2026-02-08 03:23:25] INFO  ============================================================
+[2026-02-08 03:23:25] INFO  
+[2026-02-08 03:23:25] INFO  CSV written to: /data/chinese_restaurants.csv

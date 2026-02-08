@@ -1,0 +1,75 @@
+[2026-02-08 03:26:23] INFO  Log file: /data/logs/fetch_20260208_032623.log
+[2026-02-08 03:26:24] INFO  ============================================================
+[2026-02-08 03:26:24] INFO    Metros:             1
+[2026-02-08 03:26:24] INFO    Total grid cells:   13
+[2026-02-08 03:26:24] INFO    Already completed:  0
+[2026-02-08 03:26:24] INFO    Remaining cells:    13
+[2026-02-08 03:26:24] INFO    Estimated cost:     $0.46
+[2026-02-08 03:26:24] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:26:24] INFO  ============================================================
+[2026-02-08 03:26:24] INFO  
+[2026-02-08 03:26:24] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:26:24] INFO  
+[2026-02-08 03:26:24] INFO    Portland, OR: 13 cells (0 cached, 13 remaining)
+[2026-02-08 03:26:24] DEBUG     Cache miss at (45.3801, -122.6784); querying API
+[2026-02-08 03:26:24] INFO      Cell 1/13: +5 new (5 total)
+[2026-02-08 03:26:24] DEBUG     Cache miss at (45.4476, -122.7748); querying API
+[2026-02-08 03:26:25] INFO      Filtered: Queenz Asian Cuisine (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:26:25] INFO      Cell 2/13: +16 new (21 total)
+[2026-02-08 03:26:25] DEBUG     Cache miss at (45.4476, -122.6784); querying API
+[2026-02-08 03:26:26] INFO      Cell 3/13: +8 new (29 total)
+[2026-02-08 03:26:26] DEBUG     Cache miss at (45.4476, -122.5820); querying API
+[2026-02-08 03:26:26] INFO      Cell 4/13: +13 new (42 total)
+[2026-02-08 03:26:26] DEBUG     Cache miss at (45.5152, -122.8713); querying API
+[2026-02-08 03:26:27] INFO      Cell 5/13: +17 new (59 total)
+[2026-02-08 03:26:27] DEBUG     Cache miss at (45.5152, -122.7748); querying API
+[2026-02-08 03:26:28] INFO      Cell 6/13: +7 new (66 total)
+[2026-02-08 03:26:28] DEBUG     Cache miss at (45.5152, -122.6784); querying API
+[2026-02-08 03:26:29] INFO      Cell 7/13: +20 new (86 total)
+[2026-02-08 03:26:29] DEBUG     Cache miss at (45.5152, -122.5820); querying API
+[2026-02-08 03:26:30] INFO      Cell 8/13: +15 new (101 total)
+[2026-02-08 03:26:30] DEBUG     Cache miss at (45.5152, -122.4855); querying API
+[2026-02-08 03:26:30] INFO      Filtered: China Garden Chinese Food (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:26:30] INFO      Cell 9/13: +13 new (114 total)
+[2026-02-08 03:26:30] DEBUG     Cache miss at (45.5828, -122.7748); querying API
+[2026-02-08 03:26:31] INFO      Filtered: Brad's (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:26:31] INFO      Cell 10/13: +4 new (118 total)
+[2026-02-08 03:26:31] DEBUG     Saved state at cell 10/13
+[2026-02-08 03:26:31] DEBUG     Cache miss at (45.5828, -122.6784); querying API
+[2026-02-08 03:26:32] INFO      Cell 11/13: +7 new (125 total)
+[2026-02-08 03:26:32] DEBUG     Cache miss at (45.5828, -122.5820); querying API
+[2026-02-08 03:26:33] INFO      Cell 12/13: +8 new (133 total)
+[2026-02-08 03:26:33] DEBUG     Cache miss at (45.6503, -122.6784); querying API
+[2026-02-08 03:26:34] INFO      Cell 13/13: +9 new (142 total)
+[2026-02-08 03:26:34] INFO    Filtered out 3 restaurants
+[2026-02-08 03:26:34] INFO    -> Portland: 142 restaurants (running total: 142)
+[2026-02-08 03:26:34] INFO  
+[2026-02-08 03:26:34] INFO  
+[2026-02-08 03:26:34] INFO  ============================================================
+[2026-02-08 03:26:34] INFO  FETCH SUMMARY
+[2026-02-08 03:26:34] INFO  ============================================================
+[2026-02-08 03:26:34] INFO  Total restaurants:    142
+[2026-02-08 03:26:34] INFO  API calls made:       13
+[2026-02-08 03:26:34] INFO  Cache hits/misses:    0/13
+[2026-02-08 03:26:34] INFO  Estimated cost:       $0.46
+[2026-02-08 03:26:34] INFO  
+[2026-02-08 03:26:34] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:26:34] INFO    Phone:               135 ( 95.1%)
+[2026-02-08 03:26:34] INFO    Website:             114 ( 80.3%)
+[2026-02-08 03:26:34] INFO    Hours:               138 ( 97.2%)
+[2026-02-08 03:26:34] INFO    Rating:              139 ( 97.9%)
+[2026-02-08 03:26:34] INFO    Takeout flag:        141 ( 99.3%)
+[2026-02-08 03:26:34] INFO  
+[2026-02-08 03:26:34] INFO  AVG RATING:           4.13
+[2026-02-08 03:26:34] INFO  
+[2026-02-08 03:26:34] INFO  PRICE LEVELS:
+[2026-02-08 03:26:34] INFO    PRICE_LEVEL_MODERATE                  63 ( 44.4%)
+[2026-02-08 03:26:34] INFO    PRICE_LEVEL_INEXPENSIVE               63 ( 44.4%)
+[2026-02-08 03:26:34] INFO    UNKNOWN                               16 ( 11.3%)
+[2026-02-08 03:26:34] INFO  
+[2026-02-08 03:26:34] INFO  TOP STATES:
+[2026-02-08 03:26:34] INFO    OR          129 ( 90.8%)
+[2026-02-08 03:26:34] INFO    WA           13 (  9.2%)
+[2026-02-08 03:26:34] INFO  ============================================================
+[2026-02-08 03:26:34] INFO  
+[2026-02-08 03:26:34] INFO  CSV written to: /data/chinese_restaurants.csv

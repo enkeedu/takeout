@@ -1,0 +1,73 @@
+[2026-02-08 03:09:58] INFO  Log file: /data/logs/fetch_20260208_030958.log
+[2026-02-08 03:09:59] INFO  ============================================================
+[2026-02-08 03:09:59] INFO    Metros:             1
+[2026-02-08 03:09:59] INFO    Total grid cells:   13
+[2026-02-08 03:09:59] INFO    Already completed:  0
+[2026-02-08 03:09:59] INFO    Remaining cells:    13
+[2026-02-08 03:09:59] INFO    Estimated cost:     $0.46
+[2026-02-08 03:09:59] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:09:59] INFO  ============================================================
+[2026-02-08 03:09:59] INFO  
+[2026-02-08 03:09:59] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:09:59] INFO  
+[2026-02-08 03:09:59] INFO    Tampa, FL: 13 cells (0 cached, 13 remaining)
+[2026-02-08 03:09:59] DEBUG     Cache miss at (27.8155, -82.4572); querying API
+[2026-02-08 03:09:59] DEBUG     Cache miss at (27.8830, -82.5337); querying API
+[2026-02-08 03:10:00] INFO      Cell 2/13: +7 new (7 total)
+[2026-02-08 03:10:00] DEBUG     Cache miss at (27.8830, -82.4572); querying API
+[2026-02-08 03:10:01] INFO      Cell 3/13: +1 new (8 total)
+[2026-02-08 03:10:01] DEBUG     Cache miss at (27.8830, -82.3807); querying API
+[2026-02-08 03:10:01] INFO      Cell 4/13: +4 new (12 total)
+[2026-02-08 03:10:01] DEBUG     Cache miss at (27.9506, -82.6102); querying API
+[2026-02-08 03:10:02] DEBUG     Cache miss at (27.9506, -82.5337); querying API
+[2026-02-08 03:10:03] INFO      Filtered: Wok N Roll (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:10:03] INFO      Filtered: Top China (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:10:03] INFO      Cell 6/13: +11 new (23 total)
+[2026-02-08 03:10:03] DEBUG     Cache miss at (27.9506, -82.4572); querying API
+[2026-02-08 03:10:04] INFO      Cell 7/13: +7 new (30 total)
+[2026-02-08 03:10:04] DEBUG     Cache miss at (27.9506, -82.3807); querying API
+[2026-02-08 03:10:04] INFO      Cell 8/13: +3 new (33 total)
+[2026-02-08 03:10:04] DEBUG     Cache miss at (27.9506, -82.3042); querying API
+[2026-02-08 03:10:05] INFO      Cell 9/13: +13 new (46 total)
+[2026-02-08 03:10:05] DEBUG     Cache miss at (28.0182, -82.5337); querying API
+[2026-02-08 03:10:06] INFO      Filtered: El Borinchino (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:10:06] INFO      Cell 10/13: +14 new (60 total)
+[2026-02-08 03:10:06] DEBUG     Saved state at cell 10/13
+[2026-02-08 03:10:06] DEBUG     Cache miss at (28.0182, -82.4572); querying API
+[2026-02-08 03:10:07] INFO      Cell 11/13: +14 new (74 total)
+[2026-02-08 03:10:07] DEBUG     Cache miss at (28.0182, -82.3807); querying API
+[2026-02-08 03:10:07] INFO      Filtered: Yum Yum Hot Pot AYCE (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:10:07] INFO      Cell 12/13: +8 new (82 total)
+[2026-02-08 03:10:07] DEBUG     Cache miss at (28.0857, -82.4572); querying API
+[2026-02-08 03:10:08] INFO      Cell 13/13: +16 new (98 total)
+[2026-02-08 03:10:08] INFO    Filtered out 4 restaurants
+[2026-02-08 03:10:08] INFO    -> Tampa: 98 restaurants (running total: 98)
+[2026-02-08 03:10:08] INFO  
+[2026-02-08 03:10:08] INFO  
+[2026-02-08 03:10:08] INFO  ============================================================
+[2026-02-08 03:10:08] INFO  FETCH SUMMARY
+[2026-02-08 03:10:08] INFO  ============================================================
+[2026-02-08 03:10:08] INFO  Total restaurants:    98
+[2026-02-08 03:10:08] INFO  API calls made:       13
+[2026-02-08 03:10:08] INFO  Cache hits/misses:    0/13
+[2026-02-08 03:10:08] INFO  Estimated cost:       $0.46
+[2026-02-08 03:10:08] INFO  
+[2026-02-08 03:10:08] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:10:08] INFO    Phone:                96 ( 98.0%)
+[2026-02-08 03:10:08] INFO    Website:              83 ( 84.7%)
+[2026-02-08 03:10:08] INFO    Hours:                94 ( 95.9%)
+[2026-02-08 03:10:08] INFO    Rating:               97 ( 99.0%)
+[2026-02-08 03:10:08] INFO    Takeout flag:         98 (100.0%)
+[2026-02-08 03:10:08] INFO  
+[2026-02-08 03:10:08] INFO  AVG RATING:           4.05
+[2026-02-08 03:10:08] INFO  
+[2026-02-08 03:10:08] INFO  PRICE LEVELS:
+[2026-02-08 03:10:08] INFO    PRICE_LEVEL_INEXPENSIVE               56 ( 57.1%)
+[2026-02-08 03:10:08] INFO    PRICE_LEVEL_MODERATE                  23 ( 23.5%)
+[2026-02-08 03:10:08] INFO    UNKNOWN                               19 ( 19.4%)
+[2026-02-08 03:10:08] INFO  
+[2026-02-08 03:10:08] INFO  TOP STATES:
+[2026-02-08 03:10:08] INFO    FL           98 (100.0%)
+[2026-02-08 03:10:08] INFO  ============================================================
+[2026-02-08 03:10:08] INFO  
+[2026-02-08 03:10:08] INFO  CSV written to: /data/chinese_restaurants.csv

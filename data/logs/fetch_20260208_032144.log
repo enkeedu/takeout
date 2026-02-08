@@ -1,0 +1,75 @@
+[2026-02-08 03:21:44] INFO  Log file: /data/logs/fetch_20260208_032144.log
+[2026-02-08 03:21:44] INFO  ============================================================
+[2026-02-08 03:21:44] INFO    Metros:             1
+[2026-02-08 03:21:44] INFO    Total grid cells:   13
+[2026-02-08 03:21:44] INFO    Already completed:  0
+[2026-02-08 03:21:44] INFO    Remaining cells:    13
+[2026-02-08 03:21:44] INFO    Estimated cost:     $0.46
+[2026-02-08 03:21:44] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:21:44] INFO  ============================================================
+[2026-02-08 03:21:44] INFO  
+[2026-02-08 03:21:44] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:21:44] INFO  
+[2026-02-08 03:21:44] INFO    Baltimore, MD: 13 cells (0 cached, 13 remaining)
+[2026-02-08 03:21:44] DEBUG     Cache miss at (39.1553, -76.6122); querying API
+[2026-02-08 03:21:45] INFO      Filtered: Hong Kong Chinese Restaurant (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:21:45] INFO      Cell 1/13: +18 new (18 total)
+[2026-02-08 03:21:45] DEBUG     Cache miss at (39.2228, -76.6995); querying API
+[2026-02-08 03:21:45] INFO      Cell 2/13: +8 new (26 total)
+[2026-02-08 03:21:45] DEBUG     Cache miss at (39.2228, -76.6122); querying API
+[2026-02-08 03:21:46] INFO      Cell 3/13: +7 new (33 total)
+[2026-02-08 03:21:46] DEBUG     Cache miss at (39.2228, -76.5249); querying API
+[2026-02-08 03:21:47] INFO      Cell 4/13: +2 new (35 total)
+[2026-02-08 03:21:47] DEBUG     Cache miss at (39.2904, -76.7868); querying API
+[2026-02-08 03:21:48] INFO      Cell 5/13: +16 new (51 total)
+[2026-02-08 03:21:48] DEBUG     Cache miss at (39.2904, -76.6995); querying API
+[2026-02-08 03:21:49] INFO      Cell 6/13: +11 new (62 total)
+[2026-02-08 03:21:49] DEBUG     Cache miss at (39.2904, -76.6122); querying API
+[2026-02-08 03:21:50] INFO      Cell 7/13: +19 new (81 total)
+[2026-02-08 03:21:50] DEBUG     Cache miss at (39.2904, -76.5249); querying API
+[2026-02-08 03:21:50] INFO      Filtered: Eden (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:21:50] INFO      Cell 8/13: +15 new (96 total)
+[2026-02-08 03:21:50] DEBUG     Cache miss at (39.2904, -76.4376); querying API
+[2026-02-08 03:21:51] INFO      Cell 9/13: +6 new (102 total)
+[2026-02-08 03:21:51] DEBUG     Cache miss at (39.3580, -76.6995); querying API
+[2026-02-08 03:21:52] INFO      Cell 10/13: +18 new (120 total)
+[2026-02-08 03:21:52] DEBUG     Saved state at cell 10/13
+[2026-02-08 03:21:52] DEBUG     Cache miss at (39.3580, -76.6122); querying API
+[2026-02-08 03:21:53] INFO      Filtered: New Generation Hot Pot AYCE (no takeout)
+[2026-02-08 03:21:53] INFO      Cell 11/13: +13 new (133 total)
+[2026-02-08 03:21:53] DEBUG     Cache miss at (39.3580, -76.5249); querying API
+[2026-02-08 03:21:53] INFO      Cell 12/13: +16 new (149 total)
+[2026-02-08 03:21:53] DEBUG     Cache miss at (39.4255, -76.6122); querying API
+[2026-02-08 03:21:54] INFO      Cell 13/13: +12 new (161 total)
+[2026-02-08 03:21:54] INFO    Filtered out 3 restaurants
+[2026-02-08 03:21:54] INFO    -> Baltimore: 161 restaurants (running total: 161)
+[2026-02-08 03:21:54] INFO  
+[2026-02-08 03:21:54] INFO  
+[2026-02-08 03:21:54] INFO  ============================================================
+[2026-02-08 03:21:54] INFO  FETCH SUMMARY
+[2026-02-08 03:21:54] INFO  ============================================================
+[2026-02-08 03:21:54] INFO  Total restaurants:    161
+[2026-02-08 03:21:54] INFO  API calls made:       13
+[2026-02-08 03:21:54] INFO  Cache hits/misses:    0/13
+[2026-02-08 03:21:54] INFO  Estimated cost:       $0.46
+[2026-02-08 03:21:54] INFO  
+[2026-02-08 03:21:54] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:21:54] INFO    Phone:               155 ( 96.3%)
+[2026-02-08 03:21:54] INFO    Website:             122 ( 75.8%)
+[2026-02-08 03:21:54] INFO    Hours:               157 ( 97.5%)
+[2026-02-08 03:21:54] INFO    Rating:              157 ( 97.5%)
+[2026-02-08 03:21:54] INFO    Takeout flag:        159 ( 98.8%)
+[2026-02-08 03:21:54] INFO  
+[2026-02-08 03:21:54] INFO  AVG RATING:           3.98
+[2026-02-08 03:21:54] INFO  
+[2026-02-08 03:21:54] INFO  PRICE LEVELS:
+[2026-02-08 03:21:54] INFO    PRICE_LEVEL_INEXPENSIVE              102 ( 63.4%)
+[2026-02-08 03:21:54] INFO    PRICE_LEVEL_MODERATE                  40 ( 24.8%)
+[2026-02-08 03:21:54] INFO    UNKNOWN                               18 ( 11.2%)
+[2026-02-08 03:21:54] INFO    PRICE_LEVEL_EXPENSIVE                  1 (  0.6%)
+[2026-02-08 03:21:54] INFO  
+[2026-02-08 03:21:54] INFO  TOP STATES:
+[2026-02-08 03:21:54] INFO    MD          161 (100.0%)
+[2026-02-08 03:21:54] INFO  ============================================================
+[2026-02-08 03:21:54] INFO  
+[2026-02-08 03:21:54] INFO  CSV written to: /data/chinese_restaurants.csv

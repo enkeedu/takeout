@@ -1,0 +1,54 @@
+[2026-02-08 03:29:10] INFO  Log file: /data/logs/fetch_20260208_032910.log
+[2026-02-08 03:29:10] INFO  ============================================================
+[2026-02-08 03:29:10] INFO    Metros:             1
+[2026-02-08 03:29:10] INFO    Total grid cells:   5
+[2026-02-08 03:29:10] INFO    Already completed:  0
+[2026-02-08 03:29:10] INFO    Remaining cells:    5
+[2026-02-08 03:29:10] INFO    Estimated cost:     $0.18
+[2026-02-08 03:29:10] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:29:10] INFO  ============================================================
+[2026-02-08 03:29:10] INFO  
+[2026-02-08 03:29:10] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:29:10] INFO  
+[2026-02-08 03:29:10] INFO    Bellevue, WA: 5 cells (0 cached, 5 remaining)
+[2026-02-08 03:29:10] DEBUG     Cache miss at (47.5425, -122.2015); querying API
+[2026-02-08 03:29:11] INFO      Cell 1/5: +12 new (12 total)
+[2026-02-08 03:29:11] DEBUG     Cache miss at (47.6101, -122.3017); querying API
+[2026-02-08 03:29:12] INFO      Cell 2/5: +20 new (32 total)
+[2026-02-08 03:29:12] DEBUG     Cache miss at (47.6101, -122.2015); querying API
+[2026-02-08 03:29:12] INFO      Cell 3/5: +18 new (50 total)
+[2026-02-08 03:29:12] DEBUG     Cache miss at (47.6101, -122.1013); querying API
+[2026-02-08 03:29:13] INFO      Cell 4/5: +14 new (64 total)
+[2026-02-08 03:29:13] DEBUG     Cache miss at (47.6777, -122.2015); querying API
+[2026-02-08 03:29:14] INFO      Cell 5/5: +11 new (75 total)
+[2026-02-08 03:29:14] INFO    -> Bellevue: 75 restaurants (running total: 75)
+[2026-02-08 03:29:14] INFO  
+[2026-02-08 03:29:14] INFO  
+[2026-02-08 03:29:14] INFO  ============================================================
+[2026-02-08 03:29:14] INFO  FETCH SUMMARY
+[2026-02-08 03:29:14] INFO  ============================================================
+[2026-02-08 03:29:14] INFO  Total restaurants:    75
+[2026-02-08 03:29:14] INFO  API calls made:       5
+[2026-02-08 03:29:14] INFO  Cache hits/misses:    0/5
+[2026-02-08 03:29:14] INFO  Estimated cost:       $0.18
+[2026-02-08 03:29:14] INFO  
+[2026-02-08 03:29:14] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:29:14] INFO    Phone:                75 (100.0%)
+[2026-02-08 03:29:14] INFO    Website:              73 ( 97.3%)
+[2026-02-08 03:29:14] INFO    Hours:                75 (100.0%)
+[2026-02-08 03:29:14] INFO    Rating:               75 (100.0%)
+[2026-02-08 03:29:14] INFO    Takeout flag:         75 (100.0%)
+[2026-02-08 03:29:14] INFO  
+[2026-02-08 03:29:14] INFO  AVG RATING:           4.24
+[2026-02-08 03:29:14] INFO  
+[2026-02-08 03:29:14] INFO  PRICE LEVELS:
+[2026-02-08 03:29:14] INFO    PRICE_LEVEL_MODERATE                  51 ( 68.0%)
+[2026-02-08 03:29:14] INFO    PRICE_LEVEL_INEXPENSIVE               19 ( 25.3%)
+[2026-02-08 03:29:14] INFO    UNKNOWN                                3 (  4.0%)
+[2026-02-08 03:29:14] INFO    PRICE_LEVEL_EXPENSIVE                  2 (  2.7%)
+[2026-02-08 03:29:14] INFO  
+[2026-02-08 03:29:14] INFO  TOP STATES:
+[2026-02-08 03:29:14] INFO    WA           75 (100.0%)
+[2026-02-08 03:29:14] INFO  ============================================================
+[2026-02-08 03:29:14] INFO  
+[2026-02-08 03:29:14] INFO  CSV written to: /data/chinese_restaurants.csv

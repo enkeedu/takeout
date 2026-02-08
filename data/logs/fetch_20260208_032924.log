@@ -1,0 +1,53 @@
+[2026-02-08 03:29:24] INFO  Log file: /data/logs/fetch_20260208_032924.log
+[2026-02-08 03:29:24] INFO  ============================================================
+[2026-02-08 03:29:24] INFO    Metros:             1
+[2026-02-08 03:29:24] INFO    Total grid cells:   5
+[2026-02-08 03:29:24] INFO    Already completed:  0
+[2026-02-08 03:29:24] INFO    Remaining cells:    5
+[2026-02-08 03:29:24] INFO    Estimated cost:     $0.18
+[2026-02-08 03:29:24] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:29:24] INFO  ============================================================
+[2026-02-08 03:29:24] INFO  
+[2026-02-08 03:29:24] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:29:24] INFO  
+[2026-02-08 03:29:24] INFO    Madison, WI: 5 cells (0 cached, 5 remaining)
+[2026-02-08 03:29:24] DEBUG     Cache miss at (43.0055, -89.4012); querying API
+[2026-02-08 03:29:25] INFO      Cell 1/5: +1 new (1 total)
+[2026-02-08 03:29:25] DEBUG     Cache miss at (43.0731, -89.4937); querying API
+[2026-02-08 03:29:26] INFO      Cell 2/5: +14 new (15 total)
+[2026-02-08 03:29:26] DEBUG     Cache miss at (43.0731, -89.4012); querying API
+[2026-02-08 03:29:26] INFO      Cell 3/5: +19 new (34 total)
+[2026-02-08 03:29:26] DEBUG     Cache miss at (43.0731, -89.3087); querying API
+[2026-02-08 03:29:27] INFO      Filtered: Happy Wok (price=PRICE_LEVEL_VERY_EXPENSIVE)
+[2026-02-08 03:29:27] INFO      Cell 4/5: +4 new (38 total)
+[2026-02-08 03:29:27] DEBUG     Cache miss at (43.1407, -89.4012); querying API
+[2026-02-08 03:29:28] INFO    Filtered out 1 restaurants
+[2026-02-08 03:29:28] INFO    -> Madison: 38 restaurants (running total: 38)
+[2026-02-08 03:29:28] INFO  
+[2026-02-08 03:29:28] INFO  
+[2026-02-08 03:29:28] INFO  ============================================================
+[2026-02-08 03:29:28] INFO  FETCH SUMMARY
+[2026-02-08 03:29:28] INFO  ============================================================
+[2026-02-08 03:29:28] INFO  Total restaurants:    38
+[2026-02-08 03:29:28] INFO  API calls made:       5
+[2026-02-08 03:29:28] INFO  Cache hits/misses:    0/5
+[2026-02-08 03:29:28] INFO  Estimated cost:       $0.18
+[2026-02-08 03:29:28] INFO  
+[2026-02-08 03:29:28] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:29:28] INFO    Phone:                36 ( 94.7%)
+[2026-02-08 03:29:28] INFO    Website:              36 ( 94.7%)
+[2026-02-08 03:29:28] INFO    Hours:                37 ( 97.4%)
+[2026-02-08 03:29:28] INFO    Rating:               38 (100.0%)
+[2026-02-08 03:29:28] INFO    Takeout flag:         38 (100.0%)
+[2026-02-08 03:29:28] INFO  
+[2026-02-08 03:29:28] INFO  AVG RATING:           4.19
+[2026-02-08 03:29:28] INFO  
+[2026-02-08 03:29:28] INFO  PRICE LEVELS:
+[2026-02-08 03:29:28] INFO    PRICE_LEVEL_INEXPENSIVE               25 ( 65.8%)
+[2026-02-08 03:29:28] INFO    PRICE_LEVEL_MODERATE                  13 ( 34.2%)
+[2026-02-08 03:29:28] INFO  
+[2026-02-08 03:29:28] INFO  TOP STATES:
+[2026-02-08 03:29:28] INFO    WI           38 (100.0%)
+[2026-02-08 03:29:28] INFO  ============================================================
+[2026-02-08 03:29:28] INFO  
+[2026-02-08 03:29:28] INFO  CSV written to: /data/chinese_restaurants.csv

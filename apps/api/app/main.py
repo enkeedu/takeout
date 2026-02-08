@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
-from app.routers import browse, health, restaurants, search, sitemap
+from app.routers import admin, browse, health, restaurants, search, sitemap
 
 
 @asynccontextmanager
@@ -26,3 +26,4 @@ app.include_router(browse.router)
 app.include_router(restaurants.router)
 app.include_router(search.router)
 app.include_router(sitemap.router)
+app.include_router(admin.router)

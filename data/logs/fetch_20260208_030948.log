@@ -1,0 +1,75 @@
+[2026-02-08 03:09:48] INFO  Log file: /data/logs/fetch_20260208_030948.log
+[2026-02-08 03:09:48] INFO  ============================================================
+[2026-02-08 03:09:48] INFO    Metros:             1
+[2026-02-08 03:09:48] INFO    Total grid cells:   13
+[2026-02-08 03:09:48] INFO    Already completed:  0
+[2026-02-08 03:09:48] INFO    Remaining cells:    13
+[2026-02-08 03:09:48] INFO    Estimated cost:     $0.46
+[2026-02-08 03:09:48] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:09:48] INFO  ============================================================
+[2026-02-08 03:09:48] INFO  
+[2026-02-08 03:09:48] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:09:48] INFO  
+[2026-02-08 03:09:48] INFO    Orlando, FL: 13 cells (0 cached, 13 remaining)
+[2026-02-08 03:09:48] DEBUG     Cache miss at (28.4032, -81.3792); querying API
+[2026-02-08 03:09:49] INFO      Cell 1/13: +12 new (12 total)
+[2026-02-08 03:09:49] DEBUG     Cache miss at (28.4707, -81.4561); querying API
+[2026-02-08 03:09:50] INFO      Cell 2/13: +20 new (32 total)
+[2026-02-08 03:09:50] DEBUG     Cache miss at (28.4707, -81.3792); querying API
+[2026-02-08 03:09:51] INFO      Cell 3/13: +12 new (44 total)
+[2026-02-08 03:09:51] DEBUG     Cache miss at (28.4707, -81.3023); querying API
+[2026-02-08 03:09:52] INFO      Cell 4/13: +10 new (54 total)
+[2026-02-08 03:09:52] DEBUG     Cache miss at (28.5383, -81.5330); querying API
+[2026-02-08 03:09:52] INFO      Cell 5/13: +6 new (60 total)
+[2026-02-08 03:09:52] DEBUG     Cache miss at (28.5383, -81.4561); querying API
+[2026-02-08 03:09:53] INFO      Filtered: Bashu Hot Pot (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:09:53] INFO      Cell 6/13: +17 new (77 total)
+[2026-02-08 03:09:53] DEBUG     Cache miss at (28.5383, -81.3792); querying API
+[2026-02-08 03:09:54] INFO      Filtered: The Imperial Bamboo (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:09:54] INFO      Cell 7/13: +17 new (94 total)
+[2026-02-08 03:09:54] DEBUG     Cache miss at (28.5383, -81.3023); querying API
+[2026-02-08 03:09:54] INFO      Cell 8/13: +10 new (104 total)
+[2026-02-08 03:09:54] DEBUG     Cache miss at (28.5383, -81.2254); querying API
+[2026-02-08 03:09:55] INFO      Filtered: Lan’s Kitchen (Inside Marathon) (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:09:55] INFO      Cell 9/13: +15 new (119 total)
+[2026-02-08 03:09:55] DEBUG     Cache miss at (28.6059, -81.4561); querying API
+[2026-02-08 03:09:56] INFO      Cell 10/13: +7 new (126 total)
+[2026-02-08 03:09:56] DEBUG     Saved state at cell 10/13
+[2026-02-08 03:09:56] DEBUG     Cache miss at (28.6059, -81.3792); querying API
+[2026-02-08 03:09:57] INFO      Filtered: Yummii 2 Go (status=CLOSED_TEMPORARILY)
+[2026-02-08 03:09:57] INFO      Cell 11/13: +9 new (135 total)
+[2026-02-08 03:09:57] DEBUG     Cache miss at (28.6059, -81.3023); querying API
+[2026-02-08 03:09:57] INFO      Cell 12/13: +10 new (145 total)
+[2026-02-08 03:09:57] DEBUG     Cache miss at (28.6734, -81.3792); querying API
+[2026-02-08 03:09:58] INFO      Cell 13/13: +15 new (160 total)
+[2026-02-08 03:09:58] INFO    Filtered out 4 restaurants
+[2026-02-08 03:09:58] INFO    -> Orlando: 160 restaurants (running total: 160)
+[2026-02-08 03:09:58] INFO  
+[2026-02-08 03:09:58] INFO  
+[2026-02-08 03:09:58] INFO  ============================================================
+[2026-02-08 03:09:58] INFO  FETCH SUMMARY
+[2026-02-08 03:09:58] INFO  ============================================================
+[2026-02-08 03:09:58] INFO  Total restaurants:    160
+[2026-02-08 03:09:58] INFO  API calls made:       13
+[2026-02-08 03:09:58] INFO  Cache hits/misses:    0/13
+[2026-02-08 03:09:58] INFO  Estimated cost:       $0.46
+[2026-02-08 03:09:58] INFO  
+[2026-02-08 03:09:58] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:09:58] INFO    Phone:               156 ( 97.5%)
+[2026-02-08 03:09:58] INFO    Website:             134 ( 83.8%)
+[2026-02-08 03:09:58] INFO    Hours:               158 ( 98.8%)
+[2026-02-08 03:09:58] INFO    Rating:              159 ( 99.4%)
+[2026-02-08 03:09:58] INFO    Takeout flag:        158 ( 98.8%)
+[2026-02-08 03:09:58] INFO  
+[2026-02-08 03:09:58] INFO  AVG RATING:           4.03
+[2026-02-08 03:09:58] INFO  
+[2026-02-08 03:09:58] INFO  PRICE LEVELS:
+[2026-02-08 03:09:58] INFO    PRICE_LEVEL_INEXPENSIVE               91 ( 56.9%)
+[2026-02-08 03:09:58] INFO    PRICE_LEVEL_MODERATE                  49 ( 30.6%)
+[2026-02-08 03:09:58] INFO    UNKNOWN                               20 ( 12.5%)
+[2026-02-08 03:09:58] INFO  
+[2026-02-08 03:09:58] INFO  TOP STATES:
+[2026-02-08 03:09:58] INFO    FL          160 (100.0%)
+[2026-02-08 03:09:58] INFO  ============================================================
+[2026-02-08 03:09:58] INFO  
+[2026-02-08 03:09:58] INFO  CSV written to: /data/chinese_restaurants.csv

@@ -1,0 +1,50 @@
+[2026-02-08 03:20:38] INFO  Log file: /data/logs/fetch_20260208_032038.log
+[2026-02-08 03:20:38] INFO  ============================================================
+[2026-02-08 03:20:38] INFO    Metros:             1
+[2026-02-08 03:20:38] INFO    Total grid cells:   5
+[2026-02-08 03:20:38] INFO    Already completed:  0
+[2026-02-08 03:20:38] INFO    Remaining cells:    5
+[2026-02-08 03:20:38] INFO    Estimated cost:     $0.18
+[2026-02-08 03:20:38] INFO    Cache:              enabled (TTL=30d)
+[2026-02-08 03:20:38] INFO  ============================================================
+[2026-02-08 03:20:38] INFO  
+[2026-02-08 03:20:38] INFO  Fetching Chinese takeout restaurants from 1 metro area(s)...
+[2026-02-08 03:20:38] INFO  
+[2026-02-08 03:20:38] INFO    Boise, ID: 5 cells (0 cached, 5 remaining)
+[2026-02-08 03:20:38] DEBUG     Cache miss at (43.5474, -116.2023); querying API
+[2026-02-08 03:20:39] INFO      Cell 1/5: +2 new (2 total)
+[2026-02-08 03:20:39] DEBUG     Cache miss at (43.6150, -116.2956); querying API
+[2026-02-08 03:20:39] INFO      Cell 2/5: +10 new (12 total)
+[2026-02-08 03:20:39] DEBUG     Cache miss at (43.6150, -116.2023); querying API
+[2026-02-08 03:20:40] INFO      Cell 3/5: +7 new (19 total)
+[2026-02-08 03:20:40] DEBUG     Cache miss at (43.6150, -116.1090); querying API
+[2026-02-08 03:20:41] DEBUG     Cache miss at (43.6826, -116.2023); querying API
+[2026-02-08 03:20:42] INFO    -> Boise: 19 restaurants (running total: 19)
+[2026-02-08 03:20:42] INFO  
+[2026-02-08 03:20:42] INFO  
+[2026-02-08 03:20:42] INFO  ============================================================
+[2026-02-08 03:20:42] INFO  FETCH SUMMARY
+[2026-02-08 03:20:42] INFO  ============================================================
+[2026-02-08 03:20:42] INFO  Total restaurants:    19
+[2026-02-08 03:20:42] INFO  API calls made:       5
+[2026-02-08 03:20:42] INFO  Cache hits/misses:    0/5
+[2026-02-08 03:20:42] INFO  Estimated cost:       $0.18
+[2026-02-08 03:20:42] INFO  
+[2026-02-08 03:20:42] INFO  FIELD COMPLETENESS:
+[2026-02-08 03:20:42] INFO    Phone:                19 (100.0%)
+[2026-02-08 03:20:42] INFO    Website:              17 ( 89.5%)
+[2026-02-08 03:20:42] INFO    Hours:                19 (100.0%)
+[2026-02-08 03:20:42] INFO    Rating:               19 (100.0%)
+[2026-02-08 03:20:42] INFO    Takeout flag:         19 (100.0%)
+[2026-02-08 03:20:42] INFO  
+[2026-02-08 03:20:42] INFO  AVG RATING:           4.11
+[2026-02-08 03:20:42] INFO  
+[2026-02-08 03:20:42] INFO  PRICE LEVELS:
+[2026-02-08 03:20:42] INFO    PRICE_LEVEL_INEXPENSIVE               12 ( 63.2%)
+[2026-02-08 03:20:42] INFO    PRICE_LEVEL_MODERATE                   7 ( 36.8%)
+[2026-02-08 03:20:42] INFO  
+[2026-02-08 03:20:42] INFO  TOP STATES:
+[2026-02-08 03:20:42] INFO    ID           19 (100.0%)
+[2026-02-08 03:20:42] INFO  ============================================================
+[2026-02-08 03:20:42] INFO  
+[2026-02-08 03:20:42] INFO  CSV written to: /data/chinese_restaurants.csv
