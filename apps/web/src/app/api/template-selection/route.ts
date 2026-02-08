@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { TEMPLATE_KEYS, type TemplateKey } from "@/components/restaurant-templates/types";
 
-const INTERNAL_API_URL = process.env.INTERNAL_API_URL || "http://api:8000";
+const INTERNAL_API_URL = process.env.INTERNAL_API_URL || "http://localhost:8001";
 
 type TemplateSelectionPayload = {
   stateSlug?: string;

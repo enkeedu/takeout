@@ -8,78 +8,90 @@ chinese-takeout.com — A US Chinese restaurant directory with location browsing
 
 ## Commands
 
-### Start all services
+### Start local services (no Docker)
 ```bash
-docker compose up --build
+# Terminal 1 (API)
+cd apps/api
+uv sync --no-install-project
+DATABASE_URL=postgresql+asyncpg://takeout:takeout_dev@localhost:5432/takeout \
+  DEBUG=false .venv/bin/uvicorn app.main:app --reload --host 127.0.0.1 --port 8001
+
+# Terminal 2 (Web)
+cd apps/web
+npm install
+NEXT_PUBLIC_API_URL=http://localhost:8001 INTERNAL_API_URL=http://localhost:8001 \
+  npm run dev -- --port 3001
 ```
 
 ### Access points
 - Web: http://localhost:3001
 - API: http://localhost:8001
 - Swagger docs: http://localhost:8001/docs
-- Postgres: localhost:5433 (user: takeout, db: takeout)
+- Postgres: localhost:5432 (user: takeout, db: takeout)
 
 ### Database migrations
 ```bash
-# Migrations auto-run on API startup via entrypoint.sh
-# Manual:
-docker compose exec api alembic upgrade head
+cd apps/api
+DATABASE_URL=postgresql+asyncpg://takeout:takeout_dev@localhost:5432/takeout \
+  .venv/bin/alembic upgrade head
 
 # Create new migration:
-docker compose exec api alembic revision --autogenerate -m "description"
+DATABASE_URL=postgresql+asyncpg://takeout:takeout_dev@localhost:5432/takeout \
+  .venv/bin/alembic revision --autogenerate -m "description"
 ```
 
 ### Import data
 ```bash
-docker compose exec api python -m scripts.import_restaurants /data/sample_restaurants.csv
+cd apps/api
+DATABASE_URL=postgresql+asyncpg://takeout:takeout_dev@localhost:5432/takeout \
+  DEBUG=false .venv/bin/python -m scripts.import_restaurants ../../data/sample_restaurants.csv
 ```
 
 ### Frontend
 ```bash
-# Inside apps/web/:
-npm run dev        # dev server with turbopack
-npm run build      # production build
+cd apps/web
+npm run dev    # dev server with turbopack
+npm run build  # production build
 ```
 
-### Rebuild a single service
+### Full shared dataset import
 ```bash
-docker compose up --build api
-docker compose up --build web
+cd apps/api
+DATABASE_URL=postgresql+asyncpg://takeout:takeout_dev@localhost:5432/takeout \
+  DEBUG=false .venv/bin/python -m scripts.import_restaurants ../../data/chinese_restaurants.csv
 ```
 
 ## Architecture
 
-Monorepo with three services orchestrated via Docker Compose on a shared `takeout-net` bridge network.
+Monorepo with API and web processes running locally against a local PostgreSQL database.
 
 ### apps/api — FastAPI backend (Python 3.12)
 - **Entry:** `app/main.py` → FastAPI app with CORS, routers mounted at `/`
 - **Database:** Async SQLAlchemy + asyncpg → PostgreSQL 16
 - **Routing layers:** `routers/` → `services/` → SQLAlchemy queries
 - **Schemas:** Pydantic v2 models in `schemas/`
-- **Migrations:** Alembic in `alembic/versions/`, auto-run on startup
+- **Migrations:** Alembic in `alembic/versions/`
 
 ### apps/web — Next.js 15 frontend (TypeScript, React 19)
 - **App Router** with dynamic segments: `[state]/[city]/[slug]`
 - **Tailwind CSS 4** via `@tailwindcss/postcss`
-- **SSR API calls** use `INTERNAL_API_URL` (http://api:8000 inside Docker)
-- **Client API calls** use `NEXT_PUBLIC_API_URL` (http://localhost:8001)
+- **SSR API calls** use `INTERNAL_API_URL` (default `http://localhost:8001`)
+- **Client API calls** use `NEXT_PUBLIC_API_URL` (default `http://localhost:8001`)
 - **API helper:** `src/lib/api.ts` — `apiFetch()` auto-selects URL based on context
 
 ### Database (PostgreSQL 16)
 Four tables: `restaurants`, `restaurant_locations`, `restaurant_slugs`, `fetch_metros`
 
-Key relationships:
+Key relationships
 - `restaurants` 1→N `restaurant_locations` 1→1 `restaurant_slugs`
 - Full-text search via PL/pgSQL trigger `update_location_search_vector()` on `restaurant_locations` that joins restaurant name + city + state into a `tsvector` column with GIN index
 
 Deduplication on import: `google_place_id` → `(phone + address1 + zip)` → `(name + address1 + zip)`
 
 ### Port mapping
-| Service  | Host  | Internal |
-|----------|-------|----------|
-| Postgres | 5433  | 5432     |
-| API      | 8001  | 8000     |
-| Web      | 3001  | 3000     |
+- Postgres: `5432`
+- API: `8001`
+- Web: `3001`
 
 ## Key Conventions
 
@@ -89,4 +101,3 @@ Deduplication on import: `google_place_id` → `(phone + address1 + zip)` → `(
 - **Pagination:** 1-indexed `page` + `page_size` (max 100). Response shape: `PaginatedResponse<T>`.
 - **Restaurant templates:** Three showcase templates (market, modern, luxe) selected deterministically by hashing restaurant ID. Preview mode via `?template=...&preview=1`.
 - **Build backend:** Use `setuptools.build_meta` in pyproject.toml (not `_legacy:_Backend`).
-- **Docker entrypoint:** Use `bash entrypoint.sh` (not `./entrypoint.sh`) because volume mount overrides chmod.
