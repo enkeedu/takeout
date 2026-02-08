@@ -1,7 +1,7 @@
-"""Add template key and order item modifiers
+"""Add template key and order item modifiers.
 
-Revision ID: 0004
-Revises: 0003
+Revision ID: 4d7f2a0b8c31
+Revises: 1b3e5a9d2c44
 Create Date: 2026-02-07
 """
 
@@ -11,8 +11,8 @@ import sqlalchemy as sa
 from alembic import op
 from sqlalchemy.dialects import postgresql
 
-revision: str = "0004"
-down_revision: Union[str, None] = "0003"
+revision: str = "4d7f2a0b8c31"
+down_revision: Union[str, None] = "1b3e5a9d2c44"
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 

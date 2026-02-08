@@ -1,7 +1,7 @@
-"""Add menu schema
+"""Add menu schema.
 
-Revision ID: 0002
-Revises: 0001
+Revision ID: 9a2f8b1c7d10
+Revises: 0002
 Create Date: 2026-02-06
 """
 
@@ -11,8 +11,8 @@ import sqlalchemy as sa
 from alembic import op
 from sqlalchemy.dialects import postgresql
 
-revision: str = "0002"
-down_revision: Union[str, None] = "0001"
+revision: str = "9a2f8b1c7d10"
+down_revision: Union[str, None] = "0002"
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
