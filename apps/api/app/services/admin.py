@@ -1,11 +1,33 @@
+import asyncio
+import logging
 import math
+import uuid
+from email.message import EmailMessage
 
 from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.models import Restaurant, RestaurantLocation, RestaurantSlug, WebsiteAudit
-from app.schemas.admin import ChartEntry, LeadItem, LeadStats, LeadsResponse
+from app.config import settings
+from app.models import ClaimRequest, Restaurant, RestaurantLocation, RestaurantSlug, WebsiteAudit
+from app.schemas.admin import (
+    AdminClaimQueueItem,
+    AdminClaimQueueResponse,
+    AdminClaimQueueUpdateIn,
+    AdminDiagnosticsOut,
+    ChartEntry,
+    LeadItem,
+    LeadStats,
+    LeadsResponse,
+)
 from app.schemas.common import PaginationParams
+from app.services.claim import (
+    ClaimServiceError,
+    _RestaurantContext,
+    _send_email_sync,
+    _serialize_claim_request_status,
+    _utc_now,
+    send_owner_launch_notification,
+)
 
 PLATFORM_COSTS: dict[str, int] = {
     "beyondmenu": 50,
@@ -33,6 +55,83 @@ DEFAULT_PLATFORM_COST = 50
 LOW_QUALITY_PLATFORMS = {"beyondmenu", "menupix", "allmenus", "zmenu", "restaurantji"}
 
 SORT_KEYS = {"lead_score", "name", "state", "estimated_monthly_spend", "rating"}
+
+logger = logging.getLogger(__name__)
+
+
+def _smtp_sender() -> str:
+    return (settings.claim_alert_email_from or settings.smtp_username or "").strip()
+
+
+def _smtp_transport_ready() -> bool:
+    return bool((settings.smtp_host or "").strip() and settings.smtp_port)
+
+
+def _smtp_auth_configured() -> bool:
+    return bool((settings.smtp_username or "").strip() and (settings.smtp_password or "").strip())
+
+
+def _smtp_auth_partial() -> bool:
+    username = (settings.smtp_username or "").strip()
+    password = (settings.smtp_password or "").strip()
+    return bool((username and not password) or (password and not username))
+
+
+def _build_admin_claim_queue_item(
+    claim_request: ClaimRequest,
+    restaurant_name: str,
+    restaurant_phone: str | None,
+    address1: str,
+    city: str,
+    state: str,
+    state_slug: str,
+    city_slug: str,
+    restaurant_slug: str,
+) -> AdminClaimQueueItem:
+    restaurant = _RestaurantContext(
+        id=claim_request.restaurant_id,
+        name=restaurant_name,
+        phone=restaurant_phone,
+        address1=address1,
+        city=city,
+        state=state,
+        state_slug=state_slug,
+        city_slug=city_slug,
+        restaurant_slug=restaurant_slug,
+    )
+    status = _serialize_claim_request_status(claim_request, restaurant)
+    return AdminClaimQueueItem(
+        claim_request_id=str(claim_request.id),
+        status=status.status,
+        status_label=status.status_label,
+        status_detail=status.status_detail,
+        payment_unlocked=status.payment_unlocked,
+        setup_deposit_state=status.setup_deposit_state,
+        kickoff_state=status.kickoff_state,
+        review_state=status.review_state,
+        submitted_at=claim_request.submitted_at,
+        kickoff_scheduled_for=claim_request.kickoff_scheduled_for,
+        review_responded_at=claim_request.review_responded_at,
+        review_issue_areas=claim_request.review_issue_areas or [],
+        review_notes=claim_request.review_notes,
+        setup_intake_status=status.setup_intake_status,
+        setup_intake_submitted_at=status.setup_intake_submitted_at,
+        setup_intake_summary=status.setup_intake_summary,
+        template_key=claim_request.template_key,
+        owner_name=claim_request.owner_name,
+        owner_phone=claim_request.owner_phone,
+        owner_email=claim_request.owner_email,
+        preferred_contact_method=claim_request.preferred_contact_method,
+        verification_method=claim_request.verification_method,
+        verification_status=claim_request.verification_status,
+        manual_review_reason=claim_request.manual_review_reason,
+        restaurant_name=restaurant_name,
+        restaurant_city=city,
+        restaurant_state=state,
+        state_slug=state_slug,
+        city_slug=city_slug,
+        restaurant_slug=restaurant_slug,
+    )
 
 
 def _compute_lead_score(
@@ -268,3 +367,326 @@ async def get_leads_for_csv(
     pagination = PaginationParams.model_construct(page=1, page_size=1_000_000)
     resp = await get_leads(db, pagination, state_filter, sort_by, sort_dir)
     return resp.items
+
+
+async def get_claim_queue(db: AsyncSession) -> AdminClaimQueueResponse:
+    stmt = (
+        select(
+            ClaimRequest,
+            Restaurant.name,
+            Restaurant.phone,
+            RestaurantLocation.address1,
+            RestaurantLocation.city,
+            RestaurantLocation.state,
+            RestaurantSlug.state_slug,
+            RestaurantSlug.city_slug,
+            RestaurantSlug.restaurant_slug,
+        )
+        .join(Restaurant, ClaimRequest.restaurant_id == Restaurant.id)
+        .join(RestaurantLocation, Restaurant.id == RestaurantLocation.restaurant_id)
+        .join(RestaurantSlug, RestaurantLocation.id == RestaurantSlug.restaurant_location_id)
+        .where(RestaurantSlug.is_canonical.is_(True))
+        .order_by(ClaimRequest.submitted_at.desc())
+        .limit(100)
+    )
+    result = await db.execute(stmt)
+    items: list[AdminClaimQueueItem] = []
+    for (
+        claim_request,
+        restaurant_name,
+        restaurant_phone,
+        address1,
+        city,
+        state,
+        state_slug,
+        city_slug,
+        restaurant_slug,
+    ) in result.all():
+        items.append(
+            _build_admin_claim_queue_item(
+                claim_request,
+                restaurant_name,
+                restaurant_phone,
+                address1,
+                city,
+                state,
+                state_slug,
+                city_slug,
+                restaurant_slug,
+            )
+        )
+    return AdminClaimQueueResponse(items=items)
+
+
+async def get_admin_diagnostics() -> AdminDiagnosticsOut:
+    payment_provider = settings.claim_payment_provider.strip().lower() or "mock"
+    sms_provider = settings.claim_sms_provider.strip().lower() or "mock"
+    smtp_ready = _smtp_transport_ready()
+    smtp_auth_configured = _smtp_auth_configured()
+    sender_ready = bool(_smtp_sender())
+    web_base_url_configured = bool((settings.web_base_url or "").strip())
+    claim_alert_recipient_ready = bool((settings.claim_alert_email_to or "").strip())
+    stripe_ready = bool(
+        payment_provider == "stripe"
+        and (settings.stripe_secret_key or "").strip()
+        and (settings.stripe_webhook_secret or "").strip()
+    )
+    claim_alert_ready = bool(
+        smtp_ready
+        and sender_ready
+        and claim_alert_recipient_ready
+    )
+    owner_notifications_ready = bool(
+        smtp_ready
+        and sender_ready
+        and web_base_url_configured
+    )
+
+    warnings: list[str] = []
+    if not (settings.admin_token or "").strip():
+        warnings.append(
+            "API admin token is missing. /admin actions stay blocked until ADMIN_TOKEN is set."
+        )
+    if payment_provider == "stripe" and not stripe_ready:
+        warnings.append(
+            "Stripe is selected, but the secret key or webhook secret is still missing."
+        )
+    if payment_provider != "stripe":
+        warnings.append(
+            "Stripe is not the active payment provider yet. Deposit checkout will fall back to mock mode."
+        )
+    if not smtp_ready:
+        warnings.append(
+            "SMTP host or port is missing, so owner launch emails and internal alerts cannot send yet."
+        )
+    elif _smtp_auth_partial():
+        warnings.append(
+            "SMTP username/password is only partially configured. Leave both blank for no-auth SMTP or set both values together."
+        )
+    if smtp_ready and not sender_ready:
+        warnings.append(
+            "SMTP transport is configured, but sender identity is missing. Set CLAIM_ALERT_EMAIL_FROM or SMTP_USERNAME."
+        )
+    if smtp_ready and sender_ready and not web_base_url_configured:
+        warnings.append(
+            "Owner notification emails need WEB_BASE_URL so launch links point to the right site."
+        )
+    if smtp_ready and sender_ready and not claim_alert_recipient_ready:
+        warnings.append(
+            "Internal claim alert emails need CLAIM_ALERT_EMAIL_TO so new claims have an inbox destination."
+        )
+
+    return AdminDiagnosticsOut(
+        api_admin_token_configured=bool((settings.admin_token or "").strip()),
+        payment_provider=payment_provider,
+        stripe_ready=stripe_ready,
+        sms_provider=sms_provider,
+        smtp_ready=smtp_ready,
+        smtp_auth_configured=smtp_auth_configured,
+        smtp_sender_ready=sender_ready,
+        web_base_url_configured=web_base_url_configured,
+        claim_alert_recipient_ready=claim_alert_recipient_ready,
+        claim_alert_ready=claim_alert_ready,
+        owner_notifications_ready=owner_notifications_ready,
+        warnings=warnings,
+    )
+
+
+async def send_admin_test_email(recipient: str | None = None) -> str:
+    if not _smtp_transport_ready():
+        raise ClaimServiceError(
+            400,
+            "SMTP host/port is not configured yet. Set SMTP_HOST and SMTP_PORT first.",
+        )
+
+    sender = _smtp_sender()
+    if not sender:
+        raise ClaimServiceError(
+            400,
+            "Sender identity is missing. Set CLAIM_ALERT_EMAIL_FROM or SMTP_USERNAME first.",
+        )
+
+    target = (recipient or settings.claim_alert_email_to or "").strip()
+    if not target:
+        raise ClaimServiceError(
+            400,
+            "No test-email recipient was provided. Add CLAIM_ALERT_EMAIL_TO or enter a recipient.",
+        )
+    if "@" not in target:
+        raise ClaimServiceError(400, "Test email recipient must be a valid email address.")
+
+    message = EmailMessage()
+    message["Subject"] = "Chinese Takeout SMTP test"
+    message["From"] = sender
+    message["To"] = target
+    message.set_content(
+        "\n".join(
+            [
+                "This is a test email from the Chinese Takeout admin readiness panel.",
+                "",
+                f"Sent at: {_utc_now().isoformat()}",
+                f"SMTP host: {(settings.smtp_host or '').strip() or '(missing)'}",
+                f"SMTP port: {settings.smtp_port or '(missing)'}",
+                f"SMTP auth configured: {'yes' if _smtp_auth_configured() else 'no'}",
+                f"WEB_BASE_URL configured: {'yes' if (settings.web_base_url or '').strip() else 'no'}",
+                "",
+                "If you received this email, SMTP delivery from the current API environment is working.",
+            ]
+        )
+    )
+
+    try:
+        await asyncio.to_thread(_send_email_sync, message)
+    except Exception as exc:
+        raise ClaimServiceError(500, f"SMTP test failed: {exc}") from exc
+
+    return target
+
+
+async def update_claim_queue_item(
+    db: AsyncSession,
+    claim_request_id: str,
+    payload: AdminClaimQueueUpdateIn,
+) -> AdminClaimQueueItem:
+    try:
+        claim_uuid = uuid.UUID(claim_request_id)
+    except ValueError as exc:
+        raise ClaimServiceError(400, "Claim request ID is invalid.") from exc
+
+    result = await db.execute(
+        select(ClaimRequest).where(ClaimRequest.id == claim_uuid)
+    )
+    claim_request = result.scalar_one_or_none()
+    if claim_request is None:
+        raise ClaimServiceError(404, "Claim request not found.")
+
+    now = _utc_now()
+    action = payload.action
+
+    if action == "approve_manual_review":
+        if claim_request.verification_status != "manual_review_requested":
+            raise ClaimServiceError(400, "This claim is not waiting on manual review.")
+        claim_request.verification_status = "verified"
+        claim_request.status = "verified_request_received"
+    elif action == "mark_kickoff_scheduled":
+        if claim_request.setup_deposit_state != "paid":
+            raise ClaimServiceError(400, "Setup deposit must be paid before kickoff is scheduled.")
+        claim_request.kickoff_state = "scheduled"
+        claim_request.kickoff_scheduled_for = payload.kickoff_scheduled_for or now
+        claim_request.status = "kickoff_scheduled"
+    elif action == "mark_kickoff_confirmed":
+        if claim_request.setup_deposit_state != "paid":
+            raise ClaimServiceError(400, "Setup deposit must be paid before kickoff is confirmed.")
+        claim_request.kickoff_state = "confirmed"
+        claim_request.kickoff_scheduled_for = (
+            claim_request.kickoff_scheduled_for or payload.kickoff_scheduled_for or now
+        )
+        claim_request.status = "kickoff_confirmed"
+    elif action == "mark_build_in_progress":
+        if claim_request.setup_deposit_state != "paid":
+            raise ClaimServiceError(400, "Setup deposit must be paid before build can start.")
+        if claim_request.kickoff_state == "pending":
+            claim_request.kickoff_state = "confirmed"
+            claim_request.kickoff_scheduled_for = claim_request.kickoff_scheduled_for or now
+        claim_request.status = "build_in_progress"
+    elif action == "mark_review_ready":
+        claim_request.status = "ready_for_review"
+        claim_request.review_state = "pending"
+        claim_request.review_responded_at = None
+        claim_request.review_issue_areas = None
+        claim_request.review_notes = None
+    elif action == "mark_live":
+        if claim_request.setup_deposit_state != "paid":
+            raise ClaimServiceError(400, "Setup deposit must be paid before launch can go live.")
+        if claim_request.status != "approved_for_launch":
+            raise ClaimServiceError(
+                400, "The owner must approve the review before the site can go live."
+            )
+        claim_request.status = "live"
+        claim_request.monthly_billing_starts_at = claim_request.monthly_billing_starts_at or now
+        if claim_request.kickoff_state == "pending":
+            claim_request.kickoff_state = "confirmed"
+            claim_request.kickoff_scheduled_for = claim_request.kickoff_scheduled_for or now
+    else:
+        raise ClaimServiceError(400, "Unsupported admin action.")
+
+    await db.commit()
+
+    row = await db.execute(
+        select(
+            ClaimRequest,
+            Restaurant.name,
+            Restaurant.phone,
+            RestaurantLocation.address1,
+            RestaurantLocation.city,
+            RestaurantLocation.state,
+            RestaurantSlug.state_slug,
+            RestaurantSlug.city_slug,
+            RestaurantSlug.restaurant_slug,
+        )
+        .join(Restaurant, ClaimRequest.restaurant_id == Restaurant.id)
+        .join(RestaurantLocation, Restaurant.id == RestaurantLocation.restaurant_id)
+        .join(RestaurantSlug, RestaurantLocation.id == RestaurantSlug.restaurant_location_id)
+        .where(
+            ClaimRequest.id == claim_request.id,
+            RestaurantSlug.is_canonical.is_(True),
+        )
+    )
+    (
+        claim_request,
+        restaurant_name,
+        restaurant_phone,
+        address1,
+        city,
+        state,
+        state_slug,
+        city_slug,
+        restaurant_slug,
+    ) = row.one()
+    restaurant = _RestaurantContext(
+        id=claim_request.restaurant_id,
+        name=restaurant_name,
+        phone=restaurant_phone,
+        address1=address1,
+        city=city,
+        state=state,
+        state_slug=state_slug,
+        city_slug=city_slug,
+        restaurant_slug=restaurant_slug,
+    )
+    notification_event: str | None = None
+    if action == "approve_manual_review":
+        notification_event = "ownership_approved"
+    elif action == "mark_kickoff_scheduled":
+        notification_event = "kickoff_scheduled"
+    elif action == "mark_review_ready":
+        notification_event = "review_ready"
+    elif action == "mark_live":
+        notification_event = "site_live"
+
+    if notification_event:
+        try:
+            await send_owner_launch_notification(
+                db,
+                restaurant,
+                claim_request,
+                notification_event,
+            )
+        except Exception as exc:  # pragma: no cover - notification failure should not block
+            logger.warning(
+                "Owner notification failed for claim %s (%s): %s",
+                claim_request.id,
+                notification_event,
+                exc,
+            )
+    return _build_admin_claim_queue_item(
+        claim_request,
+        restaurant_name,
+        restaurant_phone,
+        address1,
+        city,
+        state,
+        state_slug,
+        city_slug,
+        restaurant_slug,
+    )

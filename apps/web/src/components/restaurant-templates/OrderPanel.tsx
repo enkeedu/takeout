@@ -48,6 +48,34 @@ const VARIANT_STYLES: Record<
     muted: string;
   }
 > = {
+  "local-order": {
+    panel: "border-slate-200 bg-white/95 text-slate-900",
+    button:
+      "bg-[var(--template-accent)] text-white hover:bg-[var(--template-accent-strong)] hover:text-black",
+    accent: "text-[var(--template-accent)]",
+    muted: "text-slate-500",
+  },
+  "local-storefront": {
+    panel: "border-slate-200 bg-white/95 text-slate-900",
+    button:
+      "bg-[var(--template-accent)] text-white hover:bg-[var(--template-accent-strong)] hover:text-black",
+    accent: "text-[var(--template-accent)]",
+    muted: "text-slate-500",
+  },
+  "local-express": {
+    panel: "border-slate-200 bg-white/95 text-slate-900",
+    button:
+      "bg-[var(--template-accent)] text-white hover:bg-[var(--template-accent-strong)] hover:text-black",
+    accent: "text-[var(--template-accent)]",
+    muted: "text-slate-500",
+  },
+  "local-feast": {
+    panel: "border-slate-200 bg-white/95 text-slate-900",
+    button:
+      "bg-[var(--template-accent)] text-white hover:bg-[var(--template-accent-strong)] hover:text-black",
+    accent: "text-[var(--template-accent)]",
+    muted: "text-slate-500",
+  },
   ming: {
     panel: "border-slate-200 bg-white/95 text-slate-900",
     button:

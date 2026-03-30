@@ -4,6 +4,10 @@ import { useRouter } from "next/navigation";
 import { TEMPLATE_LABELS, TEMPLATE_KEYS, type TemplateKey } from "./types";
 
 const VARIANT_CLASSES: Record<TemplateKey, string> = {
+  "local-order": "bg-red-50/90 text-red-800 border-red-200",
+  "local-storefront": "bg-amber-50/90 text-amber-900 border-amber-200",
+  "local-express": "bg-orange-50/90 text-orange-900 border-orange-200",
+  "local-feast": "bg-orange-50/90 text-orange-900 border-orange-200",
   ming: "bg-rose-50/90 text-rose-800 border-rose-200",
   "ming-slim": "bg-rose-50/90 text-rose-800 border-rose-200",
   "ming-balanced": "bg-rose-50/90 text-rose-800 border-rose-200",
@@ -29,7 +33,7 @@ export function TemplatePicker({
   const router = useRouter();
 
   function buildUrl(key: TemplateKey): string {
-    return `${basePath}?template=${key}`;
+    return `${basePath}?template=${key}&preview=1`;
   }
 
   function handleChange(event: React.ChangeEvent<HTMLSelectElement>) {
@@ -42,7 +46,7 @@ export function TemplatePicker({
       className={`mb-6 flex flex-wrap items-center gap-2 rounded-2xl border px-4 py-3 text-sm font-medium ${VARIANT_CLASSES[variant]}`}
     >
       <span className="text-xs uppercase tracking-[0.2em]">
-        Template
+        Template Preview
       </span>
       <div className="flex items-center gap-2">
         <label className="text-xs font-semibold">Choose template</label>

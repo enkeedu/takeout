@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
-import { apiFetch } from "@/lib/api";
-import type { LeadsResponse } from "@/lib/types";
+import { ApiError, apiFetch } from "@/lib/api";
+import type {
+  AdminClaimQueueResponse,
+  AdminDiagnostics,
+  LeadsResponse,
+} from "@/lib/types";
+import { AdminReadinessPanel } from "./AdminReadinessPanel";
 import { LeadsDashboard } from "./LeadsDashboard";
+import { LaunchQueuePanel } from "./LaunchQueuePanel";
 
 export const metadata: Metadata = {
   title: "Admin - Leads Dashboard",
@@ -9,15 +15,43 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminPage() {
+  const adminToken =
+    process.env.ADMIN_TOKEN || process.env.NEXT_PUBLIC_ADMIN_TOKEN || "";
+  const publicApiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8001";
+  const internalApiUrl = process.env.INTERNAL_API_URL || "http://localhost:8001";
+
   let data: LeadsResponse;
+  let claimQueue: AdminClaimQueueResponse;
+  let diagnostics: AdminDiagnostics;
   try {
-    data = await apiFetch<LeadsResponse>(
-      "/admin/leads?page=1&page_size=50&sort_by=lead_score&sort_dir=desc"
-    );
-  } catch {
+    const headers = adminToken ? { "X-Admin-Token": adminToken } : undefined;
+    [data, claimQueue, diagnostics] = await Promise.all([
+      apiFetch<LeadsResponse>(
+        "/admin/leads?page=1&page_size=50&sort_by=lead_score&sort_dir=desc",
+        headers ? { headers } : undefined
+      ),
+      apiFetch<AdminClaimQueueResponse>(
+        "/admin/claim-requests",
+        headers ? { headers } : undefined
+      ),
+      apiFetch<AdminDiagnostics>(
+        "/admin/diagnostics",
+        headers ? { headers } : undefined
+      ),
+    ]);
+  } catch (error) {
+    let message = "Failed to load leads data.";
+    if (error instanceof ApiError) {
+      if (error.status === 503) {
+        message = "Admin token missing. Set ADMIN_TOKEN in web/api env, then restart both apps.";
+      } else {
+        message = `Failed to load leads data (${error.status}): ${error.detail}`;
+      }
+    }
+
     return (
       <div className="py-12 text-center text-gray-500">
-        Failed to load leads data. Is the API running?
+        {message}
       </div>
     );
   }
@@ -29,7 +63,14 @@ export default async function AdminPage() {
         Restaurants that may be interested in web hosting / online ordering
         services.
       </p>
+      <AdminReadinessPanel
+        diagnostics={diagnostics}
+        webAdminTokenConfigured={Boolean(adminToken)}
+        publicApiUrl={publicApiUrl}
+        internalApiUrl={internalApiUrl}
+      />
       <LeadsDashboard initialData={data} />
+      <LaunchQueuePanel initialData={claimQueue} />
     </div>
   );
 }

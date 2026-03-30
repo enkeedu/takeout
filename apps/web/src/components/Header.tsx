@@ -10,7 +10,7 @@ export function Header() {
             Chinese Takeout
           </p>
           <p className="text-[11px] uppercase tracking-[0.18em] text-[#8b7965]">
-            Owner Growth Platform
+            Find Your Listing. Launch Direct Orders.
           </p>
         </Link>
         <div className="hidden w-full max-w-md sm:block md:max-w-lg">

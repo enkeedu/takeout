@@ -12,7 +12,9 @@ router = APIRouter(prefix="/admin/menus", tags=["admin"])
 
 
 def require_admin(x_admin_token: str | None = Header(default=None)) -> None:
-    if settings.admin_token and x_admin_token != settings.admin_token:
+    if not settings.admin_token:
+        raise HTTPException(status_code=503, detail="Admin token is not configured")
+    if x_admin_token != settings.admin_token:
         raise HTTPException(status_code=403, detail="Invalid admin token")
 
 

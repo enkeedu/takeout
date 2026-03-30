@@ -13,9 +13,22 @@ node_modules/
 
 # Environment
 .env
+*.local
+!.env.local.example
+!*.local.example
 
 # Docker
 postgres_data/
+
+# Local runtime / logs
+.run/
+apps/api/.run/
+apps/web/.run/
+.codex-logs/
+*.log
+*.err.log
+*.out.log
+*.next-dev/
 
 # IDE
 .vscode/

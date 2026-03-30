@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { buildClaimHref, buildListingHref } from "@/lib/claim";
+import { DiscoveryRating } from "@/components/DiscoveryRating";
 
 interface RestaurantCardProps {
   name: string;
@@ -6,9 +8,11 @@ interface RestaurantCardProps {
   city: string;
   state: string;
   phone: string | null;
+  website_url?: string | null;
   has_online_ordering?: boolean;
-  has_ai_phone?: boolean;
   is_claimed?: boolean;
+  rating?: number | null;
+  user_rating_count?: number | null;
   state_slug: string;
   city_slug: string;
   restaurant_slug: string;
@@ -20,80 +24,89 @@ export function RestaurantCard({
   city,
   state,
   phone,
+  website_url = null,
   has_online_ordering = false,
-  has_ai_phone = false,
   is_claimed = false,
+  rating = null,
+  user_rating_count = null,
   state_slug,
   city_slug,
   restaurant_slug,
 }: RestaurantCardProps) {
-  const actionLabel = is_claimed ? "Open restaurant page" : "Claim listing";
-  const badges: Array<{ label: string; className: string }> = [];
+  const hasWebsite = Boolean(website_url && website_url.trim().length > 0);
 
-  if (is_claimed) {
-    badges.push({
-      label: "Claimed",
-      className: "bg-[#fff2df] text-[#8a5300]",
-    });
-  } else {
-    badges.push({
-      label: "Unclaimed",
-      className: "bg-[#f5f5f5] text-[#666]",
-    });
-  }
+  const claimHref = buildClaimHref({
+    stateSlug: state_slug,
+    citySlug: city_slug,
+    restaurantSlug: restaurant_slug,
+    templateKey: "local-order",
+  });
+  const listingHref = buildListingHref({
+    stateSlug: state_slug,
+    citySlug: city_slug,
+    restaurantSlug: restaurant_slug,
+  });
 
-  if (has_online_ordering) {
-    badges.push({
-      label: "Online Ordering",
-      className: "bg-[#fff3f1] text-[#c0392b]",
-    });
-  }
-
-  if (has_ai_phone) {
-    badges.push({
-      label: "AI Phone",
-      className: "bg-[#f2f6ff] text-[#2a5fb8]",
-    });
-  }
+  const primaryLabel = is_claimed ? "View Listing" : "Preview Website";
+  const primaryHref = is_claimed ? listingHref : claimHref;
 
   return (
-    <Link
-      href={`/${state_slug}/${city_slug}/${restaurant_slug}`}
-      className="group block rounded-2xl border border-[#e8ddd2] bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-[#d33f2f] hover:shadow-md"
-    >
+    <article className="flex h-full flex-col rounded-[26px] border border-[#e8ddd2] bg-gradient-to-br from-white via-white to-[#fff8f3] p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-[#d33f2f] hover:shadow-md">
       <div className="flex flex-wrap items-center gap-2">
-        {badges.map((badge) => (
-          <span
-            key={`${restaurant_slug}-${badge.label}`}
-            className={`rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] ${badge.className}`}
-          >
-            {badge.label}
+        <span
+          className={`rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide ${
+            is_claimed ? "bg-[#f5f5f5] text-[#666]" : "bg-[#fff3df] text-[#8a5300]"
+          }`}
+        >
+          {is_claimed ? "Claimed" : "Unclaimed"}
+        </span>
+        <span
+          className={`rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide ${
+            hasWebsite ? "bg-[#eff8ff] text-[#20548c]" : "bg-[#fff1f0] text-[#b93d2f]"
+          }`}
+        >
+          {hasWebsite ? "Website Found" : "No Website"}
+        </span>
+        {!has_online_ordering ? (
+          <span className="rounded-full bg-[#fff7da] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-[#7a5a00]">
+            Direct-Order Opportunity
           </span>
-        ))}
+        ) : null}
       </div>
 
-      <h3 className="[font-family:var(--font-display)] mt-3 text-xl font-bold leading-tight text-[#1f1f1f] md:text-2xl">
+      <h3 className="font-[var(--font-display)] mt-3 text-2xl font-semibold leading-tight text-[#1f1f1f]">
         {name}
       </h3>
-      <p className="mt-2 text-sm text-[#555]">{address1}</p>
+      <DiscoveryRating rating={rating} reviewCount={user_rating_count} />
+      <p className="mt-1 text-sm text-[#555]">{address1}</p>
       <p className="text-sm text-[#555]">
         {city}, {state}
       </p>
-      {phone ? (
-        <p className="mt-3 text-sm font-semibold text-[#c0392b]">{phone}</p>
-      ) : (
-        <p className="mt-3 text-sm text-[#888]">Phone not listed</p>
-      )}
+      {phone ? <p className="mt-1 text-sm text-[#6f6357]">{phone}</p> : null}
 
-      <p className="mt-4 text-xs uppercase tracking-[0.14em] text-[#8c7f73]">
-        Owner next step
-      </p>
-      <div className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-[#c0392b]">
-        {actionLabel}
-        <span className="transition-transform group-hover:translate-x-0.5">
-          {"->"}
-        </span>
+      <div className="mt-auto pt-4">
+        {!is_claimed ? (
+          <p className="mb-2 text-xs text-[#7a6d62]">
+            See your recommended design, then verify ownership to launch.
+          </p>
+        ) : null}
+        <Link
+          href={primaryHref}
+          data-analytics-event="discovery_result_click"
+          data-analytics-payload={JSON.stringify({
+            source: "search_results",
+            result_type: "restaurant_listing",
+            destination: is_claimed ? "listing" : "claim",
+            state_slug,
+            city_slug,
+            restaurant_slug,
+            template_key: is_claimed ? null : "local-order",
+          })}
+          className="inline-flex w-full items-center justify-center rounded-xl bg-[#c73f2f] px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-[#ad3324] active:scale-[0.99]"
+        >
+          {primaryLabel}
+        </Link>
       </div>
-    </Link>
+    </article>
   );
 }

@@ -16,14 +16,26 @@ export interface CityInfo {
   city_slug: string;
   state: string;
   restaurant_count: number;
+  online_ordering_count: number;
+  no_online_ordering_count: number;
+  claimed_count: number;
+  unclaimed_count: number;
+  ai_phone_count: number;
+  website_count: number;
+  opportunity_score: number;
 }
 
 export interface RestaurantListItem {
   name: string;
   phone: string | null;
+  website_url: string | null;
   has_online_ordering: boolean;
   has_ai_phone: boolean;
   is_claimed: boolean;
+  lead_score: number;
+  rating?: number | null;
+  user_rating_count?: number | null;
+  price_level?: string | null;
   address1: string;
   city: string;
   state: string;
@@ -64,6 +76,22 @@ export interface RestaurantDetail {
   restaurant_slug: string;
   is_canonical: boolean;
   template_key: string | null;
+}
+
+export interface RestaurantReviewItem {
+  id: string;
+  name: string;
+  rating: number;
+  quote: string;
+  source: string;
+  source_url: string | null;
+  relative_time: string | null;
+  published_at: string | null;
+}
+
+export interface RestaurantReviewsResponse {
+  items: RestaurantReviewItem[];
+  refreshed_at: string | null;
 }
 
 export interface ModifierOptionOut {
@@ -229,9 +257,90 @@ export interface LeadsResponse {
   total_pages: number;
 }
 
+export interface AdminClaimQueueItem {
+  claim_request_id: string;
+  status: string;
+  status_label: string;
+  status_detail: string;
+  payment_unlocked: boolean;
+  setup_deposit_state: string;
+  kickoff_state: string;
+  review_state: string;
+  submitted_at: string;
+  kickoff_scheduled_for: string | null;
+  review_responded_at: string | null;
+  review_issue_areas: string[];
+  review_notes: string | null;
+  setup_intake_status: string;
+  setup_intake_submitted_at: string | null;
+  setup_intake_summary: AdminSetupIntakeSummary | null;
+  template_key: string;
+  owner_name: string;
+  owner_phone: string;
+  owner_email: string;
+  preferred_contact_method: string;
+  verification_method: string;
+  verification_status: string;
+  manual_review_reason: string | null;
+  restaurant_name: string;
+  restaurant_city: string;
+  restaurant_state: string;
+  state_slug: string;
+  city_slug: string;
+  restaurant_slug: string;
+}
+
+export interface AdminClaimQueueResponse {
+  items: AdminClaimQueueItem[];
+}
+
+export interface AdminSetupIntakeSummary {
+  preferredContactMethod?: string;
+  preferred_contact_method?: string;
+  hoursFulfillmentNotes?: string | null;
+  hours_fulfillment_notes?: string | null;
+  googleBusinessProfileStatus?: string;
+  google_business_profile_status?: string;
+  yelpStatus?: string;
+  yelp_status?: string;
+  domainStatus?: string;
+  domain_status?: string;
+  logoPhotosStatus?: string;
+  logo_photos_status?: string;
+  posPaymentStatus?: string;
+  pos_payment_status?: string;
+  setupNotes?: string | null;
+  setup_notes?: string | null;
+}
+
+export interface AdminDiagnostics {
+  api_admin_token_configured: boolean;
+  payment_provider: string;
+  stripe_ready: boolean;
+  sms_provider: string;
+  smtp_ready: boolean;
+  smtp_auth_configured: boolean;
+  smtp_sender_ready: boolean;
+  web_base_url_configured: boolean;
+  claim_alert_recipient_ready: boolean;
+  claim_alert_ready: boolean;
+  owner_notifications_ready: boolean;
+  warnings: string[];
+}
+
+export interface AdminTestEmailResponse {
+  recipient: string;
+  detail: string;
+}
+
 export interface SearchResultItem {
   name: string;
   phone: string | null;
+  website_url?: string | null;
+  has_online_ordering?: boolean;
+  is_claimed?: boolean;
+  rating?: number | null;
+  user_rating_count?: number | null;
   address1: string;
   city: string;
   state: string;

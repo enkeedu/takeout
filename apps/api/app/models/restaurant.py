@@ -37,3 +37,16 @@ class Restaurant(Base):
     locations: Mapped[list["RestaurantLocation"]] = relationship(
         back_populates="restaurant"
     )
+    reviews: Mapped[list["RestaurantReview"]] = relationship(
+        back_populates="restaurant",
+        cascade="all, delete-orphan",
+        order_by="RestaurantReview.sort_order",
+    )
+    claim_requests: Mapped[list["ClaimRequest"]] = relationship(
+        back_populates="restaurant",
+        cascade="all, delete-orphan",
+    )
+    claim_verification_sessions: Mapped[list["ClaimVerificationSession"]] = relationship(
+        back_populates="restaurant",
+        cascade="all, delete-orphan",
+    )

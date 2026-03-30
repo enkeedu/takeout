@@ -2,46 +2,51 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { apiFetch } from "@/lib/api";
 import { getStateName } from "@/lib/states";
+import { CORE_OWNER_PROMISE, OWNER_LAUNCH_STEPS } from "@/lib/ownerJourney";
 import { SearchBar } from "@/components/SearchBar";
-import type { StateInfo, CityInfo, PaginatedResponse } from "@/lib/types";
+import { OwnerSetupExpectations } from "@/components/OwnerSetupExpectations";
+import { DiscoveryProofStrip } from "@/components/discovery/DiscoveryProofStrip";
+import {
+  BUYER_TEMPLATE_KEYS,
+  TEMPLATE_LABELS,
+  TEMPLATE_PROFILES,
+  type BuyerTemplateKey,
+} from "@/components/restaurant-templates/types";
+import type { StateInfo } from "@/lib/types";
 
 export default async function HomePage() {
   const states = await apiFetch<StateInfo[]>("/browse/states");
   const sortedStates = [...states].sort(
     (a, b) => b.restaurant_count - a.restaurant_count
   );
-  const featuredStates = sortedStates.slice(0, 8);
+  const featuredStates = sortedStates.slice(0, 6);
   const totalRestaurants = states.reduce(
     (sum, item) => sum + item.restaurant_count,
     0
   );
 
-  const topCitiesByState = new Map<string, CityInfo[]>();
-  await Promise.all(
-    featuredStates.map(async (state) => {
-      try {
-        const cityData = await apiFetch<PaginatedResponse<CityInfo>>(
-          `/browse/${state.state}/cities?page=1&page_size=100`
-        );
-        topCitiesByState.set(
-          state.state,
-          [...cityData.items]
-            .sort((a, b) => b.restaurant_count - a.restaurant_count)
-            .slice(0, 3)
-        );
-      } catch {
-        topCitiesByState.set(state.state, []);
-      }
-    })
-  );
+  const numberFormatter = new Intl.NumberFormat("en-US");
+  const formatNumber = (value: number) => numberFormatter.format(value);
 
-  const citiesCovered = featuredStates.reduce((sum, state) => {
-    const topCities = topCitiesByState.get(state.state) || [];
-    return sum + topCities.length;
-  }, 0);
+  const templateAccentMap: Record<BuyerTemplateKey, string> = {
+    "local-order": "from-[#b73a2f] via-[#d45038] to-[#f08a56]",
+    "local-storefront": "from-[#6d321f] via-[#9a4f2f] to-[#c97444]",
+    "local-express": "from-[#8f3418] via-[#c65b29] to-[#f08a45]",
+  };
+  const templateShowcase = BUYER_TEMPLATE_KEYS.map((key) => ({
+    key,
+    label: TEMPLATE_LABELS[key],
+    tag: TEMPLATE_PROFILES[key].badge,
+    title: TEMPLATE_PROFILES[key].headline,
+    detail: TEMPLATE_PROFILES[key].detail,
+    fitTags: TEMPLATE_PROFILES[key].fitTags,
+    href: `/ca/los-angeles/a-w-seafood-restaurant?preview=1&template=${key}`,
+    cta: `Preview ${TEMPLATE_LABELS[key]}`,
+    accent: templateAccentMap[key],
+  }));
 
   return (
-    <div className="space-y-8 pb-10">
+    <div className="space-y-8 pb-8">
       <section className="full-bleed relative overflow-hidden border-y border-[#2c1f18]/50 bg-[#130d0a] text-white">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-70"
@@ -52,282 +57,293 @@ export default async function HomePage() {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#120b09]/90 via-[#140d0a]/70 to-[#120b09]/85" />
 
-        <div className="relative mx-auto w-full max-w-[1720px] px-4 py-12 md:px-6 lg:px-8 lg:py-16">
-          <div className="grid gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
+        <div className="relative mx-auto w-full max-w-[1720px] px-4 py-10 md:px-6 lg:px-8 lg:py-14">
+          <div className="grid gap-8 lg:grid-cols-[1.18fr_0.82fr] lg:items-end">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.34em] text-[#ffb998]">
                 Built for Chinese Restaurant Owners
               </p>
-              <h1 className="[font-family:var(--font-display)] mt-3 max-w-4xl text-4xl font-black leading-tight tracking-tight md:text-5xl lg:text-6xl">
-                Go from listing to live ordering website fast, without changing
-                how your restaurant already works.
+              <h1 className="font-[var(--font-display)] mt-3 max-w-4xl text-4xl font-black leading-tight tracking-tight md:text-5xl lg:text-6xl">
+                {CORE_OWNER_PROMISE}
               </h1>
               <p className="mt-4 max-w-3xl text-base text-[#f5ddd2] md:text-lg">
-                Keep your menu, keep your flow, and launch web + AI phone
-                ordering in one place. Built for busy Chinese takeout owners.
+                Keep your menu, POS, and team workflow. We handle setup, migration,
+                and owner onboarding with English and Chinese support.
               </p>
 
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <Link
                   href="/search"
-                  className="rounded-xl bg-[#d64534] px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#b43728]"
+                  data-analytics-event="discovery_search_cta_click"
+                  data-analytics-payload={JSON.stringify({
+                    source: "home_hero_primary",
+                  })}
+                  className="rounded-xl bg-[#d64534] px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-[#d64534]/25 transition-all hover:bg-[#b43728] active:scale-[0.99]"
                 >
-                  Start My Demo Site
+                  Find My Restaurant
                 </Link>
                 <a
-                  href="#states"
+                  href="tel:+18183420990"
+                  data-analytics-event="discovery_help_click"
+                  data-analytics-payload={JSON.stringify({
+                    source: "home_hero_secondary",
+                    channel: "phone",
+                  })}
                   className="rounded-xl border border-[#f8c7ae]/55 bg-white/10 px-5 py-3 text-sm font-semibold text-[#ffe1d3] transition-colors hover:bg-white/20"
                 >
-                  Browse Listings
+                  Book 15-min Setup Call
                 </a>
               </div>
 
-              <div className="mt-4 flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#ffd7c3]">
-                <span className="rounded-full border border-[#ffffff2a] bg-black/25 px-3 py-1">
-                  No full rebuild
-                </span>
-                <span className="rounded-full border border-[#ffffff2a] bg-black/25 px-3 py-1">
-                  Keep your existing POS
-                </span>
-                <span className="rounded-full border border-[#ffffff2a] bg-black/25 px-3 py-1">
-                  Web + AI phone ordering
-                </span>
-              </div>
-
-              <div className="mt-8 grid gap-3 sm:grid-cols-3">
-                <div className="rounded-xl border border-[#ffffff22] bg-black/25 px-4 py-3">
-                  <p className="text-xs uppercase tracking-[0.2em] text-[#d9bdb0]">States</p>
-                  <p className="mt-1 text-2xl font-bold">{states.length}</p>
-                </div>
-                <div className="rounded-xl border border-[#ffffff22] bg-black/25 px-4 py-3">
-                  <p className="text-xs uppercase tracking-[0.2em] text-[#d9bdb0]">
-                    Restaurants
-                  </p>
-                  <p className="mt-1 text-2xl font-bold">{totalRestaurants}</p>
-                </div>
-                <div className="rounded-xl border border-[#ffffff22] bg-black/25 px-4 py-3">
-                  <p className="text-xs uppercase tracking-[0.2em] text-[#d9bdb0]">Coverage</p>
-                  <p className="mt-1 text-2xl font-bold">{citiesCovered} cities</p>
-                </div>
-              </div>
-
-              <div className="mt-7 w-full max-w-2xl rounded-2xl border border-[#ffffff2e] bg-black/25 p-3">
+              <div className="mt-6 w-full max-w-2xl rounded-2xl border border-[#ffffff2e] bg-black/25 p-3">
                 <Suspense>
                   <SearchBar />
                 </Suspense>
+                <p className="mt-2 text-xs uppercase tracking-[0.14em] text-[#ffddca]">
+                  Search by restaurant, city, ZIP, street address, or phone
+                </p>
               </div>
             </div>
 
-            <div
-              id="owner-start"
-              className="rounded-2xl border border-[#ffffff2a] bg-black/35 p-6 backdrop-blur-sm"
-            >
+            <aside className="rounded-2xl border border-[#ffffff2a] bg-black/35 p-6 backdrop-blur-sm">
               <p className="text-xs font-semibold uppercase tracking-[0.26em] text-[#ffb998]">
-                Owner Launch Plan
+                Why Owners Start Here
               </p>
-              <h2 className="[font-family:var(--font-display)] mt-2 text-3xl font-bold leading-tight tracking-tight">
-                Launch in 3 simple steps
+              <h2 className="font-[var(--font-display)] mt-2 text-3xl font-bold leading-tight tracking-tight">
+                One search, then a clean launch path
               </h2>
-              <ol className="mt-4 space-y-3 text-sm text-[#f1d7ca]">
-                <li>
-                  <span className="font-semibold text-white">1.</span> Find your
-                  restaurant and confirm your listing details.
-                </li>
-                <li>
-                  <span className="font-semibold text-white">2.</span> Pick a
-                  Chinese-focused website style for your shop.
-                </li>
-                <li>
-                  <span className="font-semibold text-white">3.</span> Enable web
-                  ordering, AI phone flow, and launch with POS migration help.
-                </li>
-              </ol>
               <div className="mt-5 grid gap-2 sm:grid-cols-2">
                 <div className="rounded-lg border border-[#ffffff26] bg-white/10 p-3">
                   <p className="text-xs uppercase tracking-wide text-[#d9bdb0]">
-                    Main win
+                    Directory Coverage
                   </p>
-                  <p className="mt-1 font-semibold text-white">More direct orders</p>
+                  <p className="mt-1 font-semibold text-white">
+                    {formatNumber(totalRestaurants)} listings
+                  </p>
                 </div>
                 <div className="rounded-lg border border-[#ffffff26] bg-white/10 p-3">
                   <p className="text-xs uppercase tracking-wide text-[#d9bdb0]">
-                    Main risk reduced
+                    Transparent Pricing
                   </p>
-                  <p className="mt-1 font-semibold text-white">No tech headache</p>
+                  <p className="mt-1 font-semibold text-white">$299 setup + $99/mo</p>
+                </div>
+                <div className="rounded-lg border border-[#ffffff26] bg-white/10 p-3">
+                  <p className="text-xs uppercase tracking-wide text-[#d9bdb0]">
+                    Launch Timeline
+                  </p>
+                  <p className="mt-1 font-semibold text-white">5-7 days</p>
+                </div>
+                <div className="rounded-lg border border-[#ffffff26] bg-white/10 p-3">
+                  <p className="text-xs uppercase tracking-wide text-[#d9bdb0]">
+                    Human Support
+                  </p>
+                  <p className="mt-1 font-semibold text-white">English | Chinese</p>
                 </div>
               </div>
-            </div>
+            </aside>
           </div>
         </div>
       </section>
 
-      <section className="rounded-3xl border border-[#e2d4c5] bg-white p-6 shadow-sm md:p-8">
-        <div className="mb-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b73a2f]">
-            Owner ROI Snapshot
+      <DiscoveryProofStrip
+        eyebrow="Verified Owner Proof"
+        items={[
+          { label: "Directory Coverage", value: `${formatNumber(totalRestaurants)} listings` },
+          { label: "Launch Markets", value: `${states.length} states` },
+          { label: "Pricing", value: "$299 setup + $99/month" },
+          { label: "Support", value: "English | Chinese | Human help" },
+        ]}
+      />
+
+      <section className="rounded-3xl border border-[#ead8c6] bg-gradient-to-br from-[#fff8f1] via-[#fffdfb] to-[#faeee4] p-6 shadow-sm md:p-7">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b73a2f]">
+              Find - Claim - Launch
+            </p>
+            <h2 className="font-[var(--font-display)] mt-1 text-3xl font-bold tracking-tight text-[#1f1f1f] md:text-[2.15rem]">
+              A clearer path from directory to launch
+            </h2>
+          </div>
+          <p className="max-w-2xl text-sm text-[#685b4f]">
+            The directory should help owners find the right listing quickly, trust the
+            product fast, and move into claim with almost no friction.
           </p>
-          <h2 className="[font-family:var(--font-display)] mt-1 text-3xl font-bold tracking-tight text-[#1f1f1f] md:text-4xl">
-            What changes when you launch direct ordering
-          </h2>
         </div>
-        <div className="grid gap-4 md:grid-cols-3">
+
+        <div className="mt-5 grid gap-4 md:grid-cols-3">
           {[
             {
-              title: "Keep more profit per order",
-              desc: "Drive web orders to your own flow instead of relying only on app marketplaces.",
+              title: OWNER_LAUNCH_STEPS[0],
+              detail: "Search by name, ZIP, address, or phone so you land on the exact location.",
             },
             {
-              title: "Launch faster with less stress",
-              desc: "Start from existing listing data, then pick a template and go live.",
+              title: OWNER_LAUNCH_STEPS[1],
+              detail: "Use the existing listing data instead of rebuilding everything from scratch.",
             },
             {
-              title: "Add AI phone without replacing POS",
-              desc: "Use the tools around your current setup instead of rebuilding operations.",
+              title: OWNER_LAUNCH_STEPS[2],
+              detail: "We handle setup so owners can go live in days, not months.",
             },
-          ].map((item) => (
-            <div
-              key={item.title}
-              className="rounded-2xl border border-[#eadfd4] bg-[#fffaf5] p-5"
+          ].map((step, index) => (
+            <article
+              key={step.title}
+              className="rounded-2xl border border-[#e7d8cb] bg-white p-5 shadow-sm"
             >
-              <p className="text-lg font-semibold text-[#222]">{item.title}</p>
-              <p className="mt-2 text-sm text-[#666]">{item.desc}</p>
-            </div>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#b73a2f]">
+                Step {index + 1}
+              </p>
+              <h3 className="mt-2 text-xl font-semibold text-[#1f1f1f]">{step.title}</h3>
+              <p className="mt-2 text-sm text-[#60554b]">{step.detail}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-5 flex flex-wrap items-center gap-2">
+          <Link
+            href="/search"
+            data-analytics-event="discovery_search_cta_click"
+            data-analytics-payload={JSON.stringify({
+              source: "home_steps_cta",
+            })}
+            className="inline-flex rounded-xl bg-[#c73f2f] px-5 py-3 text-sm font-semibold text-white transition-all hover:bg-[#ad3324] active:scale-[0.99]"
+          >
+            Find My Restaurant
+          </Link>
+          <a
+            href="https://wa.me/18183420990"
+            target="_blank"
+            rel="noreferrer"
+            data-analytics-event="discovery_help_click"
+            data-analytics-payload={JSON.stringify({
+              source: "home_steps_help",
+              channel: "whatsapp",
+            })}
+            className="inline-flex rounded-xl border border-[#e0c9b7] bg-white px-4 py-3 text-sm font-semibold text-[#6e5a4c] transition-colors hover:bg-[#fff8f2]"
+          >
+            Talk to a Human
+          </a>
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-[#ead8c6] bg-gradient-to-br from-[#fff8f1] via-[#fffdfb] to-[#faeee4] p-5 shadow-sm md:p-7">
+        <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b73a2f]">
+              Template Showroom
+            </p>
+            <h2 className="font-[var(--font-display)] mt-1 text-3xl font-bold tracking-tight text-[#1f1f1f] md:text-[2.15rem]">
+              Preview what owners get after discovery
+            </h2>
+          </div>
+          <p className="max-w-2xl text-sm text-[#685b4f]">
+            Discovery comes first. These previews stay below the listing-search path and focus on
+            three clear owner-facing choices: safest default, brand-forward storefront, or a faster
+            phone-first ordering feel.
+          </p>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-3">
+          {templateShowcase.map((template) => (
+            <article
+              key={template.key}
+              className="group relative overflow-hidden rounded-2xl border border-[#e7d8cb] bg-white p-4 shadow-sm"
+            >
+              <div
+                className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${template.accent}`}
+              />
+              <div className="flex items-center justify-between gap-2">
+                <p className="text-sm font-semibold text-[#2f251e]">{template.label}</p>
+                <span
+                  className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.11em] ${
+                    template.key === "local-order"
+                      ? "bg-[#ffe8e1] text-[#ab3328]"
+                      : template.key === "local-express"
+                        ? "bg-[#fff1e8] text-[#a64d21]"
+                        : "bg-[#f6efe7] text-[#7a5f4a]"
+                  }`}
+                >
+                  {template.tag}
+                </span>
+              </div>
+              <h3 className="mt-2 text-lg font-semibold leading-tight text-[#1f1f1f]">
+                {template.title}
+              </h3>
+              <p className="mt-2 text-sm text-[#60554b]">{template.detail}</p>
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                {template.fitTags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full border border-[#eadccf] bg-[#fff8f2] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-[#7a5f4a]"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <Link
+                href={template.href}
+                data-analytics-event="home_template_showroom_click"
+                data-analytics-payload={JSON.stringify({
+                  template: template.key,
+                  source: "home_showroom",
+                })}
+                className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#be3f2f]"
+              >
+                {template.cta}
+                <span className="transition-transform group-hover:translate-x-0.5">{"->"}</span>
+              </Link>
+            </article>
           ))}
         </div>
       </section>
 
-      <section className="rounded-3xl border border-[#dbc8b6] bg-gradient-to-r from-[#fff8f1] via-[#f8eddf] to-[#fff2e6] p-6 shadow-sm md:p-8">
-        <div className="grid gap-6 md:grid-cols-[1.15fr_0.85fr] md:items-center">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#9b4b1c]">
-              POS Migration Friendly
-            </p>
-            <h2 className="[font-family:var(--font-display)] mt-2 text-3xl font-bold tracking-tight text-[#1f1f1f] md:text-4xl">
-              Keep your current POS. We handle the setup layer around it.
-            </h2>
-            <p className="mt-3 text-sm text-[#5f5b56] md:text-base">
-              This is made for owners who are busy and not technical. You keep
-              current operations while adding better web ordering and AI phone flow.
-            </p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {[
-                "Menu import support",
-                "No retyping everything",
-                "Owner-first onboarding",
-                "AI call-in ordering",
-              ].map((item) => (
-                <span
-                  key={item}
-                  className="rounded-full border border-[#d9c4b1] bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-[#705947]"
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="rounded-2xl border border-[#e2d3c3] bg-white p-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b73a2f]">
-              Owner Checklist
-            </p>
-            <ul className="mt-3 space-y-2 text-sm text-[#4f4b46]">
-              <li>Claim listing and verify phone/address</li>
-              <li>Pick template and domain name</li>
-              <li>Enable direct ordering + AI phone workflow</li>
-              <li>Go live and track direct-order growth</li>
-            </ul>
+      <OwnerSetupExpectations />
+
+      <section className="rounded-3xl border border-[#f0d3c7] bg-gradient-to-r from-[#fff4ea] to-[#ffece7] p-6 md:p-8">
+        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b73a2f]">
+          Owner Call To Action
+        </p>
+        <h2 className="font-[var(--font-display)] mt-2 text-3xl font-bold tracking-tight text-[#1f1f1f]">
+          Ready to find your listing and launch?
+        </h2>
+        <p className="mt-2 text-sm text-[#666]">
+          Transparent pricing, migration help, and real human support.
+        </p>
+
+        <div className="mt-4 flex flex-wrap gap-2">
+          {featuredStates.map((item) => (
             <Link
-              href="/search"
-              className="mt-4 inline-flex rounded-xl bg-[#c73f2f] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#ad3324]"
+              key={item.state}
+              href={`/${item.state.toLowerCase()}`}
+              className="rounded-full border border-[#e5cdbc] bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.1em] text-[#6b5747] transition-colors hover:bg-[#fff8f1]"
             >
-              Start My Demo Site
+              {getStateName(item.state)} ({formatNumber(item.restaurant_count)})
             </Link>
-          </div>
-        </div>
-      </section>
-
-      <section id="states">
-        <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#b73a2f]">
-              Browse by State
-            </p>
-            <h2 className="[font-family:var(--font-display)] mt-1 text-4xl font-bold tracking-tight text-[#1f1f1f]">
-              Pick a state and start from real listings
-            </h2>
-          </div>
-          <p className="text-sm text-[#666]">Top {featuredStates.length} markets</p>
+          ))}
         </div>
 
-        <div className="grid gap-4 md:grid-cols-2">
-          {featuredStates.map((state) => {
-            const topCities = topCitiesByState.get(state.state) || [];
-            return (
-              <Link
-                key={state.state}
-                href={`/${state.state.toLowerCase()}`}
-                className="group rounded-2xl border border-[#e8ddd2] bg-white p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-[#cf4333] hover:shadow-md"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <h3 className="text-xl font-semibold text-[#1f1f1f]">
-                      {getStateName(state.state)}
-                    </h3>
-                    <p className="mt-1 text-sm text-[#666]">
-                      {state.restaurant_count} restaurant
-                      {state.restaurant_count !== 1 ? "s" : ""}
-                    </p>
-                  </div>
-                  <span className="rounded-full bg-[#fff2ef] px-3 py-1 text-xs font-semibold text-[#b73a2f]">
-                    Open
-                  </span>
-                </div>
-
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {topCities.length ? (
-                    topCities.map((city) => (
-                      <span
-                        key={`${state.state}-${city.city_slug}`}
-                        className="rounded-full border border-[#eadfd4] bg-[#fffdf8] px-3 py-1 text-xs text-[#575757]"
-                      >
-                        {city.city} ({city.restaurant_count})
-                      </span>
-                    ))
-                  ) : (
-                    <span className="text-xs text-[#777]">Top cities unavailable</span>
-                  )}
-                </div>
-
-                <div className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#c0392b]">
-                  Open state and pick a city
-                  <span className="transition-transform group-hover:translate-x-0.5">
-                    {"->"}
-                  </span>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-      </section>
-
-      <section className="rounded-3xl border border-[#f0d3c7] bg-gradient-to-r from-[#fff4ea] to-[#ffece7] p-6 md:flex md:items-center md:justify-between md:gap-6 md:p-8">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b73a2f]">
-            Owner Call To Action
-          </p>
-          <h2 className="[font-family:var(--font-display)] mt-2 text-3xl font-bold tracking-tight text-[#1f1f1f] md:text-4xl">
-            Want your demo website this week?
-          </h2>
-          <p className="mt-2 text-sm text-[#666] md:text-base">
-            Start from your real restaurant listing and launch faster.
-          </p>
-        </div>
-        <div className="mt-4 md:mt-0">
+        <div className="mt-5 flex flex-wrap items-center gap-2">
           <Link
             href="/search"
-            className="inline-flex rounded-xl bg-[#c73f2f] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#ad3324]"
+            data-analytics-event="discovery_search_cta_click"
+            data-analytics-payload={JSON.stringify({
+              source: "home_bottom_cta",
+            })}
+            className="inline-flex rounded-xl bg-[#c73f2f] px-5 py-3 text-sm font-semibold text-white transition-all hover:bg-[#ad3324] active:scale-[0.99]"
           >
-            Start My Demo Site
+            Find My Restaurant
           </Link>
+          <a
+            href="tel:+18183420990"
+            data-analytics-event="discovery_help_click"
+            data-analytics-payload={JSON.stringify({
+              source: "home_bottom_cta",
+              channel: "phone",
+            })}
+            className="inline-flex rounded-xl border border-[#e0c9b7] bg-white px-4 py-3 text-sm font-semibold text-[#6e5a4c] transition-colors hover:bg-[#fff8f2]"
+          >
+            Book 15-min Setup Call
+          </a>
         </div>
       </section>
     </div>
