@@ -6,13 +6,25 @@ import {
   BUYER_TEMPLATE_KEYS,
   DEFAULT_TEMPLATE_KEY,
   OPERATOR_TEMPLATE_KEYS,
+  TEMPLATE_KEYS,
   TEMPLATE_LABELS,
   TEMPLATE_PROFILES,
   isBuyerTemplateKey,
   isDeployableTemplateKey,
   isOperatorTemplateKey,
+  isTemplateKey,
   type TemplateKey,
 } from "@/components/restaurant-templates/types";
+import {
+  FONT_PRESET_KEYS,
+  FONT_PRESET_LABELS,
+  PALETTE_KEYS,
+  PALETTE_LABELS,
+  resolveFontPreset,
+  resolvePalette,
+  type FontPresetKey,
+  type PaletteKey,
+} from "@/components/restaurant-templates/preview-options";
 import { trackEvent } from "@/lib/analytics";
 import { buildClaimHref } from "@/lib/claim";
 
@@ -23,6 +35,8 @@ type TemplatePreviewToggleProps = {
   citySlug: string;
   restaurantSlug: string;
   canSaveDefault: boolean;
+  currentFont: FontPresetKey;
+  currentPalette: PaletteKey;
 };
 
 export function TemplatePreviewToggle({
@@ -32,6 +46,8 @@ export function TemplatePreviewToggle({
   citySlug,
   restaurantSlug,
   canSaveDefault,
+  currentFont,
+  currentPalette,
 }: TemplatePreviewToggleProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -40,7 +56,12 @@ export function TemplatePreviewToggle({
   const [saveStatus, setSaveStatus] = useState<string | null>(null);
   const isPreview = searchParams.get("preview") === "1";
   const templateParam = searchParams.get("template") as TemplateKey | null;
-  const activeTemplate = templateParam ?? current;
+  const activeTemplate =
+    templateParam && isTemplateKey(templateParam) ? templateParam : current;
+  const activeFont = resolveFontPreset(searchParams.get("font") ?? currentFont);
+  const activePalette = resolvePalette(
+    searchParams.get("palette") ?? currentPalette
+  );
   const activeBuyerTemplate = isBuyerTemplateKey(activeTemplate)
     ? activeTemplate
     : DEFAULT_TEMPLATE_KEY;
@@ -50,9 +71,7 @@ export function TemplatePreviewToggle({
   const isLegacyConceptTemplate =
     !isBuyerTemplateKey(activeTemplate) && !isOperatorLaneTemplate;
   const canSaveActiveTemplate = canSaveDefault && isDeployableTemplateKey(activeTemplate);
-  const previewTemplateKeys: readonly TemplateKey[] = isOperatorLaneTemplate
-    ? [...BUYER_TEMPLATE_KEYS, ...OPERATOR_TEMPLATE_KEYS]
-    : BUYER_TEMPLATE_KEYS;
+  const previewTemplateKeys: readonly TemplateKey[] = TEMPLATE_KEYS;
   const previewSelectedTemplate = previewTemplateKeys.includes(activeTemplate as TemplateKey)
     ? activeTemplate
     : activeBuyerTemplate;
@@ -63,16 +82,25 @@ export function TemplatePreviewToggle({
     templateKey: activeBuyerTemplate,
   });
 
-  function buildUrl(nextPreview: boolean, nextTemplate?: TemplateKey) {
+  function buildUrl(
+    nextPreview: boolean,
+    nextTemplate?: TemplateKey,
+    nextFont?: FontPresetKey,
+    nextPalette?: PaletteKey
+  ) {
     const params = new URLSearchParams(searchParams.toString());
     if (nextPreview) {
       params.set("preview", "1");
       params.set("template", nextTemplate ?? activeBuyerTemplate);
+      params.set("font", nextFont ?? activeFont);
+      params.set("palette", nextPalette ?? activePalette);
       params.delete("viewport");
       params.delete("compare");
     } else {
       params.delete("preview");
       params.delete("template");
+      params.delete("font");
+      params.delete("palette");
       params.delete("viewport");
       params.delete("compare");
     }
@@ -100,7 +128,7 @@ export function TemplatePreviewToggle({
       city_slug: citySlug,
       restaurant_slug: restaurantSlug,
     });
-    router.push(buildUrl(true, value));
+    router.push(buildUrl(true, value, activeFont, activePalette));
   }
 
   function handleTemplatePick(value: TemplateKey) {
@@ -112,7 +140,17 @@ export function TemplatePreviewToggle({
       city_slug: citySlug,
       restaurant_slug: restaurantSlug,
     });
-    router.push(buildUrl(true, value));
+    router.push(buildUrl(true, value, activeFont, activePalette));
+  }
+
+  function handleFontChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    const value = event.target.value as FontPresetKey;
+    router.push(buildUrl(true, activeTemplate, value, activePalette));
+  }
+
+  function handlePaletteChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    const value = event.target.value as PaletteKey;
+    router.push(buildUrl(true, activeTemplate, activeFont, value));
   }
 
   async function handleSaveTemplate() {
@@ -189,7 +227,7 @@ export function TemplatePreviewToggle({
         </div>
         <div className="mt-3 flex flex-wrap items-center gap-3">
           {isPreview ? (
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <label className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
                 Choose
               </label>
@@ -201,6 +239,28 @@ export function TemplatePreviewToggle({
                 {previewTemplateKeys.map((key) => (
                   <option key={key} value={key}>
                     {TEMPLATE_LABELS[key]}
+                  </option>
+                ))}
+              </select>
+              <select
+                value={activeFont}
+                onChange={handleFontChange}
+                className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700"
+              >
+                {FONT_PRESET_KEYS.map((key) => (
+                  <option key={key} value={key}>
+                    {FONT_PRESET_LABELS[key]}
+                  </option>
+                ))}
+              </select>
+              <select
+                value={activePalette}
+                onChange={handlePaletteChange}
+                className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700"
+              >
+                {PALETTE_KEYS.map((key) => (
+                  <option key={key} value={key}>
+                    {PALETTE_LABELS[key]}
                   </option>
                 ))}
               </select>
@@ -298,10 +358,14 @@ export function TemplatePreviewToggle({
                         className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.1em] ${
                           key === "local-order"
                             ? "bg-[#ffe8e1] text-[#ab3328]"
-                            : key === "local-express"
+                          : key === "local-express"
                               ? "bg-[#fff1e8] text-[#a64d21]"
                               : key === "local-feast"
                                 ? "bg-[#fff2ea] text-[#9a4520]"
+                              : key === "metro-grid"
+                                ? "bg-[#e9f2ff] text-[#275aa8]"
+                              : key === "glass-orbit"
+                                ? "bg-[#e8f9ff] text-[#13708b]"
                             : "bg-[#f6efe7] text-[#7a5f4a]"
                         }`}
                       >

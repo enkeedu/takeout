@@ -1,4 +1,5 @@
 import type { RestaurantDetail } from "@/lib/types";
+import type { FontPresetKey, PaletteKey } from "./preview-options";
 import type {
   GalleryItem,
   HoursData,
@@ -16,6 +17,11 @@ export const TEMPLATE_KEYS = [
   "ming-slim",
   "ming-balanced",
   "ming-full",
+  "night-market",
+  "wok-fire",
+  "metro-grid",
+  "editorial-column",
+  "glass-orbit",
 ] as const;
 
 export type TemplateKey = (typeof TEMPLATE_KEYS)[number];
@@ -58,6 +64,11 @@ export const TEMPLATE_LABELS: Record<TemplateKey, string> = {
   "ming-slim": "Ming Slim",
   "ming-balanced": "Ming Balanced",
   "ming-full": "Ming Full",
+  "night-market": "Night Market",
+  "wok-fire": "Wok Fire",
+  "metro-grid": "Metro Grid",
+  "editorial-column": "Editorial Column",
+  "glass-orbit": "Glass Orbit",
 };
 
 export type TemplateProfile = {
@@ -176,6 +187,56 @@ export const TEMPLATE_PROFILES: Record<TemplateKey, TemplateProfile> = {
     focusPoints: "archived concept comparison",
     fitTags: ["Archived", "Content-heavy", "Internal only"],
   },
+  "night-market": {
+    stage: "Style Lab",
+    badge: "Theme Lab",
+    headline: "Neon-forward late-night concept",
+    detail: "An experimental layout for louder nightlife energy and high-contrast merchandising.",
+    bestFor: "Internal design exploration and specific nightlife brand fits.",
+    strengths: ["High-contrast visual system", "Bold merch moments", "Distinct late-night tone"],
+    focusPoints: "visual experimentation and differentiated mood",
+    fitTags: ["Experimental", "Nightlife", "Internal only"],
+  },
+  "wok-fire": {
+    stage: "Style Lab",
+    badge: "Theme Lab",
+    headline: "High-heat hero concept",
+    detail: "A more intense archival variant built around bold hero moments and action-heavy visuals.",
+    bestFor: "Internal comparison when a sharper, more energetic concept is worth testing.",
+    strengths: ["Stronger hero emphasis", "Punchier accent system", "Useful comparison point"],
+    focusPoints: "energy, contrast, and concept testing",
+    fitTags: ["Experimental", "Bold", "Internal only"],
+  },
+  "metro-grid": {
+    stage: "Style Lab",
+    badge: "Layout Lab",
+    headline: "Grid-first city layout",
+    detail: "A modular concept exploring denser structure, editorial cards, and urban storefront framing.",
+    bestFor: "Internal testing of alternate content hierarchy and storefront storytelling.",
+    strengths: ["Dense modular layout", "Editorial card rhythm", "Alternative hierarchy"],
+    focusPoints: "layout experimentation and storefront framing",
+    fitTags: ["Experimental", "Grid", "Internal only"],
+  },
+  "editorial-column": {
+    stage: "Style Lab",
+    badge: "Layout Lab",
+    headline: "Story-led editorial layout",
+    detail: "A concept that leans into narrative pacing and magazine-style sections for design review.",
+    bestFor: "Internal review when comparing more editorial brand presentations.",
+    strengths: ["Narrative pacing", "Magazine-style sections", "Stronger storytelling"],
+    focusPoints: "editorial hierarchy and narrative feel",
+    fitTags: ["Experimental", "Editorial", "Internal only"],
+  },
+  "glass-orbit": {
+    stage: "Style Lab",
+    badge: "Theme Lab",
+    headline: "Glassmorphism concept study",
+    detail: "A future-facing visual system kept for internal comparison rather than launch deployment.",
+    bestFor: "Internal theme exploration when testing more atmospheric visual directions.",
+    strengths: ["Distinct visual mood", "Layered glass treatment", "Useful style comparison"],
+    focusPoints: "atmosphere, motion, and visual range",
+    fitTags: ["Experimental", "Atmospheric", "Internal only"],
+  },
 };
 
 export function isTemplateKey(value: string): value is TemplateKey {
@@ -213,4 +274,6 @@ export interface RestaurantTemplateProps {
   basePath: string;
   orderPath: string;
   orderingEnabled: boolean;
+  fontPreset: FontPresetKey;
+  palette: PaletteKey;
 }

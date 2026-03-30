@@ -12,6 +12,11 @@ const VARIANT_CLASSES: Record<TemplateKey, string> = {
   "ming-slim": "bg-rose-50/90 text-rose-800 border-rose-200",
   "ming-balanced": "bg-rose-50/90 text-rose-800 border-rose-200",
   "ming-full": "bg-rose-50/90 text-rose-800 border-rose-200",
+  "night-market": "bg-emerald-50/90 text-emerald-800 border-emerald-200",
+  "wok-fire": "bg-amber-50/90 text-amber-800 border-amber-200",
+  "metro-grid": "bg-blue-50/90 text-blue-800 border-blue-200",
+  "editorial-column": "bg-slate-100/90 text-slate-800 border-slate-300",
+  "glass-orbit": "bg-cyan-50/90 text-cyan-800 border-cyan-200",
 };
 
 type TemplatePickerProps = {
