@@ -5,6 +5,7 @@ import type { LeadsResponse, LeadItem, LeadStats, ChartEntry } from "@/lib/types
 import { STATE_NAMES } from "@/lib/states";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8001";
+const ADMIN_TOKEN = process.env.NEXT_PUBLIC_ADMIN_TOKEN || "";
 
 const SORT_OPTIONS = [
   { value: "lead_score", label: "Lead Score" },
@@ -350,7 +351,10 @@ export function LeadsDashboard({ initialData }: Props) {
     if (stateFilter) params.set("state", stateFilter);
 
     try {
-      const res = await fetch(`${API_URL}/admin/leads?${params}`);
+      const headers: HeadersInit = ADMIN_TOKEN
+        ? { "X-Admin-Token": ADMIN_TOKEN }
+        : {};
+      const res = await fetch(`${API_URL}/admin/leads?${params}`, { headers });
       const json = await res.json();
       setData(json);
     } catch (err) {
@@ -368,13 +372,32 @@ export function LeadsDashboard({ initialData }: Props) {
     fetchLeads();
   }, [mounted, fetchLeads]);
 
-  function handleExportCsv() {
+  async function handleExportCsv() {
     const params = new URLSearchParams({
       sort_by: sortBy,
       sort_dir: sortDir,
     });
     if (stateFilter) params.set("state", stateFilter);
-    window.open(`${API_URL}/admin/leads/csv?${params}`, "_blank");
+    try {
+      const headers: HeadersInit = ADMIN_TOKEN
+        ? { "X-Admin-Token": ADMIN_TOKEN }
+        : {};
+      const res = await fetch(`${API_URL}/admin/leads/csv?${params}`, { headers });
+      if (!res.ok) {
+        throw new Error("CSV export failed");
+      }
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "leads.csv";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error("Failed to export CSV:", err);
+    }
   }
 
   const { stats } = data;

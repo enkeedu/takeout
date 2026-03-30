@@ -14,6 +14,10 @@ function isTemplateKey(value: string): value is TemplateKey {
   return TEMPLATE_KEYS.includes(value as TemplateKey);
 }
 
+function normalizeBaseUrl(value: string): string {
+  return value.trim().replace(/\/+$/, "");
+}
+
 export async function POST(request: Request) {
   let body: TemplateSelectionPayload;
   try {
@@ -34,15 +38,20 @@ export async function POST(request: Request) {
     );
   }
 
-  const headers: Record<string, string> = {
-    "Content-Type": "application/json",
-  };
-  if (process.env.ADMIN_TOKEN) {
-    headers["X-Admin-Token"] = process.env.ADMIN_TOKEN;
+  if (!process.env.ADMIN_TOKEN) {
+    return NextResponse.json(
+      { detail: "Template saving is disabled. Set ADMIN_TOKEN for web/api and restart." },
+      { status: 503 }
+    );
   }
 
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+    "X-Admin-Token": process.env.ADMIN_TOKEN,
+  };
+
   const upstream = await fetch(
-    `${INTERNAL_API_URL}/admin/menus/${stateSlug}/${citySlug}/${restaurantSlug}/template`,
+    `${normalizeBaseUrl(INTERNAL_API_URL)}/admin/menus/${stateSlug}/${citySlug}/${restaurantSlug}/template`,
     {
       method: "PUT",
       headers,
@@ -53,8 +62,17 @@ export async function POST(request: Request) {
 
   const text = await upstream.text();
   if (!upstream.ok) {
+    let detail = text || "Unable to save template.";
+    try {
+      const parsed = JSON.parse(text);
+      if (parsed && typeof parsed.detail === "string") {
+        detail = parsed.detail;
+      }
+    } catch {
+      // Keep text detail when response is not JSON.
+    }
     return NextResponse.json(
-      { detail: text || "Unable to save template." },
+      { detail },
       { status: upstream.status }
     );
   }

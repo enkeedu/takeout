@@ -12,6 +12,7 @@ dependencies = [
     "pydantic-settings>=2.6.0",
     "python-slugify>=8.0.4",
     "requests>=2.31.0",
+    "stripe>=11.0.0",
 ]
 
 [build-system]

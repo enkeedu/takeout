@@ -1,4 +1,5 @@
 import uuid
+from datetime import datetime
 
 from pydantic import BaseModel
 
@@ -6,9 +7,11 @@ from pydantic import BaseModel
 class RestaurantListItem(BaseModel):
     name: str
     phone: str | None = None
+    website_url: str | None = None
     has_online_ordering: bool = False
     has_ai_phone: bool = False
     is_claimed: bool = False
+    lead_score: int = 0
     address1: str
     city: str
     state: str
@@ -62,9 +65,30 @@ class RestaurantTemplateUpdate(BaseModel):
     template_key: str
 
 
+class RestaurantReviewItem(BaseModel):
+    id: str
+    name: str
+    rating: float
+    quote: str
+    source: str
+    source_url: str | None = None
+    relative_time: str | None = None
+    published_at: datetime | None = None
+
+
+class RestaurantReviewsResponse(BaseModel):
+    items: list[RestaurantReviewItem]
+    refreshed_at: datetime | None = None
+
+
 class SearchResultItem(BaseModel):
     name: str
     phone: str | None = None
+    website_url: str | None = None
+    has_online_ordering: bool = False
+    is_claimed: bool = False
+    rating: float | None = None
+    user_rating_count: int | None = None
     address1: str
     city: str
     state: str

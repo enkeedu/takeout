@@ -9,6 +9,7 @@ import type {
 } from "@/lib/restaurantDemo";
 import { formatPrice } from "@/lib/restaurantDemo";
 import { apiFetch } from "@/lib/api";
+import { trackEvent } from "@/lib/analytics";
 import type { OrderOut } from "@/lib/types";
 import type { TemplateKey } from "./types";
 
@@ -72,17 +73,29 @@ const VARIANT_STYLES: Record<
     accent: "text-[#B51F09]",
     muted: "text-[#6b6b6b]",
   },
-  "night-market": {
-    panel: "border-slate-200 bg-white text-slate-900",
-    button: "bg-emerald-700 text-white hover:bg-emerald-600",
-    accent: "text-emerald-700",
-    muted: "text-slate-500",
+  "local-order": {
+    panel: "border-[#dfd2c5] bg-white text-[#2e241d]",
+    button: "bg-[#b3342d] text-white hover:bg-[#9d2b24]",
+    accent: "text-[#b3342d]",
+    muted: "text-[#6d6155]",
   },
-  "wok-fire": {
-    panel: "border-amber-200 bg-white text-slate-900",
-    button: "bg-amber-700 text-white hover:bg-amber-600",
-    accent: "text-amber-700",
-    muted: "text-slate-500",
+  "local-storefront": {
+    panel: "border-[#d7cbbe] bg-white text-[#241d18]",
+    button: "bg-[#1f1a16] text-white hover:bg-[#0f0c0a]",
+    accent: "text-[#8f4a24]",
+    muted: "text-[#6b6158]",
+  },
+  "local-express": {
+    panel: "border-[#d8dfd4] bg-white text-[#1f2722]",
+    button: "bg-[#e8652a] text-white hover:bg-[#cf551f]",
+    accent: "text-[#cb5520]",
+    muted: "text-[#657067]",
+  },
+  "local-feast": {
+    panel: "border-[#e0d1c3] bg-white text-[#241d17]",
+    button: "bg-[#a5421f] text-white hover:bg-[#8d3517]",
+    accent: "text-[#9a4520]",
+    muted: "text-[#6d6155]",
   },
 };
 
@@ -298,6 +311,11 @@ export function OrderPanel({
 
   async function handlePlaceOrder() {
     if (!canSubmit) return;
+    trackEvent("order_place_attempt", {
+      template: variant,
+      item_count: totalItems,
+      fulfillment: fulfillment,
+    });
     setIsSubmitting(true);
     setErrorMessage(null);
     setOrderResult(null);
@@ -323,9 +341,17 @@ export function OrderPanel({
         body: JSON.stringify(payload),
       });
       setOrderResult(order);
+      trackEvent("order_place_success", {
+        template: variant,
+        order_id: order.id,
+        item_count: totalItems,
+      });
       setCartLines([]);
       setNotes("");
     } catch {
+      trackEvent("order_place_error", {
+        template: variant,
+      });
       setErrorMessage("Unable to place order. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -593,7 +619,7 @@ export function OrderPanel({
                           : maxSelect
                           ? `Select up to ${maxSelect}`
                           : "Select any"}
-                        {group.minSelect > 0 ? ` • Min ${group.minSelect}` : ""}
+                        {group.minSelect > 0 ? ` - Min ${group.minSelect}` : ""}
                       </p>
                     </div>
                     <div className="space-y-2">

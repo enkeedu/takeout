@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { apiFetch } from "@/lib/api";
+import { ApiError, apiFetch } from "@/lib/api";
 import type { MenuOut, MenuUpsert } from "@/lib/types";
 
 type MenuItemDraft = {
@@ -154,6 +154,14 @@ export function MenuEditor({
     let active = true;
     async function load() {
       setIsLoading(true);
+      setError(null);
+
+      if (!adminToken) {
+        setError("NEXT_PUBLIC_ADMIN_TOKEN is not set. Add it to web env and restart.");
+        setIsLoading(false);
+        return;
+      }
+
       try {
         const menu = await apiFetch<MenuOut>(
           `/admin/menus/${state}/${city}/${slug}`,
@@ -163,8 +171,21 @@ export function MenuEditor({
         const data = fromMenu(menu);
         setMenuName(data.name);
         setCategories(data.categories);
-      } catch {
+      } catch (error) {
         if (!active) return;
+        if (error instanceof ApiError) {
+          if (error.status === 404) {
+            setError("No existing menu yet. You can create one and save.");
+          } else if (error.status === 503) {
+            setError("Admin token is not configured on API. Set ADMIN_TOKEN and restart API.");
+          } else if (error.status === 403) {
+            setError("Invalid admin token. Check NEXT_PUBLIC_ADMIN_TOKEN.");
+          } else {
+            setError(`Unable to load menu (${error.status}): ${error.detail}`);
+          }
+        } else {
+          setError("Unable to load existing menu. You can create a new menu and save.");
+        }
       } finally {
         if (active) setIsLoading(false);
       }
@@ -245,6 +266,11 @@ export function MenuEditor({
       return;
     }
 
+    if (!adminToken) {
+      setError("NEXT_PUBLIC_ADMIN_TOKEN is not set. Add it to web env and restart.");
+      return;
+    }
+
     setIsSaving(true);
     try {
       await apiFetch<MenuOut>(`/admin/menus/${state}/${city}/${slug}`, {
@@ -253,8 +279,18 @@ export function MenuEditor({
         headers: adminToken ? { "X-Admin-Token": adminToken } : undefined,
       });
       setStatus("Menu saved.");
-    } catch {
-      setError("Unable to save menu. Check inputs and try again.");
+    } catch (error) {
+      if (error instanceof ApiError) {
+        if (error.status === 503) {
+          setError("Admin token is not configured on API. Set ADMIN_TOKEN and restart API.");
+        } else if (error.status === 403) {
+          setError("Invalid admin token. Check NEXT_PUBLIC_ADMIN_TOKEN.");
+        } else {
+          setError(`Unable to save menu (${error.status}): ${error.detail}`);
+        }
+      } else {
+        setError("Unable to save menu. Check inputs and try again.");
+      }
     } finally {
       setIsSaving(false);
     }
@@ -282,7 +318,7 @@ export function MenuEditor({
       </div>
 
       {isLoading ? (
-        <p className="text-sm text-slate-500">Loading menu…</p>
+        <p className="text-sm text-slate-500">Loading menu...</p>
       ) : null}
 
       <div className="space-y-5">

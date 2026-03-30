@@ -5,12 +5,14 @@ from app.models import Restaurant, RestaurantLocation, RestaurantSlug
 from app.schemas.restaurant import RestaurantDetail
 
 TEMPLATE_KEYS = {
+    "local-order",
+    "local-storefront",
+    "local-express",
+    "local-feast",
     "ming",
     "ming-slim",
     "ming-balanced",
     "ming-full",
-    "night-market",
-    "wok-fire",
 }
 
 

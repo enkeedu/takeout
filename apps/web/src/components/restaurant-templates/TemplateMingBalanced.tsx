@@ -16,20 +16,19 @@ const body = Roboto({
   variable: "--font-body",
 });
 
-function placeholderImage(label: string, accent = "#B51F09") {
-  const safeLabel = label.toUpperCase();
+function placeholderImage(_label: string, accent = "#B51F09") {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
   <defs>
     <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
       <stop offset="0%" stop-color="#fffefb"/>
-      <stop offset="55%" stop-color="#f9f5ee"/>
-      <stop offset="100%" stop-color="#f3eee6"/>
+      <stop offset="55%" stop-color="#f7efe5"/>
+      <stop offset="100%" stop-color="#efdfcf"/>
     </linearGradient>
   </defs>
   <rect width="900" height="600" fill="url(#bg)"/>
-  <rect x="48" y="48" width="804" height="504" rx="28" fill="none" stroke="${accent}" stroke-opacity="0.25" stroke-width="2"/>
-  <text x="450" y="300" text-anchor="middle" fill="${accent}" font-size="30" font-family="Fira Sans, Arial, sans-serif" font-weight="700" letter-spacing="4">${safeLabel}</text>
-  <text x="450" y="340" text-anchor="middle" fill="#6b6b6b" font-size="14" font-family="Roboto, Arial, sans-serif" letter-spacing="3">IMAGE PLACEHOLDER</text>
+  <rect x="48" y="48" width="804" height="504" rx="28" fill="none" stroke="${accent}" stroke-opacity="0.18" stroke-width="2"/>
+  <circle cx="160" cy="120" r="90" fill="${accent}" fill-opacity="0.08"/>
+  <circle cx="770" cy="510" r="120" fill="${accent}" fill-opacity="0.08"/>
 </svg>`;
   const encoded = encodeURIComponent(svg);
   return `url("data:image/svg+xml;utf8,${encoded}")`;
@@ -66,7 +65,7 @@ export function TemplateMingBalanced({
     "Call for hours";
 
   const photoStyle = (baseName: string, label: string) => ({
-    backgroundImage: `url(${assetBase}/${baseName}.webp), url(${assetBase}/${baseName}.jpg), url(${assetBase}/${baseName}.svg), ${placeholderImage(label)}`,
+    backgroundImage: `url(${assetBase}/${baseName}.webp), ${placeholderImage(label)}`,
     backgroundSize: "cover",
     backgroundPosition: "center",
   });
@@ -75,7 +74,7 @@ export function TemplateMingBalanced({
     <div
       className={`${display.variable} ${body.variable} font-[var(--font-body)] text-[#2D2D2D]`}
     >
-      <div className="relative left-1/2 right-1/2 -mx-[50vw] w-screen bg-[#FFFEFD]">
+      <div className="viewport-bleed bg-[#FFFEFD]">
         <div className="absolute inset-0 pattern-medallion opacity-10" />
         <div className="relative mx-auto max-w-[1760px] px-6 py-10 space-y-10">
           <section className="full-bleed section-angled relative overflow-hidden border border-[#e6dfd8] text-white">
@@ -440,6 +439,11 @@ export function TemplateMingBalanced({
               </p>
               <button
                 type="button"
+                data-analytics-event="contact_submitted"
+                data-analytics-payload={JSON.stringify({
+                  source: "template_inquiry",
+                  template: "ming-balanced",
+                })}
                 className="mt-4 w-full border border-[#B51F09] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#B51F09] hover:bg-[#B51F09] hover:text-white"
               >
                 Send Inquiry
@@ -451,3 +455,4 @@ export function TemplateMingBalanced({
     </div>
   );
 }
+

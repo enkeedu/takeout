@@ -8,6 +8,7 @@ from app.routers import (
     admin,
     admin_menus,
     browse,
+    claim,
     health,
     menus,
     orders,
@@ -33,6 +34,7 @@ app.add_middleware(
 
 app.include_router(health.router)
 app.include_router(browse.router)
+app.include_router(claim.router)
 app.include_router(restaurants.router)
 app.include_router(menus.router)
 app.include_router(admin_menus.router)

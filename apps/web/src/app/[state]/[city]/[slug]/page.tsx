@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { apiFetch } from "@/lib/api";
-import type { MenuOut, RestaurantDetail } from "@/lib/types";
+import type {
+  MenuOut,
+  RestaurantDetail,
+  RestaurantReviewsResponse,
+} from "@/lib/types";
 import { menuFromApi } from "@/lib/menu";
 import {
+  type Review,
   buildHighlights,
   buildHours,
   buildMockGallery,
@@ -16,17 +21,29 @@ import { TemplateMing } from "@/components/restaurant-templates/TemplateMing";
 import { TemplateMingSlim } from "@/components/restaurant-templates/TemplateMingSlim";
 import { TemplateMingBalanced } from "@/components/restaurant-templates/TemplateMingBalanced";
 import { TemplateMingFull } from "@/components/restaurant-templates/TemplateMingFull";
-import { TemplateNightMarket } from "@/components/restaurant-templates/TemplateNightMarket";
-import { TemplateWokFire } from "@/components/restaurant-templates/TemplateWokFire";
+import { TemplateLocalOrder } from "@/components/restaurant-templates/TemplateLocalOrder";
+import { TemplateLocalStorefront } from "@/components/restaurant-templates/TemplateLocalStorefront";
+import { TemplateLocalExpress } from "@/components/restaurant-templates/TemplateLocalExpress";
+import { TemplateLocalFeast } from "@/components/restaurant-templates/TemplateLocalFeast";
 import {
-  TEMPLATE_KEYS,
+  DEFAULT_TEMPLATE_KEY,
+  isDeployableTemplateKey,
+  isBuyerTemplateKey,
+  isTemplateKey,
   type TemplateKey,
 } from "@/components/restaurant-templates/types";
 import { TemplatePreviewToggle } from "@/components/TemplatePreviewToggle";
+import { ListingOpenTracker } from "@/components/ListingOpenTracker";
+import { buildClaimHref } from "@/lib/claim";
+import { CORE_OWNER_PROMISE } from "@/lib/ownerJourney";
 
 type Props = {
   params: Promise<{ state: string; city: string; slug: string }>;
-  searchParams: Promise<{ template?: string; preview?: string }>;
+  searchParams: Promise<{
+    template?: string;
+    preview?: string;
+    claimPreview?: string;
+  }>;
 };
 
 async function getRestaurant(
@@ -55,29 +72,31 @@ async function getMenu(
   }
 }
 
-function hashString(value: string): number {
-  let hash = 0;
-  for (let i = 0; i < value.length; i += 1) {
-    hash = (hash * 31 + value.charCodeAt(i)) | 0;
+async function getRestaurantReviews(
+  state: string,
+  city: string,
+  slug: string
+): Promise<RestaurantReviewsResponse | null> {
+  try {
+    return await apiFetch<RestaurantReviewsResponse>(
+      `/restaurants/${state}/${city}/${slug}/reviews`
+    );
+  } catch {
+    return null;
   }
-  return Math.abs(hash);
 }
 
 function selectTemplateKey(
   restaurant: RestaurantDetail,
   requested: string | undefined
 ): TemplateKey {
-  if (requested && TEMPLATE_KEYS.includes(requested as TemplateKey)) {
-    return requested as TemplateKey;
+  if (requested && isTemplateKey(requested)) {
+    return requested;
   }
-  if (
-    restaurant.template_key &&
-    TEMPLATE_KEYS.includes(restaurant.template_key as TemplateKey)
-  ) {
-    return restaurant.template_key as TemplateKey;
+  if (restaurant.template_key && isDeployableTemplateKey(restaurant.template_key)) {
+    return restaurant.template_key;
   }
-  const seed = hashString(`${restaurant.id}-${restaurant.name}`);
-  return TEMPLATE_KEYS[seed % TEMPLATE_KEYS.length];
+  return DEFAULT_TEMPLATE_KEY;
 }
 
 function buildMapsUrl(restaurant: RestaurantDetail): string {
@@ -105,16 +124,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function RestaurantPage({ params, searchParams }: Props) {
   const { state, city, slug } = await params;
   const sp = await searchParams;
-  const [r, menuData] = await Promise.all([
+  const [r, menuData, reviewData] = await Promise.all([
     getRestaurant(state, city, slug),
     getMenu(state, city, slug),
+    getRestaurantReviews(state, city, slug),
   ]);
   if (!r) notFound();
 
   const templateKey = selectTemplateKey(r, sp.template);
   const menu = menuData ? menuFromApi(menuData) : buildMockMenu(r.name);
   const orderingEnabled = Boolean(menuData);
-  const reviews = buildMockReviews(r.name, r.city);
+  const reviews: Review[] =
+    reviewData?.items && reviewData.items.length > 0
+      ? reviewData.items.slice(0, 3).map((item) => ({
+          id: item.id,
+          name: item.name,
+          rating: item.rating,
+          quote: item.quote,
+          source: item.source || "Google",
+        }))
+      : buildMockReviews(r.name, r.city);
   const gallery = buildMockGallery(r.name);
   const specials = buildMockSpecials(r.name);
   const highlights = buildHighlights(r.name, r.city);
@@ -124,6 +153,17 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
   const basePath = `/${r.state_slug}/${r.city_slug}/${r.restaurant_slug}`;
   const orderPath = basePath;
   const previewMode = sp.preview === "1";
+  const claimPreviewMode = sp.claimPreview === "1";
+  const canSaveDefaultTemplate = Boolean(process.env.ADMIN_TOKEN);
+  const claimTemplateKey = isBuyerTemplateKey(templateKey)
+    ? templateKey
+    : DEFAULT_TEMPLATE_KEY;
+  const claimHref = buildClaimHref({
+    stateSlug: r.state_slug,
+    citySlug: r.city_slug,
+    restaurantSlug: r.restaurant_slug,
+    templateKey: claimTemplateKey,
+  });
 
   const DAY_MAP: Record<string, string> = {
     monday: "Monday",
@@ -205,18 +245,109 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
 
   return (
     <article className="page-fade">
+      {claimPreviewMode ? (
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              [data-site-shell="header"],
+              [data-site-shell="footer"] {
+                display: none !important;
+              }
+
+              main[data-site-main="true"] {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+              }
+            `,
+          }}
+        />
+      ) : null}
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <TemplatePreviewToggle
-        basePath={basePath}
-        current={templateKey}
-        stateSlug={r.state_slug}
-        citySlug={r.city_slug}
-        restaurantSlug={r.restaurant_slug}
-      />
+      {!claimPreviewMode ? (
+        <ListingOpenTracker
+          stateSlug={r.state_slug}
+          citySlug={r.city_slug}
+          restaurantSlug={r.restaurant_slug}
+          templateKey={templateKey}
+        />
+      ) : null}
+
+      {!claimPreviewMode ? (
+        <section className="mx-auto mt-4 w-full max-w-[1760px] px-6">
+          <div className="rounded-2xl border border-[#e7d7c9] bg-white p-4 shadow-sm md:p-5">
+            <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+              <div className="space-y-3">
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#b64a30]">
+                  {r.is_claimed ? "Owner Launch Path" : "Website Preview Ready"}
+                </p>
+                <p className="mt-1 text-sm text-[#5f544b]">
+                  {r.is_claimed
+                    ? CORE_OWNER_PROMISE
+                    : "See your recommended design, then verify ownership to launch."}
+                </p>
+                <div className="flex flex-wrap gap-2 text-xs">
+                  <span className="rounded-full border border-[#eadccf] bg-[#fff9f3] px-3 py-1 font-semibold uppercase tracking-[0.12em] text-[#7d6857]">
+                    $299 setup + $99/mo
+                  </span>
+                  <span className="rounded-full border border-[#eadccf] bg-[#fff9f3] px-3 py-1 font-semibold uppercase tracking-[0.12em] text-[#7d6857]">
+                    5-7 day launch
+                  </span>
+                  <span className="rounded-full border border-[#eadccf] bg-[#fff9f3] px-3 py-1 font-semibold uppercase tracking-[0.12em] text-[#7d6857]">
+                    English | Chinese support
+                  </span>
+                </div>
+              </div>
+              <div className="flex flex-wrap items-center gap-2 lg:justify-end">
+                <a
+                  href={claimHref}
+                  data-analytics-event="claim_cta_click"
+                  data-analytics-payload={JSON.stringify({
+                    source: "listing_launch_panel",
+                    state_slug: r.state_slug,
+                    city_slug: r.city_slug,
+                    restaurant_slug: r.restaurant_slug,
+                    template_key: templateKey,
+                  })}
+                  className="rounded-xl bg-[#c73f2f] px-4 py-2 text-sm font-semibold text-white hover:bg-[#ad3324]"
+                >
+                  {r.is_claimed ? "Claim & Launch" : "Preview Website"}
+                </a>
+                <a
+                  href="tel:+18183420990"
+                  className="rounded-xl border border-[#e0c9b7] bg-white px-3 py-2 text-xs font-semibold uppercase tracking-[0.11em] text-[#6e5a4c] hover:bg-[#fff8f2]"
+                >
+                  Call Support
+                </a>
+                <a
+                  href="https://wa.me/18183420990"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-xl border border-[#e0c9b7] bg-white px-3 py-2 text-xs font-semibold uppercase tracking-[0.11em] text-[#6e5a4c] hover:bg-[#fff8f2]"
+                >
+                  WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {!claimPreviewMode ? (
+        <TemplatePreviewToggle
+          basePath={basePath}
+          current={templateKey}
+          stateSlug={r.state_slug}
+          citySlug={r.city_slug}
+          restaurantSlug={r.restaurant_slug}
+          canSaveDefault={canSaveDefaultTemplate}
+        />
+      ) : null}
 
       {templateKey === "ming" ? (
         <TemplateMing
@@ -294,8 +425,8 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
         />
       ) : null}
 
-      {templateKey === "night-market" ? (
-        <TemplateNightMarket
+      {templateKey === "local-order" ? (
+        <TemplateLocalOrder
           restaurant={r}
           menu={menu}
           reviews={reviews}
@@ -313,8 +444,8 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
         />
       ) : null}
 
-      {templateKey === "wok-fire" ? (
-        <TemplateWokFire
+      {templateKey === "local-storefront" ? (
+        <TemplateLocalStorefront
           restaurant={r}
           menu={menu}
           reviews={reviews}
@@ -324,9 +455,47 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
           tagline={tagline}
           highlights={highlights}
           mapsUrl={mapsUrl}
+          templateKey={templateKey}
           previewMode={previewMode}
           basePath={basePath}
+          orderPath={orderPath}
+          orderingEnabled={orderingEnabled}
+        />
+      ) : null}
+
+      {templateKey === "local-express" ? (
+        <TemplateLocalExpress
+          restaurant={r}
+          menu={menu}
+          reviews={reviews}
+          gallery={gallery}
+          hours={hours}
+          specials={specials}
+          tagline={tagline}
+          highlights={highlights}
+          mapsUrl={mapsUrl}
           templateKey={templateKey}
+          previewMode={previewMode}
+          basePath={basePath}
+          orderPath={orderPath}
+          orderingEnabled={orderingEnabled}
+        />
+      ) : null}
+
+      {templateKey === "local-feast" ? (
+        <TemplateLocalFeast
+          restaurant={r}
+          menu={menu}
+          reviews={reviews}
+          gallery={gallery}
+          hours={hours}
+          specials={specials}
+          tagline={tagline}
+          highlights={highlights}
+          mapsUrl={mapsUrl}
+          templateKey={templateKey}
+          previewMode={previewMode}
+          basePath={basePath}
           orderPath={orderPath}
           orderingEnabled={orderingEnabled}
         />

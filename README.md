@@ -60,8 +60,6 @@ DATABASE_URL=postgresql+asyncpg://takeout:takeout_dev@localhost:5432/takeout \
 ```bash
 cd apps/web
 npm install
-NEXT_PUBLIC_API_URL=http://localhost:8001 \
-INTERNAL_API_URL=http://localhost:8001 \
 npm run dev -- --port 3001
 ```
 
@@ -72,12 +70,34 @@ npm run dev -- --port 3001
 - API docs: `http://localhost:8001/docs`
 - Admin menu editor example: `http://localhost:3001/admin/menus/nj/clinton/hunan-wok`
 
-Optional admin token for protected admin endpoints:
+## Local Env Setup
+
+Use the repo-root `.env` for API/server secrets and `apps/web/.env.local` for the web app.
+
+Root `.env` examples:
 
 ```bash
 ADMIN_TOKEN=change-me
-NEXT_PUBLIC_ADMIN_TOKEN=change-me
+CLAIM_PAYMENT_PROVIDER=stripe
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+SMTP_USERNAME=launch@example.com
+SMTP_PASSWORD=change-me
 ```
+
+`apps/web/.env.local` examples:
+
+```bash
+NEXT_PUBLIC_ADMIN_TOKEN=change-me
+NEXT_PUBLIC_API_URL=http://localhost:8001
+INTERNAL_API_URL=http://localhost:8001
+WEB_BASE_URL=http://localhost:3001
+```
+
+The shared-token admin flow only works when `ADMIN_TOKEN` and `NEXT_PUBLIC_ADMIN_TOKEN` match and
+both the API and web servers are restarted.
 
 ## Team Bootstrap (Full Dataset)
 
