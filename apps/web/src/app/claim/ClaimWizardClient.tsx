@@ -15,7 +15,7 @@ import {
   buildClaimHref,
   buildLaunchStatusHref,
   buildListingHref,
-  createClaimDepositCheckout,
+  buildOwnerWorkspaceHref,
   sendClaimCode,
   submitClaimManualReview,
   submitClaimRequest,
@@ -612,22 +612,10 @@ export function ClaimWizardClient({
       clearClaimDraft(draftKey);
       setLastSavedAt(null);
       setCompleted("claim_submitted");
-      try {
-        const checkout = await createClaimDepositCheckout(response.claimRequestId, {
-          accessToken: response.launchAccessToken,
-        });
-        window.location.assign(checkout.checkoutUrl);
-        return;
-      } catch {
-        router.push(
-          buildLaunchStatusHref(response.claimRequestId, response.launchAccessToken, {
-            fresh: "1",
-            mode: "verified",
-            payment: "error",
-          })
-        );
-        return;
-      }
+      router.push(
+        buildOwnerWorkspaceHref(response.claimRequestId, response.launchAccessToken)
+      );
+      return;
     } catch (error) {
       setSubmitError(errorText(error, "We could not submit this claim request right now. Try again or contact support."));
     } finally {

@@ -36,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${displayFont.variable} ${bodyFont.variable} site-bg min-h-screen text-gray-900 antialiased flex flex-col [font-family:var(--font-body)]`}
+        className={`${displayFont.variable} ${bodyFont.variable} site-bg min-h-screen text-gray-900 flex flex-col [font-family:var(--font-body)]`}
       >
         <Suspense>
           <div data-site-shell="header">

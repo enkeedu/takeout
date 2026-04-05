@@ -209,6 +209,14 @@ def _build_launch_url(
     )
 
 
+def _build_owner_workspace_url(
+    claim_request_id: uuid.UUID | str,
+    access_token: str,
+) -> str:
+    query = urlencode({"access": access_token})
+    return f"{settings.web_base_url.rstrip('/')}/owner/{claim_request_id}?{query}"
+
+
 def _build_listing_url(restaurant: _RestaurantContext) -> str:
     return (
         f"{settings.web_base_url.rstrip('/')}/"
@@ -236,12 +244,12 @@ def _validate_launch_access(claim_request: ClaimRequest, access_token: str) -> N
     if not token or not claim_request.access_token_hash:
         raise ClaimServiceError(
             403,
-            "This launch page needs the secure access token from your claim confirmation link.",
+            "This private owner link needs the secure access token from your claim confirmation link.",
         )
     if not hmac.compare_digest(claim_request.access_token_hash, _hash_secret(token)):
         raise ClaimServiceError(
             403,
-            "This launch page needs the secure access token from your claim confirmation link.",
+            "This private owner link needs the secure access token from your claim confirmation link.",
         )
 
 
@@ -504,7 +512,7 @@ def _status_summary(
     if status_key == "manual_review_requested":
         status_label = "Ownership review pending"
         status_detail = (
-            "We saved the request and the team is reviewing another ownership path before payment and kickoff unlock."
+            "We saved the request and the team is reviewing another ownership path before website access is unlocked."
         )
         next_step_title = "Wait for ownership approval"
         next_step_detail = (
@@ -514,16 +522,16 @@ def _status_summary(
             "A team member is reviewing the listing issue because phone verification could not finish cleanly."
         )
     elif status_key == "verified_request_received":
-        status_label = "Ownership verified"
+        status_label = "Website access ready"
         status_detail = (
-            "Your listing is unlocked. Pay the setup deposit to move this website into kickoff."
+            "Ownership is verified and the private owner workspace is ready."
         )
-        next_step_title = "Pay the setup deposit"
+        next_step_title = "Open the owner workspace"
         next_step_detail = (
-            "Use this private launch link to pay the one-time $299 setup deposit. Monthly billing starts only after launch."
+            "Use the private owner link to confirm details, choose a website style, add branding, and publish the page."
         )
         ownership_detail = (
-            "The listed business phone was verified and the launch is ready for payment."
+            "The listed business phone was verified and owner workspace access is unlocked."
         )
         deposit_state = "current"
     elif status_key == "deposit_paid":
@@ -558,67 +566,67 @@ def _status_summary(
         kickoff_state = "completed"
         build_state = "current"
     elif status_key == "build_in_progress":
-        status_label = "Build in progress"
-        status_detail = "Kickoff is complete and the team is building your website, menu, and launch details now."
+        status_label = "Website build in progress"
+        status_detail = "Kickoff is complete and the team is preparing your website details now."
         next_step_title = "Watch for the review handoff"
         next_step_detail = (
-            "We will reach out when the launch build is ready for owner review."
+            "We will reach out when the website is ready for owner review."
         )
         ownership_detail = (
-            "The listed business phone was verified and the launch is ready to build."
+            "The listed business phone was verified and the website is moving through activation."
         )
         deposit_state = "completed"
         kickoff_state = "completed"
         build_state = "current"
     elif status_key == "ready_for_review":
         status_label = "Ready for review"
-        status_detail = "Your launch build is ready for the last owner review before go-live."
-        next_step_title = "Approve the final review"
+        status_detail = "Your website draft is ready for the final owner review before publish."
+        next_step_title = "Review the website and confirm publish readiness"
         next_step_detail = (
-            "Review the website, final menu details, and launch timing so the team can schedule go-live."
+            "Review the website, final business details, and any guest-facing links before publish."
         )
         ownership_detail = (
-            "The listed business phone was verified and the launch is ready to build."
+            "The listed business phone was verified and the website is in final review."
         )
         deposit_state = "completed"
         kickoff_state = "completed"
         build_state = "current"
     elif status_key == "changes_requested":
-        status_label = "Changes requested"
-        status_detail = "We received your revision request and the team is updating the build now."
-        next_step_title = "Watch for the updated review link"
+        status_label = "Website changes requested"
+        status_detail = "We received your revision request and the team is updating the website now."
+        next_step_title = "Watch for the updated website review"
         next_step_detail = (
             "Support is working through your notes now. We will send a fresh review handoff once the updates are ready."
         )
         ownership_detail = (
-            "The listed business phone was verified and the launch is ready to build."
+            "The listed business phone was verified and the website remains in activation."
         )
         deposit_state = "completed"
         kickoff_state = "completed"
         build_state = "current"
     elif status_key == "approved_for_launch":
-        status_label = "Approved for launch"
-        status_detail = "Approval received. Final launch checks are in progress before go-live."
-        next_step_title = "We are preparing launch"
+        status_label = "Approved for publish"
+        status_detail = "Approval received. Final website checks are in progress before publish."
+        next_step_title = "We are preparing the website publish"
         next_step_detail = (
-            "No more action is needed from you right now. We will let you know as soon as the site is live."
+            "No more action is needed from you right now. We will let you know as soon as the website is published."
         )
         ownership_detail = (
-            "The listed business phone was verified and the launch is ready to build."
+            "The listed business phone was verified and the website is in final publish checks."
         )
         deposit_state = "completed"
         kickoff_state = "completed"
         build_state = "completed"
         live_state = "current"
     else:
-        status_label = "Live"
-        status_detail = "Your direct-order website is live and ready to share with guests."
+        status_label = "Published"
+        status_detail = "Your website is published and ready to share with guests."
         next_step_title = "Start sending guests to your site"
         next_step_detail = (
-            "Use your website, Google profile, and social links to push direct orders into your own channel."
+            "Use your website, Google profile, and social links to strengthen your direct web presence."
         )
         ownership_detail = (
-            "The listed business phone was verified and the launch is complete."
+            "The listed business phone was verified and the website is published."
         )
         deposit_state = "completed"
         kickoff_state = "completed"
@@ -634,57 +642,57 @@ def _status_summary(
         ),
         ClaimProgressStepOut(
             key="setup_deposit_paid",
-            label="Setup deposit paid",
+            label="Activation setup",
             state=deposit_state,
             detail=(
-                "Pay the one-time setup deposit to start kickoff."
+                "Optional activation setup can be handled after ownership is verified."
                 if deposit_state != "completed"
-                else "The setup deposit is in and kickoff can move forward."
+                else "Activation setup is complete and the team can keep moving."
             ),
         ),
         ClaimProgressStepOut(
             key="kickoff_scheduled",
             label=(
-                "Kickoff pending"
+                "Activation support pending"
                 if kickoff_state == "current"
-                else "Kickoff scheduled"
+                else "Activation support scheduled"
             ),
             state=kickoff_state,
             detail=(
-                "Support will lock in kickoff timing after payment."
+                "Support will lock in activation timing after ownership is confirmed."
                 if kickoff_state == "current"
                 else (
-                    "Kickoff timing is confirmed with the launch team."
+                    "Activation timing is confirmed with the team."
                     if kickoff_state == "completed"
-                    else "Kickoff is scheduled once payment is in."
+                    else "Activation support is scheduled once needed."
                 )
             ),
         ),
         ClaimProgressStepOut(
             key="build_review",
-            label="Build + review",
+            label="Website review",
             state=build_state,
             detail=(
-                "We build the site, menu, and launch details for owner review."
+                "We prepare the website details and guest-facing presentation for owner review."
                 if build_state != "completed"
                 else (
-                    "Owner review is complete and the launch is in final checks."
+                    "Owner review is complete and the website is in final checks."
                     if status_key == "approved_for_launch"
-                    else "The build and review stage is in motion."
+                    else "The website review stage is in motion."
                 )
             ),
         ),
         ClaimProgressStepOut(
             key="live_launch",
-            label="Live launch",
+            label="Website published",
             state=live_state,
             detail=(
-                "Share the live direct-order website with guests."
+                "Share the published website with guests."
                 if live_state == "current"
                 else (
-                    "The site is almost ready. Final launch checks are underway."
+                    "The site is almost ready. Final publish checks are underway."
                     if status_key == "approved_for_launch"
-                    else "The site goes live after review is complete."
+                    else "The site publishes after review is complete."
                 )
             ),
         ),
@@ -1065,7 +1073,7 @@ async def _send_claim_alert_email(
 def _build_owner_review_ops_email(
     restaurant: _RestaurantContext,
     claim_request: ClaimRequest,
-    launch_url: str,
+    owner_url: str,
     decision: str,
 ) -> EmailMessage | None:
     if not settings.claim_alert_email_to or not settings.claim_alert_email_from:
@@ -1107,7 +1115,7 @@ def _build_owner_review_ops_email(
                     if claim_request.review_notes
                     else "Owner notes: n/a"
                 ),
-                f"Launch page: {launch_url}",
+                f"Owner workspace: {owner_url}",
                 f"Claim request ID: {claim_request.id}",
             ]
         )
@@ -1125,11 +1133,11 @@ async def _send_owner_review_ops_alert(
     if not token:
         raise RuntimeError("Owner review ops alert needs a launch access token.")
     decision = _review_state_value(claim_request)
-    launch_url = _build_launch_url(claim_request.id, token)
+    owner_url = _build_owner_workspace_url(claim_request.id, token)
     message = _build_owner_review_ops_email(
         restaurant,
         claim_request,
-        launch_url,
+        owner_url,
         decision,
     )
     if message is None:
@@ -1141,7 +1149,7 @@ def _build_owner_notification_email(
     restaurant: _RestaurantContext,
     claim_request: ClaimRequest,
     event_key: str,
-    launch_url: str,
+    destination_url: str,
 ) -> EmailMessage:
     if event_key not in OWNER_NOTIFICATION_EVENTS:
         raise RuntimeError(f"Unsupported owner notification event: {event_key}")
@@ -1155,35 +1163,37 @@ def _build_owner_notification_email(
     scheduled_for = _format_schedule(claim_request.kickoff_scheduled_for)
 
     if event_key == "launch_link_ready":
-        subject = "Your launch link is ready"
-        changed = f"Your private launch link for {restaurant_label} is ready."
+        subject = "Your owner workspace is ready"
+        changed = f"Your private owner workspace for {restaurant_label} is ready."
         next_step = (
-            f"Next: pay the {_format_money(claim_request.setup_deposit_cents, claim_request.currency)} "
-            "setup deposit to move this website into kickoff."
+            "Next: open your private owner workspace to confirm business details, choose a website style, and publish the page."
         )
         extra_lines: list[str] = []
+        destination_label = "Open your private owner workspace"
     elif event_key == "manual_review_saved":
         subject = "Your claim is in review"
         changed = f"We saved your ownership review request for {restaurant_label}."
         next_step = (
-            "Next: our team will review the listing issue and reach out before payment and kickoff unlock."
+            "Next: our team will review the listing issue and reach out before owner workspace access is unlocked."
         )
         extra_lines = []
+        destination_label = "Open your private claim status page"
     elif event_key == "ownership_approved":
-        subject = "Ownership approved - setup deposit unlocked"
+        subject = "Ownership approved - owner workspace unlocked"
         changed = f"Ownership review is complete for {restaurant_label}."
         next_step = (
-            f"Next: pay the {_format_money(claim_request.setup_deposit_cents, claim_request.currency)} "
-            "setup deposit from your private launch page."
+            "Next: open your owner workspace to confirm details, add branding, and publish the website."
         )
         extra_lines = []
+        destination_label = "Open your private owner workspace"
     elif event_key == "deposit_received":
         subject = "Setup deposit received"
         changed = f"We received the setup deposit for {restaurant_label}."
         next_step = (
-            "Next: open your private launch page to share your setup details for Google, Yelp, domain access, assets, and hours. Support will still reach out within 24 hours to lock in kickoff."
+            "Next: open your private owner link to keep website details, assets, and setup notes current while support keeps moving."
         )
         extra_lines = []
+        destination_label = "Open your private owner link"
     elif event_key == "kickoff_scheduled":
         subject = (
             f"Kickoff scheduled for {scheduled_for}"
@@ -1195,13 +1205,15 @@ def _build_owner_notification_email(
             "Next: have your menu, hours, logo, and any Google, Yelp, or domain logins nearby for the kickoff handoff."
         )
         extra_lines = [f"Scheduled time: {scheduled_for}"] if scheduled_for else []
+        destination_label = "Open your private owner link"
     elif event_key == "review_ready":
         subject = "Your website is ready for review"
         changed = f"The first polished website build for {restaurant_label} is ready for owner review."
         next_step = (
-            "Next: open your private launch page to review status, then use the preview link below to inspect the site and send back any final edits."
+            "Next: open your private owner link to review status, then use the preview link below to inspect the site and send back any final edits."
         )
         extra_lines = [f"Preview website: {preview_url}"]
+        destination_label = "Open your private owner link"
     elif event_key == "review_changes_requested_received":
         subject = "Change request received - we're updating your build"
         changed = f"We received your revision request for {restaurant_label}."
@@ -1214,20 +1226,23 @@ def _build_owner_notification_email(
         )
         if claim_request.review_notes:
             extra_lines.append(f"Your notes: {claim_request.review_notes}")
+        destination_label = "Open your private owner link"
     elif event_key == "review_approved_received":
-        subject = "Approval received - final launch checks started"
+        subject = "Approval received - final website checks started"
         changed = f"Thanks for approving the website build for {restaurant_label}."
         next_step = (
-            "Next: the team is running final launch checks now. We will let you know as soon as the site is live."
+            "Next: the team is running final website checks now. We will let you know as soon as the site is published."
         )
-        extra_lines = [f"Live website after launch: {listing_url}"]
+        extra_lines = [f"Website URL after publish: {listing_url}"]
+        destination_label = "Open your private owner link"
     elif event_key == "site_live":
-        subject = "Your direct-order website is live"
-        changed = f"Your direct-order website for {restaurant_label} is live."
+        subject = "Your website is published"
+        changed = f"Your website for {restaurant_label} is published."
         next_step = (
-            "Next: open your private launch page for the live link, QR code, and launch checklist. Then update Google, Yelp, and social links so guests start ordering directly."
+            "Next: open your private owner link for the live website, then update Google, Yelp, and social links so guests land on your website."
         )
-        extra_lines = [f"Live website: {listing_url}"]
+        extra_lines = [f"Published website: {listing_url}"]
+        destination_label = "Open your private owner link"
     else:  # pragma: no cover - guarded above
         raise RuntimeError(f"Unsupported owner notification event: {event_key}")
 
@@ -1243,7 +1258,7 @@ def _build_owner_notification_email(
                 changed,
                 next_step,
                 "",
-                f"Open your private launch page: {launch_url}",
+                f"{destination_label}: {destination_url}",
                 *extra_lines,
                 "",
                 f"Support phone: {SUPPORT_PHONE_DISPLAY}",
@@ -1288,14 +1303,18 @@ async def send_owner_launch_notification(
         token = _issue_launch_access_token(claim_request)
         generated_token = True
 
-    launch_url = _build_launch_url(claim_request.id, token)
+    destination_url = (
+        _build_owner_workspace_url(claim_request.id, token)
+        if event_key in {"launch_link_ready", "ownership_approved"}
+        else _build_launch_url(claim_request.id, token)
+    )
 
     try:
         message = _build_owner_notification_email(
             restaurant,
             claim_request,
             event_key,
-            launch_url,
+            destination_url,
         )
         await asyncio.to_thread(_send_email_sync, message)
     except Exception as exc:

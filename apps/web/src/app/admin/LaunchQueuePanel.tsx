@@ -52,22 +52,27 @@ function nextAction(item: AdminClaimQueueItem): { label: string; action: QueueAc
     return { label: "Approve Ownership", action: "approve_manual_review" };
   }
   if (item.setup_deposit_state === "paid" && item.kickoff_state === "pending") {
-    return { label: "Schedule Kickoff", action: "mark_kickoff_scheduled" };
+    return { label: "Schedule Activation", action: "mark_kickoff_scheduled" };
   }
   if (item.kickoff_state === "scheduled") {
-    return { label: "Confirm Kickoff", action: "mark_kickoff_confirmed" };
+    return { label: "Confirm Activation", action: "mark_kickoff_confirmed" };
   }
-  if (item.kickoff_state === "confirmed" && item.status !== "build_in_progress" && item.status !== "ready_for_review" && item.status !== "live") {
-    return { label: "Start Build", action: "mark_build_in_progress" };
+  if (
+    item.kickoff_state === "confirmed" &&
+    item.status !== "build_in_progress" &&
+    item.status !== "ready_for_review" &&
+    item.status !== "live"
+  ) {
+    return { label: "Start Website Build", action: "mark_build_in_progress" };
   }
   if (item.status === "build_in_progress") {
-    return { label: "Ready For Review", action: "mark_review_ready" };
+    return { label: "Ready For Website Review", action: "mark_review_ready" };
   }
   if (item.status === "changes_requested") {
-    return { label: "Ready For Review", action: "mark_review_ready" };
+    return { label: "Ready For Website Review", action: "mark_review_ready" };
   }
   if (item.status === "approved_for_launch") {
-    return { label: "Mark Live", action: "mark_live" };
+    return { label: "Mark Published", action: "mark_live" };
   }
   return null;
 }
@@ -147,9 +152,9 @@ export function LaunchQueuePanel({ initialData }: LaunchQueuePanelProps) {
     <section className="mt-10 rounded-2xl border border-gray-200 bg-white p-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h2 className="text-xl font-bold text-gray-900">Launch Queue</h2>
+          <h2 className="text-xl font-bold text-gray-900">Website Activation Queue</h2>
           <p className="mt-1 text-sm text-gray-500">
-            Claim requests that need approval, kickoff, build, review, or launch updates.
+            Claim requests that need ownership approval, activation, review, or publish updates.
           </p>
         </div>
       </div>
@@ -168,7 +173,7 @@ export function LaunchQueuePanel({ initialData }: LaunchQueuePanelProps) {
               <th className="px-4 py-3 text-left font-semibold text-gray-600">Owner</th>
               <th className="px-4 py-3 text-left font-semibold text-gray-600">Status</th>
               <th className="px-4 py-3 text-left font-semibold text-gray-600">Setup Intake</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-600">Billing</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-600">Activation</th>
               <th className="px-4 py-3 text-left font-semibold text-gray-600">Submitted</th>
               <th className="px-4 py-3 text-right font-semibold text-gray-600">Action</th>
             </tr>
@@ -211,7 +216,7 @@ export function LaunchQueuePanel({ initialData }: LaunchQueuePanelProps) {
                       Verification: {item.verification_status.replace(/_/g, " ")}
                     </p>
                     <p className="text-xs text-gray-500">
-                      Kickoff: {item.kickoff_state.replace(/_/g, " ")}
+                      Activation: {item.kickoff_state.replace(/_/g, " ")}
                     </p>
                     <p className="text-xs text-gray-500">
                       Review: {reviewStateLabel(item.review_state)}
@@ -240,8 +245,8 @@ export function LaunchQueuePanel({ initialData }: LaunchQueuePanelProps) {
                     </p>
                     <p className="mt-1 text-xs text-gray-500">
                       {item.setup_intake_status === "submitted"
-                        ? "Kickoff details are saved for support."
-                        : "Owner still needs to save kickoff details."}
+                        ? "Activation details are saved for support."
+                        : "Owner still needs to save activation details."}
                     </p>
                     {item.setup_intake_summary ? (
                       <div className="mt-2 flex flex-wrap gap-1.5">

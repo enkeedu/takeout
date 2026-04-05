@@ -39,6 +39,33 @@ Acceptable MVP model:
 This means "index every restaurant" is not a prerequisite for shipping the
 website claim product.
 
+## Build Strategy
+
+Do not start a brand-new project unless the current codebase proves unusable.
+
+Current assessment:
+- the searchable directory already exists
+- public restaurant pages already exist
+- claim flow already exists
+- unlisted-owner fallback already exists
+- owner workspace already exists
+- published owner overrides already flow onto public pages
+
+That means the expensive foundation for the website MVP is already present.
+The main problem is not missing infrastructure. The problem is that parts of the
+backend and admin flow still reflect an older launch-oriented product model.
+
+Recommended strategy:
+- keep this repo and current implementation as the base
+- build the cleaner website-activation lifecycle inside this repo
+- refactor backend and frontend around that lifecycle
+- treat the old launch/deposit/kickoff flow as transitional or legacy where it
+  no longer fits the primary website MVP
+
+Avoid:
+- full project restart
+- cosmetic copy-only rewrites that leave the old lifecycle untouched underneath
+
 ## Current State
 
 The product now has the core MVP building blocks:
@@ -74,6 +101,19 @@ The main remaining gap is operational:
 - media support is URL-based today rather than true uploads
 - domain support is not yet a first-class owner workflow
 - ordering, reservations, and voice are future expansion paths, not current MVP
+
+## Refactor Principle
+
+Backend and frontend are both allowed to change.
+
+Do not treat the current backend as a fixed constraint if it encodes the wrong
+product story. Instead:
+- preserve useful data structures and working routes where they still help
+- redefine the primary owner lifecycle around website activation
+- reshape backend contracts, notifications, and admin actions to support that
+  lifecycle
+- keep old launch-related logic only where it remains useful for future
+  ordering upgrades
 
 ## Most Valuable Next Tranche
 
@@ -115,6 +155,7 @@ What still feels wrong:
 
 - make owner workspace the default approved-owner destination
 - re-scope admin and owner copy toward website activation
+- refactor backend lifecycle semantics away from launch-first assumptions
 - improve media handling
 - add clearer domain-help workflow where needed
 
@@ -167,6 +208,23 @@ Do not do yet:
 Acceptance criteria:
 - public/admin owner-review language reads as ownership verification and website activation
 - launch/deposit language is no longer the primary website MVP narrative
+
+### Workstream 2.5: Re-architecture In Place
+
+Goal:
+- avoid a full rebuild while still fixing the underlying lifecycle mismatch
+
+Approach:
+- preserve the current repo, routes, and working website-publishing foundation
+- refactor status mapping, notifications, admin actions, and owner flows toward
+  website activation
+- isolate or demote legacy launch concepts instead of centering them
+
+Acceptance criteria:
+- the primary lifecycle reads as claim -> verify -> workspace -> publish
+- old launch-oriented concepts no longer control the main owner journey
+- future ordering upgrades still have an extensible path without forcing a new
+  repo build
 
 ### Workstream 3: Decide whether website approval should bypass payment entirely
 

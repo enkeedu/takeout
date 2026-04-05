@@ -15,7 +15,7 @@ import { LaunchReviewCenter } from "./LaunchReviewCenter";
 import { LaunchSetupIntake } from "./LaunchSetupIntake";
 
 export const metadata: Metadata = {
-  title: "Launch Status",
+  title: "Owner Status",
   robots: { index: false },
 };
 
@@ -131,7 +131,7 @@ function buildPaymentBanner(payment?: string) {
     case "success":
       return {
         title: "Setup deposit received",
-        detail: "The launch page is updated and kickoff can move forward now.",
+        detail: "This private owner page is updated and kickoff can move forward now.",
         tone: "border-[#d8ead8] bg-[#f7fcf7] text-[#2f6b39]",
       };
     case "failed":
@@ -149,7 +149,7 @@ function buildPaymentBanner(payment?: string) {
     case "error":
       return {
         title: "Checkout needs one more try",
-        detail: "The launch request is saved. Use the button below to open checkout again.",
+        detail: "The website activation request is saved. Use the button below to open checkout again.",
         tone: "border-[#f2d1c8] bg-[#fff4ef] text-[#9e3f28]",
       };
     default:
@@ -170,7 +170,7 @@ function buildFreshBanner(
       eyebrow: "Manual Review Saved",
       title: "Your claim is in the ownership review queue",
       detail:
-        "Bookmark this page. It is the private launch checkpoint for payment, kickoff, and build progress.",
+        "Bookmark this page. It is the private owner checkpoint for review, activation, and website progress.",
       tone: "border-[#ead9c3] bg-[#fff8ef] text-[#8b5d27]",
     };
   }
@@ -178,9 +178,9 @@ function buildFreshBanner(
   if (isManualReviewEntry) {
     return {
       eyebrow: "Ownership Approved",
-      title: "Your launch link is payment-ready",
+      title: "Your owner workspace is ready",
       detail:
-        "Ownership review is complete. Use this private page to pay the setup deposit and keep kickoff moving.",
+        "Ownership review is complete. Use this private page to manage and publish the website.",
       tone: "border-[#d8ead8] bg-[#f7fcf7] text-[#2f6b39]",
     };
   }
@@ -188,9 +188,9 @@ function buildFreshBanner(
   if (isReviewApproved) {
     return {
       eyebrow: "Approval Saved",
-      title: "Your launch approval is locked in",
+      title: "Your website approval is locked in",
       detail:
-        "The team has your approval and is moving this build through final launch checks now.",
+        "The team has your approval and is moving this build through final website checks now.",
       tone: "border-[#d8ead8] bg-[#f7fcf7] text-[#2f6b39]",
     };
   }
@@ -198,7 +198,7 @@ function buildFreshBanner(
   if (isReviewChanges) {
     return {
       eyebrow: "Changes Saved",
-      title: "Your requested edits are with the launch team",
+      title: "Your requested edits are with the website team",
       detail:
         "We saved your revision notes. The team will update the build and send a fresh review handoff when it is ready again.",
       tone: "border-[#ead9c3] bg-[#fff8ef] text-[#8b5d27]",
@@ -206,10 +206,10 @@ function buildFreshBanner(
   }
 
   return {
-    eyebrow: "Launch Request Saved",
-    title: "Your private launch link is ready",
+    eyebrow: "Website Request Saved",
+    title: "Your private owner link is ready",
     detail:
-      "Bookmark this page. It is the private launch checkpoint for payment, kickoff, and build progress.",
+      "Bookmark this page. It is the private owner checkpoint for website activation progress.",
     tone: "border-[#d8ead8] bg-[#f7fcf7] text-[#2f6b39]",
   };
 }
@@ -223,10 +223,10 @@ function buildLaunchNarrative(claim: ClaimRequestStatusResponse): {
     if (claim.setupIntakeStatus === "submitted") {
       return {
         statusDetail:
-          "We have your kickoff details. Support will reach out within 24 hours to confirm timing.",
-        nextStepTitle: "Watch for kickoff confirmation",
+          "We have your activation details. Support will reach out within 24 hours to confirm timing.",
+        nextStepTitle: "Watch for activation confirmation",
         nextStepDetail:
-          "Your setup notes are already saved, so the next move is on the launch team. If anything changes before kickoff, message support on WhatsApp or call us directly.",
+          "Your setup notes are already saved, so the next move is on the team. If anything changes before activation, message support on WhatsApp or call us directly.",
       };
     }
 
@@ -252,7 +252,7 @@ function buildLaunchNarrative(claim: ClaimRequestStatusResponse): {
   if (claim.status === "build_in_progress") {
     return {
       statusDetail:
-        "The launch team is building your website, menu, and direct-order setup now.",
+        "The team is preparing your website and guest-facing details now.",
       nextStepTitle: "Watch for your review handoff",
       nextStepDetail:
         "We'll reach out when the first polished version is ready so you can review it and request any final changes.",
@@ -272,18 +272,18 @@ function buildLaunchNarrative(claim: ClaimRequestStatusResponse): {
   if (claim.status === "changes_requested") {
     return {
       statusDetail:
-        "Your requested changes are with the launch team now. We will send a fresh review handoff when the updated build is ready.",
+        "Your requested changes are with the team now. We will send a fresh review handoff when the updated build is ready.",
       nextStepTitle: "Watch for your refreshed review link",
       nextStepDetail:
-        "Support is updating the build based on your notes. When the new review pass is ready, you will get another owner review email and private launch-page update.",
+        "Support is updating the build based on your notes. When the new review pass is ready, you will get another owner review email and private owner-page update.",
     };
   }
 
   if (claim.status === "approved_for_launch") {
     return {
       statusDetail:
-        "Approval received. The team is running final launch checks before the site goes live.",
-      nextStepTitle: "Watch for the live launch confirmation",
+        "Approval received. The team is running final website checks before the site goes live.",
+      nextStepTitle: "Watch for the publish confirmation",
       nextStepDetail:
         "Final checks are in motion now. We will email as soon as the site is live, and monthly billing will stay pending until launch is complete.",
     };
@@ -339,13 +339,13 @@ export default async function LaunchStatusPage({
       <div className="space-y-6">
         <section className="rounded-3xl border border-[#e6d6c6] bg-white p-6 shadow-sm md:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b04a2d]">
-            Launch Status
+            Owner Status
           </p>
           <h1 className="font-[var(--font-display)] mt-2 text-4xl font-black tracking-tight text-[#1f1f1f]">
-            Missing launch request
+            Missing owner request
           </h1>
           <p className="mt-2 text-sm text-[#665b52]">
-            We need a claim request ID to load the private launch page.
+            We need a claim request ID to load the private owner page.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             <Link
@@ -917,7 +917,7 @@ export default async function LaunchStatusPage({
                 href={buildLaunchStatusHref(claim.claimRequestId, accessToken)}
                 className="rounded-lg border border-[#ddc7b5] px-3 py-2 text-center text-xs font-semibold uppercase tracking-[0.12em] text-[#6b5543] hover:bg-[#fff8f2]"
               >
-                {showLiveLinks ? "Refresh Launch Link" : "Refresh Launch Link"}
+                Refresh Status Page
               </Link>
               <Link
                 href={buildOwnerWorkspaceHref(claim.claimRequestId, accessToken)}

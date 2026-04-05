@@ -4,7 +4,13 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import { trackEvent } from "@/lib/analytics";
 
-export function SearchBar({ compact = false }: { compact?: boolean }) {
+export function SearchBar({
+  compact = false,
+  variant = "default",
+}: {
+  compact?: boolean;
+  variant?: "default" | "hero";
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [query, setQuery] = useState(searchParams.get("q") || "");
@@ -29,11 +35,17 @@ export function SearchBar({ compact = false }: { compact?: boolean }) {
     });
   };
 
+  const isHero = variant === "hero" && !compact;
+
   return (
     <form
       onSubmit={handleSubmit}
       aria-busy={isPending}
-      className="w-full rounded-2xl border border-[#d9d9d9] bg-white p-1.5 shadow-sm transition-shadow duration-200 focus-within:shadow-md"
+      className={`w-full transition-shadow duration-200 ${
+        isHero
+          ? "rounded-[28px] border border-[#ead6ca] bg-[#fff8f3] p-2.5 shadow-[0_18px_44px_rgba(25,12,6,0.18)] focus-within:shadow-[0_22px_52px_rgba(25,12,6,0.24)]"
+          : "rounded-2xl border border-[#d9d9d9] bg-white p-1.5 shadow-sm focus-within:shadow-md"
+      }`}
     >
       <div className="flex items-center gap-1.5">
         <input
@@ -41,8 +53,12 @@ export function SearchBar({ compact = false }: { compact?: boolean }) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Restaurant, city, ZIP, address, or phone"
-          className={`flex-1 rounded-xl border border-transparent text-[#1f1f1f] placeholder:text-[#787878] focus:border-[#d8d8d8] focus:outline-none ${
-            compact ? "h-9 px-3 text-sm" : "h-12 px-4 text-base"
+          className={`flex-1 border border-transparent bg-white text-[#1f1f1f] placeholder:text-[#7d746d] focus:border-[#e1d4ca] focus:outline-none ${
+            compact
+              ? "h-9 rounded-xl px-3 text-sm"
+              : isHero
+              ? "h-14 rounded-[22px] px-5 text-base md:text-lg"
+              : "h-12 rounded-xl px-4 text-base"
           }`}
         />
         <button
@@ -51,6 +67,8 @@ export function SearchBar({ compact = false }: { compact?: boolean }) {
           className={`flex items-center justify-center gap-2 rounded-xl font-semibold transition-all duration-200 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-55 ${
             compact
               ? "h-9 w-9 text-[#333] hover:bg-[#f6f6f6]"
+              : isHero
+              ? "h-14 rounded-[22px] bg-[#d88376] px-6 text-base text-white shadow-sm hover:bg-[#c87164]"
               : "h-12 bg-[#c73f2f] px-4 text-sm text-white shadow-sm hover:bg-[#ad3324]"
           }`}
           aria-label="Search restaurants"

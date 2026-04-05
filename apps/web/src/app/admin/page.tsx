@@ -12,7 +12,7 @@ import { LaunchQueuePanel } from "./LaunchQueuePanel";
 import { UnlistedRequestsPanel } from "./UnlistedRequestsPanel";
 
 export const metadata: Metadata = {
-  title: "Admin - Leads Dashboard",
+  title: "Admin - Website Activation Dashboard",
   robots: { index: false, follow: false },
 };
 
@@ -67,8 +67,8 @@ export default async function AdminPage() {
     <div>
       <h1 className="text-2xl font-bold text-gray-900">Leads Dashboard</h1>
       <p className="mt-1 text-sm text-gray-500">
-        Restaurants that may be interested in web hosting / online ordering
-        services.
+        Restaurants that may be interested in website activation and later
+        online ordering services.
       </p>
       <AdminReadinessPanel
         diagnostics={diagnostics}
