@@ -1,5 +1,44 @@
 # Owner Activation Next Steps
 
+This is the current working plan for the restaurant owner web presence MVP.
+Older handoff and superseded plan documents were removed to keep resume context
+anchored to a single source of truth.
+
+## Product Goal
+
+The product is a directory-assisted website activation flow for restaurants.
+
+Primary goal:
+- help restaurants establish and improve a web presence that supports SEO,
+  discoverability, and lightweight website management
+
+Owner actions should include:
+- claiming an existing listing
+- creating or requesting a listing if the restaurant is not already indexed
+- confirming restaurant information
+- adding branding and photos
+- selecting or changing a website template/style
+- publishing updates to the public website page
+- later requesting help with domain-related setup or management when relevant
+
+Longer-term business path:
+1. website claim or listing creation
+2. owner website activation and lightweight customization
+3. upsell into online ordering
+4. later upsell into reservations, voice agents, and other products
+
+## Product Boundaries For MVP
+
+The directory does not need complete restaurant coverage to make the MVP work.
+
+Acceptable MVP model:
+- partial directory coverage for discovery and SEO
+- self-serve fallback for owners whose restaurant is not listed
+- owner-provided information becoming the authoritative source once claimed
+
+This means "index every restaurant" is not a prerequisite for shipping the
+website claim product.
+
 ## Current State
 
 The product now has the core MVP building blocks:
@@ -18,6 +57,23 @@ The main remaining gap is operational:
 - admin review still carries launch-oriented semantics
 - owner notifications and post-approval links still center the launch page
 - the MVP website owner path is not yet the default lifecycle
+
+## What Already Matches The Goal
+
+- a searchable directory exists
+- claim flow exists for listed restaurants
+- an unlisted-owner fallback exists
+- a private owner workspace exists
+- lightweight website customization exists
+- published owner overrides already affect the public restaurant page
+
+## What Does Not Fully Match Yet
+
+- the default post-approval path is still framed as launch operations
+- operational copy still emphasizes deposits, kickoff, and launch readiness
+- media support is URL-based today rather than true uploads
+- domain support is not yet a first-class owner workflow
+- ordering, reservations, and voice are future expansion paths, not current MVP
 
 ## Most Valuable Next Tranche
 
@@ -43,6 +99,36 @@ What already works:
 What still feels wrong:
 - the system still narrates approval as a launch/payment milestone
 - the default post-approval experience is not yet "manage your website"
+
+## Phased Strategy
+
+### Phase 1: Web Presence MVP
+
+- searchable restaurant pages
+- claim existing listing
+- submit business info if not listed
+- owner workspace for website edits
+- publish owner-approved website details
+- SEO-safe public pages
+
+### Phase 1.5: Operational Hardening
+
+- make owner workspace the default approved-owner destination
+- re-scope admin and owner copy toward website activation
+- improve media handling
+- add clearer domain-help workflow where needed
+
+### Phase 2: Monetization And Upgrade Path
+
+- online ordering onboarding and rollout
+- preserve existing launch/payment infrastructure only where it helps this
+  future upgrade path
+
+### Phase 3: Expanded Product Surface
+
+- reservations
+- voice agent ordering or reservations
+- other restaurant growth and operations products
 
 ## Next Session Implementation Plan
 
