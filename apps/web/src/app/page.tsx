@@ -4,7 +4,7 @@ import { SearchBar } from "@/components/SearchBar";
 
 export default async function HomePage() {
   return (
-    <div className="space-y-8 pb-8">
+    <div className="pb-8">
       <section className="full-bleed relative overflow-hidden border-y border-[#2c1f18]/50 bg-[#120c09] text-white">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-[0.18]"
@@ -23,13 +23,29 @@ export default async function HomePage() {
                 Built for Chinese Restaurant Owners
               </p>
               <h1 className="mt-3 max-w-4xl text-4xl font-black leading-[0.92] tracking-[-0.04em] text-[#fffaf6] md:text-6xl lg:text-[4.95rem]">
-                Claim your restaurant website and make a stronger first impression online.
+                Claim your restaurant page and get your business online.
               </h1>
               <p className="mt-5 max-w-3xl text-[1.15rem] leading-8 text-[#f0d8cb]">
-                We already create restaurant pages across the directory. Find yours, confirm the
-                details customers actually see, add better branding and photos, and publish a site
-                that feels more like the real business.
+                Whether you need a first website, cleaner business details, better visibility, or a
+                page you actually control, start with the restaurant page we already created and
+                publish something customers can trust.
               </p>
+
+              <div className="mt-6 flex flex-wrap gap-2.5">
+                {[
+                  "No website yet",
+                  "Wrong info online",
+                  "Need a better page",
+                  "Want more control",
+                ].map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-full border border-[#f3c7af]/30 bg-white/8 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-[#ffd8c6]"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
 
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link
@@ -58,9 +74,9 @@ export default async function HomePage() {
                   <SearchBar variant="hero" />
                 </Suspense>
                 <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm leading-6 text-[#e5c8ba]">
-                  <span>Fix hours and contact info.</span>
-                  <span>Add better photos and branding.</span>
-                  <span>Publish without rebuilding from zero.</span>
+                  <span>Publish a first website fast.</span>
+                  <span>Fix hours, phone, and address.</span>
+                  <span>Improve it over time.</span>
                 </div>
               </div>
             </div>
@@ -87,14 +103,14 @@ export default async function HomePage() {
                   </div>
 
                   <p className="text-[1rem] leading-7 text-[#efd7cb]">
-                    Modern Chinese takeout with stronger branding, clearer business details, and a
-                    page that feels ready for customers.
+                    Start simple with a page that is live, accurate, and ready for customers. Add
+                    stronger branding and upgrades later.
                   </p>
 
                   <div className="grid grid-cols-2 gap-3">
                     <div className="rounded-[18px] border border-white/10 bg-[#24150f] p-4">
                       <p className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-[#dca892]">
-                        Updated Details
+                        Start With Basics
                       </p>
                       <ul className="mt-2 space-y-1.5 text-sm leading-6 text-[#f6dfd3]">
                         <li>Mon-Sun 11:00 AM - 9:30 PM</li>
@@ -104,10 +120,11 @@ export default async function HomePage() {
                     </div>
                     <div className="rounded-[18px] border border-white/10 bg-[#24150f] p-4">
                       <p className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-[#dca892]">
-                        Better Presence
+                        Improve Later
                       </p>
                       <p className="mt-2 text-sm leading-6 text-[#f6dfd3]">
-                        Better photo, cleaner identity, and a website customers trust faster.
+                        Add better photos, cleaner branding, and a stronger presence when you are
+                        ready.
                       </p>
                     </div>
                   </div>
@@ -115,46 +132,6 @@ export default async function HomePage() {
               </div>
             </aside>
           </div>
-        </div>
-      </section>
-
-      <section className="surface-panel rounded-3xl p-6 md:p-8">
-        <div className="max-w-4xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b73a2f]">
-            What Claiming Fixes
-          </p>
-          <h2 className="font-[var(--font-display)] mt-2 text-3xl font-bold tracking-tight text-[#1f1f1f] md:text-[2.25rem]">
-            Take control of what customers see first
-          </h2>
-          <p className="copy-muted mt-3 max-w-3xl text-base leading-8">
-            Claiming your restaurant page gives you one place to clean up the basics, strengthen
-            the presentation, and publish a website that reflects the real business.
-          </p>
-        </div>
-
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
-          {[
-            {
-              title: "Correct the basics",
-              detail: "Fix hours, phone, address, and the business details customers rely on.",
-            },
-            {
-              title: "Improve the presentation",
-              detail: "Add logo, photos, and a cleaner visual identity that feels more credible.",
-            },
-            {
-              title: "Publish a better website",
-              detail: "Turn the page into a stronger restaurant website without rebuilding from zero.",
-            },
-          ].map((item) => (
-            <div
-              key={item.title}
-              className="surface-card rounded-2xl p-6"
-            >
-              <h3 className="text-lg font-semibold tracking-tight text-[#231d18]">{item.title}</h3>
-              <p className="mt-2 text-base leading-7 text-[#564b41]">{item.detail}</p>
-            </div>
-          ))}
         </div>
       </section>
     </div>
