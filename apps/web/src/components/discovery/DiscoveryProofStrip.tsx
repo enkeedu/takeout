@@ -20,11 +20,11 @@ export function DiscoveryProofStrip({
             {eyebrow}
           </p>
           <h2 className="font-[var(--font-display)] mt-1 text-2xl font-bold tracking-tight text-[#1f1f1f] md:text-[2rem]">
-            Clear pricing, fast launch, human support
+            Clear website claim path, human support
           </h2>
         </div>
         <p className="text-sm text-[#695c4f]">
-          Built to help owners find the right listing fast and move straight into launch.
+          Built to help owners find the right listing fast and move straight into claim.
         </p>
       </div>
 

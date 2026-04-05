@@ -85,6 +85,219 @@ class ClaimVerifyCodeOut(CamelModel):
     expires_in_seconds: int = Field(serialization_alias="expiresInSeconds")
 
 
+class UnlistedOwnerRequestIn(CamelModel):
+    restaurant_name: str = Field(
+        ...,
+        validation_alias=AliasChoices("restaurantName", "restaurant_name"),
+        serialization_alias="restaurantName",
+    )
+    city: str
+    state: str
+    restaurant_phone: str | None = Field(
+        default=None,
+        validation_alias=AliasChoices("restaurantPhone", "restaurant_phone"),
+        serialization_alias="restaurantPhone",
+    )
+    owner_name: str = Field(
+        ...,
+        validation_alias=AliasChoices("ownerName", "owner_name"),
+        serialization_alias="ownerName",
+    )
+    owner_phone: str = Field(
+        ...,
+        validation_alias=AliasChoices("ownerPhone", "owner_phone"),
+        serialization_alias="ownerPhone",
+    )
+    owner_email: str = Field(
+        ...,
+        validation_alias=AliasChoices("ownerEmail", "owner_email"),
+        serialization_alias="ownerEmail",
+    )
+    preferred_contact_method: PreferredContactMethod = Field(
+        ...,
+        validation_alias=AliasChoices(
+            "preferredContactMethod", "preferred_contact_method"
+        ),
+        serialization_alias="preferredContactMethod",
+    )
+    website_url: str | None = Field(
+        default=None,
+        validation_alias=AliasChoices("websiteUrl", "website_url"),
+        serialization_alias="websiteUrl",
+    )
+    google_maps_url: str | None = Field(
+        default=None,
+        validation_alias=AliasChoices("googleMapsUrl", "google_maps_url"),
+        serialization_alias="googleMapsUrl",
+    )
+    yelp_url: str | None = Field(
+        default=None,
+        validation_alias=AliasChoices("yelpUrl", "yelp_url"),
+        serialization_alias="yelpUrl",
+    )
+    notes: str | None = None
+    source_path: str | None = Field(
+        default=None,
+        validation_alias=AliasChoices("sourcePath", "source_path"),
+        serialization_alias="sourcePath",
+    )
+
+    @field_validator(
+        "restaurant_name",
+        "city",
+        "state",
+        "restaurant_phone",
+        "owner_name",
+        "owner_phone",
+        "owner_email",
+        "website_url",
+        "google_maps_url",
+        "yelp_url",
+        "notes",
+        "source_path",
+        mode="before",
+    )
+    @classmethod
+    def trim_optional_strings(cls, value: str | None) -> str | None:
+        if value is None:
+            return None
+        trimmed = value.strip()
+        return trimmed or None
+
+    @field_validator("state")
+    @classmethod
+    def normalize_state(cls, value: str) -> str:
+        trimmed = value.strip()
+        return trimmed.upper() if len(trimmed) == 2 else trimmed
+
+
+class UnlistedOwnerRequestOut(CamelModel):
+    request_id: uuid.UUID = Field(serialization_alias="requestId")
+    status: str
+    detail: str
+
+
+class OwnerSiteProfileRestaurantBaselineOut(CamelModel):
+    name: str
+    phone: str | None = None
+    address1: str
+    address2: str | None = None
+    city: str
+    state: str
+    zip: str
+    state_slug: str = Field(serialization_alias="stateSlug")
+    city_slug: str = Field(serialization_alias="citySlug")
+    restaurant_slug: str = Field(serialization_alias="restaurantSlug")
+    website_url: str | None = Field(default=None, serialization_alias="websiteUrl")
+    hours_json: dict | None = Field(default=None, serialization_alias="hoursJson")
+    template_key: str | None = Field(default=None, serialization_alias="templateKey")
+
+
+class OwnerSiteProfileOut(CamelModel):
+    business_name: str | None = Field(default=None, serialization_alias="businessName")
+    phone: str | None = None
+    address1: str | None = None
+    address2: str | None = None
+    city: str | None = None
+    state: str | None = None
+    zip: str | None = None
+    short_description: str | None = Field(default=None, serialization_alias="shortDescription")
+    logo_url: str | None = Field(default=None, serialization_alias="logoUrl")
+    photo_urls: list[str] = Field(default_factory=list, serialization_alias="photoUrls")
+    menu_image_urls: list[str] = Field(default_factory=list, serialization_alias="menuImageUrls")
+    template_key: str | None = Field(default=None, serialization_alias="templateKey")
+    hours_json: dict | None = Field(default=None, serialization_alias="hoursJson")
+    is_published: bool = Field(serialization_alias="isPublished")
+    published_at: datetime | None = Field(default=None, serialization_alias="publishedAt")
+    updated_at: datetime | None = Field(default=None, serialization_alias="updatedAt")
+
+
+class OwnerSiteProfileWorkspaceOut(CamelModel):
+    claim_request_id: uuid.UUID = Field(serialization_alias="claimRequestId")
+    restaurant_id: uuid.UUID = Field(serialization_alias="restaurantId")
+    access_granted: bool = Field(serialization_alias="accessGranted")
+    baseline: OwnerSiteProfileRestaurantBaselineOut
+    profile: OwnerSiteProfileOut
+
+
+class OwnerSiteProfileUpdateIn(CamelModel):
+    access_token: str = Field(
+        ...,
+        validation_alias=AliasChoices("accessToken", "access_token"),
+        serialization_alias="accessToken",
+    )
+    business_name: str | None = Field(
+        default=None,
+        validation_alias=AliasChoices("businessName", "business_name"),
+        serialization_alias="businessName",
+    )
+    phone: str | None = None
+    address1: str | None = None
+    address2: str | None = None
+    city: str | None = None
+    state: str | None = None
+    zip: str | None = None
+    short_description: str | None = Field(
+        default=None,
+        validation_alias=AliasChoices("shortDescription", "short_description"),
+        serialization_alias="shortDescription",
+    )
+    logo_url: str | None = Field(
+        default=None,
+        validation_alias=AliasChoices("logoUrl", "logo_url"),
+        serialization_alias="logoUrl",
+    )
+    photo_urls: list[str] = Field(
+        default_factory=list,
+        validation_alias=AliasChoices("photoUrls", "photo_urls"),
+        serialization_alias="photoUrls",
+    )
+    menu_image_urls: list[str] = Field(
+        default_factory=list,
+        validation_alias=AliasChoices("menuImageUrls", "menu_image_urls"),
+        serialization_alias="menuImageUrls",
+    )
+    template_key: str | None = Field(
+        default=None,
+        validation_alias=AliasChoices("templateKey", "template_key"),
+        serialization_alias="templateKey",
+    )
+    hours_json: dict | None = Field(
+        default=None,
+        validation_alias=AliasChoices("hoursJson", "hours_json"),
+        serialization_alias="hoursJson",
+    )
+
+    @field_validator(
+        "access_token",
+        "business_name",
+        "phone",
+        "address1",
+        "address2",
+        "city",
+        "state",
+        "zip",
+        "short_description",
+        "logo_url",
+        "template_key",
+        mode="before",
+    )
+    @classmethod
+    def trim_site_profile_strings(cls, value: str | None) -> str | None:
+        if value is None:
+            return None
+        trimmed = value.strip()
+        return trimmed or None
+
+
+class OwnerSiteProfilePublishIn(CamelModel):
+    access_token: str = Field(
+        ...,
+        validation_alias=AliasChoices("accessToken", "access_token"),
+        serialization_alias="accessToken",
+    )
+
+
 class ClaimSubmitIn(CamelModel):
     verified_token: str = Field(
         ...,

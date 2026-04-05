@@ -99,6 +99,29 @@ class AdminClaimQueueResponse(BaseModel):
     items: list[AdminClaimQueueItem]
 
 
+class AdminUnlistedOwnerRequestItem(BaseModel):
+    request_id: str
+    restaurant_name: str
+    city: str
+    state: str
+    restaurant_phone: str | None = None
+    owner_name: str
+    owner_phone: str
+    owner_email: str
+    preferred_contact_method: str
+    website_url: str | None = None
+    google_maps_url: str | None = None
+    yelp_url: str | None = None
+    notes: str | None = None
+    source_path: str | None = None
+    status: str
+    created_at: datetime
+
+
+class AdminUnlistedOwnerRequestResponse(BaseModel):
+    items: list[AdminUnlistedOwnerRequestItem]
+
+
 class AdminClaimQueueUpdateIn(BaseModel):
     action: AdminClaimQueueAction
     kickoff_scheduled_for: datetime | None = None

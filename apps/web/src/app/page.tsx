@@ -67,8 +67,8 @@ export default async function HomePage() {
                 {CORE_OWNER_PROMISE}
               </h1>
               <p className="mt-4 max-w-3xl text-base text-[#f5ddd2] md:text-lg">
-                Keep your menu, POS, and team workflow. We handle setup, migration,
-                and owner onboarding with English and Chinese support.
+                Start with your existing listing data, then claim, confirm, and publish a
+                restaurant website with English and Chinese support.
               </p>
 
               <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -82,6 +82,12 @@ export default async function HomePage() {
                 >
                   Find My Restaurant
                 </Link>
+                <Link
+                  href="/not-listed"
+                  className="rounded-xl border border-[#f8c7ae]/55 bg-white/10 px-5 py-3 text-sm font-semibold text-[#ffe1d3] transition-colors hover:bg-white/20"
+                >
+                  Not Listed Yet?
+                </Link>
                 <a
                   href="tel:+18183420990"
                   data-analytics-event="discovery_help_click"
@@ -91,7 +97,7 @@ export default async function HomePage() {
                   })}
                   className="rounded-xl border border-[#f8c7ae]/55 bg-white/10 px-5 py-3 text-sm font-semibold text-[#ffe1d3] transition-colors hover:bg-white/20"
                 >
-                  Book 15-min Setup Call
+                  Talk to a Human
                 </a>
               </div>
 
@@ -110,7 +116,7 @@ export default async function HomePage() {
                 Why Owners Start Here
               </p>
               <h2 className="font-[var(--font-display)] mt-2 text-3xl font-bold leading-tight tracking-tight">
-                One search, then a clean launch path
+                One search, then a clear website claim path
               </h2>
               <div className="mt-5 grid gap-2 sm:grid-cols-2">
                 <div className="rounded-lg border border-[#ffffff26] bg-white/10 p-3">
@@ -129,7 +135,7 @@ export default async function HomePage() {
                 </div>
                 <div className="rounded-lg border border-[#ffffff26] bg-white/10 p-3">
                   <p className="text-xs uppercase tracking-wide text-[#d9bdb0]">
-                    Launch Timeline
+                    Website Timeline
                   </p>
                   <p className="mt-1 font-semibold text-white">5-7 days</p>
                 </div>
@@ -149,8 +155,8 @@ export default async function HomePage() {
         eyebrow="Verified Owner Proof"
         items={[
           { label: "Directory Coverage", value: `${formatNumber(totalRestaurants)} listings` },
-          { label: "Launch Markets", value: `${states.length} states` },
-          { label: "Pricing", value: "$299 setup + $99/month" },
+          { label: "Active Markets", value: `${states.length} states` },
+          { label: "Publishing Model", value: "Baseline site + owner claim" },
           { label: "Support", value: "English | Chinese | Human help" },
         ]}
       />
@@ -159,10 +165,10 @@ export default async function HomePage() {
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b73a2f]">
-              Find - Claim - Launch
+              Find - Claim - Publish
             </p>
             <h2 className="font-[var(--font-display)] mt-1 text-3xl font-bold tracking-tight text-[#1f1f1f] md:text-[2.15rem]">
-              A clearer path from directory to launch
+              A clearer path from listing to website
             </h2>
           </div>
           <p className="max-w-2xl text-sm text-[#685b4f]">
@@ -183,7 +189,7 @@ export default async function HomePage() {
             },
             {
               title: OWNER_LAUNCH_STEPS[2],
-              detail: "We handle setup so owners can go live in days, not months.",
+              detail: "Confirm the website details, pick a template, and publish a stronger web presence.",
             },
           ].map((step, index) => (
             <article
@@ -233,13 +239,12 @@ export default async function HomePage() {
               Template Showroom
             </p>
             <h2 className="font-[var(--font-display)] mt-1 text-3xl font-bold tracking-tight text-[#1f1f1f] md:text-[2.15rem]">
-              Preview what owners get after discovery
+              Preview the website templates owners can unlock
             </h2>
           </div>
           <p className="max-w-2xl text-sm text-[#685b4f]">
             Discovery comes first. These previews stay below the listing-search path and focus on
-            three clear owner-facing choices: safest default, brand-forward storefront, or a faster
-            phone-first ordering feel.
+            three clear owner-facing website choices: safest default, brand-forward storefront, or a tighter phone-first presentation.
           </p>
         </div>
 
@@ -304,7 +309,7 @@ export default async function HomePage() {
           Owner Call To Action
         </p>
         <h2 className="font-[var(--font-display)] mt-2 text-3xl font-bold tracking-tight text-[#1f1f1f]">
-          Ready to find your listing and launch?
+          Ready to find your listing and publish?
         </h2>
         <p className="mt-2 text-sm text-[#666]">
           Transparent pricing, migration help, and real human support.
@@ -333,6 +338,12 @@ export default async function HomePage() {
           >
             Find My Restaurant
           </Link>
+          <Link
+            href="/not-listed"
+            className="inline-flex rounded-xl border border-[#e0c9b7] bg-white px-4 py-3 text-sm font-semibold text-[#6e5a4c] transition-colors hover:bg-[#fff8f2]"
+          >
+            Restaurant Not Listed?
+          </Link>
           <a
             href="tel:+18183420990"
             data-analytics-event="discovery_help_click"
@@ -342,7 +353,7 @@ export default async function HomePage() {
             })}
             className="inline-flex rounded-xl border border-[#e0c9b7] bg-white px-4 py-3 text-sm font-semibold text-[#6e5a4c] transition-colors hover:bg-[#fff8f2]"
           >
-            Book 15-min Setup Call
+            Talk to a Human
           </a>
         </div>
       </section>

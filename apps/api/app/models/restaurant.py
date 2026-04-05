@@ -50,3 +50,8 @@ class Restaurant(Base):
         back_populates="restaurant",
         cascade="all, delete-orphan",
     )
+    owner_site_profile: Mapped["OwnerSiteProfile | None"] = relationship(
+        back_populates="restaurant",
+        cascade="all, delete-orphan",
+        uselist=False,
+    )

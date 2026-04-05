@@ -195,6 +195,62 @@ export type ClaimSetupIntakeRequest = ClaimSetupIntakeSummary & {
   accessToken: string;
 };
 
+export type OwnerSiteProfileWorkspaceResponse = {
+  claimRequestId: string;
+  restaurantId: string;
+  accessGranted: boolean;
+  baseline: {
+    name: string;
+    phone: string | null;
+    address1: string;
+    address2: string | null;
+    city: string;
+    state: string;
+    zip: string;
+    stateSlug: string;
+    citySlug: string;
+    restaurantSlug: string;
+    websiteUrl: string | null;
+    hoursJson: Record<string, unknown> | null;
+    templateKey: string | null;
+  };
+  profile: {
+    businessName: string | null;
+    phone: string | null;
+    address1: string | null;
+    address2: string | null;
+    city: string | null;
+    state: string | null;
+    zip: string | null;
+    shortDescription: string | null;
+    logoUrl: string | null;
+    photoUrls: string[];
+    menuImageUrls: string[];
+    templateKey: string | null;
+    hoursJson: Record<string, unknown> | null;
+    isPublished: boolean;
+    publishedAt: string | null;
+    updatedAt: string | null;
+  };
+};
+
+export type OwnerSiteProfileUpdateRequest = {
+  accessToken: string;
+  businessName: string | null;
+  phone: string | null;
+  address1: string | null;
+  address2: string | null;
+  city: string | null;
+  state: string | null;
+  zip: string | null;
+  shortDescription: string | null;
+  logoUrl: string | null;
+  photoUrls: string[];
+  menuImageUrls: string[];
+  templateKey: string | null;
+  hoursJson: Record<string, unknown> | null;
+};
+
 function normalizePart(value?: string | null): string {
   return (value || "").trim().toLowerCase();
 }
@@ -249,6 +305,20 @@ export function buildLaunchStatusHref(
   return query
     ? `/launch/${encodeURIComponent(normalized)}?${query}`
     : `/launch/${encodeURIComponent(normalized)}`;
+}
+
+export function buildOwnerWorkspaceHref(
+  claimRequestId: string,
+  accessToken?: string
+): string {
+  const normalized = claimRequestId.trim();
+  if (!normalized) return "/search?claim=1";
+  const params = new URLSearchParams();
+  if (accessToken?.trim()) params.set("access", accessToken.trim());
+  const query = params.toString();
+  return query
+    ? `/owner/${encodeURIComponent(normalized)}?${query}`
+    : `/owner/${encodeURIComponent(normalized)}`;
 }
 
 export async function sendClaimCode(
@@ -347,6 +417,44 @@ export async function submitClaimSetupIntake(
     {
       method: "POST",
       body: JSON.stringify(payload),
+    }
+  );
+}
+
+export async function getOwnerSiteProfileWorkspace(
+  claimRequestId: string,
+  accessToken: string
+): Promise<OwnerSiteProfileWorkspaceResponse> {
+  return apiFetch<OwnerSiteProfileWorkspaceResponse>(
+    `/claim/requests/${encodeURIComponent(claimRequestId)}/site-profile`,
+    {
+      headers: { "X-Launch-Access-Token": accessToken },
+    }
+  );
+}
+
+export async function updateOwnerSiteProfileWorkspace(
+  claimRequestId: string,
+  payload: OwnerSiteProfileUpdateRequest
+): Promise<OwnerSiteProfileWorkspaceResponse> {
+  return apiFetch<OwnerSiteProfileWorkspaceResponse>(
+    `/claim/requests/${encodeURIComponent(claimRequestId)}/site-profile`,
+    {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }
+  );
+}
+
+export async function publishOwnerSiteProfileWorkspace(
+  claimRequestId: string,
+  accessToken: string
+): Promise<OwnerSiteProfileWorkspaceResponse> {
+  return apiFetch<OwnerSiteProfileWorkspaceResponse>(
+    `/claim/requests/${encodeURIComponent(claimRequestId)}/site-profile/publish`,
+    {
+      method: "POST",
+      body: JSON.stringify({ accessToken }),
     }
   );
 }

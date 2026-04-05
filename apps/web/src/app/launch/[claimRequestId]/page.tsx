@@ -4,6 +4,7 @@ import { ApiError } from "@/lib/api";
 import {
   buildLaunchStatusHref,
   buildListingHref,
+  buildOwnerWorkspaceHref,
   getClaimRequestStatus,
   type ClaimRequestStatusResponse,
 } from "@/lib/claim";
@@ -917,6 +918,12 @@ export default async function LaunchStatusPage({
                 className="rounded-lg border border-[#ddc7b5] px-3 py-2 text-center text-xs font-semibold uppercase tracking-[0.12em] text-[#6b5543] hover:bg-[#fff8f2]"
               >
                 {showLiveLinks ? "Refresh Launch Link" : "Refresh Launch Link"}
+              </Link>
+              <Link
+                href={buildOwnerWorkspaceHref(claim.claimRequestId, accessToken)}
+                className="rounded-lg border border-[#ddc7b5] px-3 py-2 text-center text-xs font-semibold uppercase tracking-[0.12em] text-[#6b5543] hover:bg-[#fff8f2]"
+              >
+                Edit Website Details
               </Link>
             </div>
           </section>

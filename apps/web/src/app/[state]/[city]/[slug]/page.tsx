@@ -30,6 +30,7 @@ import { TemplateWokFire } from "@/components/restaurant-templates/TemplateWokFi
 import { TemplateMetroGrid } from "@/components/restaurant-templates/TemplateMetroGrid";
 import { TemplateEditorialColumn } from "@/components/restaurant-templates/TemplateEditorialColumn";
 import { TemplateGlassOrbit } from "@/components/restaurant-templates/TemplateGlassOrbit";
+import { TemplateVisitDetails } from "@/components/restaurant-templates/TemplateVisitDetails";
 import {
   DEFAULT_TEMPLATE_KEY,
   isDeployableTemplateKey,
@@ -62,6 +63,7 @@ const MOCK_MENU_TEMPLATE_KEYS: TemplateKey[] = [
   "editorial-column",
   "glass-orbit",
 ];
+const HIDE_MENU_UI = true;
 
 async function getRestaurant(
   state: string,
@@ -131,7 +133,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${r.name} - ${r.city}, ${r.state}`,
-    description: `${r.name} at ${r.address1}, ${r.city}, ${r.state} ${r.zip}. ${r.phone ? `Phone: ${r.phone}.` : ""} Chinese restaurant.`,
+    description:
+      r.short_description ||
+      `${r.name} at ${r.address1}, ${r.city}, ${r.state} ${r.zip}. ${
+        r.phone ? `Phone: ${r.phone}.` : ""
+      } Chinese restaurant.`,
     alternates: {
       canonical: `https://chinese-takeout.com/${r.state_slug}/${r.city_slug}/${r.restaurant_slug}`,
     },
@@ -172,7 +178,7 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
   const specials = buildMockSpecials(r.name);
   const highlights = buildHighlights(r.name, r.city);
   const hours = buildHours(r.hours_json);
-  const tagline = buildTagline(r.name, r.city);
+  const tagline = r.short_description || buildTagline(r.name, r.city);
   const mapsUrl = buildMapsUrl(r);
   const basePath = `/${r.state_slug}/${r.city_slug}/${r.restaurant_slug}`;
   const orderPath = basePath;
@@ -308,22 +314,22 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
             <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
               <div className="space-y-3">
                 <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#b64a30]">
-                  {r.is_claimed ? "Owner Launch Path" : "Website Preview Ready"}
+                  {r.is_claimed ? "Owner Website Path" : "Website Preview Ready"}
                 </p>
                 <p className="mt-1 text-sm text-[#5f544b]">
                   {r.is_claimed
                     ? CORE_OWNER_PROMISE
-                    : "See your recommended design, then verify ownership to launch."}
+                    : "See your recommended design, then verify ownership to unlock website updates."}
                 </p>
                 <div className="flex flex-wrap gap-2 text-xs">
                   <span className="rounded-full border border-[#eadccf] bg-[#fff9f3] px-3 py-1 font-semibold uppercase tracking-[0.12em] text-[#7d6857]">
-                    $299 setup + $99/mo
+                    {r.site_profile_published ? "Owner details live" : "Website preview ready"}
                   </span>
                   <span className="rounded-full border border-[#eadccf] bg-[#fff9f3] px-3 py-1 font-semibold uppercase tracking-[0.12em] text-[#7d6857]">
-                    5-7 day launch
+                    {r.short_description ? "Custom description saved" : "Confirm business details"}
                   </span>
                   <span className="rounded-full border border-[#eadccf] bg-[#fff9f3] px-3 py-1 font-semibold uppercase tracking-[0.12em] text-[#7d6857]">
-                    English | Chinese support
+                    Photos, hours, and contact info
                   </span>
                 </div>
               </div>
@@ -340,7 +346,7 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
                   })}
                   className="rounded-xl bg-[#c73f2f] px-4 py-2 text-sm font-semibold text-white hover:bg-[#ad3324]"
                 >
-                  {r.is_claimed ? "Claim & Launch" : "Preview Website"}
+                  {r.is_claimed ? "Manage Website" : "Preview Website"}
                 </a>
                 <a
                   href="tel:+18183420990"
@@ -375,7 +381,28 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
         />
       ) : null}
 
-      {templateKey === "ming" ? (
+      {HIDE_MENU_UI ? (
+        <TemplateVisitDetails
+          restaurant={r}
+          menu={menu}
+          reviews={reviews}
+          gallery={gallery}
+          hours={hours}
+          specials={specials}
+          tagline={tagline}
+          highlights={highlights}
+          mapsUrl={mapsUrl}
+          templateKey={templateKey}
+          previewMode={previewMode}
+          basePath={basePath}
+          orderPath={orderPath}
+          orderingEnabled={orderingEnabled}
+          fontPreset={fontPreset}
+          palette={palette}
+        />
+      ) : null}
+
+      {!HIDE_MENU_UI && templateKey === "ming" ? (
         <TemplateMing
           restaurant={r}
           menu={menu}
@@ -396,7 +423,7 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
         />
       ) : null}
 
-      {templateKey === "ming-slim" ? (
+      {!HIDE_MENU_UI && templateKey === "ming-slim" ? (
         <TemplateMingSlim
           restaurant={r}
           menu={menu}
@@ -417,7 +444,7 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
         />
       ) : null}
 
-      {templateKey === "ming-balanced" ? (
+      {!HIDE_MENU_UI && templateKey === "ming-balanced" ? (
         <TemplateMingBalanced
           restaurant={r}
           menu={menu}
@@ -438,7 +465,7 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
         />
       ) : null}
 
-      {templateKey === "ming-full" ? (
+      {!HIDE_MENU_UI && templateKey === "ming-full" ? (
         <TemplateMingFull
           restaurant={r}
           menu={menu}
@@ -459,7 +486,7 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
         />
       ) : null}
 
-      {templateKey === "local-order" ? (
+      {!HIDE_MENU_UI && templateKey === "local-order" ? (
         <TemplateLocalOrder
           restaurant={r}
           menu={menu}
@@ -480,7 +507,7 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
         />
       ) : null}
 
-      {templateKey === "local-storefront" ? (
+      {!HIDE_MENU_UI && templateKey === "local-storefront" ? (
         <TemplateLocalStorefront
           restaurant={r}
           menu={menu}
@@ -501,7 +528,7 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
         />
       ) : null}
 
-      {templateKey === "local-express" ? (
+      {!HIDE_MENU_UI && templateKey === "local-express" ? (
         <TemplateLocalExpress
           restaurant={r}
           menu={menu}
@@ -522,7 +549,7 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
         />
       ) : null}
 
-      {templateKey === "local-feast" ? (
+      {!HIDE_MENU_UI && templateKey === "local-feast" ? (
         <TemplateLocalFeast
           restaurant={r}
           menu={menu}
@@ -543,7 +570,7 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
         />
       ) : null}
 
-      {templateKey === "night-market" ? (
+      {!HIDE_MENU_UI && templateKey === "night-market" ? (
         <TemplateNightMarket
           restaurant={r}
           menu={menu}
@@ -564,7 +591,7 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
         />
       ) : null}
 
-      {templateKey === "wok-fire" ? (
+      {!HIDE_MENU_UI && templateKey === "wok-fire" ? (
         <TemplateWokFire
           restaurant={r}
           menu={menu}
@@ -585,7 +612,7 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
         />
       ) : null}
 
-      {templateKey === "metro-grid" ? (
+      {!HIDE_MENU_UI && templateKey === "metro-grid" ? (
         <TemplateMetroGrid
           restaurant={r}
           menu={menu}
@@ -606,7 +633,7 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
         />
       ) : null}
 
-      {templateKey === "editorial-column" ? (
+      {!HIDE_MENU_UI && templateKey === "editorial-column" ? (
         <TemplateEditorialColumn
           restaurant={r}
           menu={menu}
@@ -627,7 +654,7 @@ export default async function RestaurantPage({ params, searchParams }: Props) {
         />
       ) : null}
 
-      {templateKey === "glass-orbit" ? (
+      {!HIDE_MENU_UI && templateKey === "glass-orbit" ? (
         <TemplateGlassOrbit
           restaurant={r}
           menu={menu}

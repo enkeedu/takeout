@@ -8,12 +8,21 @@ from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config import settings
-from app.models import ClaimRequest, Restaurant, RestaurantLocation, RestaurantSlug, WebsiteAudit
+from app.models import (
+    ClaimRequest,
+    Restaurant,
+    RestaurantLocation,
+    RestaurantSlug,
+    UnlistedOwnerRequest,
+    WebsiteAudit,
+)
 from app.schemas.admin import (
     AdminClaimQueueItem,
     AdminClaimQueueResponse,
     AdminClaimQueueUpdateIn,
     AdminDiagnosticsOut,
+    AdminUnlistedOwnerRequestItem,
+    AdminUnlistedOwnerRequestResponse,
     ChartEntry,
     LeadItem,
     LeadStats,
@@ -416,6 +425,36 @@ async def get_claim_queue(db: AsyncSession) -> AdminClaimQueueResponse:
             )
         )
     return AdminClaimQueueResponse(items=items)
+
+
+async def get_unlisted_owner_requests(
+    db: AsyncSession,
+) -> AdminUnlistedOwnerRequestResponse:
+    result = await db.execute(
+        select(UnlistedOwnerRequest).order_by(UnlistedOwnerRequest.created_at.desc())
+    )
+    items = [
+        AdminUnlistedOwnerRequestItem(
+            request_id=str(entry.id),
+            restaurant_name=entry.restaurant_name,
+            city=entry.city,
+            state=entry.state,
+            restaurant_phone=entry.restaurant_phone,
+            owner_name=entry.owner_name,
+            owner_phone=entry.owner_phone,
+            owner_email=entry.owner_email,
+            preferred_contact_method=entry.preferred_contact_method,
+            website_url=entry.website_url,
+            google_maps_url=entry.google_maps_url,
+            yelp_url=entry.yelp_url,
+            notes=entry.notes,
+            source_path=entry.source_path,
+            status=entry.status,
+            created_at=entry.created_at,
+        )
+        for entry in result.scalars().all()
+    ]
+    return AdminUnlistedOwnerRequestResponse(items=items)
 
 
 async def get_admin_diagnostics() -> AdminDiagnosticsOut:

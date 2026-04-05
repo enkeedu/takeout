@@ -3,11 +3,13 @@ import { ApiError, apiFetch } from "@/lib/api";
 import type {
   AdminClaimQueueResponse,
   AdminDiagnostics,
+  AdminUnlistedOwnerRequestResponse,
   LeadsResponse,
 } from "@/lib/types";
 import { AdminReadinessPanel } from "./AdminReadinessPanel";
 import { LeadsDashboard } from "./LeadsDashboard";
 import { LaunchQueuePanel } from "./LaunchQueuePanel";
+import { UnlistedRequestsPanel } from "./UnlistedRequestsPanel";
 
 export const metadata: Metadata = {
   title: "Admin - Leads Dashboard",
@@ -22,16 +24,21 @@ export default async function AdminPage() {
 
   let data: LeadsResponse;
   let claimQueue: AdminClaimQueueResponse;
+  let unlistedRequests: AdminUnlistedOwnerRequestResponse;
   let diagnostics: AdminDiagnostics;
   try {
     const headers = adminToken ? { "X-Admin-Token": adminToken } : undefined;
-    [data, claimQueue, diagnostics] = await Promise.all([
+    [data, claimQueue, unlistedRequests, diagnostics] = await Promise.all([
       apiFetch<LeadsResponse>(
         "/admin/leads?page=1&page_size=50&sort_by=lead_score&sort_dir=desc",
         headers ? { headers } : undefined
       ),
       apiFetch<AdminClaimQueueResponse>(
         "/admin/claim-requests",
+        headers ? { headers } : undefined
+      ),
+      apiFetch<AdminUnlistedOwnerRequestResponse>(
+        "/admin/unlisted-owner-requests",
         headers ? { headers } : undefined
       ),
       apiFetch<AdminDiagnostics>(
@@ -71,6 +78,7 @@ export default async function AdminPage() {
       />
       <LeadsDashboard initialData={data} />
       <LaunchQueuePanel initialData={claimQueue} />
+      <UnlistedRequestsPanel initialData={unlistedRequests} />
     </div>
   );
 }

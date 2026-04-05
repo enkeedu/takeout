@@ -17,7 +17,7 @@ import type { PaginatedResponse, SearchResultItem, StateInfo } from "@/lib/types
 export const metadata: Metadata = {
   title: "Find My Restaurant",
   description:
-    "Search by restaurant name, city, ZIP, address, or phone to find your listing and launch direct ordering.",
+    "Search by restaurant name, city, ZIP, address, or phone to find your listing and claim your restaurant website.",
   robots: { index: false },
 };
 
@@ -78,6 +78,16 @@ function buildSearchUrl(filters: Partial<SearchFilters>, page?: number): string 
   if (page && page > 1) params.set("page", String(page));
   const query = params.toString();
   return query ? `/search?${query}` : "/search";
+}
+
+function buildNotListedUrl(filters: Partial<SearchFilters>): string {
+  const params = new URLSearchParams();
+  if (filters.name?.trim()) params.set("name", filters.name.trim());
+  if (filters.city?.trim()) params.set("city", filters.city.trim());
+  if (filters.state?.trim()) params.set("state", filters.state.trim().toUpperCase());
+  if (filters.phone?.trim()) params.set("phone", filters.phone.trim());
+  const query = params.toString();
+  return query ? `/not-listed?${query}` : "/not-listed";
 }
 
 function buildSearchCollectionName(filters: SearchFilters) {
@@ -143,7 +153,7 @@ async function SearchResults({
   const collectionJsonLd = buildCollectionPageJsonLd({
     name: buildSearchCollectionName(filters),
     description:
-      "Search results for Chinese restaurant owners finding the correct listing to claim and launch.",
+      "Search results for Chinese restaurant owners finding the correct listing to claim and manage their website.",
     path: searchPath,
   });
 
@@ -177,7 +187,7 @@ async function SearchResults({
         </h2>
         <p className="mt-3 text-sm text-[#5f5851] md:text-base">
           Retry the same search, or talk to a human and we will help you continue your
-          launch quickly.
+          website claim quickly.
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
           <Link
@@ -270,6 +280,12 @@ async function SearchResults({
           >
             Clear and Search Again
           </Link>
+          <Link
+            href={buildNotListedUrl(filters)}
+            className="rounded-xl border border-[#decfbd] bg-[#fff8f2] px-4 py-2 text-sm font-semibold text-[#6f5a49] transition-colors hover:bg-[#fff1e8]"
+          >
+            Restaurant Not Listed?
+          </Link>
           <a
             href="tel:+18183420990"
             data-analytics-event="discovery_help_click"
@@ -338,7 +354,7 @@ async function SearchResults({
               {data.total} restaurant{data.total !== 1 ? "s" : ""} matched
             </h2>
             <p className="text-sm text-[#6d6258]">
-              Open your listing and continue with claim and launch.
+              Open your listing and continue with website claim and setup.
             </p>
           </div>
           <a
@@ -385,12 +401,18 @@ async function SearchResults({
           <ol className="mt-3 space-y-2 text-sm text-[#5f5851]">
             <li>1. Open the listing that matches your phone and address.</li>
             <li>2. Claim the listing so we can use the right business data.</li>
-            <li>3. Launch direct ordering with done-for-you setup in 5-7 days.</li>
+            <li>3. Confirm the website details and publish a stronger web presence.</li>
           </ol>
           <div className="mt-4 rounded-xl border border-[#ecdccc] bg-[#fff8f1] p-3 text-xs text-[#6b5f54]">
             Transparent pricing: $299 setup + $99/month.
           </div>
           <div className="mt-3 flex flex-wrap gap-2">
+            <Link
+              href="/not-listed"
+              className="rounded-lg border border-[#decfbd] px-3 py-2 text-xs font-semibold uppercase tracking-[0.1em] text-[#6f5a49] transition-colors hover:bg-[#fff8f2]"
+            >
+              Not Listed?
+            </Link>
             <a
               href="tel:+18183420990"
               data-analytics-event="discovery_help_click"
@@ -534,7 +556,7 @@ export default async function SearchPage({
                 <p className="mt-1 text-lg font-bold text-[#1f1f1f]">English | Chinese</p>
               </div>
               <div className="rounded-xl border border-[#eadccf] bg-[#fff9f3] px-3 py-2">
-                <p className="text-xs uppercase tracking-[0.18em] text-[#8d7a66]">Launch</p>
+                <p className="text-xs uppercase tracking-[0.18em] text-[#8d7a66]">Website Setup</p>
                 <p className="mt-1 text-lg font-bold text-[#1f1f1f]">5-7 days</p>
               </div>
               <div className="rounded-xl border border-[#eadccf] bg-[#fff9f3] px-3 py-2">
@@ -556,7 +578,7 @@ export default async function SearchPage({
               : "7,000+ listings",
           },
           { label: "Pricing", value: "$299 setup + $99/month" },
-          { label: "Launch Timeline", value: "Go live in 5-7 days" },
+          { label: "Website Timeline", value: "Go live in 5-7 days" },
           { label: "Support", value: "English | Chinese | Human help" },
         ]}
       />

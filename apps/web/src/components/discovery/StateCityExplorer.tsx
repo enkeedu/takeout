@@ -217,7 +217,7 @@ export function StateCityExplorer({
           Pick your city in {stateName}
         </h2>
         <p className="mt-2 max-w-3xl text-sm text-[#5a534d] md:text-base">
-          Start with top launch opportunities. If you already know your listing, jump
+          Start with the strongest website-claim opportunities. If you already know your listing, jump
           to direct search.
         </p>
 
@@ -243,7 +243,7 @@ export function StateCityExplorer({
             })}
             className="inline-flex rounded-xl border border-[#e2d4c4] px-4 py-2 text-sm font-semibold text-[#6b5543] transition-colors hover:bg-[#fff8f2]"
           >
-            Book 15-min Setup Call
+            Talk to a Human
           </a>
           <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8a7665]">
             English | Chinese support
@@ -265,7 +265,7 @@ export function StateCityExplorer({
             }
             className="rounded-xl border border-[#d8cdbf] bg-white px-4 py-3 text-sm text-[#222] focus:border-[#cc3f2f] focus:outline-none focus:ring-2 focus:ring-[#f7d4cf]"
           >
-            <option value="opportunity">Best Launch Opportunity</option>
+            <option value="opportunity">Best Website Opportunity</option>
             <option value="count">Most Restaurants</option>
             <option value="alpha">A-Z</option>
           </select>
@@ -316,7 +316,7 @@ export function StateCityExplorer({
               </h3>
               <p className="mt-1 text-sm text-[#65584d]">
                 Search by restaurant name, city, state, ZIP, or address and jump
-                straight to claim and launch.
+                straight to claim and website setup.
               </p>
             </div>
             <div className="mt-4 flex flex-wrap gap-2 md:mt-0">
@@ -429,7 +429,7 @@ export function StateCityExplorer({
             })}
             className="inline-flex rounded-lg border border-[#e2d4c4] px-4 py-2 text-sm font-semibold text-[#6b5543] transition-colors hover:bg-[#fff8f2]"
           >
-            Book 15-min Setup Call
+            Talk to a Human
           </a>
           <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[#8a7665]">
             English | Chinese

@@ -6,7 +6,7 @@ export function Footer() {
           <p>&copy; {new Date().getFullYear()} chinese-takeout.com</p>
           <div className="flex items-center gap-4 text-xs uppercase tracking-[0.16em]">
             <span>Built for restaurant owners</span>
-            <span className="text-[#a49684]">Find, Claim, Launch</span>
+            <span className="text-[#a49684]">Find, Claim, Publish</span>
           </div>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-4 text-xs uppercase tracking-[0.14em] text-[#7c6e60] md:justify-start">

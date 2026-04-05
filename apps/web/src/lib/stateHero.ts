@@ -9,7 +9,7 @@ const DEFAULT_THEME: StateHeroTheme = {
   eyebrow: "State Market View",
   headlineSuffix: "Owner Market",
   supportingText:
-    "See city-level Chinese restaurant opportunities, then choose where to launch your owner demo first.",
+    "See city-level Chinese restaurant opportunities, then choose where website claim and owner activation should start first.",
   imagePath: "/state-banners/default.svg",
 };
 
@@ -18,7 +18,7 @@ const THEMES: Record<string, StateHeroTheme> = {
     eyebrow: "California Market View",
     headlineSuffix: "Golden State",
     supportingText:
-      "From Golden Gate markets to Hollywood-heavy demand zones, pick the best city to launch direct ordering first.",
+      "From Golden Gate markets to Hollywood-heavy demand zones, pick the best city to start owner website claims first.",
     imagePath: "/state-banners/ca.svg",
   },
   NY: {
@@ -32,7 +32,7 @@ const THEMES: Record<string, StateHeroTheme> = {
     eyebrow: "Florida Market View",
     headlineSuffix: "Sunshine State",
     supportingText:
-      "Use Miami-style, high-tourism city demand to prioritize the best launch point for web ordering and AI phone flow.",
+      "Use Miami-style, high-tourism city demand to prioritize the best launch point for restaurant web presence.",
     imagePath: "/state-banners/fl.svg",
   },
   IL: {
@@ -46,7 +46,7 @@ const THEMES: Record<string, StateHeroTheme> = {
     eyebrow: "Massachusetts Market View",
     headlineSuffix: "Bay State",
     supportingText:
-      "Choose the right Massachusetts city cluster, from historic core markets to suburban growth pockets, and launch faster.",
+      "Choose the right Massachusetts city cluster, from historic core markets to suburban growth pockets, and start owner onboarding faster.",
     imagePath: "/state-banners/ma.svg",
   },
   NJ: {
@@ -60,14 +60,14 @@ const THEMES: Record<string, StateHeroTheme> = {
     eyebrow: "Texas Market View",
     headlineSuffix: "Lone Star State",
     supportingText:
-      "Size city-by-city Texas demand and launch where direct web ordering can scale quickest for your restaurant.",
+      "Size city-by-city Texas demand and claim where a stronger restaurant website can create the fastest lift.",
     imagePath: "/state-banners/tx.svg",
   },
   WA: {
     eyebrow: "Washington Market View",
     headlineSuffix: "Evergreen State",
     supportingText:
-      "Evaluate Seattle-led markets and surrounding Washington cities, then launch where owner lift will happen fastest.",
+      "Evaluate Seattle-led markets and surrounding Washington cities, then start where owner website lift will happen fastest.",
     imagePath: "/state-banners/wa.svg",
   },
 };

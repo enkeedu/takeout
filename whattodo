@@ -1,0 +1,36 @@
+# website
+    get all restaurant info using google API
+
+    design canonical database model for menu items
+
+    create different templates for visuals
+
+    allow user to claim website
+
+    implement online order
+
+    integrate vapi ai voice agent to place order
+
+    create demo
+
+    payment processing for restaurant owner to enroll into our services
+
+
+# marketing
+
+1) have directory of restaurants that can be claimed, major cities, chinese restaurants (DONE)
+
+2) meaning of owning website
+    - customize
+        - domain name
+        - pick 1 out of 3 templates
+
+    - claiming (DONE)
+        - sms verification
+    - pick domain name (todo)
+    - improve templating options (todo)
+    - customization (todo)
+    - pay
+
+3) 
+

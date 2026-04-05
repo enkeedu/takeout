@@ -21,11 +21,11 @@ const bodyFont = Manrope({
 
 export const metadata: Metadata = {
   title: {
-    default: "Chinese Takeout - Find Your Listing and Launch Direct Ordering",
+    default: "Chinese Takeout - Find Your Listing and Claim Your Website",
     template: "%s | Chinese Takeout",
   },
   description:
-    "Owner-first directory for Chinese restaurants. Find your listing, claim it, and launch direct ordering with done-for-you setup.",
+    "Owner-first directory for Chinese restaurants. Find your listing, claim it, and build a stronger restaurant web presence.",
 };
 
 export default function RootLayout({

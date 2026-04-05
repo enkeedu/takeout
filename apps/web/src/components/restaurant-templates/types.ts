@@ -86,17 +86,17 @@ export const TEMPLATE_PROFILES: Record<TemplateKey, TemplateProfile> = {
   "local-order": {
     stage: "Pioneer",
     badge: "Recommended",
-    headline: "Best default for most restaurant launches",
+    headline: "Best default for most restaurant websites",
     detail:
-      "Balanced, conversion-first direct ordering that fits most Chinese takeout menus without extra complexity.",
+      "A balanced website layout that fits most Chinese takeout restaurants without extra complexity.",
     bestFor:
-      "Owners who want the clearest path from listing to launch with the strongest all-around direct-order default.",
+      "Owners who want the clearest path from listing to a polished website with the strongest all-around default.",
     strengths: [
-      "Category-first menu browsing",
-      "Quick item customization",
-      "Strongest broad-fit launch default",
+      "Clear business information hierarchy",
+      "Strong all-around website presentation",
+      "Strongest broad-fit default",
     ],
-    focusPoints: "trust, clarity, and the safest overall launch path",
+    focusPoints: "trust, clarity, and the safest overall website path",
     fitTags: ["Most restaurants", "Google/Yelp traffic", "Safest default"],
   },
   "local-storefront": {
@@ -104,31 +104,31 @@ export const TEMPLATE_PROFILES: Record<TemplateKey, TemplateProfile> = {
     badge: "Brand-Forward",
     headline: "Best when restaurant identity should lead the page",
     detail:
-      "A branded storefront feel up top with stronger hero presence, fast picks, and the same proven ordering engine underneath.",
+      "A branded storefront feel up top with stronger hero presence and a clearer restaurant-site first impression.",
     bestFor:
-      "Owners who want a more polished restaurant-site first impression while keeping direct ordering obvious and fast.",
+      "Owners who want a more polished restaurant-site first impression with stronger branding and visual identity.",
     strengths: [
       "Strongest hero and restaurant identity",
-      "Fast picks and merchandising before the menu",
-      "Same cart, customization, and checkout path",
+      "Best branded storefront presentation",
+      "Clean path from discovery to website trust",
     ],
-    focusPoints: "brand presence, guest trust, and a faster menu handoff",
+    focusPoints: "brand presence, guest trust, and a stronger website first impression",
     fitTags: ["Brand-led", "Social/Maps traffic", "Restaurant-site feel"],
   },
   "local-express": {
     stage: "Pioneer",
     badge: "Fast-Pickup",
-    headline: "Best for a faster, more app-like ordering flow",
+    headline: "Best for a tighter, simpler website presentation",
     detail:
-      "A tighter, denser ordering path with stronger cart awareness that feels closer to a direct-order app.",
+      "A tighter, denser website presentation with a faster phone-first feel and compact information layout.",
     bestFor:
-      "Owners who want a tighter phone-first ordering experience with faster scanning and stronger cart awareness.",
+      "Owners who want a tighter phone-first website experience with faster scanning and a denser information layout.",
     strengths: [
-      "Fastest menu handoff",
-      "Stronger cart awareness and compact layout",
-      "Best fit for phone-first repeat ordering",
+      "Fastest compact layout",
+      "Stronger phone-first feel",
+      "Best fit for owners who want a tighter presentation",
     ],
-    focusPoints: "speed, density, mobile ordering rhythm, and repeat use",
+    focusPoints: "speed, density, mobile scanning rhythm, and repeat discovery",
     fitTags: ["Lunch rush", "Fast pickup", "Phone-first diners"],
   },
   "local-feast": {

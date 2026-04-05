@@ -26,9 +26,11 @@ from app.models import (
     ClaimRequest,
     ClaimRequestNotification,
     ClaimVerificationSession,
+    OwnerSiteProfile,
     Restaurant,
     RestaurantLocation,
     RestaurantSlug,
+    UnlistedOwnerRequest,
 )
 from app.schemas.claim import (
     ClaimDepositCheckoutIn,
@@ -52,7 +54,14 @@ from app.schemas.claim import (
     ClaimVerifyCodeOut,
     KickoffState,
     MonthlyBillingState,
+    OwnerSiteProfileOut,
+    OwnerSiteProfilePublishIn,
+    OwnerSiteProfileRestaurantBaselineOut,
+    OwnerSiteProfileUpdateIn,
+    OwnerSiteProfileWorkspaceOut,
     SetupDepositState,
+    UnlistedOwnerRequestIn,
+    UnlistedOwnerRequestOut,
 )
 
 logger = logging.getLogger(__name__)
@@ -141,6 +150,28 @@ def _format_money(cents: int | None, currency: str | None) -> str:
     normalized_cents = int(cents or 0)
     normalized_currency = (currency or "usd").upper()
     return f"{normalized_currency} ${(normalized_cents / 100):,.0f}"
+
+
+def _normalize_optional_url(value: str | None) -> str | None:
+    if not value:
+        return None
+    trimmed = value.strip()
+    if not trimmed:
+        return None
+    if trimmed.startswith(("http://", "https://")):
+        return trimmed
+    return f"https://{trimmed}"
+
+
+def _normalize_url_list(values: list[str] | None) -> list[str]:
+    if not values:
+        return []
+    normalized: list[str] = []
+    for value in values:
+        next_value = _normalize_optional_url(value)
+        if next_value:
+            normalized.append(next_value)
+    return normalized
 
 
 def _format_schedule(when: datetime | None) -> str | None:
@@ -1631,6 +1662,47 @@ async def submit_manual_review_request(
     )
 
 
+async def submit_unlisted_owner_request(
+    db: AsyncSession, payload: UnlistedOwnerRequestIn
+) -> UnlistedOwnerRequestOut:
+    _validate_claim_contact_fields(
+        payload.owner_name, payload.owner_phone, payload.owner_email
+    )
+    if not payload.restaurant_name:
+        raise ClaimServiceError(400, "Restaurant name is required.")
+    if not payload.city:
+        raise ClaimServiceError(400, "City is required.")
+    if not payload.state:
+        raise ClaimServiceError(400, "State is required.")
+
+    request = UnlistedOwnerRequest(
+        restaurant_name=payload.restaurant_name,
+        city=payload.city,
+        state=payload.state,
+        restaurant_phone=payload.restaurant_phone,
+        owner_name=payload.owner_name,
+        owner_phone=payload.owner_phone,
+        owner_email=payload.owner_email,
+        preferred_contact_method=payload.preferred_contact_method,
+        website_url=_normalize_optional_url(payload.website_url),
+        google_maps_url=_normalize_optional_url(payload.google_maps_url),
+        yelp_url=_normalize_optional_url(payload.yelp_url),
+        notes=payload.notes,
+        source_path=payload.source_path,
+        status="new",
+        created_at=_utc_now(),
+    )
+    db.add(request)
+    await db.commit()
+    await db.refresh(request)
+
+    return UnlistedOwnerRequestOut(
+        request_id=request.id,
+        status=request.status,
+        detail="We saved the unlisted restaurant request for manual follow-up.",
+    )
+
+
 async def _get_claim_request_or_404(
     db: AsyncSession, claim_request_id: uuid.UUID
 ) -> ClaimRequest:
@@ -1641,6 +1713,38 @@ async def _get_claim_request_or_404(
     if claim_request is None:
         raise ClaimServiceError(404, "Claim request not found.")
     return claim_request
+
+
+def _serialize_owner_site_profile(profile: OwnerSiteProfile | None) -> OwnerSiteProfileOut:
+    return OwnerSiteProfileOut(
+        business_name=profile.business_name if profile else None,
+        phone=profile.phone if profile else None,
+        address1=profile.address1 if profile else None,
+        address2=profile.address2 if profile else None,
+        city=profile.city if profile else None,
+        state=profile.state if profile else None,
+        zip=profile.zip if profile else None,
+        short_description=profile.short_description if profile else None,
+        logo_url=profile.logo_url if profile else None,
+        photo_urls=list(profile.photo_urls or []) if profile else [],
+        menu_image_urls=list(profile.menu_image_urls or []) if profile else [],
+        template_key=profile.template_key if profile else None,
+        hours_json=profile.hours_json if profile else None,
+        is_published=bool(profile.is_published) if profile else False,
+        published_at=profile.published_at if profile else None,
+        updated_at=profile.updated_at if profile else None,
+    )
+
+
+async def _get_owner_site_profile_for_claim(
+    db: AsyncSession, claim_request: ClaimRequest
+) -> OwnerSiteProfile | None:
+    result = await db.execute(
+        select(OwnerSiteProfile).where(
+            OwnerSiteProfile.restaurant_id == claim_request.restaurant_id
+        )
+    )
+    return result.scalar_one_or_none()
 
 
 async def get_claim_request_status(
@@ -1654,6 +1758,121 @@ async def get_claim_request_status(
         raise ClaimServiceError(404, "Restaurant not found for this claim request.")
 
     return _serialize_claim_request_status(claim_request, restaurant)
+
+
+async def get_owner_site_profile_workspace(
+    db: AsyncSession, claim_request_id: uuid.UUID, access_token: str
+) -> OwnerSiteProfileWorkspaceOut:
+    claim_request = await _get_claim_request_or_404(db, claim_request_id)
+    _validate_launch_access(claim_request, access_token)
+
+    profile = await _get_owner_site_profile_for_claim(db, claim_request)
+
+    location_result = await db.execute(
+        select(
+            Restaurant.name,
+            Restaurant.phone,
+            Restaurant.website_url,
+            RestaurantLocation.address1,
+            RestaurantLocation.address2,
+            RestaurantLocation.city,
+            RestaurantLocation.state,
+            RestaurantLocation.zip,
+            RestaurantLocation.hours_json,
+            RestaurantLocation.template_key,
+            RestaurantSlug.state_slug,
+            RestaurantSlug.city_slug,
+            RestaurantSlug.restaurant_slug,
+        )
+        .join(RestaurantLocation, Restaurant.id == RestaurantLocation.restaurant_id)
+        .join(
+            RestaurantSlug,
+            RestaurantSlug.restaurant_location_id == RestaurantLocation.id,
+        )
+        .where(
+            Restaurant.id == claim_request.restaurant_id,
+            RestaurantSlug.is_canonical.is_(True),
+        )
+    )
+    row = location_result.one_or_none()
+    if row is None:
+        raise ClaimServiceError(404, "Restaurant not found for this claim request.")
+
+    return OwnerSiteProfileWorkspaceOut(
+        claim_request_id=claim_request.id,
+        restaurant_id=claim_request.restaurant_id,
+        access_granted=True,
+        baseline=OwnerSiteProfileRestaurantBaselineOut(
+            name=row.name,
+            phone=row.phone,
+            address1=row.address1,
+            address2=row.address2,
+            city=row.city,
+            state=row.state,
+            zip=row.zip,
+            state_slug=row.state_slug,
+            city_slug=row.city_slug,
+            restaurant_slug=row.restaurant_slug,
+            website_url=row.website_url,
+            hours_json=row.hours_json,
+            template_key=row.template_key,
+        ),
+        profile=_serialize_owner_site_profile(profile),
+    )
+
+
+async def update_owner_site_profile(
+    db: AsyncSession,
+    claim_request_id: uuid.UUID,
+    payload: OwnerSiteProfileUpdateIn,
+) -> OwnerSiteProfileWorkspaceOut:
+    claim_request = await _get_claim_request_or_404(db, claim_request_id)
+    _validate_launch_access(claim_request, payload.access_token)
+
+    profile = await _get_owner_site_profile_for_claim(db, claim_request)
+    if profile is None:
+        profile = OwnerSiteProfile(
+            restaurant_id=claim_request.restaurant_id,
+            claim_request_id=claim_request.id,
+        )
+        db.add(profile)
+
+    profile.claim_request_id = claim_request.id
+    profile.business_name = payload.business_name
+    profile.phone = payload.phone
+    profile.address1 = payload.address1
+    profile.address2 = payload.address2
+    profile.city = payload.city
+    profile.state = payload.state
+    profile.zip = payload.zip
+    profile.short_description = payload.short_description
+    profile.logo_url = _normalize_optional_url(payload.logo_url)
+    profile.photo_urls = _normalize_url_list(payload.photo_urls)
+    profile.menu_image_urls = _normalize_url_list(payload.menu_image_urls)
+    profile.template_key = payload.template_key
+    profile.hours_json = payload.hours_json
+    await db.commit()
+
+    return await get_owner_site_profile_workspace(db, claim_request_id, payload.access_token)
+
+
+async def publish_owner_site_profile(
+    db: AsyncSession,
+    claim_request_id: uuid.UUID,
+    payload: OwnerSiteProfilePublishIn,
+) -> OwnerSiteProfileWorkspaceOut:
+    claim_request = await _get_claim_request_or_404(db, claim_request_id)
+    _validate_launch_access(claim_request, payload.access_token)
+
+    profile = await _get_owner_site_profile_for_claim(db, claim_request)
+    if profile is None:
+        raise ClaimServiceError(400, "Save website details before publishing.")
+
+    profile.is_published = True
+    profile.published_at = _utc_now()
+    await db.commit()
+
+    return await get_owner_site_profile_workspace(db, claim_request_id, payload.access_token)
 
 
 async def submit_claim_setup_intake(

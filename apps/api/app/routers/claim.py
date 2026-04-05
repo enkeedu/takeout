@@ -19,18 +19,27 @@ from app.schemas.claim import (
     ClaimSubmitOut,
     ClaimVerifyCodeIn,
     ClaimVerifyCodeOut,
+    OwnerSiteProfilePublishIn,
+    OwnerSiteProfileUpdateIn,
+    OwnerSiteProfileWorkspaceOut,
+    UnlistedOwnerRequestIn,
+    UnlistedOwnerRequestOut,
 )
 from app.services.claim import (
     ClaimServiceError,
     complete_mock_deposit_checkout,
     create_deposit_checkout,
+    get_owner_site_profile_workspace,
     get_claim_request_status,
     handle_deposit_webhook,
+    publish_owner_site_profile,
     send_claim_code,
     submit_claim_review_decision,
     submit_claim_setup_intake,
     submit_claim_request,
     submit_manual_review_request,
+    update_owner_site_profile,
+    submit_unlisted_owner_request,
     verify_claim_code,
 )
 
@@ -82,6 +91,17 @@ async def claim_manual_review(
         raise HTTPException(status_code=exc.status_code, detail=exc.detail) from exc
 
 
+@router.post("/unlisted-request", response_model=UnlistedOwnerRequestOut)
+async def claim_unlisted_request(
+    payload: UnlistedOwnerRequestIn,
+    db: AsyncSession = Depends(get_db),
+):
+    try:
+        return await submit_unlisted_owner_request(db, payload)
+    except ClaimServiceError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.detail) from exc
+
+
 @router.post(
     "/requests/{claim_request_id}/deposit-checkout",
     response_model=ClaimDepositCheckoutOut,
@@ -123,6 +143,56 @@ async def claim_request_status(
         return await get_claim_request_status(
             db, claim_request_id, (access_token or access_token_query or "").strip()
         )
+    except ClaimServiceError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.detail) from exc
+
+
+@router.get(
+    "/requests/{claim_request_id}/site-profile",
+    response_model=OwnerSiteProfileWorkspaceOut,
+)
+async def claim_site_profile(
+    claim_request_id: uuid.UUID,
+    access_token: str | None = Header(default=None, alias="X-Launch-Access-Token"),
+    access_token_query: str | None = Query(default=None, alias="accessToken"),
+    db: AsyncSession = Depends(get_db),
+):
+    try:
+        return await get_owner_site_profile_workspace(
+            db,
+            claim_request_id,
+            (access_token or access_token_query or "").strip(),
+        )
+    except ClaimServiceError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.detail) from exc
+
+
+@router.post(
+    "/requests/{claim_request_id}/site-profile",
+    response_model=OwnerSiteProfileWorkspaceOut,
+)
+async def claim_site_profile_update(
+    claim_request_id: uuid.UUID,
+    payload: OwnerSiteProfileUpdateIn,
+    db: AsyncSession = Depends(get_db),
+):
+    try:
+        return await update_owner_site_profile(db, claim_request_id, payload)
+    except ClaimServiceError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.detail) from exc
+
+
+@router.post(
+    "/requests/{claim_request_id}/site-profile/publish",
+    response_model=OwnerSiteProfileWorkspaceOut,
+)
+async def claim_site_profile_publish(
+    claim_request_id: uuid.UUID,
+    payload: OwnerSiteProfilePublishIn,
+    db: AsyncSession = Depends(get_db),
+):
+    try:
+        return await publish_owner_site_profile(db, claim_request_id, payload)
     except ClaimServiceError as exc:
         raise HTTPException(status_code=exc.status_code, detail=exc.detail) from exc
 

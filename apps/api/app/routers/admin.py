@@ -15,6 +15,7 @@ from app.schemas.admin import (
     AdminDiagnosticsOut,
     AdminTestEmailIn,
     AdminTestEmailOut,
+    AdminUnlistedOwnerRequestResponse,
     LeadsResponse,
 )
 from app.schemas.common import PaginationParams
@@ -23,6 +24,7 @@ from app.services.admin import (
     get_claim_queue,
     get_leads,
     get_leads_for_csv,
+    get_unlisted_owner_requests,
     send_admin_test_email,
     update_claim_queue_item,
 )
@@ -99,6 +101,14 @@ async def list_claim_requests(
     _: None = Depends(require_admin),
 ):
     return await get_claim_queue(db)
+
+
+@router.get("/unlisted-owner-requests", response_model=AdminUnlistedOwnerRequestResponse)
+async def list_unlisted_owner_requests(
+    db: AsyncSession = Depends(get_db),
+    _: None = Depends(require_admin),
+):
+    return await get_unlisted_owner_requests(db)
 
 
 @router.get("/diagnostics", response_model=AdminDiagnosticsOut)

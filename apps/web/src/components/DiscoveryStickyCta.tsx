@@ -15,7 +15,7 @@ function getContextCopy(pathname: string) {
   }
   if (segments.length === 0) {
     return {
-      title: "Find your restaurant and get a 7-day launch plan.",
+      title: "Find your restaurant and claim your website.",
       primary: "Find My Restaurant",
       href: "/search",
       source: "home",
@@ -23,14 +23,14 @@ function getContextCopy(pathname: string) {
   }
   if (segments.length === 1) {
     return {
-      title: "Pick your city, then claim and launch.",
-      primary: "Get My 7-Day Launch Plan",
+      title: "Pick your city, then claim your website.",
+      primary: "Find My Restaurant",
       href: "/search",
       source: "state",
     };
   }
   return {
-    title: "Claim your listing and launch direct ordering this week.",
+    title: "Claim your listing and start managing your website.",
     primary: "Find My Restaurant",
     href: "/search",
     source: "city",
@@ -61,7 +61,7 @@ export function DiscoveryStickyCta() {
           <div>
             <p className="text-sm font-semibold text-[#1f1f1f]">{copy.title}</p>
             <p className="text-xs text-[#6f6359]">
-              English | Chinese - Talk to a human: call, text, or WhatsApp
+              English | Chinese - Talk to a human, or tell us if the restaurant is not listed yet
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
@@ -73,6 +73,12 @@ export function DiscoveryStickyCta() {
             >
               {copy.primary}
             </Link>
+            <Link
+              href="/not-listed"
+              className="rounded-xl border border-[#decfbf] px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#695949] transition-colors hover:bg-[#fff8f2]"
+            >
+              Not Listed?
+            </Link>
             <a
               href="tel:+18183420990"
               data-analytics-event="discovery_help_click"
@@ -82,7 +88,7 @@ export function DiscoveryStickyCta() {
               })}
               className="rounded-xl border border-[#decfbf] px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#695949] transition-colors hover:bg-[#fff8f2]"
             >
-              Book 15-min Setup Call
+              Talk to a Human
             </a>
           </div>
         </div>

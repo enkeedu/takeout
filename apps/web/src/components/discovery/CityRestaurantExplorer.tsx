@@ -61,7 +61,7 @@ function CityListingCard({ restaurant }: CityListingCardProps) {
         </span>
         {!restaurant.has_online_ordering ? (
           <span className="rounded-full bg-[#fff7da] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-[#7a5a00]">
-            Direct-Order Opportunity
+            Website Opportunity
           </span>
         ) : null}
       </div>
@@ -84,7 +84,7 @@ function CityListingCard({ restaurant }: CityListingCardProps) {
       <div className="mt-auto pt-4">
         {!isClaimed ? (
           <p className="mb-2 text-xs text-[#7a6d62]">
-            See your recommended design, then verify ownership to launch.
+            Preview the website, then verify ownership to unlock updates.
           </p>
         ) : null}
         <Link
@@ -225,7 +225,7 @@ export function CityRestaurantExplorer({
                 : "border-[#d8cdbf] bg-white text-[#5f564d] hover:bg-[#fff7f1]"
             }`}
           >
-            Needs direct ordering
+            Needs website help
           </button>
         </div>
 
@@ -239,7 +239,7 @@ export function CityRestaurantExplorer({
             <p className="mt-1 text-lg font-bold text-[#1f1f1f]">{totalUnclaimed}</p>
           </div>
           <div className="rounded-xl border border-[#ebdece] bg-[#fff9f3] p-3">
-            <p className="text-xs uppercase tracking-[0.18em] text-[#8d7a66]">No Direct Ordering</p>
+            <p className="text-xs uppercase tracking-[0.18em] text-[#8d7a66]">Needs Website Help</p>
             <p className="mt-1 text-lg font-bold text-[#1f1f1f]">{totalDirectOrderOpportunity}</p>
           </div>
           <div className="rounded-xl border border-[#ebdece] bg-[#fff9f3] p-3">

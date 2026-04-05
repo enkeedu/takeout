@@ -6,7 +6,7 @@ import { CORE_OWNER_PROMISE } from "@/lib/ownerJourney";
 import { ClaimWizardClient } from "./ClaimWizardClient";
 
 export const metadata: Metadata = {
-  title: "Preview Website & Claim",
+  title: "Claim and Manage Your Website",
   robots: { index: false },
 };
 
@@ -98,7 +98,7 @@ export default async function ClaimPage({
       <div className="space-y-6">
         <section className="rounded-3xl border border-[#e6d6c6] bg-white p-6 shadow-sm md:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b04a2d]">
-            Preview & Claim
+            Claim Your Website
           </p>
           <h1 className="font-[var(--font-display)] mt-2 text-4xl font-black tracking-tight text-[#1f1f1f]">
             Missing listing context
@@ -143,7 +143,7 @@ export default async function ClaimPage({
       <div className="space-y-6">
         <section className="rounded-3xl border border-[#e6d6c6] bg-white p-6 shadow-sm md:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b04a2d]">
-            Preview & Claim
+            Claim Your Website
           </p>
           <h1 className="font-[var(--font-display)] mt-2 text-4xl font-black tracking-tight text-[#1f1f1f]">
             Listing not found
@@ -177,14 +177,14 @@ export default async function ClaimPage({
       <div className="space-y-6">
         <section className="rounded-3xl border border-[#e6d6c6] bg-white p-6 shadow-sm md:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b04a2d]">
-            Preview & Claim
+            Claim Your Website
           </p>
           <h1 className="font-[var(--font-display)] mt-2 text-4xl font-black tracking-tight text-[#1f1f1f]">
             Temporary loading issue
           </h1>
           <p className="mt-2 text-sm text-[#665b52]">
             We could not load this listing right now. Retry, or contact support to continue your
-            launch.
+            website claim.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             <Link

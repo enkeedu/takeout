@@ -48,8 +48,13 @@ export interface RestaurantListItem {
 export interface RestaurantDetail {
   id: string;
   name: string;
+  short_description: string | null;
   phone: string | null;
   website_url: string | null;
+  logo_url: string | null;
+  photo_urls: string[] | null;
+  menu_image_urls: string[] | null;
+  site_profile_published: boolean;
   has_online_ordering: boolean;
   has_ai_phone: boolean;
   is_claimed: boolean;
@@ -292,6 +297,29 @@ export interface AdminClaimQueueItem {
 
 export interface AdminClaimQueueResponse {
   items: AdminClaimQueueItem[];
+}
+
+export interface AdminUnlistedOwnerRequestItem {
+  request_id: string;
+  restaurant_name: string;
+  city: string;
+  state: string;
+  restaurant_phone: string | null;
+  owner_name: string;
+  owner_phone: string;
+  owner_email: string;
+  preferred_contact_method: string;
+  website_url: string | null;
+  google_maps_url: string | null;
+  yelp_url: string | null;
+  notes: string | null;
+  source_path: string | null;
+  status: string;
+  created_at: string;
+}
+
+export interface AdminUnlistedOwnerRequestResponse {
+  items: AdminUnlistedOwnerRequestItem[];
 }
 
 export interface AdminSetupIntakeSummary {

@@ -1,5 +1,5 @@
 import { Cormorant_Garamond, Inter } from "next/font/google";
-import type { RestaurantTemplateProps } from "./types";
+import { TEMPLATE_LABELS, type RestaurantTemplateProps } from "./types";
 
 const display = Cormorant_Garamond({
   subsets: ["latin"],
@@ -13,18 +13,27 @@ const body = Inter({
   variable: "--font-body",
 });
 
-export function TemplateLocalOrder({
+export function TemplateVisitDetails({
   restaurant,
   hours,
   highlights,
   mapsUrl,
   previewMode,
+  templateKey,
 }: RestaurantTemplateProps) {
-  const todayLabel = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][new Date().getDay()];
+  const todayLabel = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][
+    new Date().getDay()
+  ];
   const todayHours =
     hours.rows.find((row) => row.day.startsWith(todayLabel))?.hours ||
     hours.rows[0]?.hours ||
     "Call for hours";
+  const heroImage = restaurant.photo_urls?.[0] || "/templates/ming/hero.webp";
+  const photoGallery = restaurant.photo_urls?.slice(0, 3) || [];
+  const menuImages = restaurant.menu_image_urls?.slice(0, 2) || [];
+  const description =
+    restaurant.short_description ||
+    "Owner-confirmed visit details, hours, and contact information are available here while structured ordering stays disabled.";
 
   return (
     <div
@@ -36,22 +45,28 @@ export function TemplateLocalOrder({
             <div className="relative overflow-hidden border-b border-[#e4d9cb] bg-[#130f0c] text-white">
               <div
                 className="absolute inset-0 bg-cover bg-center opacity-35"
-                style={{ backgroundImage: "url('/templates/ming/hero.webp')" }}
+                style={{ backgroundImage: `url('${heroImage}')` }}
               />
               <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/70" />
               <div className="relative p-6 md:p-8">
                 <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#ffc9b6]">
-                  Local Chinese Takeout Ordering
+                  {TEMPLATE_LABELS[templateKey]} Preview
                 </p>
+                {restaurant.logo_url ? (
+                  <img
+                    src={restaurant.logo_url}
+                    alt={`${restaurant.name} logo`}
+                    className="mt-4 h-12 w-12 rounded-2xl border border-[#ffffff22] bg-white/95 object-cover p-1"
+                  />
+                ) : null}
                 <h1 className="mt-2 font-[var(--font-display)] text-5xl font-semibold leading-tight md:text-6xl">
                   {restaurant.name}
                 </h1>
                 <p className="mt-2 max-w-3xl text-sm text-[#f3ddd3] md:text-base">
-                  Built for neighborhood Chinese restaurants: familiar categories,
-                  quick item customization, and clear checkout.
+                  {description}
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#ffe3d6]">
-                  {highlights.map((highlight) => (
+                  {highlights.slice(0, 4).map((highlight) => (
                     <span
                       key={highlight}
                       className="rounded-full border border-[#ffffff33] bg-black/35 px-3 py-1"
@@ -77,7 +92,7 @@ export function TemplateLocalOrder({
                   </a>
                   {previewMode ? (
                     <span className="inline-flex items-center rounded-full border border-[#ffffff30] bg-white/10 px-4 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#ffe5d7]">
-                      Previewing the live ordering flow
+                      Preview mode active
                     </span>
                   ) : null}
                 </div>
@@ -87,13 +102,13 @@ export function TemplateLocalOrder({
             <div className="grid gap-3 p-4 md:grid-cols-2 xl:grid-cols-4 md:p-5">
               <div className="rounded-2xl border border-[#e1d4c5] bg-[#faf6f0] p-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#ab3128]">
-                  Ordering
+                  Template
                 </p>
                 <p className="mt-1 text-sm font-semibold text-[#2d231b]">
-                  Pickup and delivery ready
+                  {TEMPLATE_LABELS[templateKey]}
                 </p>
                 <p className="mt-2 text-xs text-[#6e6257]">
-                  Familiar direct-order flow built for fast Chinese takeout ordering.
+                  Shared details-only presentation while menu UI is disabled.
                 </p>
               </div>
               <div className="rounded-xl border border-[#e1d4c5] bg-[#faf6f0] p-4">
@@ -102,16 +117,18 @@ export function TemplateLocalOrder({
                 </p>
                 <p className="mt-1 text-sm font-semibold text-[#2d231b]">{todayHours}</p>
                 <p className="mt-2 text-xs text-[#6e6257]">
-                  Live hours at the top so guests know they can order right now.
+                  Live hours stay visible even while ordering content is hidden.
                 </p>
               </div>
               <div className="rounded-xl border border-[#e1d4c5] bg-[#faf6f0] p-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#ab3128]">
-                  Pickup ETA
+                  Phone
                 </p>
-                <p className="mt-1 text-sm font-semibold text-[#2d231b]">20-35 minutes</p>
+                <p className="mt-1 text-sm font-semibold text-[#2d231b]">
+                  {restaurant.phone || "Call store"}
+                </p>
                 <p className="mt-2 text-xs text-[#6e6257]">
-                  Clear timing upfront reduces hesitation before guests start building an order.
+                  Guests can still contact the restaurant directly.
                 </p>
               </div>
               <a
@@ -124,7 +141,7 @@ export function TemplateLocalOrder({
                   Map + Contact
                 </p>
                 <p className="mt-1 text-sm font-semibold text-[#2d231b]">
-                  {restaurant.phone || "Call store"}
+                  Open directions
                 </p>
                 <p className="mt-2 text-xs text-[#6e6257]">
                   {restaurant.address1}, {restaurant.city}, {restaurant.state}
@@ -132,6 +149,7 @@ export function TemplateLocalOrder({
               </a>
             </div>
           </section>
+
           <section
             id="visit"
             className="rounded-3xl border border-[#dacdbc] bg-white p-6 shadow-sm md:p-8"
@@ -139,14 +157,13 @@ export function TemplateLocalOrder({
             <div className="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(280px,0.9fr)]">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#ab3128]">
-                  Ordering Update
+                  Website Summary
                 </p>
                 <h2 className="mt-2 font-[var(--font-display)] text-3xl font-semibold text-[#2d231b] md:text-4xl">
-                  Menu preview is temporarily hidden
+                  Visit details stay live while ordering is disabled
                 </h2>
                 <p className="mt-3 max-w-2xl text-sm leading-6 text-[#6e6257] md:text-base">
-                  We&apos;re simplifying this template for now, so menu items are not shown on the
-                  page. Guests can still use the restaurant phone number or directions below.
+                  {description}
                 </p>
               </div>
               <div className="rounded-2xl border border-[#e1d4c5] bg-[#faf6f0] p-5">
@@ -176,10 +193,53 @@ export function TemplateLocalOrder({
                 </a>
               </div>
             </div>
+
+            {photoGallery.length > 0 ? (
+              <div className="mt-8">
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#ab3128]">
+                  Photo Highlights
+                </p>
+                <div className="mt-4 grid gap-3 md:grid-cols-3">
+                  {photoGallery.map((photoUrl, index) => (
+                    <div
+                      key={`${photoUrl}-${index}`}
+                      className="overflow-hidden rounded-2xl border border-[#e1d4c5] bg-[#faf6f0]"
+                    >
+                      <img
+                        src={photoUrl}
+                        alt={`${restaurant.name} photo ${index + 1}`}
+                        className="h-48 w-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+
+            {menuImages.length > 0 ? (
+              <div className="mt-8">
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#ab3128]">
+                  Menu Images
+                </p>
+                <div className="mt-4 grid gap-3 md:grid-cols-2">
+                  {menuImages.map((imageUrl, index) => (
+                    <div
+                      key={`${imageUrl}-${index}`}
+                      className="overflow-hidden rounded-2xl border border-[#e1d4c5] bg-[#faf6f0]"
+                    >
+                      <img
+                        src={imageUrl}
+                        alt={`${restaurant.name} menu ${index + 1}`}
+                        className="h-64 w-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
           </section>
         </div>
       </div>
     </div>
   );
 }
-

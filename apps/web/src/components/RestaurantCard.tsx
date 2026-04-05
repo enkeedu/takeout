@@ -69,7 +69,7 @@ export function RestaurantCard({
         </span>
         {!has_online_ordering ? (
           <span className="rounded-full bg-[#fff7da] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-[#7a5a00]">
-            Direct-Order Opportunity
+            Website Opportunity
           </span>
         ) : null}
       </div>
@@ -87,7 +87,7 @@ export function RestaurantCard({
       <div className="mt-auto pt-4">
         {!is_claimed ? (
           <p className="mb-2 text-xs text-[#7a6d62]">
-            See your recommended design, then verify ownership to launch.
+            Preview the website, then verify ownership to unlock updates.
           </p>
         ) : null}
         <Link

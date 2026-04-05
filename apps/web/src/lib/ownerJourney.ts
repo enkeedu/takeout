@@ -1,36 +1,36 @@
 export const CORE_OWNER_PROMISE =
-  "Find your listing, launch direct ordering fast, and keep more of every order.";
+  "Find your listing, claim your restaurant website, and build a stronger web presence.";
 
 export const OWNER_LAUNCH_STEPS = [
   "Find your listing",
   "Claim your listing",
-  "Launch your direct-ordering site",
+  "Publish your website",
 ] as const;
 
 export const OWNER_SETUP_REQUIREMENTS = [
   {
     eyebrow: "Access",
-    title: "Google, Yelp, and optional domain access",
+    title: "Business profile links and optional domain access",
     detail:
-      "We start with your listing data first, then use kickoff to confirm any Google Business Profile, Yelp, or domain access needed to update your links faster.",
+      "We start with your listing data first, then confirm any Google Business Profile, Yelp, social, or domain access you want us to reference later.",
   },
   {
     eyebrow: "Content",
-    title: "Menu, hours, logo, and photos",
+    title: "Hours, logo, photos, and website details",
     detail:
-      "We confirm your menu scope, business hours, and any branding assets so the site looks finished before it goes live.",
+      "We confirm your business information, hours, branding assets, and any website details so the site looks finished before it goes live.",
   },
   {
-    eyebrow: "Operations",
-    title: "POS, printer, and payment details",
+    eyebrow: "Presence",
+    title: "Website details and optional menu images",
     detail:
-      "If you already use Stripe, a printer, or a POS workflow, we collect those details during kickoff so launch fits your current setup.",
+      "If you have menu images, preferred descriptions, or existing website assets, we collect those details so the site reflects the real business.",
   },
   {
-    eyebrow: "Launch",
-    title: "Managed live link first",
+    eyebrow: "Publish",
+    title: "Managed website first",
     detail:
-      "Your first launch uses your managed restaurant URL. Monthly billing starts only after the site goes live, not before.",
+      "Your first website can live on your managed restaurant URL. Later, you can connect more advanced features once the web presence is in place.",
   },
 ] as const;
 
@@ -38,21 +38,21 @@ export const OWNER_SETUP_FAQS = [
   {
     question: "What do I need to get started?",
     answer:
-      "We need the basics: the right owner contact, final menu and hours, any logo or photos you want us to use, and optional Google, Yelp, or domain access if you want faster link updates. If you already know your logins, kickoff moves much faster.",
+      "We need the basics: the right owner contact, confirmed business information, any logo or photos you want us to use, and optional Google, Yelp, or domain access if you want faster link updates later.",
   },
   {
     question: "What happens to my current website?",
     answer:
-      "Your current site can stay live while we build. We launch first on your managed restaurant URL, then use kickoff to decide when to update Google, Yelp, social profiles, or any existing website links.",
+      "Your current site can stay live while we build. We publish first on your managed restaurant URL, then decide when to update Google, Yelp, social profiles, or any existing website links.",
   },
   {
-    question: "Do you take over my POS or payment flow?",
+    question: "Can I update my website details later?",
     answer:
-      "No. We work around your current workflow. If you already have Stripe, printer, or POS details we should know about, we collect that during kickoff so the launch matches how your restaurant already operates.",
+      "Yes. The goal of the MVP is to make it easy to confirm and update core website details like business information, hours, branding, and photos without rebuilding everything from scratch.",
   },
   {
-    question: "How fast can you launch?",
+    question: "How fast can my website go live?",
     answer:
-      "The target is 5-7 days after kickoff is confirmed. Owners who already have their menu, hours, and access details ready usually move through setup the fastest.",
+      "The target is 5-7 days after the ownership review and setup details are confirmed. Owners who already have their business info, hours, logo, and photos ready usually move through setup the fastest.",
   },
 ] as const;

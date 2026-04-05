@@ -27,7 +27,7 @@ export function OwnerSetupExpectations({
           ))}
         </ul>
         <p className="mt-3 text-sm text-[#665b52]">
-          Your current website can stay up while we build. We launch first on your
+          Your current website can stay up while we build. We publish first on your
           managed restaurant URL, then confirm when to update Google, Yelp, and
           social links.
         </p>
@@ -57,12 +57,12 @@ export function OwnerSetupExpectations({
             Owner Setup Expectations
           </p>
           <h2 className="font-[var(--font-display)] mt-1 text-3xl font-bold tracking-tight text-[#1f1f1f] md:text-[2.1rem]">
-            What we need from you to launch fast
+            What we need from you to publish your website
           </h2>
           <p className="mt-2 max-w-3xl text-sm text-[#685b4f]">
             The best owner funnels do not hide the handoff. We start with your
-            listing data, then use kickoff to confirm access, branding, operations,
-            and launch timing without making you rebuild everything from scratch.
+            listing data, then confirm access, branding, and website details without
+            making you rebuild everything from scratch.
           </p>
 
           <div className="mt-5 grid gap-4 md:grid-cols-2">
@@ -85,28 +85,28 @@ export function OwnerSetupExpectations({
 
         <div className="rounded-3xl border border-[#f0d3c7] bg-[#fff3ea] p-5 shadow-sm">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#b73a2f]">
-            Managed Launch Model
+            Managed Website Model
           </p>
           <h3 className="mt-2 text-2xl font-semibold tracking-tight text-[#1f1f1f]">
             Keep your current site up while we build
           </h3>
           <p className="mt-2 text-sm text-[#685b4f]">
-            We launch first on your managed restaurant URL. Once the new site is
+            We publish first on your managed restaurant URL. Once the new site is
             approved, we help you update Google Business Profile, Yelp, and social
-            links so customers land on the new direct-order page.
+            links so customers land on the new website.
           </p>
           <ul className="mt-4 space-y-3 text-sm text-[#5e544c]">
             <li className="flex items-start gap-2">
               <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#c73f2f]" />
-              <span>$299 deposit starts kickoff now.</span>
+              <span>We start with your imported listing data and owner confirmation.</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#c73f2f]" />
-              <span>You review the final build before go-live.</span>
+              <span>You review the website details before the public version is finalized.</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#c73f2f]" />
-              <span>$99/month starts only after the site is live.</span>
+              <span>Ordering and other upgrades can be added later without rebuilding the site.</span>
             </li>
           </ul>
           <div className="mt-5 flex flex-wrap gap-2">
@@ -122,7 +122,7 @@ export function OwnerSetupExpectations({
               rel="noreferrer"
               className="inline-flex rounded-xl border border-[#e0c9b7] bg-white px-4 py-3 text-sm font-semibold text-[#6e5a4c] transition-colors hover:bg-[#fff8f2]"
             >
-              Ask a Setup Question
+              Ask a Website Question
             </a>
           </div>
         </div>
@@ -140,7 +140,7 @@ export function OwnerSetupExpectations({
           </div>
           <p className="max-w-2xl text-sm text-[#685b4f]">
             This is the part strong owner funnels explain early. Clear expectations
-            make the launch feel real.
+            make the website handoff feel real.
           </p>
         </div>
 

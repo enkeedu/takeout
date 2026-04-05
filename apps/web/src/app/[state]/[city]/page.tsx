@@ -113,8 +113,8 @@ export default async function CityPage({ params, searchParams }: Props) {
                 {cityName}, {stateName}
               </h1>
               <p className="mt-3 max-w-3xl text-sm text-[#f2ddd1] md:text-base">
-                {CORE_OWNER_PROMISE} Compare local listings, spot who still needs direct
-                ordering, and move into claim from the right restaurant page.
+                {CORE_OWNER_PROMISE} Compare local listings, spot who still needs a stronger
+                web presence, and move into claim from the right restaurant page.
               </p>
 
               <div className="mt-5 flex flex-wrap items-center gap-2">
@@ -129,6 +129,12 @@ export default async function CityPage({ params, searchParams }: Props) {
                   className="inline-flex rounded-xl bg-[#c73f2f] px-5 py-3 text-sm font-semibold text-white transition-all hover:bg-[#ad3324] active:scale-[0.99]"
                 >
                   Find My Restaurant
+                </Link>
+                <Link
+                  href="/not-listed"
+                  className="inline-flex rounded-xl border border-[#ffffff30] bg-white/10 px-4 py-3 text-sm font-semibold text-[#ffe1d3] transition-colors hover:bg-white/20"
+                >
+                  Not Listed Yet?
                 </Link>
                 <a
                   href="https://wa.me/18183420990"
@@ -161,7 +167,7 @@ export default async function CityPage({ params, searchParams }: Props) {
                 </div>
                 <div className="rounded-xl border border-[#ffffff24] bg-black/25 px-4 py-3">
                   <p className="text-xs uppercase tracking-[0.2em] text-[#d5b9aa]">
-                    Direct-order opportunity
+                    Needs website help
                   </p>
                   <p className="mt-1 text-xl font-bold text-white">{totalNoOnline}</p>
                 </div>
@@ -180,10 +186,10 @@ export default async function CityPage({ params, searchParams }: Props) {
       <DiscoveryProofStrip
         eyebrow="What Owners Need"
         items={[
-          { label: "Pricing", value: "$299 setup + $99/mo" },
+          { label: "Publishing Model", value: "Baseline site + owner claim" },
           { label: "Needs Website", value: `${totalNoWebsite} listings` },
-          { label: "Direct-Order Opportunity", value: `${totalNoOnline} listings` },
-          { label: "Launch Timeline", value: "Launch in 5-7 days" },
+          { label: "Needs Website Help", value: `${totalNoOnline} listings` },
+          { label: "Website Timeline", value: "Go live in 5-7 days" },
         ]}
       />
 
@@ -238,6 +244,12 @@ export default async function CityPage({ params, searchParams }: Props) {
             className="inline-flex rounded-xl border border-[#e0c9b7] bg-white px-4 py-3 text-sm font-semibold text-[#6e5a4c] transition-colors hover:bg-[#fff8f2]"
           >
             Find My Restaurant
+          </Link>
+          <Link
+            href="/not-listed"
+            className="inline-flex rounded-xl border border-[#e0c9b7] bg-white px-4 py-3 text-sm font-semibold text-[#6e5a4c] transition-colors hover:bg-[#fff8f2]"
+          >
+            Restaurant Not Listed?
           </Link>
           <a
             href="https://wa.me/18183420990"

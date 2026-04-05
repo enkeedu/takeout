@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const name = getStateName(state);
   return {
     title: `Chinese Restaurants in ${name} | Find Your Listing`,
-    description: `Browse Chinese restaurants in ${name}, find the right listing, and launch direct ordering with owner-first support.`,
+    description: `Browse Chinese restaurants in ${name}, find the right listing, and claim your restaurant website with owner-first support.`,
     alternates: { canonical: `https://chinese-takeout.com/${state}` },
   };
 }
@@ -140,6 +140,12 @@ export default async function StatePage({ params }: Props) {
                 >
                   Find My Restaurant
                 </Link>
+                <Link
+                  href="/not-listed"
+                  className="inline-flex rounded-xl border border-[#ffffff30] bg-white/10 px-4 py-3 text-sm font-semibold text-[#ffe1d3] transition-colors hover:bg-white/20"
+                >
+                  Not Listed Yet?
+                </Link>
                 <a
                   href="tel:+18183420990"
                   data-analytics-event="discovery_help_click"
@@ -166,7 +172,7 @@ export default async function StatePage({ params }: Props) {
                 </div>
                 <div className="rounded-xl border border-[#ffffff24] bg-black/25 px-4 py-3">
                   <p className="text-xs uppercase tracking-[0.2em] text-[#d5b9aa]">
-                    Direct-order opportunity
+                    Website opportunity
                   </p>
                   <p className="mt-1 text-xl font-bold text-white">{totalNoOnline}</p>
                 </div>
@@ -185,8 +191,8 @@ export default async function StatePage({ params }: Props) {
       <DiscoveryProofStrip
         eyebrow="What Owners Get"
         items={[
-          { label: "Transparent Pricing", value: "$299 setup + $99/mo" },
-          { label: "Launch Timeline", value: "Go live in 5-7 days" },
+          { label: "Auto-Published Sites", value: "Baseline website live" },
+          { label: "Website Timeline", value: "Go live in 5-7 days" },
           { label: "Bilingual Help", value: "English | Chinese support" },
           { label: "Human Support", value: "Call, text, or WhatsApp" },
         ]}
@@ -226,7 +232,7 @@ export default async function StatePage({ params }: Props) {
           </h2>
           <p className="mt-2 text-sm text-[#666]">
             Search by name, ZIP, address, or phone if you want the fastest path into
-            claim and launch.
+            claim and website setup.
           </p>
         </div>
         <div className="mt-4 flex flex-wrap items-center gap-2 md:mt-0">
@@ -241,6 +247,12 @@ export default async function StatePage({ params }: Props) {
           >
             Find My Restaurant
           </Link>
+          <Link
+            href="/not-listed"
+            className="inline-flex rounded-xl border border-[#e0c9b7] bg-white px-4 py-3 text-sm font-semibold text-[#6e5a4c] transition-colors hover:bg-[#fff8f2]"
+          >
+            Restaurant Not Listed?
+          </Link>
           <a
             href="tel:+18183420990"
             data-analytics-event="discovery_help_click"
@@ -251,7 +263,7 @@ export default async function StatePage({ params }: Props) {
             })}
             className="inline-flex rounded-xl border border-[#e0c9b7] bg-white px-4 py-3 text-sm font-semibold text-[#6e5a4c] transition-colors hover:bg-[#fff8f2]"
           >
-            Book a 15-min Setup Call
+            Talk to a Human
           </a>
         </div>
       </section>

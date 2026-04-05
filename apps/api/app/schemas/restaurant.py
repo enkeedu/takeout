@@ -29,8 +29,13 @@ class RestaurantListItem(BaseModel):
 class RestaurantDetail(BaseModel):
     id: uuid.UUID
     name: str
+    short_description: str | None = None
     phone: str | None = None
     website_url: str | None = None
+    logo_url: str | None = None
+    photo_urls: list[str] | None = None
+    menu_image_urls: list[str] | None = None
+    site_profile_published: bool = False
     has_online_ordering: bool = False
     has_ai_phone: bool = False
     is_claimed: bool = False

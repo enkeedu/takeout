@@ -78,8 +78,8 @@ const CONTACT_OPTIONS: Array<[PreferredContactMethod, string]> = [
   ["email", "Email"],
 ];
 
-const PROCESS_STRIP = ["Preview", "Verify", "Confirm", "Launch in 5-7 days"] as const;
-const POST_VERIFY_STEPS = ["Owner Contact", "Confirm Menu", "Pay Deposit"] as const;
+const PROCESS_STRIP = ["Preview", "Verify", "Confirm", "Website ready in 5-7 days"] as const;
+const POST_VERIFY_STEPS = ["Owner Contact", "Confirm Website Details", "Finalize Setup"] as const;
 
 function labelSavedAt(iso: string | null) {
   if (!iso) return "Draft not saved yet";
@@ -474,7 +474,7 @@ export function ClaimWizardClient({
       setNote(
         response.providerMode === "mock"
           ? `Code sent to ${response.maskedPhone}. Local dev mode: enter 111111.`
-          : `Code sent to ${response.maskedPhone}. Enter it below to unlock editing and launch.`
+          : `Code sent to ${response.maskedPhone}. Enter it below to unlock website editing.`
       );
       trackEvent("claim_verification_code_sent", {
         source: "claim_verification_gate",
@@ -659,13 +659,13 @@ export function ClaimWizardClient({
       <section className="rounded-3xl border border-[#e6d6c6] bg-white p-6 shadow-sm md:p-8">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="max-w-4xl space-y-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b04a2d]">Preview & Claim</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#b04a2d]">Claim Your Website</p>
             <h1 className="font-[var(--font-display)] mt-2 text-4xl font-black tracking-tight text-[#1f1f1f]">
               {restaurantName}
             </h1>
             <p className="max-w-3xl text-sm text-[#665b52] md:text-base">
-              We prepared website designs for this restaurant. Claim the listing to edit, publish,
-              and start taking direct orders.
+              We prepared website designs for this restaurant. Claim the listing to edit,
+              publish, and manage the restaurant's web presence.
             </p>
             <div className="flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#7d6857]">
               <span className="rounded-full border border-[#eadccf] bg-[#fff9f3] px-3 py-1">
@@ -720,7 +720,7 @@ export function ClaimWizardClient({
               </h2>
               <p className="max-w-3xl text-sm text-[#665b52]">
                 Start with the recommended version below. You can view the full website, switch
-                designs, and then verify ownership to launch.
+                designs, and then verify ownership to unlock editing.
               </p>
             </div>
 
@@ -845,7 +845,7 @@ export function ClaimWizardClient({
                         className="inline-flex w-full items-center justify-center rounded-xl bg-[#c73f2f] px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-[#ad3324] active:scale-[0.99]"
                       >
                         {verification?.verified_token
-                          ? "Continue Launch Setup"
+                          ? "Continue Website Setup"
                           : "Claim & Unlock This Website"}
                       </button>
                       <a
@@ -936,11 +936,11 @@ export function ClaimWizardClient({
                 tabIndex={-1}
                 className="font-[var(--font-display)] mt-2 text-3xl font-bold tracking-tight text-[#1f1f1f] focus:outline-none"
               >
-                Claim this website by verifying the listed business phone
+                Verify this website using the listed business phone
               </h2>
               <p className="mt-2 text-sm text-[#665b52]">
                 We&apos;ll text the phone already listed for this restaurant so we can unlock
-                editing and launch.
+                editing.
               </p>
               <p className="mt-2 text-sm text-[#665b52]">
                 If the listed line is shared, wrong, missing, or cannot receive texts,
@@ -1081,7 +1081,7 @@ export function ClaimWizardClient({
                       tabIndex={-1}
                       className="font-[var(--font-display)] mt-2 text-3xl font-bold tracking-tight text-[#1f1f1f] focus:outline-none"
                     >
-                      Finish setup and we can launch this website
+                      Finish setup and we can publish this website
                     </h2>
                     <p className="mt-2 text-sm text-[#665b52]">
                       Code confirmed on {verification.masked_phone || "the listed phone"}. Finish the owner setup steps below.
@@ -1122,10 +1122,10 @@ export function ClaimWizardClient({
                 {step === 1 ? (
                   <div className="space-y-4">
                     <h2 className="font-[var(--font-display)] text-3xl font-bold tracking-tight text-[#1f1f1f]">Step 1: Owner Contact</h2>
-                    <p className="text-sm text-[#665b52]">Tell us who should receive launch updates after verification.</p>
+                    <p className="text-sm text-[#665b52]">Tell us who should receive website updates after verification.</p>
                     <div className="grid gap-3 md:grid-cols-2">
                       <Field label="Owner Name" value={ownerName} placeholder="First and last name" onChange={setOwnerName} />
-                      <Field label="Phone" type="tel" value={ownerPhone} placeholder="Best number for launch updates" onChange={setOwnerPhone} />
+                      <Field label="Phone" type="tel" value={ownerPhone} placeholder="Best number for website updates" onChange={setOwnerPhone} />
                       <div className="md:col-span-2">
                         <Field label="Email" type="email" value={ownerEmail} placeholder="owner@restaurant.com" onChange={setOwnerEmail} />
                       </div>
@@ -1140,11 +1140,11 @@ export function ClaimWizardClient({
                 {step === 2 ? (
                   <div className="space-y-4">
                     <h2 className="font-[var(--font-display)] text-3xl font-bold tracking-tight text-[#1f1f1f]">
-                      Step 2: Confirm Menu + Hours
+                      Step 2: Confirm Website Details
                     </h2>
                     <div className="rounded-2xl border border-[#ebdece] bg-[#fff9f3] p-4 text-sm text-[#4f463f]">
                       <p>
-                        Menu imported: <span className="font-semibold">{menuItemCount} items</span> across{" "}
+                        Menu data imported: <span className="font-semibold">{menuItemCount} items</span> across{" "}
                         <span className="font-semibold">{menuCategoryCount} categories</span>
                       </p>
                       <p className="mt-1">
@@ -1153,7 +1153,7 @@ export function ClaimWizardClient({
                     </div>
                     <label className="flex items-center gap-2 text-sm text-[#4f463f]">
                       <input type="checkbox" checked={verifiedMenu} onChange={(event) => setVerifiedMenu(event.target.checked)} className="h-4 w-4 accent-[#c73f2f]" />
-                      Menu scope is ready for launch.
+                      Website details are ready to publish.
                     </label>
                     <label className="flex items-center gap-2 text-sm text-[#4f463f]">
                       <input type="checkbox" checked={verifiedHours} onChange={(event) => setVerifiedHours(event.target.checked)} className="h-4 w-4 accent-[#c73f2f]" />
@@ -1165,15 +1165,15 @@ export function ClaimWizardClient({
                 {step === 3 ? (
                   <div className="space-y-4">
                     <h2 className="font-[var(--font-display)] text-3xl font-bold tracking-tight text-[#1f1f1f]">
-                      Step 3: Pay Setup Deposit
+                      Step 3: Finalize Website Setup
                     </h2>
                     <div className="rounded-2xl border border-[#ebdece] bg-[#fff9f3] p-4 text-sm text-[#4f463f]">
-                      <p className="font-semibold text-[#1f1f1f]">Single package, clear handoff</p>
+                      <p className="font-semibold text-[#1f1f1f]">Single package, clear website handoff</p>
                       <p className="mt-2">Selected website: {selectedTemplateOption.label}.</p>
                       <p className="mt-1">Setup deposit today: $299.</p>
-                      <p className="mt-1">Monthly billing after launch: $99/month.</p>
-                      <p className="mt-1">Includes template handoff, menu setup, direct-order launch, and bilingual support.</p>
-                      <p className="mt-1">Target launch timeline: 5-7 days after kickoff is confirmed.</p>
+                      <p className="mt-1">Monthly billing after publish: $99/month.</p>
+                      <p className="mt-1">Includes template handoff, website setup, menu data preservation, and bilingual support.</p>
+                      <p className="mt-1">Target website timeline: 5-7 days after setup is confirmed.</p>
                     </div>
                     <div className="space-y-3">
                       <label className="flex items-start gap-2 text-sm text-[#4f463f]">
@@ -1183,7 +1183,7 @@ export function ClaimWizardClient({
                           onChange={(event) => setLaunchReady(event.target.checked)}
                           className="mt-0.5 h-4 w-4 accent-[#c73f2f]"
                         />
-                        <span>I am ready to start kickoff for this verified website.</span>
+                        <span>I am ready to move forward with this verified website setup.</span>
                       </label>
                       <label className="flex items-start gap-2 text-sm text-[#4f463f]">
                         <input
@@ -1193,7 +1193,7 @@ export function ClaimWizardClient({
                           className="mt-0.5 h-4 w-4 accent-[#c73f2f]"
                         />
                         <span>
-                          I understand the $299 setup deposit starts kickoff now, and the $99/month plan starts only after the website goes live.
+                          I understand the $299 setup deposit starts website setup now, and the $99/month plan starts only after the website goes live.
                         </span>
                       </label>
                     </div>
@@ -1236,7 +1236,7 @@ export function ClaimWizardClient({
                       disabled={!canSubmitClaim || submitBusy}
                       className="rounded-xl bg-[#c73f2f] px-5 py-2 text-sm font-semibold text-white hover:bg-[#ad3324] disabled:opacity-60"
                     >
-                      {submitBusy ? "Starting Checkout..." : "Pay Setup Deposit"}
+                      {submitBusy ? "Starting Checkout..." : "Confirm Website Setup"}
                     </button>
                   )}
                 </div>
@@ -1258,7 +1258,7 @@ export function ClaimWizardClient({
                   ? "Manual review requested"
                   : verification?.verified_token
                   ? step === POST_VERIFY_STEPS.length
-                    ? "Kickoff pending"
+                    ? "Setup pending"
                     : `Setup step ${step} of ${POST_VERIFY_STEPS.length}`
                   : phone
                   ? "Verification pending"
@@ -1267,11 +1267,11 @@ export function ClaimWizardClient({
             </div>
             <div className="rounded-xl border border-[#eadccf] bg-[#fff9f3] p-3">
               <p className="text-xs uppercase tracking-[0.16em] text-[#8d7a66]">Pricing</p>
-              <p className="mt-1 text-sm font-semibold text-[#1f1f1f]">$299 deposit now</p>
-              <p className="mt-1 text-xs text-[#6f6256]">$99/month starts after launch</p>
+              <p className="mt-1 text-sm font-semibold text-[#1f1f1f]">$299 setup now</p>
+              <p className="mt-1 text-xs text-[#6f6256]">$99/month starts after publish</p>
             </div>
             <div className="rounded-xl border border-[#eadccf] bg-[#fff9f3] p-3">
-              <p className="text-xs uppercase tracking-[0.16em] text-[#8d7a66]">Launch ETA</p>
+              <p className="text-xs uppercase tracking-[0.16em] text-[#8d7a66]">Website ETA</p>
               <p className="mt-1 text-sm font-semibold text-[#1f1f1f]">5-7 days</p>
             </div>
             <div className="rounded-xl border border-[#eadccf] bg-[#fff9f3] p-3">
@@ -1281,10 +1281,10 @@ export function ClaimWizardClient({
           </div>
 
           <div className="mt-4 rounded-2xl border border-[#eadccf] bg-[#fffaf5] p-4">
-            <p className="text-sm font-semibold text-[#1f1f1f]">Preview, verify, confirm, launch.</p>
+            <p className="text-sm font-semibold text-[#1f1f1f]">Preview, verify, confirm, publish.</p>
             <p className="mt-2 text-sm text-[#665b52]">
               Choose the design you want, verify the listed phone, confirm your details,
-              and pay the setup deposit to move into kickoff.
+              and finalize setup so the website can move toward publish.
             </p>
           </div>
 
